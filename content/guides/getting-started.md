@@ -1,8 +1,8 @@
 ---
-title: Conheçendo a API
+title: Conhecendo a API
 ---
 
-# Conheçendo a API
+# Conhecendo a API
 
 Aqui será mostrado o funcionamento básico da API RESTful do PagarMe. As requisições serão feitas utilizando o [cURL](http://curl.haxx.se).
 
