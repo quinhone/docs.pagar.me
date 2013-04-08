@@ -16,13 +16,13 @@ O endpoint da API do PagarMe é:
 
 Todas as requisições devem ser feitas utilizando HTTPS e devem apresentar o parâmetro `api_key`, contendo a chave de acesso da API disponível no seu [dashboard](https://dashboard.pagar.me).
 
+Nesse guia, a `api_key` usada de exemplo será `Jy1V5bJcGf8q4gHepttt`.
+
 ### Realizando uma transação
 
-A URL para realizar uma transação é:
+A requisição que deve ser feita no endpoint para realizar uma transação é:
 
-	https://api.pagar.me/1/transactions/
-
-O método HTTP a ser utilizado é `POST`.
+	POST /transactions
 
 Uma transação exige os seguintes parâmetros
 
@@ -34,15 +34,16 @@ Uma transação exige os seguintes parâmetros
 
 Realizando uma transação com o cURL:
 
-	curl -X POST 'https://api.pagar.me/1/transactions' \
+	curl 'https://api.pagar.me/1/transactions' \
 		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
 		-d 'card_number=4901720080344448' \
-		-d 'card_holder_name=Pedro Franceschi' \
+		-d 'card_holder_name=Usuario de Teste' \
 		-d 'card_expiracy_date=1213' \
 		-d 'card_cvv=314' \
-		-d 'amount=1000'
+		-d 'amount=1000' \
+		-X POST 
 
-Caso os dados sejam válidos, o servidor retornará:
+Caso os parâmetros sejam válidos, o servidor retornará:
 
 	{
 	  "status": "approved",
@@ -50,11 +51,61 @@ Caso os dados sejam válidos, o servidor retornará:
 	  "amount": "1000",
 	  "id": "516217040ef16fc9fc00000f",
 	  "live": true,
-	  "costumer_name": "Pedro Franceschi"
+	  "costumer_name": "Usuario de Teste"
 	}
 
 O `id` de transação retornado deverá ser usado para realizar um possível estorno ou verificar futuramente o status dessa transação.
 
 ### Verificando o status de uma transação
 
-### Estornando uma cobrança
+A requisição que deve ser feita no endpoint para verificar o status de uma transação é:
+
+	GET /transactions/:id
+
+Onde `:id` é o ID da transação que se deseja verificar o status.
+
+Para verificar o status da transação realizada anteriormente, iremos usar como `id` de exemplo `516217040ef16fc9fc00000f`.
+
+Verificando o status da transação com o cURL:
+
+	curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f' \
+		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+		-X GET 
+
+O servidor retornará:
+
+	{
+	  "status": "approved",
+	  "date_created": "2013-04-08T01:01:56.672Z",
+	  "amount": "1000",
+	  "id": "516217040ef16fc9fc00000f",
+	  "live": true,
+	  "costumer_name": "Usuario de Teste"
+	}
+
+### Estornando uma transação
+
+A requisição que deve ser feita no endpoint para estornar uma transação é:
+
+	POST /transactions/:id/chargeback
+
+Onde `:id` é o ID da transação que se deseja estornar.
+
+Para estornar a transação realizada anteriormente, iremos usar como `id` de exemplo `516217040ef16fc9fc00000f`.
+
+Estornando a transação com o cURL:
+
+	curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f/chargeback' \
+		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+		-X POST
+
+O servidor retornará:
+
+	{
+	  "status": "chargebacked",
+	  "date_created": "2013-04-08T01:01:56.672Z",
+	  "amount": "1000",
+	  "id": "516217040ef16fc9fc00000f",
+	  "live": true,
+	  "costumer_name": "Usuario de Teste"
+	}
