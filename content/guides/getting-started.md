@@ -8,7 +8,7 @@ Aqui será mostrado o funcionamento básico da API RESTful do PagarMe. As requis
 
 A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) e a resposta do servidor é no formato [JSON](http://www.json.org).
 
-### Requisições
+## Requisições
 
 O endpoint da API do PagarMe é:
 
@@ -18,7 +18,7 @@ Todas as requisições devem ser feitas utilizando HTTPS e devem apresentar o pa
 
 Nesse guia, a `api_key` usada de exemplo será `Jy1V5bJcGf8q4gHepttt`.
 
-### Realizando uma transação
+## Realizando uma transação
 
 A requisição que deve ser feita no endpoint para realizar uma transação é:
 
@@ -58,7 +58,7 @@ O status `approved` indica que a transação foi realizada com sucesso.
 
 O `id` de transação retornado deverá ser usado para verificar futuramente o status dessa transação ou realizar um possível estorno.
 
-### Verificando o status de uma transação
+## Verificando o status de uma transação
 
 A requisição que deve ser feita no endpoint para verificar o status de uma transação é:
 
@@ -85,7 +85,7 @@ O servidor retornará:
 	  "costumer_name": "Usuario de Teste"
 	}
 
-### Estornando uma transação
+## Estornando uma transação
 
 A requisição que deve ser feita no endpoint para estornar uma transação é:
 
