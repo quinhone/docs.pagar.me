@@ -8,17 +8,13 @@ Aqui será mostrado o funcionamento básico da API RESTful do PagarMe. As requis
 
 A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) e a resposta do servidor é no formato [JSON](http://www.json.org).
 
-### Endpoint
+### Requisições
 
 O endpoint da API do PagarMe é:
 
 	https://api.pagar.me/1/
 
-Todas as requisições devem ser feitas utilizando HTTPS.
-
-### Autenticação
-
-Todas as requisições devem apresentar o parâmetro `api_key`, contendo a chave de acesso a API disponível no seu [dashboard](https://dashboard.pagar.me).
+Todas as requisições devem ser feitas utilizando HTTPS e devem apresentar o parâmetro `api_key`, contendo a chave de acesso da API disponível no seu [dashboard](https://dashboard.pagar.me).
 
 ### Realizando uma transação
 
