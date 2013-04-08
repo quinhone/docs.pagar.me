@@ -54,7 +54,9 @@ Caso os parâmetros sejam válidos, o servidor retornará:
 	  "costumer_name": "Usuario de Teste"
 	}
 
-O `id` de transação retornado deverá ser usado para realizar um possível estorno ou verificar futuramente o status dessa transação.
+O status `approved` indica que a transação foi realizada com sucesso.
+
+O `id` de transação retornado deverá ser usado para verificar futuramente o status dessa transação ou realizar um possível estorno.
 
 ### Verificando o status de uma transação
 
@@ -109,3 +111,5 @@ O servidor retornará:
 	  "live": true,
 	  "costumer_name": "Usuario de Teste"
 	}
+
+O status `chargebacked` indica que a transação foi estornada com sucesso.
