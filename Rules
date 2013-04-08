@@ -16,17 +16,12 @@
 compile '/assets/*' do
 end
 
-compile '/' do
-  filter :kramdown
-  layout 'default'
-end
-
 compile '*' do
   if item.binary?
-    # don’t filter binary items
+	# don’t filter binary items
   else
-    filter :erb
-    layout 'default'
+	filter :kramdown
+	layout 'default'
   end
 end
 
