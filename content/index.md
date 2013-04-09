@@ -8,4 +8,4 @@ Aqui você vai encontra tudo que precisa para usar a API do PagarMe. Isso inclui
 
 ## Primeiros passos
 
-Entenda [como funciona o pagamento no PagarMe](/guides/payment-flow).
+Entenda [como funciona o pagamento no PagarMe](/guides/transaction-flow).
