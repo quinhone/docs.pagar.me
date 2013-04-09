@@ -22,15 +22,15 @@ $(function() {
     }
   }
 
-  $('#js-sidebar .js-topic').each(function(){
-    if(($(this).find('.disable').length == 0 || firstOccurance == false) &&
-    $(this).hasClass('js-current') != true){
-      $(this).find('.js-guides').children().hide()
-    } else {
-      activeItem = $(this).index()
-      firstOccurance = false
-    }
-  })
+  // $('#js-sidebar .js-topic').each(function(){
+  //   if(($(this).find('.disable').length == 0 || firstOccurance == false) &&
+  //   $(this).hasClass('js-current') != true){
+  //     $(this).find('.js-guides').children().hide()
+  //   } else {
+  //     activeItem = $(this).index()
+  //     firstOccurance = false
+  //   }
+  // })
 
   // Toggle style list. Expanded items stay
   // expanded when new items are clicked.
