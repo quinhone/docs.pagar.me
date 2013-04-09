@@ -28,4 +28,4 @@ Agora que o seu servidor detém o `card_hash`, ele pode se comunicar com o Pagar
 
 Se o seu site é em [Ruby on Rails](http://rubyonrails.org) ou [PHP](http://php.net), o PagarMe já possui bibliotecas prontas. Visite o [manual de integração em Ruby on Rails](/apis/ruby) e o [manual de integração em PHP](/apis/php).
 
-Caso o seu site não utilize essas linguagens, a API do PagarMe é RESTful, e portanto simples de ser implementada. Confira as requisições de exemplo usando o cURL.
+Caso o seu site não utilize essas linguagens, a API do PagarMe é RESTful, e portanto simples de ser implementada. [Confira os exemplos de requisição a API usando o cURL](/restful-api/examples).
