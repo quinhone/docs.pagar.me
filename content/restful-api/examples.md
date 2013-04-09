@@ -1,8 +1,8 @@
 ---
-title: Conhecendo a API
+title: Exemplos de requisições
 ---
 
-# Conhecendo a API
+# Exemplos de requisições
 
 Aqui será mostrado o funcionamento básico da API RESTful do PagarMe. As requisições serão feitas utilizando o [cURL](http://curl.haxx.se).
 
