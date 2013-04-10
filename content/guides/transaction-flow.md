@@ -26,6 +26,6 @@ Embora seja recomendado que o seu site utilize `HTTPS`, o `card_hash` gerado pel
 
 Agora que o seu servidor detém o `card_hash`, ele pode se comunicar com o PagarMe para realizar a transação em si, creditando o cartão de crédito do usuário.
 
-Se o seu site é em [Ruby on Rails](http://rubyonrails.org) ou [PHP](http://php.net), o PagarMe já possui bibliotecas prontas. Visite o [guia da biblioteca em Ruby on Rails](/apis/ruby) e o [guia da biblioteca em PHP](/apis/php).
+Se o seu site é em [Ruby on Rails](http://rubyonrails.org) ou [PHP](http://php.net), o PagarMe já possui bibliotecas prontas. Visite o [manual de integração em Ruby on Rails](/apis/ruby) e o [manual de integração em PHP](/apis/php).
 
-Caso o seu site não utilize essas linguagens, a API do PagarMe é RESTful, e por isso é simples de ser implementada. [Confira os exemplos de requisições a API usando o cURL](/restful-api/examples).
+Caso o seu site não utilize essas linguagens, a API do PagarMe é RESTful, e portanto simples de ser implementada. [Confira os exemplos de requisições a API usando o cURL](/restful-api/examples).
