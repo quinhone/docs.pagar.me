@@ -34,25 +34,26 @@ Uma transação exige os seguintes parâmetros
 
 Realizando uma transação com o cURL:
 
-	curl 'https://api.pagar.me/1/transactions' \
-		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-		-d 'card_number=4901720080344448' \
-		-d 'card_holder_name=Usuario de Teste' \
-		-d 'card_expiracy_date=1213' \
-		-d 'card_cvv=314' \
-		-d 'amount=1000' \
-		-X POST 
+<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions' \
+	-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+	-d 'card_number=4901720080344448' \
+	-d 'card_holder_name=Usuario de Teste' \
+	-d 'card_expiracy_date=1213' \
+	-d 'card_cvv=314' \
+	-d 'amount=1000' \
+	-X POST 
+</code></pre>
 
 Caso os parâmetros sejam válidos, o servidor retornará:
 
-	{
-	  "status": "approved",
-	  "date_created": "2013-04-08T01:01:56.672Z",
-	  "amount": "1000",
-	  "id": "516217040ef16fc9fc00000f",
-	  "live": true,
-	  "costumer_name": "Usuario de Teste"
-	}
+<pre><code data-language="javascript">{
+	"status": "approved",
+	"date_created": "2013-04-08T01:01:56.672Z",
+	"amount": "1000",
+	"id": "516217040ef16fc9fc00000f",
+	"live": true,
+	"costumer_name": "Usuario de Teste"
+}</code></pre>
 
 O status `approved` indica que a transação foi realizada com sucesso.
 
@@ -70,20 +71,21 @@ Para verificar o status da transação realizada anteriormente, iremos usar como
 
 Verificando o status da transação com o cURL:
 
-	curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f' \
-		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-		-X GET 
+<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f' \
+	-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+	-X GET 
+</code></pre>
 
 O servidor retornará:
 
-	{
-	  "status": "approved",
-	  "date_created": "2013-04-08T01:01:56.672Z",
-	  "amount": "1000",
-	  "id": "516217040ef16fc9fc00000f",
-	  "live": true,
-	  "costumer_name": "Usuario de Teste"
-	}
+<pre><code data-language="javascript">{
+	"status": "approved",
+	"date_created": "2013-04-08T01:01:56.672Z",
+	"amount": "1000",
+	"id": "516217040ef16fc9fc00000f",
+	"live": true,
+	"costumer_name": "Usuario de Teste"
+}</code></pre>
 
 ## Estornando uma transação
 
@@ -97,19 +99,20 @@ Para estornar a transação realizada anteriormente, iremos usar como `id` de ex
 
 Estornando a transação com o cURL:
 
-	curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f/chargeback' \
+<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f/chargeback' \
 		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
 		-X POST
+</code></pre>
 
 O servidor retornará:
 
-	{
-	  "status": "chargebacked",
-	  "date_created": "2013-04-08T01:01:56.672Z",
-	  "amount": "1000",
-	  "id": "516217040ef16fc9fc00000f",
-	  "live": true,
-	  "costumer_name": "Usuario de Teste"
-	}
+<pre><code data-language="javascript">{
+	"status": "chargebacked",
+	"date_created": "2013-04-08T01:01:56.672Z",
+	"amount": "1000",
+	"id": "516217040ef16fc9fc00000f",
+	"live": true,
+	"costumer_name": "Usuario de Teste"
+}</code></pre>
 
 O status `chargebacked` indica que a transação foi estornada com sucesso.
