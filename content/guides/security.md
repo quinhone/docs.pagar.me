@@ -2,6 +2,8 @@
 title: Segurança e autenticação
 ---
 
+# Segurança e autenticação
+
 A segurança é um dos pontos mais importantes na operação do PagarMe. Para isso, medidas precisam ser tomadas para garantir a autenticidade e a segurança das transações realizadas.
 
 ## Autenticação pela *api_key*
