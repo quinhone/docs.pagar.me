@@ -47,12 +47,12 @@ Realizando uma transação com o cURL:
 Caso os parâmetros sejam válidos, o servidor retornará:
 
 <pre><code data-language="javascript">{
-	"status": "approved",
-	"date_created": "2013-04-08T01:01:56.672Z",
-	"amount": "1000",
-	"id": "516217040ef16fc9fc00000f",
-	"live": true,
-	"costumer_name": "Usuario de Teste"
+    "status": "approved",
+    "date_created": "2013-04-08T01:01:56.672Z",
+    "amount": "1000",
+    "id": "516217040ef16fc9fc00000f",
+    "live": true,
+    "costumer_name": "Usuario de Teste"
 }</code></pre>
 
 O status `approved` indica que a transação foi realizada com sucesso.
@@ -79,12 +79,12 @@ Verificando o status da transação com o cURL:
 O servidor retornará:
 
 <pre><code data-language="javascript">{
-	"status": "approved",
-	"date_created": "2013-04-08T01:01:56.672Z",
-	"amount": "1000",
-	"id": "516217040ef16fc9fc00000f",
-	"live": true,
-	"costumer_name": "Usuario de Teste"
+    "status": "approved",
+    "date_created": "2013-04-08T01:01:56.672Z",
+    "amount": "1000",
+    "id": "516217040ef16fc9fc00000f",
+    "live": true,
+    "costumer_name": "Usuario de Teste"
 }</code></pre>
 
 ## Estornando uma transação
@@ -107,12 +107,12 @@ Estornando a transação com o cURL:
 O servidor retornará:
 
 <pre><code data-language="javascript">{
-	"status": "chargebacked",
-	"date_created": "2013-04-08T01:01:56.672Z",
-	"amount": "1000",
-	"id": "516217040ef16fc9fc00000f",
-	"live": true,
-	"costumer_name": "Usuario de Teste"
+    "status": "chargebacked",
+    "date_created": "2013-04-08T01:01:56.672Z",
+    "amount": "1000",
+    "id": "516217040ef16fc9fc00000f",
+    "live": true,
+    "costumer_name": "Usuario de Teste"
 }</code></pre>
 
 O status `chargebacked` indica que a transação foi estornada com sucesso.
