@@ -6,6 +6,10 @@ title: Métodos da API
 
 Todas os métodos devem ser chamados utilizando HTTPS e devem apresentar o parâmetro `api_key`, contendo a chave de acesso da API disponível no seu [dashboard](https://dashboard.pagar.me).
 
+O endpoint da API é:
+
+	https://api.pagar.me/1
+
 ## POST /transactions
 
 **Descrição**: realiza uma transação.
