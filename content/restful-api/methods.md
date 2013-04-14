@@ -10,6 +10,9 @@ O endpoint da API é:
 
 	https://api.pagar.me/1
 
+
+A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) e a resposta do servidor é no formato [JSON](http://www.json.org).
+
 ## POST /transactions
 
 **Descrição**: realiza uma transação.

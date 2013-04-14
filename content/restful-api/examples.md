@@ -1,12 +1,10 @@
 ---
-title: Exemplos de requisições
+title: Exemplos de uso
 ---
 
-# Exemplos de requisições
+# Exemplos de uso
 
 Aqui será mostrado o funcionamento básico da API RESTful do PagarMe. As requisições serão feitas utilizando o [cURL](http://curl.haxx.se).
-
-A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) e a resposta do servidor é no formato [JSON](http://www.json.org).
 
 ## Requisições
 
