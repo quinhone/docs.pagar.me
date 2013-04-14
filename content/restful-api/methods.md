@@ -24,7 +24,7 @@ O endpoint da API é:
 - `card_holder_name` (obrigatório) - o nome do portador do cartão, como escrito neste. Ex: `Jose da Silva`
 - `card_cvv` (obrigatório) - o código de segurança do cartão, como escrito nele. Exemplo: `314`
 
-Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card_hash`, o que aumenta consideravelmente a segurança no envio desses dados para o PagarMe. Para mais informações sobre o `card_hash`, consulte o guia de segurança.
+Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card_hash`, o que aumenta consideravelmente a segurança da transação. Para mais informações sobre o `card_hash`, [consulte a referência do *card_hash*](/restful-api/card-hash).
 
 - `card_hash` (obrigatório) - o conteúdo encriptado dos dados do cartão de crédito.
 
