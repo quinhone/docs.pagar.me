@@ -74,26 +74,6 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "costumer_name": "Jose da Silva"
 }</code></pre>
 
-## GET /transactions/card_hash
-
-**Descrição**: retorna os dados para realizar a encriptação dos dados do cartão de crédito, gerando um `card_hash`. Para mais informações, [consulte a referência sobre o *card_hash*](/restful-api/card-hash).
-
-**Parâmetros**:
-
-- `encryption_key` (obrigatório): a chave de encriptação disponível no seu dashboard. Essa chave deve ser usada sempre que o `card_hash` é gerado do lado do cliente. Dessa forma, a `api_key` não é exposta e permanece em segredo.
-
-Caso o `card_hash` esteja sendo gerado do lado do servidor, a `api_key` pode ser usada para autenticação, como em outros requests.
-
-- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
-
-**Resposta**:
-
-<pre><code data-language="javascript">{
-  "date_created": "2013-04-13T21:42:03.886Z",
-  "id": "5169d12b3da665f36e00000a",
-  "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv71aNn1njtjcSrPXW7LF\nZlxajpBht/jq/+pl77eiZEVyNnP1nHlmkM4ufZmZQF7Q8seTUEBjR2PjoocCrFsP\nsu9+ITFnqAqlYmAVXKFf/gCCQfPDfhsavQXVauDAHXyl/69ooWIMUrYmCmxpZfSU\ne9E/4dl7sUg1ywllU8EpMKIn8Zd7blk49pNZ8I2FlkLRLk3yS9JXDIe8dAZLHoZP\nyT1c/5p1czLoB7Q9k5ic2A4ZM3cwCVkbIKC4wEmFuQCQx4tu1J96kvXhVLYoZlvV\n6+u8apFpFQVpTAK71IVYJbTQjHHty1qtZMImw42YM0kFz0GqhfQk3LKziBDX/FHq\nRQIDAQAB\n-----END PUBLIC KEY-----\n"
-}</code></pre>
-
 ## GET /transactions
 
 **Descrição**: retorna as últimas transações realizadas.
@@ -188,4 +168,24 @@ Caso o `card_hash` esteja sendo gerado do lado do servidor, a `api_key` pode ser
     "costumer_name": "Jose da Silva"
   }
 ]</code></pre>
+
+## GET /transactions/card_hash
+
+**Descrição**: retorna os dados para realizar a encriptação dos dados do cartão de crédito, gerando um `card_hash`. Para mais informações, [consulte a referência sobre o *card_hash*](/restful-api/card-hash).
+
+**Parâmetros**:
+
+- `encryption_key` (obrigatório): a chave de encriptação disponível no seu dashboard. Essa chave deve ser usada sempre que o `card_hash` é gerado do lado do cliente. Dessa forma, a `api_key` não é exposta e permanece em segredo.
+
+Caso o `card_hash` esteja sendo gerado do lado do servidor, a `api_key` pode ser usada para autenticação, como em outros requests.
+
+- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
+
+**Resposta**:
+
+<pre><code data-language="javascript">{
+  "date_created": "2013-04-13T21:42:03.886Z",
+  "id": "5169d12b3da665f36e00000a",
+  "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv71aNn1njtjcSrPXW7LF\nZlxajpBht/jq/+pl77eiZEVyNnP1nHlmkM4ufZmZQF7Q8seTUEBjR2PjoocCrFsP\nsu9+ITFnqAqlYmAVXKFf/gCCQfPDfhsavQXVauDAHXyl/69ooWIMUrYmCmxpZfSU\ne9E/4dl7sUg1ywllU8EpMKIn8Zd7blk49pNZ8I2FlkLRLk3yS9JXDIe8dAZLHoZP\nyT1c/5p1czLoB7Q9k5ic2A4ZM3cwCVkbIKC4wEmFuQCQx4tu1J96kvXhVLYoZlvV\n6+u8apFpFQVpTAK71IVYJbTQjHHty1qtZMImw42YM0kFz0GqhfQk3LKziBDX/FHq\nRQIDAQAB\n-----END PUBLIC KEY-----\n"
+}</code></pre>
 
