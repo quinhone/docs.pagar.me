@@ -60,7 +60,7 @@ O conteúdo que deve ser encriptado pela chave retornada pelo servidor é uma st
 
 Você deve, com essa string,
 
-- Encriptá-la utilizando a chave retornada pelo servidor (`public_key`).
+- Encriptá-la por RSA utilizando a chave retornada pelo servidor (`public_key`).
 - Converter o resultado dessa encriptação para [base64](http://en.wikipedia.org/wiki/Base64).
 
 Como resultado, temos:
