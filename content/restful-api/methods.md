@@ -173,7 +173,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
   }
 ]</code></pre>
 
-## GET /transactions/card_hash
+## GET /transactions/card_hash_key
 
 **Descrição**: retorna os dados para realizar a encriptação dos dados do cartão de crédito, gerando um `card_hash`. Para mais informações, [consulte a referência sobre o *card_hash*](/restful-api/card-hash).
 
