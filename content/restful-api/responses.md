@@ -10,6 +10,8 @@ Respostas da API com o código HTTP 200 significam que a requisição foi tratad
 
 ## Código HTTP != 200 (erro)
 
+Respostas da API com o código HTTP diferente de 200 significam que a requisição não conseguiu ser processada devido a um erro.
+
 Todas as respostas de erro do servidor apresentam, além do código de resposta HTTP diferente de 200, o seguinte formato:
 
 <pre><code data-language="javascript">{
@@ -18,7 +20,7 @@ Todas as respostas de erro do servidor apresentam, além do código de resposta 
     "method": "método da requisição ('get' ou 'post')"
 }</code></pre>
 
-Além das mensagens de erro retornadas, os códigos de erro representam:
+Além da mensagem de erro retornada, os códigos de resposta HTTP representam:
 
 ### HTTP 400
 
