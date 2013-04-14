@@ -20,6 +20,6 @@ Nossas bibliotecas prontas fazem a validação do certificado HTTPS do servidor,
 
 ## O *card_hash*
 
-Embora os dados do cartão de crédito possam ser enviados para o PagarMe por parâmetros, há uma forma muito mais segura de enviá-los ao servidor: utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los.
+Embora os dados do cartão de crédito possam ser enviados para o PagarMe por parâmetros, há uma forma muito mais segura de enviá-los ao servidor: utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los de forma indevida por terceiros.
 
 O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Para mais informações sobre como gerá-lo, [consulte a referência sobre o *card_hash*](/restful-api/card-hash).
