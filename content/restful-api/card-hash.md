@@ -6,7 +6,7 @@ title: Gerando o card_hash
 
 Embora os dados do cartão de crédito possam ser enviados para o PagarMe por parâmetros, há uma forma muito mais segura de enviá-los ao servidor: utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los de forma indevida por terceiros.
 
-O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito que é encriptada por RSA usando uma chave pública enviada pelo servidor. Essa chave deve ser requisitada a cada `card_hash` gerado e é invalidada assim que o servidor o lê, ou seja, só pode ser utilizada uma única vez. A chave também é temporária, e por isso expira 5 minutos após ter sido gerada.
+O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Essa string é encriptada por RSA usando uma chave pública enviada pelo servidor. Essa chave deve ser requisitada a cada `card_hash` gerado e é invalidada assim que o servidor o lê, ou seja, só pode ser utilizada uma única vez. A chave também é temporária, e por isso expira 5 minutos após ter sido gerada.
 
 As bibliotecas do PagarMe sempre utilizam o `card_hash` para enviar os dados para o servidor, o que aumenta consideravelmente a segurança da transação.
 
