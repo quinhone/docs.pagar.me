@@ -48,9 +48,11 @@ Caso os parâmetros sejam válidos, o servidor retornará:
     "status": "approved",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "1000",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Usuario de Teste"
+    "costumer_name": "Jose da Silva"
+    "card_last_digits": "4448"
 }</code></pre>
 
 O status `approved` indica que a transação foi realizada com sucesso.
@@ -80,9 +82,11 @@ O servidor retornará:
     "status": "approved",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "1000",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Usuario de Teste"
+    "costumer_name": "Jose da Silva"
+    "card_last_digits": "4448"
 }</code></pre>
 
 ## Estornando uma transação
@@ -108,9 +112,11 @@ O servidor retornará:
     "status": "chargebacked",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "1000",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Usuario de Teste"
+    "costumer_name": "Jose da Silva"
+    "card_last_digits": "4448"
 }</code></pre>
 
 O status `chargebacked` indica que a transação foi estornada com sucesso.

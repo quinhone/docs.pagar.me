@@ -21,6 +21,8 @@ A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer
 
 - `api_key` (obrigatório): a chave de acesso a API do PagarMe.
 - `amount` (obrigatório) - o valor da transação, com centavos, sem vírgulas ou pontos. Ex: se o valor da transação é de R$49,90, o valor de `amount` será `4990`
+- `installments` (opcional) - o número de parcelas da transação. Ex: `3`. Caso esse parâmetro não seja passado, a transação não será parcelada (`1` parcela)
+
 
 - `card_number` (obrigatório) - o número do cartão de crédito, sem espaços ou separadores. Ex: `4532519433391701`
 - `card_expiracy_date` (obrigatório) - mês (2 dígitos) seguidos do ano (2 dígitos) de expiração do cartão de crédito. Ex: se a data de expiração do cartão é 05/2016, o valor de `amount` será `0516`
@@ -37,9 +39,11 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "status": "approved",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "4990",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
     "costumer_name": "Jose da Silva"
+    "card_last_digits": "4448"
 }</code></pre>
 
 ## POST /transactions/:id/chargeback
@@ -57,9 +61,11 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "status": "chargebacked",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "4990",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
     "costumer_name": "Jose da Silva"
+    "card_last_digits": "4448"
 }</code></pre>
 
 ## GET /transactions/:id
@@ -76,9 +82,11 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "status": "approved",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "4990",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
     "costumer_name": "Jose da Silva"
+    "card_last_digits": "4448"
 }</code></pre>
 
 ## GET /transactions
@@ -93,86 +101,105 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
 
 **Resposta**:
 
-<pre><code data-language="javascript">[
-  {
+<pre><code data-language="javascript">{
     "status": "approved",
-    "date_created": "2013-04-10T23:34:12.000Z",
-    "amount": "1000",
-    "id": "5165f6f40ef16fc9fc000028",
+    "date_created": "2013-04-16T02:03:54.828Z",
+    "amount": "10000",
+    "installments": "5",
+    "id": "516cb18a8f3c6f9fd7000013",
     "live": true,
-    "costumer_name": "Jose da Silva"
-  },
-  {
-    "status": "approved",
-    "date_created": "2013-04-08T22:29:52.154Z",
-    "amount": "1000",
-    "id": "516344e00ef16fc9fc000027",
-    "live": true,
-    "costumer_name": "Jose da Silva"
-  },
-  {
-    "status": "approved",
-    "date_created": "2013-04-08T22:29:52.139Z",
-    "amount": "1000",
-    "id": "516344e00ef16fc9fc000026",
-    "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   },
   {
     "status": "chargebacked",
-    "date_created": "2013-04-08T22:29:52.103Z",
+    "date_created": "2013-04-16T02:03:54.459Z",
     "amount": "1000",
-    "id": "516344e00ef16fc9fc000025",
+    "installments": "1",
+    "id": "516cb18a8f3c6f9fd7000011",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   },
   {
     "status": "approved",
-    "date_created": "2013-04-08T22:29:46.042Z",
-    "amount": "1000",
-    "id": "516344da0ef16fc9fc000024",
+    "date_created": "2013-04-16T02:03:43.653Z",
+    "amount": "10000",
+    "installments": "5",
+    "id": "516cb17f8f3c6f9fd700000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   },
   {
     "status": "chargebacked",
-    "date_created": "2013-04-08T22:29:46.003Z",
+    "date_created": "2013-04-16T02:03:43.421Z",
     "amount": "1000",
-    "id": "516344da0ef16fc9fc000023",
+    "installments": "1",
+    "id": "516cb17f8f3c6f9fd700000d",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   },
   {
     "status": "approved",
-    "date_created": "2013-04-08T22:29:37.909Z",
-    "amount": "1000",
-    "id": "516344d10ef16fc9fc000022",
+    "date_created": "2013-04-16T02:03:38.315Z",
+    "amount": "10000",
+    "installments": "5",
+    "id": "516cb17a8f3c6f9fd700000b",
     "live": true,
-    "costumer_name": "Jose da Silva"
-  },
-  {
-    "status": "approved",
-    "date_created": "2013-04-08T22:29:37.894Z",
-    "amount": "1000",
-    "id": "516344d10ef16fc9fc000021",
-    "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   },
   {
     "status": "chargebacked",
-    "date_created": "2013-04-08T22:29:37.854Z",
+    "date_created": "2013-04-16T02:03:38.136Z",
     "amount": "1000",
-    "id": "516344d10ef16fc9fc000020",
+    "installments": "1",
+    "id": "516cb17a8f3c6f9fd7000009",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   },
   {
     "status": "approved",
-    "date_created": "2013-04-08T22:29:24.375Z",
-    "amount": "1000",
-    "id": "516344c40ef16fc9fc00001f",
+    "date_created": "2013-04-16T02:02:55.878Z",
+    "amount": "10000",
+    "installments": "5",
+    "id": "516cb14f8f3c6f9fd7000007",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
+  },
+  {
+    "status": "chargebacked",
+    "date_created": "2013-04-16T02:02:55.657Z",
+    "amount": "1000",
+    "installments": "1",
+    "id": "516cb14f8f3c6f9fd7000005",
+    "live": true,
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
+  },
+  {
+    "status": "chargebacked",
+    "date_created": "2013-04-16T02:01:37.672Z",
+    "amount": "1000",
+    "installments": "1",
+    "id": "516cb1018f3c6f9fd7000002",
+    "live": true,
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
+  },
+  {
+    "status": "approved",
+    "date_created": "2013-04-16T01:55:50.954Z",
+    "amount": "1000",
+    "installments": "4",
+    "id": "516cafa6ab745d5fd7000004",
+    "live": true,
+    "costumer_name": "Jose da Silva",
+    "card_last_digits": "4448"
   }
 ]</code></pre>
 
