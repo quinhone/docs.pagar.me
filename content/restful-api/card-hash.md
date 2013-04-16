@@ -113,9 +113,11 @@ O servidor retornará:
     "status": "approved",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "1500",
+    "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
     "costumer_name": "Usuario de Teste"
+    "card_last_digits": "4448"
 }</code></pre>
 
 A transação foi realizada utilizando os dados de cartão de crédito presentes no `card_hash`.
