@@ -12,7 +12,7 @@ As bibliotecas do PagarMe sempre utilizam o `card_hash` para enviar os dados par
 
 ## Uso
 
-Um caso de uso do `card_hash` é a [API em Javascript do PagarMe](/apis/javascript), que funciona da seguinte maneira:
+Um caso de uso do `card_hash` é a [biblioteca em Javascript do PagarMe](/apis/javascript), que funciona da seguinte maneira:
 
 - O usuário deseja realizar um pagamento
 - O browser do usuário solicita ao servidor do PagarMe uma chave para criptografar os dados do cartão de crédito do cliente para que esses possam ser enviados para o servidor de forma segura
