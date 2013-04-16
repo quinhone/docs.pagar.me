@@ -116,7 +116,7 @@ O servidor retornará:
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Usuario de Teste"
+    "costumer_name": "Usuario de Teste",
     "card_last_digits": "4448"
 }</code></pre>
 

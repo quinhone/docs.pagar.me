@@ -51,7 +51,7 @@ Caso os parâmetros sejam válidos, o servidor retornará:
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
     "card_last_digits": "4448"
 }</code></pre>
 
@@ -85,7 +85,7 @@ O servidor retornará:
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
     "card_last_digits": "4448"
 }</code></pre>
 
@@ -115,7 +115,7 @@ O servidor retornará:
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
     "card_last_digits": "4448"
 }</code></pre>
 

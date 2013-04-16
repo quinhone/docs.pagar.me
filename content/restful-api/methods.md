@@ -42,7 +42,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
     "card_last_digits": "4448"
 }</code></pre>
 
@@ -64,7 +64,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
     "card_last_digits": "4448"
 }</code></pre>
 
@@ -85,7 +85,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "installments": "4",
     "id": "516217040ef16fc9fc00000f",
     "live": true,
-    "costumer_name": "Jose da Silva"
+    "costumer_name": "Jose da Silva",
     "card_last_digits": "4448"
 }</code></pre>
 
