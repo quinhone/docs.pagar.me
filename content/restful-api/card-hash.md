@@ -4,15 +4,28 @@ title: Gerando o card_hash
 
 # Gerando o *card_hash*
 
-Todos os dados de cartão de crédito devem ser enviados para o servidor utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los de forma indevida por terceiros.
+Todos os dados de cartão de crédito devem ser enviados utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los de forma indevida por terceiros.
 
-O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Essa string é encriptada por RSA usando uma chave pública enviada pelo servidor. Essa chave deve ser requisitada a cada `card_hash` gerado e é invalidada assim que o servidor o lê, ou seja, só pode ser utilizada uma única vez. A chave também é temporária, e por isso expira 5 minutos após ter sido gerada.
+O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Essa string é encriptada por RSA usando uma chave pública que deve ser requisitada ao servidor a cada novo `card_hash` gerado. Essa chave é invalidada assim que o servidor lê as informações contidas no `card_hash`, e por isso só pode ser utilizada uma única vez. Ela também é temporária, expirando 5 minutos após ter sido gerada.
 
 As bibliotecas do PagarMe sempre utilizam o `card_hash` para enviar os dados para o servidor, o que aumenta consideravelmente a segurança da transação.
 
-Gerando o `card_hash`, passo a passo:
+## Uso
 
-## Requisitando ao servidor uma chave para encriptar o `card_hash`
+Um caso de uso do `card_hash` é a [API em Javascript do PagarMe](/apis/javascript), que funciona da seguinte maneira:
+
+- O usuário deseja realizar um pagamento
+- O browser do usuário solicita ao servidor do PagarMe uma chave para criptografar os dados do cartão de crédito do cliente para que esses possam ser enviados para o servidor de forma segura
+- O browser do usuário criptografa os dados do cartão de crédito com a chave retornada pelo servidor, gerando o `card_hash`
+- Esse `card_hash`, gerado no browser do cliente, é enviado para o seu servidor por uma requisição HTTP
+- O seu servidor, através das bibliotecas do PagarMe ou diretamente pela [API RESTful](/restful-api/methods), realizar a transação com o PagarMe, transmitindo apenas o `card_hash` que foi originado no browser do cliente e o valor/número de parcelas da transação.
+- Apenas a API do PagarMe consegue compreender os dados do `card_hash` e obter os dados do cartão de crédito para efetuar a transação
+
+## Gerando o `card_hash`, passo a passo
+
+As seguintes etapas devem ser seguidas para gerar o `card_hash` que conterá os dados do cartão de crédito do usuário:
+
+### Requisitando ao servidor uma chave para encriptar o `card_hash`
 
 A URL a ser requisitada, conforme definido na [referência de métodos da API](/restful-api/methods), é:
 
@@ -43,7 +56,7 @@ O servidor retornará:
 
 A chave que será usada para encriptar os dados do cartão é a `public_key`.
 
-## Encriptando os dados do cartão de crédito
+### Encriptando os dados do cartão de crédito
 
 Nesse exemplo, usaremos os seguintes dados do cartão de crédito:
 
@@ -67,7 +80,7 @@ Como resultado, temos:
 
 	FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==
 
-## Enviando o `card_hash` para o servidor
+### Enviando o `card_hash` para o servidor
 
 O `card_hash` deve conter o `id` retornado pelo servidor ao requisitar a chave para encriptação. Portanto, ele tem a seguinte forma:
 
@@ -81,7 +94,7 @@ Ele deve ser enviado para o seu servidor através de uma requisição HTTP ou HT
 
 O `card_hash` só pode ser utilizado uma vez e deve ser gerado novamente a cada transação.
 
-## Utilizando o `card_hash` gerado
+### Utilizando o `card_hash` gerado
 
 Uma vez com o `card_hash` em seu servidor, você deve utilizar nossas bibliotecas para realizar a transação com o PagarMe. Elas dispõem de métodos para utilizar o `card_hash` para realizar transações.
 
