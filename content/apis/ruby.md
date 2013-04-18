@@ -154,7 +154,7 @@ Também é possível especificar a página do resultado desejada, assim como o n
 
 Exemplo:
 
-<pre><code data-language="ruby">> transactions = PagarMe::Transaction.all(3, 5) # página 3, com 5 transações por páginac:w
+<pre><code data-language="ruby">> transactions = PagarMe::Transaction.all(3, 5) # página 3, com 5 transações por página
 > transactions.length
  => 5
 > transactions[0]
