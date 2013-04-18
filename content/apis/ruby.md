@@ -8,7 +8,7 @@ title: Guia de integração em Ruby
 
 A biblioteca em Ruby do PagarMe está disponível em uma *gem*. Para instalá-la,
 
-	gem install pagarme
+	$ gem install pagarme
 
 ## Utilizando a biblioteca
 
