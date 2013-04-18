@@ -107,4 +107,56 @@ Dessa vez, o resultado será:
 
 <pre><code data-language="ruby">Erro na transação: PagarMe::TransactionError - Invalid expiracy date month.</code></pre>
 
-O erro foi "resgatado" pelo `rescue`. É nesse ponto onde o tratamento de erro específico deve ser feito.
+O erro foi "resgatado" pelo `rescue`. É nesse ponto onde o tratamento de erro específico deve ser feito (e respondido para o cliente).
+
+### Cancelando uma transação
+
+Após a transação ser realizada com sucesso, ela terá o status `:approved`, como já foi visto:
+
+<pre><code data-language="ruby">> transaction.status
+ => :approved
+</code></pre>
+
+Caso você deseja cancelar a transação, estornando o valor pago pelo cliente:
+
+<pre><code data-language="ruby">> transaction.chargeback
+ => "517035290039fc26d9000024" # o id da transação é retornado
+> transaction.status
+ => :chargebacked
+</code></pre>
+
+Se a transação for cancelada com sucesso, seu status mudará para `:chargebacked`, indicando que ela foi cancelada com sucesso.
+
+### Buscando uma transação pelo `id`
+
+Consultar os dados de uma transação já realizada é possível com o seu `id`, que é retornado ao realizá-la:
+
+<pre><code data-language="ruby">> transaction = PagarMe::Transaction.find_by_id("517035290039fc26d9000024")
+ => #<PagarMe::Transaction:0x007fa071371ef0 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
+> transaction.id
+ => "517035290039fc26d9000024"
+> transaction.status
+ => :chargebacked
+</code></pre>
+
+### Buscando as últimas transações realizadas
+
+Para buscar as últimas transações realizadas em sua conta:
+
+<pre><code data-language="ruby">> transactions = PagarMe::Transaction.all
+> transactions.length
+ => 10
+> transactions[0]
+ => #<PagarMe::Transaction:0x007fa0712bcfc8 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
+</code></pre>
+
+Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
+
+Exemplo:
+
+<pre><code data-language="ruby">> transactions = PagarMe::Transaction.all(3, 5) # página 3, com 5 transações por páginac:w
+> transactions.length
+ => 5
+> transactions[0]
+ => #<PagarMe::Transaction:0x007fa071252f38 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-16T02:39:03.412Z", @id="516cb9c70039fc26d9000010", @status=1, @live=true, @installments=5, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Test User", @card_number="", @amount="10000">
+</code></pre>
