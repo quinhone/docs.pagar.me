@@ -114,7 +114,9 @@ Um exemplo de utilização da biblioteca do PagarMe sua página, que deve ser in
 });
 </code></pre>
 
-Quando o `form` é enviado, é criado um objeto com os dados de cartão de crédito presentes nele. Se foram encontrados erros de validação nos dados do `form`, é inserida uma borda vermelha no campo para indicar o erro. Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`, e ele é enviado.
+Quando o `form` é enviado, é criado um objeto com os dados de cartão de crédito presentes nele. Se foram encontrados erros de validação nos dados do `form`, é inserida uma borda vermelha no campo para indicar o erro.
+
+Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são substituídos pelo `card_hash`, e então o `form` é enviado.
 
 ## Página de exemplo
 
