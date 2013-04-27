@@ -4,7 +4,7 @@ title: Guia de integração em Javascript
 
 # Guia de integração em Javascript
 
-O objetivo da biblioteca em Javascript é exclusivamente gerar o `card_hash`, que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do PagarMe, onde a transação será efetuada.
+O objetivo da biblioteca em Javascript é gerar o `card_hash`, que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do PagarMe, onde a transação será efetuada.
 
 ## Importando a biblioteca
 
@@ -114,9 +114,11 @@ Um exemplo de utilização da biblioteca do PagarMe sua página, que deve ser in
 });
 </code></pre>
 
-Quando o `form` é enviado, é criado um objeto com os dados de cartão de crédito presentes nele. Se foram encontrados erros de validação nos dados do `form`, é inserida uma borda vermelha no campo para indicar o erro.
+Quando o `form` é enviado, é criado um objeto com os dados de cartão de crédito presentes nele. Se forem encontrados erros de validação nos dados do `form`, é inserida uma borda vermelha no campo para indicar o erro.
 
-Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são substituídos pelo `card_hash`, e então o `form` é enviado.
+Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são removidos, já que o `card_hash` contém as informações de todos eles. A partir daí, o `form` é enviado para o seu servidor.
+
+No seu servidor, você deve utilizar o `card_hash` recebido para realizar a transação com o PagarMe. Isso pode ser feito manualmente ou através de uma de nossas bibliotecas prontas.
 
 ## Página de exemplo
 
