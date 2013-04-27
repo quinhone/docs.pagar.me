@@ -202,7 +202,7 @@ div.sidebar-module {
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	display: block;
-	width: 332px;
+	width: 250px;
 	margin-bottom: 20px;
 	font-size: 12px;
 }
@@ -484,7 +484,7 @@ Not Footer
 }
 
 .content {
-	width: 560px;
+	width: 640px;
 	position: relative;
 	float: left;
 	color: #444;
