@@ -4,7 +4,7 @@ title: Guia de integração em Javascript
 
 # Guia de integração em Javascript
 
-O objetivo da biblioteca em Javascript é gerar o `card_hash`, que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do PagarMe, onde a transação será efetuada.
+O objetivo da biblioteca em Javascript é [gerar o `card_hash`](/restful-api/card-hash), que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do PagarMe, onde a transação será efetuada.
 
 ## Importando a biblioteca
 
