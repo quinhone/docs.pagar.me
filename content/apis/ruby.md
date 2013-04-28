@@ -160,3 +160,7 @@ Exemplo:
 > transactions[0]
  => #<PagarMe::Transaction:0x007fa071252f38 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-16T02:39:03.412Z", @id="516cb9c70039fc26d9000010", @status=1, @live=true, @installments=5, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Test User", @card_number="", @amount="10000">
 </code></pre>
+
+## Aplicação Rails de exemplo
+
+Caso você queira conferir um exemplo de aplicação Rails que use a [biblioteca em Ruby do PagarMe](/apis/ruby), integrada a [biblioteca em Javascript do PagarMe](/apis/javascript), confira [esse projeto](https://github.com/PagarMe/pagarme-rails-sample) em [nosso GitHub](https://github.com/PagarMe).
