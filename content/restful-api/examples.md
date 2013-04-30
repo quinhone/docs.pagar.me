@@ -93,7 +93,7 @@ O servidor retornará:
 
 A requisição que deve ser feita no endpoint para estornar uma transação é:
 
-	POST /transactions/:id/chargeback
+	DELETE /transactions/:id
 
 Onde `:id` é o ID da transação que se deseja estornar.
 
@@ -101,9 +101,9 @@ Para estornar a transação realizada anteriormente, iremos usar como `id` de ex
 
 Estornando a transação com o cURL:
 
-<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f/chargeback' \
+<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f' \
 		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-		-X POST
+		-X DELETE
 </code></pre>
 
 O servidor retornará:

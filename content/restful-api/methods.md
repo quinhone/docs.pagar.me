@@ -46,7 +46,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
     "card_last_digits": "4448"
 }</code></pre>
 
-## POST /transactions/:id/chargeback
+## DELETE /transactions/:id
 
 **Descrição**: cancela uma transação.
 
