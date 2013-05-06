@@ -1,8 +1,8 @@
 ---
-title: Gerando o card_hash
+title: Usando o card_hash
 ---
 
-# Gerando o *card_hash*
+# Usando o *card_hash*
 
 Todos os dados de cartão de crédito devem ser enviados utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los de forma indevida por terceiros.
 
