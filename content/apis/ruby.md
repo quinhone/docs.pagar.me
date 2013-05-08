@@ -20,7 +20,7 @@ Antes de iniciar, é necessário incluir a biblioteca no seu código:
 
 ### Configurando a chave de API
 
-Para usar a biblioteca, é necessário configurar a chave de API para a que está definida em seu [dashboard](http://dashboard.pagar.me/).
+Para usar a biblioteca, é necessário configurá-la com a chave de API disponível em seu [dashboard](http://dashboard.pagar.me/).
 
 <pre><code data-language="ruby">PagarMe.api_key = "Jy1V5bJcGf8q4gHepttt"</code></pre>
 
