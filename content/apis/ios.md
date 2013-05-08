@@ -2,6 +2,19 @@
 title: Guia de integração para iOS
 ---
 
+<script>
+Rainbow.extend('objective-c', [
+	{
+		'name': 'string',
+		'pattern': /@"[^"]*"/g
+	},
+	{
+		'name': 'keyword',
+		'pattern': /sharedInstance|alloc|init|NSError|NSString|[a-zA-Z0-9]*:/g
+	}
+]);
+</script>
+
 # Guia de integração para iOS
 
 A biblioteca para iOS do PagarMe permite que o [`card_hash`](/restful-api/card-hash) seja gerado no seu aplicativo para iOS e, portanto, que os dados de cartão de crédito sejam transmitidos de forma segura do seu aplicativo para o seu servidor, e do seu servidor para o servidor do PagarMe.
@@ -20,3 +33,35 @@ Para instalar a biblioteca, siga os seguintes passos:
 (clique no botão `+` em vermelho e selecione o framework `Security.framework`)
 
 ## Usando a biblioteca
+
+Primeiro, é necessário importar os headers da biblioteca:
+
+<pre><code data-language="css">#import "PagarMe.h"</code></pre>
+
+Depois, configurar sua `encryption_key`, disponível em seu [dashboard](http://dashboard.pagar.me/):
+
+<pre><code data-language="objective-c">[PagarMe sharedInstance].encryptionKey = @"9741a03ea3a4f15f6fa8d9fe9d2c47c8";
+</code></pre>
+
+### Encriptando dados de cartão
+
+Para encriptar dados de cartão de crédito:
+
+<pre><code data-language="objective-c">PagarMeCreditCard *creditCard = [[PagarMeCreditCard alloc] init];
+creditCard.cardNumber = @"4901720080344448";
+creditCard.cardHolderName = @"Test User";
+creditCard.cardExpiracyMonth = 12;
+creditCard.cardExpiracyYear = 13;
+creditCard.cardCvv = @"315";
+
+[creditCard generateHash:^(NSError *error, NSString *cardHash) {
+    if(error) {
+        NSLog(@"Erro gerando o card_hash: %@", error);
+        return;
+    }
+
+    NSLog(@"card_hash gerado: %@", cardHash);
+    // Agora envie a string cardHash para o seu servidor e realize
+    // a transação com o PagarMe usando ela.
+}];
+</code></pre>
