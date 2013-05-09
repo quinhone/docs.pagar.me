@@ -54,14 +54,23 @@ creditCard.cardExpiracyMonth = 12;
 creditCard.cardExpiracyYear = 13;
 creditCard.cardCvv = @"315";
 
-[creditCard generateHash:^(NSError *error, NSString *cardHash) {
-    if(error) {
-        NSLog(@"Erro gerando o card_hash: %@", error);
-        return;
-    }
+// Valida os dados do cartão de crédito antes de
+// gerar o card_hash com eles.
+NSDictionary *errors = [creditCard fieldErrors];
 
-    NSLog(@"card_hash gerado: %@", cardHash);
-    // Agora envie a string cardHash para o seu servidor e realize
-    // a transação com o PagarMe usando ela.
-}];
+if([errors count] != 0) {
+    NSLog(@"Foram encontrados erros nos dados do cartão de crédito: ");
+    NSLog(@"%@", errors);
+} else {
+    [creditCard generateHash:^(NSError *error, NSString *cardHash) {
+        if(error) {
+            NSLog(@"Erro gerando o card_hash: %@", error);
+            return;
+        }
+
+        NSLog(@"card_hash gerado: %@", cardHash);
+        // Agora envie a string cardHash para o seu servidor e realize
+        // a transação com o PagarMe usando-a.
+    }];
+}
 </code></pre>
