@@ -8,8 +8,8 @@ title: Guia de integração em Java
 
 A biblioteca em Java do PagarMe está disponível através do Maven.
 
-	<informações para instalar pelo Maven>
-	</informações para instalar pelo Maven>
+	<dados para colocar no pom.xml do Maven>
+	</dados para colocar no pom.xml do Maven>
 
 Caso você não use o Maven, pode instalar a biblioteca pelo seu [JAR](https://github.com/pagarme/pagarme-java).
 
