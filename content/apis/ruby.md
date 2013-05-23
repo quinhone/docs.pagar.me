@@ -34,6 +34,7 @@ transaction.card_holder_name = "Jose da Silva"
 transaction.card_expiracy_month = "10"
 transaction.card_expiracy_year = "15"
 transaction.card_cvv = "314"
+transaction.amount = 1000
 
 transaction.charge
 </code></pre>
@@ -45,7 +46,8 @@ Você também pode inicializar o objeto de transação com um hash:
     :card_holder_name => "Jose da Silva",
     :card_expiracy_month => "10",
     :card_expiracy_year => "15",
-    :card_cvv => "314"
+    :card_cvv => "314",
+    :amount => 1000
 })
 
 transaction.charge
@@ -54,7 +56,6 @@ transaction.charge
 ... ou com um `card_hash` que foi recebido do browser do cliente:
 
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new("5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==")
-
 transaction.charge
 </code></pre>
 
@@ -75,6 +76,7 @@ transaction.card_holder_name = "Jose da Silva"
 transaction.card_expiracy_month = "13" # o mês 13 é maior do que 12 (dezembro) -> parâmetro inválido!
 transaction.card_expiracy_year = "15"
 transaction.card_cvv = "314"
+transaction.amount = 1000
 
 transaction.charge
 </code></pre>
@@ -95,6 +97,7 @@ transaction.card_holder_name = "Jose da Silva"
 transaction.card_expiracy_month = "13" # o mês 13 é maior do que 12 (dezembro) -> parâmetro inválido!
 transaction.card_expiracy_year = "15"
 transaction.card_cvv = "314"
+transaction.amount = 1000
 
 begin
     transaction.charge
