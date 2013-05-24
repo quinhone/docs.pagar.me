@@ -62,7 +62,8 @@ try {
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status `approved`, ou seja, estará aprovada:
 
 <pre><code data-language="javascript">System.out.println(transaction.status);
-// "approved" </code></pre>
+// "approved"
+</code></pre>
 
 ### Tratando erros ao realizar uma transação
 
@@ -145,32 +146,38 @@ com.pagarme.PagarMeValidationException: Mês de expiração inválido.
 
 ### Cancelando uma transação
 
-Após a transação ser realizada com sucesso, ela terá o status `:approved`, como já foi visto:
+Após a transação ser realizada com sucesso, ela terá o status `approved`, como já foi visto:
 
-<pre><code data-language="ruby">> transaction.status
- => :approved
+<pre><code data-language="javascript">System.out.println(transaction.status);
+// "approved
 </code></pre>
 
 Caso você deseja cancelar a transação, estornando o valor pago pelo cliente:
 
-<pre><code data-language="ruby">> transaction.chargeback
- => "517035290039fc26d9000024" # o id da transação é retornado
-> transaction.status
- => :chargebacked
+<pre><code data-language="python">try {
+    transaction.chargeback();
+} catch (PagarMeException e) {
+    System.out.println("Erro ao cancelar a transação: ");
+    e.printStackTrace();
+}
 </code></pre>
 
-Se a transação for cancelada com sucesso, seu status mudará para `:chargebacked`, indicando que ela foi cancelada com sucesso.
+Se a transação for cancelada com sucesso, seu status mudará para `chargebacked`, indicando que ela foi cancelada com sucesso.
 
 ### Buscando uma transação pelo `id`
 
 Consultar os dados de uma transação já realizada é possível com o seu `id`, que é retornado ao realizá-la:
 
-<pre><code data-language="ruby">> transaction = PagarMe::Transaction.find_by_id("517035290039fc26d9000024")
- => #<PagarMe::Transaction:0x007fa071371ef0 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
-> transaction.id
- => "517035290039fc26d9000024"
-> transaction.status
- => :chargebacked
+<pre><code data-language="python">try {
+    PagarMeTransaction transaction = PagarMeTransaction.findById("22");
+    System.out.println(transaction.id);
+    // "22"
+    System.out.println(transaction.status);
+    // "approved"
+} catch (PagarMeException e) {
+    System.out.println("Erro ao buscar transação: ");
+    e.printStackTrace();
+}
 </code></pre>
 
 ### Buscando as últimas transações realizadas
