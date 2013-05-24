@@ -184,24 +184,42 @@ Consultar os dados de uma transação já realizada é possível com o seu `id`,
 
 Para buscar as últimas transações realizadas em sua conta:
 
-<pre><code data-language="ruby">> transactions = PagarMe::Transaction.all
-> transactions.length
- => 10
-> transactions[0]
- => #<PagarMe::Transaction:0x007fa0712bcfc8 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
+<pre><code data-language="python">
+try {
+	List&lt;PagarMeTransaction&gt; transactions = PagarMeTransaction.all();
+	for(int i = 0; i < transactions.size(); i++) {
+		PagarMeTransaction transaction = transactions.get(i);
+		System.out.println("status: " + transaction.status);
+		System.out.println("amount: " + transaction.amount);
+		System.out.println("installments: " + transaction.installments);
+		System.out.println("id: " + transaction.id);
+		System.out.println("live: " + transaction.live);
+		System.out.println("costumerName: " + transaction.costumerName);
+		System.out.println("cardLastDigits: " + transaction.cardLastDigits);
+	}
+} catch (PagarMeException e) {
+	System.out.println("Erro ao buscar transações: ");
+	e.printStackTrace();
+}
 </code></pre>
 
 Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
 
-Exemplo:
-
-<pre><code data-language="ruby">> transactions = PagarMe::Transaction.all(3, 5) # página 3, com 5 transações por página
-> transactions.length
- => 5
-> transactions[0]
- => #<PagarMe::Transaction:0x007fa071252f38 @statuses_codes={:local=>0, :approved=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-16T02:39:03.412Z", @id="516cb9c70039fc26d9000010", @status=1, @live=true, @installments=5, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Test User", @card_number="", @amount="10000">
+<pre><code data-language="python">
+try {
+	List&lt;PagarMeTransaction&gt; transactions = PagarMeTransaction.all(3, 5); // página 3, com 5 transações por página
+	for(int i = 0; i < transactions.size(); i++) {
+		PagarMeTransaction transaction = transactions.get(i);
+		System.out.println("status: " + transaction.status);
+		System.out.println("amount: " + transaction.amount);
+		System.out.println("installments: " + transaction.installments);
+		System.out.println("id: " + transaction.id);
+		System.out.println("live: " + transaction.live);
+		System.out.println("costumerName: " + transaction.costumerName);
+		System.out.println("cardLastDigits: " + transaction.cardLastDigits);
+	}
+} catch (PagarMeException e) {
+	System.out.println("Erro ao buscar transações: ");
+	e.printStackTrace();
+}
 </code></pre>
-
-## Aplicação Rails de exemplo
-
-Caso você queira conferir um exemplo de aplicação Rails que use a [biblioteca em Ruby do PagarMe](/apis/ruby), integrada a [biblioteca em Javascript do PagarMe](/apis/javascript), confira [esse projeto](https://github.com/PagarMe/pagarme-rails-sample) em [nosso GitHub](https://github.com/PagarMe).
