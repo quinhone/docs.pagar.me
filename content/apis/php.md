@@ -71,7 +71,7 @@ Independente da forma com que a transação foi realizada, se não ocorreu nenhu
 
 ### Tratando erros ao realizar uma transação
 
-Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca irá dar `throw` em um erro do tipo PagarMe_Exception:
+Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca irá dar `throw` em um erro do tipo `PagarMe_Exception`:
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
     "card_number" => "4901720080344448",
