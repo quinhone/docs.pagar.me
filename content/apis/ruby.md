@@ -155,8 +155,6 @@ Para buscar as últimas transações realizadas em sua conta:
 
 Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
 
-Exemplo:
-
 <pre><code data-language="ruby">> transactions = PagarMe::Transaction.all(3, 5) # página 3, com 5 transações por página
 > transactions.length
  => 5
