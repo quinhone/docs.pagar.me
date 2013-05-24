@@ -29,7 +29,7 @@ As seguintes etapas devem ser seguidas para gerar o `card_hash` que conterá os 
 
 A URL a ser requisitada, conforme definido na [referência de métodos da API](/restful-api/methods), é:
 
-	GET /transactions/card_hash
+	GET /transactions/card_hash_key
 
 Caso o `card_hash` seja gerado do lado do cliente (exemplo: no browser, como faz nossa [biblioteca em Javascript](/apis/javascript)), o parâmetro `api_key` não deve ser utilizado para autenticar essa requisição, já que este deve ser mantido em segredo e, portanto, somente do lado do servidor.
 
@@ -41,7 +41,7 @@ No exemplo de geração do `card_hash` a seguir, a `encryption_key` utilizada se
 
 Realizando a requisição para obter a chave para encriptar o `card_hash`, com o cURL:
 
-<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/card_hash' \
+<pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/card_hash_key' \
 	-d 'encryption_key=9741a03ea3a4f15f6fa8d9fe9d2c47c8' \
 	-X GET 
 </code></pre>
