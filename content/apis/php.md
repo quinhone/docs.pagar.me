@@ -30,7 +30,7 @@ Para usar a biblioteca, é necessário configurá-la com a chave de API disponí
 
 ### Realizando uma transação
 
-Para realizar uma transação execute o segunite código:
+Para realizar uma transação execute o seguinte código:
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction();
 $transaction->setCardNumber("4901720080344448");
