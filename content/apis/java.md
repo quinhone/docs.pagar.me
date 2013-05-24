@@ -184,42 +184,40 @@ Consultar os dados de uma transação já realizada é possível com o seu `id`,
 
 Para buscar as últimas transações realizadas em sua conta:
 
-<pre><code data-language="python">
-try {
-	List&lt;PagarMeTransaction&gt; transactions = PagarMeTransaction.all();
-	for(int i = 0; i < transactions.size(); i++) {
-		PagarMeTransaction transaction = transactions.get(i);
-		System.out.println("status: " + transaction.status);
-		System.out.println("amount: " + transaction.amount);
-		System.out.println("installments: " + transaction.installments);
-		System.out.println("id: " + transaction.id);
-		System.out.println("live: " + transaction.live);
-		System.out.println("costumerName: " + transaction.costumerName);
-		System.out.println("cardLastDigits: " + transaction.cardLastDigits);
-	}
+<pre><code data-language="python">try {
+    List&lt;PagarMeTransaction&gt; transactions = PagarMeTransaction.all();
+    for(int i = 0; i < transactions.size(); i++) {
+        PagarMeTransaction transaction = transactions.get(i);
+        System.out.println("status: " + transaction.status);
+        System.out.println("amount: " + transaction.amount);
+        System.out.println("installments: " + transaction.installments);
+        System.out.println("id: " + transaction.id);
+        System.out.println("live: " + transaction.live);
+        System.out.println("costumerName: " + transaction.costumerName);
+        System.out.println("cardLastDigits: " + transaction.cardLastDigits);
+    }
 } catch (PagarMeException e) {
-	System.out.println("Erro ao buscar transações: ");
-	e.printStackTrace();
+    System.out.println("Erro ao buscar transações: ");
+    e.printStackTrace();
 }
 </code></pre>
 
 Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
 
-<pre><code data-language="python">
-try {
-	List&lt;PagarMeTransaction&gt; transactions = PagarMeTransaction.all(3, 5); // página 3, com 5 transações por página
-	for(int i = 0; i < transactions.size(); i++) {
-		PagarMeTransaction transaction = transactions.get(i);
-		System.out.println("status: " + transaction.status);
-		System.out.println("amount: " + transaction.amount);
-		System.out.println("installments: " + transaction.installments);
-		System.out.println("id: " + transaction.id);
-		System.out.println("live: " + transaction.live);
-		System.out.println("costumerName: " + transaction.costumerName);
-		System.out.println("cardLastDigits: " + transaction.cardLastDigits);
-	}
+<pre><code data-language="python">try {
+    List&lt;PagarMeTransaction&gt; transactions = PagarMeTransaction.all(3, 5); // página 3, com 5 transações por página
+    for(int i = 0; i < transactions.size(); i++) {
+        PagarMeTransaction transaction = transactions.get(i);
+        System.out.println("status: " + transaction.status);
+        System.out.println("amount: " + transaction.amount);
+        System.out.println("installments: " + transaction.installments);
+        System.out.println("id: " + transaction.id);
+        System.out.println("live: " + transaction.live);
+        System.out.println("costumerName: " + transaction.costumerName);
+        System.out.println("cardLastDigits: " + transaction.cardLastDigits);
+    }
 } catch (PagarMeException e) {
-	System.out.println("Erro ao buscar transações: ");
-	e.printStackTrace();
+    System.out.println("Erro ao buscar transações: ");
+    e.printStackTrace();
 }
 </code></pre>
