@@ -144,7 +144,7 @@ Consultar os dados de uma transação já realizada é possível com o seu `id`,
 
 Para buscar as últimas transações realizadas em sua conta:
 
-<pre><code data-language="php"> $transactions = PagarMe_Transaction::all();
+<pre><code data-language="php">> $transactions = PagarMe_Transaction::all();
 > sizeof(transactions);
  => 10
 > transactions[0]
@@ -153,7 +153,7 @@ Para buscar as últimas transações realizadas em sua conta:
 
 Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
 
-<pre><code data-language="php"> $transactions =  PagarMe_Transaction::all(3, 5); // página 3, com 5 transações por página
+<pre><code data-language="php">> $transactions =  PagarMe_Transaction::all(3, 5); // página 3, com 5 transações por página
 > sizeof($transactions);
  => 5
 > $transactions[0]
