@@ -8,7 +8,7 @@ title: Guia de integração em PHP
 
 Para baixar a biblioteca execute esse comando para fazer um clone dela
 
-	sudo git clone https://github.com/PagarMe/pagarme-php.git	
+	git clone https://github.com/PagarMe/pagarme-php.git	
 
 Após baixar a biblioteca, copie-a para a pasta do seu projeto
 
@@ -18,19 +18,17 @@ Após baixar a biblioteca, copie-a para a pasta do seu projeto
 
 Antes de iniciar, é necessário incluir a biblioteca no seu código:
 
-<pre><code data-language="php"> require("Pagarme.php");</code></pre>
-
-Esse código irá incluir tudo que você precisa para usar a biblioteca do PagarMe
+<pre><code data-language="php">require("Pagarme.php");</code></pre>
 
 ### Configurando a chave de API
 
-Para usar a biblioteca, é necessário configurá-la com a chave de API disponível em seu [dashboard](http://dashboard.pagar.me/). Em algum lugar do seu código, antes de fazer qualquer coisa com a biblioteca execute o seguinte código:
+Para usar a biblioteca, é necessário configurá-la com a chave de API disponível em seu [dashboard](http://dashboard.pagar.me/):
 
-<pre><code data-language="php"> Pagarme::setApiKey("Jy1V5bJcGf8q4gHepttt"); // Troque aqui pela sua chave de API </code> </pre> 
+<pre><code data-language="php">Pagarme::setApiKey("Jy1V5bJcGf8q4gHepttt"); // Insira sua chave de API </code> </pre> 
 
 ### Realizando uma transação
 
-Para realizar uma transação execute o seguinte código:
+Para realizar uma transação...
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction();
 $transaction->setCardNumber("4901720080344448");
@@ -64,7 +62,7 @@ $transaction->charge();
 
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status "approved", ou seja, estará aprovada:
 
-<pre><code data-language="php"> echo $transaction->getStatus();
+<pre><code data-language="php">echo $transaction->getStatus();
  => "approved"
 </code></pre>
 
@@ -91,38 +89,38 @@ Resultado:
 
 Para tratar erros desse tipo, você pode inserir um `try` `catch` no código acima para tratar erros do PagarMe (`PagarMeError`):
 
-<pre><code data-language="php">
-	$transaction = new PagarMe_Transaction(array(
-	    "card_number" => "4901720080344448",
-	    "card_holder_name" => "Jose da Silva",
-	    "card_expiracy_month" => "13",
-	    "card_expiracy_year" => "15",
-	    "card_cvv" => "314"
-	));
-	try {
-		$transaction->charge();
-	} catch(PagarMe_Exception $e) {
-		echo $e->getMessage();
-	}
+<pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
+    "card_number" => "4901720080344448",
+    "card_holder_name" => "Jose da Silva",
+    "card_expiracy_month" => "13",
+    "card_expiracy_year" => "15",
+    "card_cvv" => "314"
+));
+
+try {
+    $transaction->charge();
+} catch(PagarMe_Exception $e) {
+    echo $e->getMessage();
+}
 </code></pre>
 
 Dessa vez, o resultado será:
 
-<pre><code data-language="php"> Invalid expiracy date month.</code></pre>
+<pre><code data-language="php">Invalid expiracy date month.</code></pre>
 
 O erro foi "resgatado" pelo `catch`. É nesse ponto onde o tratamento de erro específico deve ser feito (e respondido para o cliente).
 
 ### Cancelando uma transação
 
-Após a transação ser realizada com sucesso, ela terá o status `:approved`, como já foi visto:
+Após a transação ser realizada com sucesso, ela terá o status `approved`, como já foi visto:
 
-<pre><code data-language="php"> $transaction->getStatus();
+<pre><code data-language="php">$transaction->getStatus();
  => "approved"
 </code></pre>
 
 Caso você deseja cancelar a transação, estornando o valor pago pelo cliente:
 
-<pre><code data-language="php"> $transaction->chargeback();
+<pre><code data-language="php">$transaction->chargeback();
  => "517035290039fc26d9000024" # o id da transação é retornado
 > $transaction->getStatus();
  => "chargebacked"
@@ -154,8 +152,6 @@ Para buscar as últimas transações realizadas em sua conta:
 </code></pre>
 
 Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
-
-Exemplo:
 
 <pre><code data-language="php"> $transactions =  PagarMe_Transaction::all(3, 5); // página 3, com 5 transações por página
 > sizeof($transactions);
