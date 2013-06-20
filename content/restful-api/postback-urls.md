@@ -4,7 +4,7 @@ title: URL de POSTback
 
 # URL de POSTback
 
-Em alguns cenários, é útil que se tenha como descobrir mudanças em relação ao estado de uma transação de forma passiva, isto é, através de uma notificação em seu servidor. Isso é possível definindo uma URL de POSTback para a transação ao criá-la. Dessa forma, você receberá uma requisição HTTP em seu servidor sempre que o `status` da transação mudar.
+O POSTback permite que o seu servidor seja notificado sempre que o `status` de uma transação mudar. Isso é possível definindo uma URL de POSTback para a transação ao criá-la. Dessa forma, quando o `status` dela mudar, você receberá uma requisição HTTP na URL definida, notificando-o da mudança ocorrida.
 
 A principal vantagem desse método é que ao realizar a transação com o PagarMe, não será necessário esperar a resposta do servidor para saber se a transação foi aprovada ou não. Ao criar a transação, será inicialmente retornado na requisição o status `processing`, indicando que ela ainda está sendo processada. Quando ela for aprovada/recusada, o PagarMe fará uma requisição a URL de POSTback para notificar seu site da mudança de `status`.
 
