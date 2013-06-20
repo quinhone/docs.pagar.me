@@ -33,13 +33,13 @@ Uma transação exige os seguintes parâmetros
 Realizando uma transação com o cURL:
 
 <pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions' \
-	-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-	-d 'card_number=4901720080344448' \
-	-d 'card_holder_name=Usuario de Teste' \
-	-d 'card_expiracy_date=1213' \
-	-d 'card_cvv=314' \
-	-d 'amount=1000' \
-	-X POST 
+    -d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+    -d 'card_number=4901720080344448' \
+    -d 'card_holder_name=Usuario de Teste' \
+    -d 'card_expiracy_date=1213' \
+    -d 'card_cvv=314' \
+    -d 'amount=1000' \
+    -X POST 
 </code></pre>
 
 Caso os parâmetros sejam válidos, o servidor retornará:
@@ -72,8 +72,8 @@ Para verificar o status da transação realizada anteriormente, iremos usar como
 Verificando o status da transação com o cURL:
 
 <pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f' \
-	-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-	-X GET 
+    -d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+    -X GET 
 </code></pre>
 
 O servidor retornará:
@@ -102,8 +102,8 @@ Para estornar a transação realizada anteriormente, iremos usar como `id` de ex
 Estornando a transação com o cURL:
 
 <pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/516217040ef16fc9fc00000f' \
-		-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-		-X DELETE
+    -d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+    -X DELETE
 </code></pre>
 
 O servidor retornará:
