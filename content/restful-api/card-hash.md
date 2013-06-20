@@ -42,8 +42,8 @@ No exemplo de geração do `card_hash` a seguir, a `encryption_key` utilizada se
 Realizando a requisição para obter a chave para encriptar o `card_hash`, com o cURL:
 
 <pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions/card_hash_key' \
-	-d 'encryption_key=9741a03ea3a4f15f6fa8d9fe9d2c47c8' \
-	-X GET 
+    -d 'encryption_key=9741a03ea3a4f15f6fa8d9fe9d2c47c8' \
+    -X GET 
 </code></pre>
 
 O servidor retornará: 
@@ -101,10 +101,10 @@ Uma vez com o `card_hash` em seu servidor, você deve utilizar nossas biblioteca
 Caso você deseja realizar a transação com o `card_hash` manualmente, temos um exemplo de utilização do `card_hash` com o cURL:
 
 <pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions' \
-	-d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-	-d 'card_hash=5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==' \
-	-d 'amount=1500' \
-	-X POST 
+    -d 'api_key=Jy1V5bJcGf8q4gHepttt' \
+    -d 'card_hash=5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==' \
+    -d 'amount=1500' \
+    -X POST 
 </code></pre>
 
 O servidor retornará:
