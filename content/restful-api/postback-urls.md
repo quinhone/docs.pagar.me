@@ -62,7 +62,8 @@ Retorno:
     "id": 448,
     "live": true,
     "costumer_name": "Usuario de Teste",
-    "card_last_digits": "4448"
+    "card_last_digits": "4448",
+    "postback_url": "http://www.meusite.com.br/transactions_postback"
 }</code></pre>
 
 A resposta da requisição será retornada imediatamente com o status `processing`, indicando que ela ainda está sendo processada. Quando ela for aprovada, o PagarMe fará uma requisição para a URL de POSTback (`http://www.meusite.com.br/transactions_postback`) com os seguintes parâmetros:
@@ -93,7 +94,8 @@ Retorno:
     "id": 448,
     "live": false,
     "costumer_name": "Usuario de Teste",
-    "card_last_digits": "4448"
+    "card_last_digits": "4448",
+    "postback_url": "http://www.meusite.com.br/transactions_postback"
 }</code></pre>
 
 A transação será retornada com o status `approved`, porque o cancelamento ainda está sendo processado. Quando a transação tiver sido cancelada, o PagarMe fará uma requisição para a URL de POSTback com os seguintes parâmetros
