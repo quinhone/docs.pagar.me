@@ -42,8 +42,11 @@ module Nanoc3::DataSources
         digest = Digest::SHA1.new
         File.open(filename, 'r') do |io|
           until io.eof
+			begin
             data = io.readpartial(2**10)
             digest.update(data)
+			rescue
+			end
           end
         end
         digest.hexdigest
