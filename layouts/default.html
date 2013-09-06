@@ -2,35 +2,49 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Documentação do PagarMe - <%= @item[:title] %></title>
-		<script src="/assets/js/jquery.js" type="text/javascript"></script>
-		<script src="/assets/js/documentation.js" type="text/javascript"></script>
-		<script src="/assets/js/rainbow.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/assets/css/documentation.css">
-		<link rel="stylesheet" href="/assets/css/rainbow-github.css">
+		<title>Documentação do PagarMe - Início</title>
+		<script src="/docs/assets/js/jquery.js" type="text/javascript"></script>
+		<script src="/docs/assets/js/documentation.js" type="text/javascript"></script>
+		<script src="/docs/assets/js/rainbow.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/docs/assets/css/documentation.css">
+		<link rel="stylesheet" href="/docs/assets/css/rainbow-github.css">
 		<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600italic,600,700,700italic' rel='stylesheet' type='text/css'>
 
 		<!-- you don't need to keep this, but it's cool for stats! -->
-		<meta name="generator" content="nanoc <%= Nanoc::VERSION %>"> 
+		<meta name="generator" content="nanoc 3.6.4"> 
 	</head>
 	<body>
 		<div id="header-wrapper">
 			<div id="header">
-				<a class="logo" href="/"><img src="/assets/images/logo_v2.png" alt="PagarMe:Logo" /></a>
+				<a class="logo" href="/docs/index.html"><img src="/docs/assets/images/logo_v2.png" alt="PagarMe:Logo" /></a>
 
 				<input type="submit" value="Iniciar agora!"></input>
 				<nav>
 					<ul>
-						<li><a href="#">Dashboard</a></li>
-						<li><a href="#">Clientes</a></li>
-						<li><a href="#">Documentação / Suporte</a></li>
+						<li><a href="/docs/#">Dashboard</a></li>
+						<li><a href="/docs/#">Clientes</a></li>
+						<li><a href="/docs/#">Documentação / Suporte</a></li>
 					</ul>
 				</nav>				
 			</div>
 		</div>
 		<div id="wrapper">
 			<div class="content">
-				<%= yield %>
+				<h1 id="incio">Início</h1>
+
+<p>Aqui você vai encontra tudo que precisa para usar a API do PagarMe. Isso inclui guias de primeiros passos, manuais de integração, documentação das bibliotecas, etc.</p>
+
+<h2 id="primeiros-passos">Primeiros passos</h2>
+
+<p>Para integrar com o Pagar.me é necessário integrar com o seu front-end, ou seja o HTML/CSS do seu formulário de pagamento, e com seu backend.</p>
+
+<p>O primeiro passo é integrar com o front-end. Para isso, siga os passos nesse link:</p>
+
+<pre><code>https://pagar.me/docs/apis/javascript/
+</code></pre>
+
+<p>Após terminar essa integração, você precisa integrar com o seu backend. Para integrar com seu backend temos bibliotecas em <a href="https://pagar.me/docs/apis/ruby/">Ruby</a>, <a href="https://pagar.me/docs/java/">Java</a> e <a href="https://pagar.me/apis/php/">PHP</a>. Caso você não use nenhuma dessas linguagens, você pode se conectar diretamente a nossa API. Para isso, acesse os guias dentro da aba “API” no menu da direita.</p>
+
 			</div>
 			<div id="js-sidebar" class="sidebar-shell">
 				<div class="js-toggle-list sidebar-module expandable">
@@ -38,32 +52,32 @@
 						<li class="js-topic">
 						<h3><a href="#" class="js-expand-btn expanded">&nbsp;</a><a href="#">Guias</a></h3>
 						<ul class="js-guides">
-							<li><a href="/guides/transaction-flow">Como funciona o pagamento?</a></li>
-							<li><a href="/guides/security">Segurança e autenticação</a></li>
-							<li><a href="/guides/test-environment">Modo de teste (sandbox)</a></li>
+							<li><a href="/docs/guides/transaction-flow">Como funciona o pagamento?</a></li>
+							<li><a href="/docs/guides/security">Segurança e autenticação</a></li>
+							<li><a href="/docs/guides/test-environment">Modo de teste (sandbox)</a></li>
 						</ul>
 						</li>
 						<li class="js-topic">
 						<h3><a href="#" class="js-expand-btn expanded">&nbsp;</a><a href="#">Bibliotecas</a></h3>
 						<ul class="js-guides">
-							<li><a href="/apis/ruby">Ruby</a></li>
-							<li><a href="/apis/php">PHP</a></li>
-							<li><a href="/apis/java">Java</a></li>
-							<li><a href="/apis/ios">iOS</a></li>
-							<li><a href="/apis/javascript">Javascript (browser)</a></li>
+							<li><a href="/docs/apis/ruby">Ruby</a></li>
+							<li><a href="/docs/apis/php">PHP</a></li>
+							<li><a href="/docs/apis/java">Java</a></li>
+							<li><a href="/docs/apis/ios">iOS</a></li>
+							<li><a href="/docs/apis/javascript">Javascript (browser)</a></li>
 						</ul>
 						</li>
 						<li class="js-topic">
 						<h3><a href="#" class="js-expand-btn expanded">&nbsp;</a><a href="#">API</a></h3>
 						<ul class="js-guides">
-							<li><a href="/restful-api/methods">Métodos</a></li>
-							<li><a href="/restful-api/responses">Respostas de sucesso/erro</a></li>
-							<li><a href="/restful-api/card-hash">Usando o <i>card_hash</i></a></li>
-							<li><a href="/restful-api/postback-urls">URL de POSTback</a></li>
-							<li><a href="/restful-api/examples">Exemplos de uso</a></li>
+							<li><a href="/docs/restful-api/methods">Métodos</a></li>
+							<li><a href="/docs/restful-api/responses">Respostas de sucesso/erro</a></li>
+							<li><a href="/docs/restful-api/card-hash">Usando o <i>card_hash</i></a></li>
+							<li><a href="/docs/restful-api/postback-urls">URL de POSTback</a></li>
+							<li><a href="/docs/restful-api/examples">Exemplos de uso</a></li>
 						</ul>
 						</li>
-						<!-- <li class="js&#45;guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li> -->
+						<!-- <li class="js&#45;guides"><h3><a href="v3/markdown/">Markdown</a></h3></li> -->
 					</ul>
 				</div> <!-- /sidebar-module -->
 			</div><!-- /sidebar-shell -->
