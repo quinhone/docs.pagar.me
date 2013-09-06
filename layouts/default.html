@@ -30,21 +30,8 @@
 		</div>
 		<div id="wrapper">
 			<div class="content">
-				<h1 id="incio">Início</h1>
-
-<p>Aqui você vai encontra tudo que precisa para usar a API do PagarMe. Isso inclui guias de primeiros passos, manuais de integração, documentação das bibliotecas, etc.</p>
-
-<h2 id="primeiros-passos">Primeiros passos</h2>
-
-<p>Para integrar com o Pagar.me é necessário integrar com o seu front-end, ou seja o HTML/CSS do seu formulário de pagamento, e com seu backend.</p>
-
-<p>O primeiro passo é integrar com o front-end. Para isso, siga os passos nesse link:</p>
-
-<pre><code>https://pagar.me/docs/apis/javascript/
-</code></pre>
-
-<p>Após terminar essa integração, você precisa integrar com o seu backend. Para integrar com seu backend temos bibliotecas em <a href="https://pagar.me/docs/apis/ruby/">Ruby</a>, <a href="https://pagar.me/docs/java/">Java</a> e <a href="https://pagar.me/apis/php/">PHP</a>. Caso você não use nenhuma dessas linguagens, você pode se conectar diretamente a nossa API. Para isso, acesse os guias dentro da aba “API” no menu da direita.</p>
-
+				<%= yield %>
+			</div>
 			</div>
 			<div id="js-sidebar" class="sidebar-shell">
 				<div class="js-toggle-list sidebar-module expandable">
