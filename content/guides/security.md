@@ -16,10 +16,10 @@ A sua `api_key` é responsável pela autenticação na API do PagarMe, assim com
 
 A comunicação com o PagarMe só é possível por HTTPS. Dessa forma, os riscos de ataques _man in the middle_ que ofereçam perigo aos dados de transações diminui consideravelmente.
 
-Nossas bibliotecas prontas fazem a validação do certificado HTTPS do servidor, e caso você deseje realizar as [requisições manualmente](/restful-api/examples) ou construir sua própria biblioteca, é altamente recomendável que faça essa validação também.
+Nossas bibliotecas prontas fazem a validação do certificado HTTPS do servidor, e caso você deseje realizar as [requisições manualmente](/docs/restful-api/examples) ou construir sua própria biblioteca, é altamente recomendável que faça essa validação também.
 
 ## O *card_hash*
 
 Todos os dados de cartão de crédito devem ser enviados para o servidor utilizando o `card_hash`. O `card_hash` torna possível que todos os dados do cartão trafeguem de forma criptografada e que só pode ser compreendida pelo PagarMe, tornando impraticável qualquer tentativa de utilizá-los de forma indevida por terceiros.
 
-O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Para mais informações sobre como gerá-lo, [consulte a referência sobre o *card_hash*](/restful-api/card-hash).
+O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Para mais informações sobre como gerá-lo, [consulte a referência sobre o *card_hash*](/docs/restful-api/card-hash).

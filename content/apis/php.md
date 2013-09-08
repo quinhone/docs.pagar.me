@@ -185,7 +185,7 @@ Após a transação ser aprovada ou recusada nosso servidor irá chamar a URL qu
 </code>
 </pre>
 
-AVISO: Se você usa um framework que trata os parâmetros $_GET diferente do padrão, você precisará implementar o postback manualmente. Para isso acesse nosso guia sobre [Postback URLS](https://pagar.me/docs/restful-api/postback-urls)
+AVISO: Se você usa um framework que trata os parâmetros $_GET diferente do padrão, você precisará implementar o postback manualmente. Para isso acesse nosso guia sobre [Postback URLS](/docs/restful-api/postback-urls)
 
 ## Planos/Assinaturas
 Essa seção vai te ensinar como criar e gerenciar transações recorrentes e one-click buy.

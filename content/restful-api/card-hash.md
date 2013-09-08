@@ -12,13 +12,13 @@ As bibliotecas do PagarMe sempre utilizam o `card_hash` para enviar os dados par
 
 ## Uso
 
-Um caso de uso do `card_hash` é a [biblioteca em Javascript do PagarMe](/apis/javascript), que funciona da seguinte maneira:
+Um caso de uso do `card_hash` é a [biblioteca em Javascript do PagarMe](/docs/apis/javascript), que funciona da seguinte maneira:
 
 - O usuário deseja realizar um pagamento
 - O browser do usuário solicita ao servidor do PagarMe uma chave para criptografar os dados do cartão de crédito do cliente para que esses possam ser enviados para o servidor de forma segura
 - O browser do usuário criptografa os dados do cartão de crédito com a chave retornada pelo servidor, gerando o `card_hash`
 - Esse `card_hash`, gerado no browser do cliente, é enviado para o seu servidor por uma requisição HTTP
-- O seu servidor, através das bibliotecas do PagarMe ou diretamente pela [API RESTful](/restful-api/methods), realizar a transação com o PagarMe, transmitindo apenas o `card_hash` que foi originado no browser do cliente e o valor/número de parcelas da transação.
+- O seu servidor, através das bibliotecas do PagarMe ou diretamente pela [API RESTful](/docs/restful-api/methods), realizar a transação com o PagarMe, transmitindo apenas o `card_hash` que foi originado no browser do cliente e o valor/número de parcelas da transação.
 - Apenas a API do PagarMe consegue compreender os dados do `card_hash` e obter os dados do cartão de crédito para efetuar a transação
 
 ## Gerando o `card_hash`, passo a passo
@@ -27,11 +27,11 @@ As seguintes etapas devem ser seguidas para gerar o `card_hash` que conterá os 
 
 ### Requisitando ao servidor uma chave para encriptar o `card_hash`
 
-A URL a ser requisitada, conforme definido na [referência de métodos da API](/restful-api/methods), é:
+A URL a ser requisitada, conforme definido na [referência de métodos da API](/docs/restful-api/methods), é:
 
 	GET /transactions/card_hash_key
 
-Caso o `card_hash` seja gerado do lado do cliente (exemplo: no browser, como faz nossa [biblioteca em Javascript](/apis/javascript)), o parâmetro `api_key` não deve ser utilizado para autenticar essa requisição, já que este deve ser mantido em segredo e, portanto, somente do lado do servidor.
+Caso o `card_hash` seja gerado do lado do cliente (exemplo: no browser, como faz nossa [biblioteca em Javascript](/docs/apis/javascript)), o parâmetro `api_key` não deve ser utilizado para autenticar essa requisição, já que este deve ser mantido em segredo e, portanto, somente do lado do servidor.
 
 Nesses casos, deve-se utilizar a `encryption_key`, que consiste em uma alternativa a `api_key` para as requisições feitas para obter a chave de encriptação do `card_hash` do lado do cliente. Essa chave está disponível em seu [dashboard](https://dashboard.pagar.me/).
 
@@ -65,7 +65,7 @@ Nesse exemplo, usaremos os seguintes dados do cartão de crédito:
 - `card_expiracy_date` - 1213
 - `card_cvv` - 314
 
-Para mais informações sobre os parâmetros que contém os dados do cartão, [consulte a referência dos métodos da API](/restful-api/methods).
+Para mais informações sobre os parâmetros que contém os dados do cartão, [consulte a referência dos métodos da API](/docs/restful-api/methods).
 
 O conteúdo que deve ser encriptado pela chave retornada pelo servidor é uma string com os dados do cartão de crédito formatados como parâmetros HTTP:
 

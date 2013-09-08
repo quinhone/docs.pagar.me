@@ -12,7 +12,7 @@ A principal vantagem desse método é que ao realizar a transação com o PagarM
 
 ## Definindo uma URL de POSTback
 
-Conforme descrito nas [referências dos métodos da API](/restful-api/methods), para definir uma URL de POSTback para a transação, basta enviar o parâmetro `postback_url` na requisição para criar uma nova transação:
+Conforme descrito nas [referências dos métodos da API](/docs/restful-api/methods), para definir uma URL de POSTback para a transação, basta enviar o parâmetro `postback_url` na requisição para criar uma nova transação:
 
 	POST /transactions
 
