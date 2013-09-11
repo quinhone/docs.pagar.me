@@ -24,7 +24,7 @@ Embora seja recomendado que o seu site utilize `HTTPS`, o `card_hash` gerado pel
 
 ### Realizando a transação com os dados do `card_hash`
 
-Agora que o seu servidor detém o `card_hash`, ele pode se comunicar com o Pagar.me para realizar a transação em si, creditando o cartão de crédito do usuário.
+Agora que o seu servidor detém o `card_hash`, ele pode se comunicar com o Pagar.me para realizar a transação em si, debitando o cartão de crédito do usuário.
 
 Se o seu site é em [Ruby on Rails](http://rubyonrails.org) ou [PHP](http://php.net), o Pagar.me já possui bibliotecas prontas. Visite o [manual de integração em Ruby on Rails](/apis/ruby) e o [manual de integração em PHP](/apis/php).
 
