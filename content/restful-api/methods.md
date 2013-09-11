@@ -28,9 +28,9 @@ A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer
 - `card_expiracy_date` (obrigatório) - mês (2 dígitos) seguidos do ano (2 dígitos) de expiração do cartão de crédito. Ex: se a data de expiração do cartão é 05/2016, o valor de `amount` será `0516`
 - `card_holder_name` (obrigatório) - o nome do portador do cartão, como escrito neste. Ex: `Jose da Silva`
 - `card_cvv` (obrigatório) - o código de segurança do cartão, como escrito nele. Exemplo: `314`
-- `postback_url` (opcional) - URL de POSTback na qual o Pagar.me fará um HTTP POST quando o status da transação mudar. Para mais informações, consulte a [referência da API sobre URLs de POSTback](/restful-api/postback-url).
+- `postback_url` (opcional) - URL de POSTback na qual o PagarMe fará um HTTP POST quando o status da transação mudar. Para mais informações, consulte a [referência da API sobre URLs de POSTback](/docs/restful-api/postback-url).
 
-Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card_hash`, o que aumenta consideravelmente a segurança da transação. Para mais informações sobre o `card_hash`, [consulte a referência do *card_hash*](/restful-api/card-hash).
+Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card_hash`, o que aumenta consideravelmente a segurança da transação. Para mais informações sobre o `card_hash`, [consulte a referência do *card_hash*](/docs/restful-api/card-hash).
 
 - `card_hash` (obrigatório) - o conteúdo encriptado dos dados do cartão de crédito.
 
@@ -206,7 +206,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
 
 ## GET /transactions/card_hash_key
 
-**Descrição**: retorna os dados para realizar a encriptação dos dados do cartão de crédito, gerando um `card_hash`. Para mais informações, [consulte a referência sobre o *card_hash*](/restful-api/card-hash).
+**Descrição**: retorna os dados para realizar a encriptação dos dados do cartão de crédito, gerando um `card_hash`. Para mais informações, [consulte a referência sobre o *card_hash*](/docs/restful-api/card-hash).
 
 **Parâmetros**:
 

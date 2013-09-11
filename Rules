@@ -26,7 +26,7 @@ compile '*' do
 end
 
 route '/assets/*' do
-  '/assets' + item.identifier[7..-2]
+  '/docs/assets' + item.identifier[7..-2]
 end
 
 route '*' do

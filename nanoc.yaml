@@ -45,7 +45,7 @@ data_sources:
     # “/” prefixed to their identifiers. If the items root were “/en/”
     # instead, an item at content/about.html would have an identifier of
     # “/en/about/” instead of just “/about/”.
-    items_root: /
+    items_root: /docs
 
     # The path where layouts should be mounted. The layouts root behaves the
     # same as the items root, but applies to layouts rather than items.

@@ -6,7 +6,11 @@ title: Guia de integração em Javascript
 
 Para manter sua página de pagamento segura é necessário integrar com nossa biblioteca Javascript, que irá cuidar de toda segurança na sua página.
 
+<<<<<<< HEAD
 O objetivo da biblioteca em Javascript é [gerar o `card_hash`](/restful-api/card-hash), que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do Pagar.me, onde a transação será efetuada.
+=======
+O objetivo da biblioteca em Javascript é [gerar o `card_hash`](/docs/restful-api/card-hash), que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do PagarMe, onde a transação será efetuada.
+>>>>>>> 53ca64e0c8ee68b7f31528b2d9c491fafef3bbc2
 
 ## Importando a biblioteca
 
@@ -111,5 +115,5 @@ Quando o `form` é enviado, é criado um objeto com os dados de cartão de créd
 
 Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são removidos, já que o `card_hash` contém as informações de todos eles. A partir daí, o `form` é enviado para o seu servidor.
 
-No seu servidor, você deve utilizar o `card_hash` recebido para realizar a transação com o Pagar.me. Isso pode ser feito manualmente ou através de uma de nossas bibliotecas prontas. Agora vamos para a integração backend! Qual linguagem você usa?
-[Ruby](https://pagar.me/docs/apis/ruby/), [Java](https://pagar.me/docs/java/) ou [PHP](https://pagar.me/apis/php/).
+No seu servidor, você deve utilizar o `card_hash` recebido para realizar a transação com o PagarMe. Isso pode ser feito manualmente ou através de uma de nossas bibliotecas prontas. Agora vamos para a integração backend! Qual linguagem você usa?
+[Ruby](/docs/apis/ruby/), [Java](/docs/api/java/) ou [PHP](/docs/api/php).

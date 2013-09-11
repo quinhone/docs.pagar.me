@@ -164,4 +164,4 @@ Também é possível especificar a página do resultado desejada, assim como o n
 
 ## Aplicação Rails de exemplo
 
-Caso você queira conferir um exemplo de aplicação Rails que use a [biblioteca em Ruby do PagarMe](/apis/ruby), integrada a [biblioteca em Javascript do PagarMe](/apis/javascript), confira [esse projeto](https://github.com/PagarMe/pagarme-rails-sample) em [nosso GitHub](https://github.com/PagarMe).
+Caso você queira conferir um exemplo de aplicação Rails que use a [biblioteca em Ruby do PagarMe](/docs/apis/ruby), integrada a [biblioteca em Javascript do PagarMe](/docs/apis/javascript), confira [esse projeto](https://github.com/PagarMe/pagarme-rails-sample) em [nosso GitHub](https://github.com/PagarMe).
