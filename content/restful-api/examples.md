@@ -4,11 +4,11 @@ title: Exemplos de uso
 
 # Exemplos de uso
 
-Aqui será mostrado o funcionamento básico da API RESTful do PagarMe. As requisições serão feitas utilizando o [cURL](http://curl.haxx.se).
+Aqui será mostrado o funcionamento básico da API RESTful do Pagar.me. As requisições serão feitas utilizando o [cURL](http://curl.haxx.se).
 
 ## Requisições
 
-O endpoint da API do PagarMe é:
+O endpoint da API do Pagar.me é:
 
 	https://api.pagar.me/1/
 

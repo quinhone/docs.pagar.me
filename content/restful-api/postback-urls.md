@@ -6,7 +6,7 @@ title: URL de POSTback
 
 O POSTback permite que o seu servidor seja notificado sempre que o `status` de uma transação mudar. Isso é possível definindo uma URL de POSTback para a transação ao criá-la. Dessa forma, quando ocorrerem modificações no `status` da transação, você receberá uma requisição HTTP na URL definida, notificando-o da mudança ocorrida.
 
-A principal vantagem desse método é que ao realizar a transação com o PagarMe, não será necessário esperar a resposta do servidor para saber se a transação foi aprovada ou não. Ao criar a transação, será inicialmente retornado na requisição o status `processing`, indicando que ela ainda está sendo processada. Quando ela for aprovada/recusada, o PagarMe fará uma requisição a URL de POSTback para notificar seu servidor da mudança de `status`.
+A principal vantagem desse método é que ao realizar a transação com o Pagar.me, não será necessário esperar a resposta do servidor para saber se a transação foi aprovada ou não. Ao criar a transação, será inicialmente retornado na requisição o status `processing`, indicando que ela ainda está sendo processada. Quando ela for aprovada/recusada, o Pagar.me fará uma requisição a URL de POSTback para notificar seu servidor da mudança de `status`.
 
 **Nota**: o uso de URLs de POSTback é opcional. Caso você não forneça uma ao realizar a transação, a requisição só será retornada quando a transação tiver um `status` definitivo.
 
@@ -22,7 +22,7 @@ Nota: a URL deve seguir o formato padrão. Exemplo:
 
 ## Recebendo o POSTback
 
-Quando o status da transação mudar, o PagarMe fará uma requisição HTTP POST a URL de POSTback com os seguintes parâmetros:
+Quando o status da transação mudar, o Pagar.me fará uma requisição HTTP POST a URL de POSTback com os seguintes parâmetros:
 
 - `id` - id da transação (retornado ao realizá-la)
 - `old_status` - status da transação antes de ter mudado
@@ -66,7 +66,7 @@ Retorno:
     "postback_url": "http://www.meusite.com.br/transactions_postback"
 }</code></pre>
 
-A resposta da requisição será retornada imediatamente com o status `processing`, indicando que ela ainda está sendo processada. Quando ela for aprovada, o PagarMe fará uma requisição para a URL de POSTback (`http://www.meusite.com.br/transactions_postback`) com os seguintes parâmetros:
+A resposta da requisição será retornada imediatamente com o status `processing`, indicando que ela ainda está sendo processada. Quando ela for aprovada, o Pagar.me fará uma requisição para a URL de POSTback (`http://www.meusite.com.br/transactions_postback`) com os seguintes parâmetros:
 
 - `id`: `448`
 - `old_status`: `processing`
@@ -98,7 +98,7 @@ Retorno:
     "postback_url": "http://www.meusite.com.br/transactions_postback"
 }</code></pre>
 
-A transação será retornada com o status `approved`, porque o cancelamento ainda está sendo processado. Quando a transação tiver sido cancelada, o PagarMe fará uma requisição para a URL de POSTback com os seguintes parâmetros
+A transação será retornada com o status `approved`, porque o cancelamento ainda está sendo processado. Quando a transação tiver sido cancelada, o Pagar.me fará uma requisição para a URL de POSTback com os seguintes parâmetros
 
 - `id`: `448`
 - `old_status`: `approved`

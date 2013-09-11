@@ -6,7 +6,7 @@ title: Guia de integração em Java
 
 ## Instalando a gem
 
-A biblioteca em Java do PagarMe está disponível através do Maven.
+A biblioteca em Java do Pagar.me está disponível através do Maven.
 
     <dados para colocar no pom.xml do Maven>
     </dados para colocar no pom.xml do Maven>

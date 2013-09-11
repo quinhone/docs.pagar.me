@@ -14,9 +14,8 @@ Para baixar a biblioteca execute esse comando para fazer um clone dela
 
 	git clone https://github.com/PagarMe/pagarme-php.git	
 
-Ou caso não tenha git instalado, baixe-a clickando neste link
-
-	https://github.com/pagarme/pagarme-php/archive/master.zip
+Ou caso não tenha git instalado, baixe-a clickando neste [https://github.com/pagarme/pagarme-php/archive/master.zip
+](https://github.com/pagarme/pagarme-php/archive/master.zip)
 
 Após baixar a biblioteca, copie-a para a pasta do seu projeto
 

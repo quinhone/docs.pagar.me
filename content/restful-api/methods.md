@@ -19,7 +19,7 @@ A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer
 
 **Parâmetros**: 
 
-- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
+- `api_key` (obrigatório): a chave de acesso a API do Pagar.me.
 - `amount` (obrigatório) - o valor da transação, com centavos, sem vírgulas ou pontos. Ex: se o valor da transação é de R$49,90, o valor de `amount` será `4990`
 - `installments` (opcional) - o número de parcelas da transação. Ex: `3`. Caso esse parâmetro não seja passado, a transação não será parcelada (`1` parcela)
 
@@ -28,7 +28,7 @@ A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer
 - `card_expiracy_date` (obrigatório) - mês (2 dígitos) seguidos do ano (2 dígitos) de expiração do cartão de crédito. Ex: se a data de expiração do cartão é 05/2016, o valor de `amount` será `0516`
 - `card_holder_name` (obrigatório) - o nome do portador do cartão, como escrito neste. Ex: `Jose da Silva`
 - `card_cvv` (obrigatório) - o código de segurança do cartão, como escrito nele. Exemplo: `314`
-- `postback_url` (opcional) - URL de POSTback na qual o PagarMe fará um HTTP POST quando o status da transação mudar. Para mais informações, consulte a [referência da API sobre URLs de POSTback](/restful-api/postback-url).
+- `postback_url` (opcional) - URL de POSTback na qual o Pagar.me fará um HTTP POST quando o status da transação mudar. Para mais informações, consulte a [referência da API sobre URLs de POSTback](/restful-api/postback-url).
 
 Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card_hash`, o que aumenta consideravelmente a segurança da transação. Para mais informações sobre o `card_hash`, [consulte a referência do *card_hash*](/restful-api/card-hash).
 
@@ -53,7 +53,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
 
 **Parâmetros**: 
 
-- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
+- `api_key` (obrigatório): a chave de acesso a API do Pagar.me.
 - `id` (obrigatório) - o ID da transação a ser cancelada, retornado ao realizá-la
 
 **Resposta**:
@@ -75,7 +75,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
 
 **Parâmetros**: 
 
-- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
+- `api_key` (obrigatório): a chave de acesso a API do Pagar.me.
 
 **Resposta**:
 
@@ -96,7 +96,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
 
 **Parâmetros**: 
 
-- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
+- `api_key` (obrigatório): a chave de acesso a API do Pagar.me.
 - `page` (opcional) - página a ser consultada. Valor padrão: `1`
 - `count` (opcional) - número de transações a ser retornado por página. Valor padrão: `10`
 
@@ -214,7 +214,7 @@ Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card
 
 Caso o `card_hash` esteja sendo gerado do lado do servidor, a `api_key` pode ser usada para autenticação, como em outros requests.
 
-- `api_key` (obrigatório): a chave de acesso a API do PagarMe.
+- `api_key` (obrigatório): a chave de acesso a API do Pagar.me.
 
 **Resposta**:
 

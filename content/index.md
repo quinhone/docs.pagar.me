@@ -4,7 +4,7 @@ title: Início
 
 # Início
 
-Aqui você vai encontra tudo que precisa para usar a API do PagarMe. Isso inclui guias de primeiros passos, manuais de integração, documentação das bibliotecas, etc.
+Aqui você vai encontra tudo que precisa para usar a API do Pagar.me. Isso inclui guias de primeiros passos, manuais de integração, documentação das bibliotecas, etc.
 
 ## Primeiros passos
 
