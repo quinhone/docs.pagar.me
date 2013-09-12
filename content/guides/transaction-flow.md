@@ -12,7 +12,7 @@ A segurança é vital em todas as etapas do processo.
 
 Uma das vantagens do Pagar.me é permitir que os pagamentos com cartão de crédito sejam realizados sem que o usuário deixe o seu site em nenhum momento. Para garantir essa comodidade e a segurança da operação, os dados do cartão de crédito do usuário devem ser capturados e transmitidos de forma segura.
 
-Para isso, é importante que o seu site utilize a [biblioteca em Javascript do PagarMe](/docs/apis/javascript). Ela permite que os dados do cartão de crédito trafeguem de forma que só possam ser lidos pelo PagarMe, garantindo assim a segurança e a autenticidade da transação.
+Para isso, é importante que o seu site utilize a [biblioteca em Javascript do Pagar.me](/docs/apis/javascript). Ela permite que os dados do cartão de crédito trafeguem de forma que só possam ser lidos pelo Pagar.me, garantindo assim a segurança e a autenticidade da transação.
 
 A biblioteca em Javascript do Pagar.me transforma os dados do cartão (número, nome do portador, data de validade, etc.) presentes em um `form` de seu HTML em uma única string chamada `card_hash`.
 
@@ -28,4 +28,4 @@ Agora que o seu servidor detém o `card_hash`, ele pode se comunicar com o Pagar
 
 Se o seu site é em [Ruby on Rails](http://rubyonrails.org) ou [PHP](http://php.net), o Pagar.me já possui bibliotecas prontas. Visite o [manual de integração em Ruby on Rails](/apis/ruby) e o [manual de integração em PHP](/apis/php).
 
-Caso o seu site não utilize essas linguagens, a API do PagarMe é RESTful, e portanto simples de ser implementada. [Confira os exemplos de requisições a API usando o cURL](/docs/restful-api/examples).
+Caso o seu site não utilize essas linguagens, a API do Pagar.me é RESTful, e portanto simples de ser implementada. [Confira os exemplos de requisições a API usando o cURL](/docs/restful-api/examples).

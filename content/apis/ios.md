@@ -17,7 +17,7 @@ Rainbow.extend('objective-c', [
 
 # Guia de integração para iOS
 
-A biblioteca para iOS do PagarMe permite que o [`card_hash`](/docs/restful-api/card-hash) seja gerado no seu aplicativo para iOS e, portanto, que os dados de cartão de crédito sejam transmitidos de forma segura do seu aplicativo para o seu servidor, e do seu servidor para o servidor do PagarMe.
+A biblioteca para iOS do Pagar.me permite que o [`card_hash`](/docs/restful-api/card-hash) seja gerado no seu aplicativo para iOS e, portanto, que os dados de cartão de crédito sejam transmitidos de forma segura do seu aplicativo para o seu servidor, e do seu servidor para o servidor do PagarMe.
 
 Ela funciona de forma análoga a [biblioteca em Javascript](/docs/apis/javascript) num browser.
 
@@ -70,7 +70,7 @@ if([errors count] != 0) {
 
         NSLog(@"card_hash gerado: %@", cardHash);
         // Agora envie a string cardHash para o seu servidor e realize
-        // a transação com o PagarMe usando-a.
+        // a transação com o Pagar.me usando-a.
     }];
 }
 </code></pre>

@@ -89,7 +89,7 @@ Resultado:
 	from /Users/pedrofranceschi/.rvm/rubies/ruby-1.9.3-p0/bin/irb:16:in `main'
 </code></pre>
 
-Para tratar erros desse tipo, você pode inserir um `begin` `rescue` no código acima para tratar erros do PagarMe (`PagarMeError`):
+Para tratar erros desse tipo, você pode inserir um `begin` `rescue` no código acima para tratar erros do Pagar.me (`PagarMeError`):
 
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new
 transaction.card_number = "4901720080344448"
@@ -164,4 +164,4 @@ Também é possível especificar a página do resultado desejada, assim como o n
 
 ## Aplicação Rails de exemplo
 
-Caso você queira conferir um exemplo de aplicação Rails que use a [biblioteca em Ruby do PagarMe](/docs/apis/ruby), integrada a [biblioteca em Javascript do PagarMe](/docs/apis/javascript), confira [esse projeto](https://github.com/PagarMe/pagarme-rails-sample) em [nosso GitHub](https://github.com/PagarMe).
+Caso você queira conferir um exemplo de aplicação Rails que use a [biblioteca em Ruby do Pagar.me](/docs/apis/ruby), integrada a [biblioteca em Javascript do Pagar.me](/docs/apis/javascript), confira [esse projeto](https://github.com/PagarMe/pagarme-rails-sample) em [nosso GitHub](https://github.com/PagarMe).
