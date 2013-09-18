@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------------
+*------------------------------------------------------------------------------
 Global Documentation Styles
 ------------------------------------------------------------------------------*/
 /* line 5, ../sass/documentation.scss */
@@ -184,7 +184,7 @@ Header Styles
   color: #8d8d8d; }
 
 /* line 191, ../sass/documentation.scss */
-#header input {
+#header input, #header button {
   border: none;
   background-color: #ef6d00;
   color: #fff;
