@@ -74,6 +74,8 @@ $transaction->setAmount(3000); // Valor da transação em centavos 3000 - R$ 30,
 $transaction->charge();
 </code></pre>
 
+PS: Se você deseja usar nosso sistema antifraude o card_hash deve ser utilizado.
+
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status "paid", ou seja, estará paga:
 
 <pre><code data-language="php">echo $transaction->getStatus();
@@ -185,6 +187,57 @@ Após a transação ser aprovada ou recusada nosso servidor irá chamar a URL qu
 </pre>
 
 AVISO: Se você usa um framework que trata os parâmetros $_GET diferente do padrão, você precisará implementar o postback manualmente. Para isso acesse nosso guia sobre [Postback URLS](/docs/restful-api/postback-urls)
+
+
+## Passo 4 - Antifraude (opcional)
+
+O Pagar.me recomenda fortemente o uso de antifraude. Para começar a utilizar o antifraude basta acessar o dashboard e ativa-lo. Na sua implementação backend basta passar algumas informações a mais, como no exemplo:
+
+<pre>
+<code data-language="php">
+$transaction = new PagarMe_Transaction(array(
+	'amount' => 70000, 
+	'card_hash' => '5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXR', 
+	'name' => "Jose da Silva", //Nome completo
+	'document_number' => "36433809847", // Documento (CPF/CNPJ)
+	'document_type' => 'cpf', // Tipo do documento "cpf" ou "cnpj"
+	'email' => "henrique@pagar.me",  // Email do cliente
+	'street' => 'Av. Brigadeiro Faria Lima',  // Rua
+	'city' => 'São Paulo', // cidade
+	'state' => 'SP', // Estado
+	'neighborhood' => 'Itaim bibi', // Bairro
+	'zipcode' => '01452000', //CEP
+	'street_number' => 2941, //Número
+	'phone_type' => 'cellphone', // "tipo" do número de telefone
+	'ddd' => 12,  // DDD
+	'number' => '981111111', // Telefone/Celular 
+	'sex' => 'M', //Sexo
+	'born_at' => '0' // Data de nascimento
+));
+$transaction->charge();
+</code>
+</pre>
+
+## Customers (Clientes)
+
+Caso você faça uma transação e passe informações do seu cliente final como `street` e `sex` o Pagar.me irá criar um `Customer` para você. Para acessar esse customer use o método `getCustomer` de uma transaction.
+
+<pre>
+<code data-language="php">
+$customer = $transaction->getCustomer(); // Cliente
+$customer->getName(); // Nome do cliente
+$customer->getAddresses(); // Array com os endereços dos clientes
+$customer->getPhones(); // Array com os telefones do cliente
+$customer->getDocumentNumber(); // CPF/CNPJ do cliente
+</code>
+</pre>
+
+Para uma lista completa de todas as informações de um customer clique aqui. Não se esqueça que para utilizar o antifraude também é necessária uma alteração no frontend. Basta adicionar esse método na sua página de checkout:
+<pre>
+<code data-language="javascript">
+PagarMe.enableAntifraudProfiling(); 
+</code>
+</pre>
 
 ## Planos/Assinaturas
 Essa seção vai te ensinar como criar e gerenciar transações recorrentes e one-click buy.

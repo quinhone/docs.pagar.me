@@ -68,6 +68,8 @@ Um exemplo de utilização da biblioteca do Pagar.me sua página, que deve ser i
 <pre><code data-language="javascript">$(document).ready(function() { // o jQuery precisa estar carregado para obter os dados do form...
     // insira sua encryption_key, disponível no seu dashboard
     PagarMe.encryption_key = "< sua encryption_key >";
+	// PagarMe.enableAntifraudProfiling(); //Adicione isso caso deseje utilizar o antifraude
+
 
     var form = $("#payment_form");
 
@@ -110,6 +112,16 @@ Um exemplo de utilização da biblioteca do Pagar.me sua página, que deve ser i
 Quando o `form` é enviado, é criado um objeto com os dados de cartão de crédito presentes nele. Se forem encontrados erros de validação nos dados do `form`, eles são alertados.
 
 Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são removidos, já que o `card_hash` contém as informações de todos eles. A partir daí, o `form` é enviado para o seu servidor.
+
+## Antifraude (Opcional)
+
+Caso deseje utilizar o antifraude adicione o seguinte código a sua pagina de pagamento:
+
+<pre>
+<code data-language='javascript'>
+	PagarMe.enableAntifraudProfiling();
+</code>
+</pre>
 
 No seu servidor, você deve utilizar o `card_hash` recebido para realizar a transação com o Pagar.me. Isso pode ser feito manualmente ou através de uma de nossas bibliotecas prontas. Agora vamos para a integração backend! Qual linguagem você usa?
 [Ruby](/docs/apis/ruby/), [Java](/docs/api/java/) ou [PHP](/docs/api/php).
