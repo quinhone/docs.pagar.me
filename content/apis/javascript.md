@@ -13,7 +13,7 @@ O objetivo da biblioteca em Javascript é [gerar o `card_hash`](/docs/restful-ap
 Para importar a biblioteca em Javascript, adicione ao `head` de sua página HTML:
 
 <pre><code data-language="html"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://pagar.me/libraries/pagarme.js"></script>
+<script src="http://pagar.me/assets/pagarme.js"></script>
 </code></pre>
 
 Dessa forma, tem-se uma página HTML similar a:
