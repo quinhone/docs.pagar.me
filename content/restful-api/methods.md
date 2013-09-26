@@ -13,39 +13,7 @@ O endpoint da API é:
 
 A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) e a resposta do servidor é no formato [JSON](http://www.json.org).
 
-## POST /transactions
-
-**Descrição**: realiza uma transação.
-
-**Parâmetros**: 
-
-- `api_key` (obrigatório): a chave de acesso a API do Pagar.me.
-- `amount` (obrigatório) - o valor da transação, com centavos, sem vírgulas ou pontos. Ex: se o valor da transação é de R$49,90, o valor de `amount` será `4990`
-- `installments` (opcional) - o número de parcelas da transação. Ex: `3`. Caso esse parâmetro não seja passado, a transação não será parcelada (`1` parcela)
-
-
-- `card_number` (obrigatório) - o número do cartão de crédito, sem espaços ou separadores. Ex: `4532519433391701`
-- `card_expiracy_date` (obrigatório) - mês (2 dígitos) seguidos do ano (2 dígitos) de expiração do cartão de crédito. Ex: se a data de expiração do cartão é 05/2016, o valor de `amount` será `0516`
-- `card_holder_name` (obrigatório) - o nome do portador do cartão, como escrito neste. Ex: `Jose da Silva`
-- `card_cvv` (obrigatório) - o código de segurança do cartão, como escrito nele. Exemplo: `314`
-- `postback_url` (opcional) - URL de POSTback na qual o PagarMe fará um HTTP POST quando o status da transação mudar. Para mais informações, consulte a [referência da API sobre URLs de POSTback](/docs/restful-api/postback-url).
-
-Os quatro parâmetros com os dados do cartão podem ser substituídos pelo `card_hash`, o que aumenta consideravelmente a segurança da transação. Para mais informações sobre o `card_hash`, [consulte a referência do *card_hash*](/docs/restful-api/card-hash).
-
-- `card_hash` (obrigatório) - o conteúdo encriptado dos dados do cartão de crédito.
-
-**Resposta**:
-
-<pre><code data-language="javascript">{
-    "status": "approved",
-    "date_created": "2013-04-08T01:01:56.672Z",
-    "amount": "4990",
-    "installments": "4",
-    "id": "516217040ef16fc9fc00000f",
-    "live": true,
-    "costumer_name": "Jose da Silva",
-    "card_last_digits": "4448"
-}</code></pre>
+## [POST /transactions](/docs/restful-api/transactions#post-transaction)
 
 ## DELETE /transactions/:id
 
