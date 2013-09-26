@@ -110,7 +110,7 @@ Caso você deseja realizar a transação com o `card_hash` manualmente, temos um
 O servidor retornará:
 
 <pre><code data-language="javascript">{
-    "status": "approved",
+    "status": "paid",
     "date_created": "2013-04-08T01:01:56.672Z",
     "amount": "1500",
     "installments": "4",

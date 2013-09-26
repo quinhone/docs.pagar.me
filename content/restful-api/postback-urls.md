@@ -26,7 +26,7 @@ Quando o status da transação mudar, o Pagar.me fará uma requisição HTTP POS
 
 - `id` - id da transação (retornado ao realizá-la)
 - `old_status` - status da transação antes de ter mudado
-- `desired_status` - status desejado. Caso se deseja aprovar a transação, o status desejado seria `approved`. Caso se deseja cancelá-la, o status desejado seria `chargebacked`.
+- `desired_status` - status desejado. Caso se deseja aprovar a transação, o status desejado seria `paid`. Caso se deseja cancelá-la, o status desejado seria `chargebacked`.
 - `current_status` - status atual (modificado) da transação.
 
 O seu servidor deverá interpretar esses parâmetros e realizar as ações/modificações necessárias de acordo com a mudança de status.
@@ -70,8 +70,8 @@ A resposta da requisição será retornada imediatamente com o status `processin
 
 - `id`: `448`
 - `old_status`: `processing`
-- `desired_status`: `approved`
-- `current_status`: `approved`
+- `desired_status`: `paid`
+- `current_status`: `paid`
 
 A partir desses parâmetros, seu servidor pode realizar as ações/modificações necessárias, como por exemplo ativar a conta de um cliente que teve a transação aprovada.
 
@@ -87,7 +87,7 @@ Para cancelar a transação realizada anteriormente, com o cURL:
 Retorno:
 
 <pre><code data-language="javascript">{
-    "status": "approved",
+    "status": "paid",
     "date_created": "2013-06-20T19:26:49.000Z",
     "amount": 1000,
     "installments": 1,
@@ -98,10 +98,10 @@ Retorno:
     "postback_url": "http://www.meusite.com.br/transactions_postback"
 }</code></pre>
 
-A transação será retornada com o status `approved`, porque o cancelamento ainda está sendo processado. Quando a transação tiver sido cancelada, o Pagar.me fará uma requisição para a URL de POSTback com os seguintes parâmetros
+A transação será retornada com o status `paid`, porque o cancelamento ainda está sendo processado. Quando a transação tiver sido cancelada, o Pagar.me fará uma requisição para a URL de POSTback com os seguintes parâmetros
 
 - `id`: `448`
-- `old_status`: `approved`
+- `old_status`: `paid`
 - `desired_status`: `chargebacked`
 - `current_status`: `chargebacked`
 

@@ -59,10 +59,10 @@ try {
 }
 </code></pre>
 
-Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status `approved`, ou seja, estará aprovada:
+Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status `paid`, ou seja, estará aprovada:
 
 <pre><code data-language="javascript">System.out.println(transaction.status);
-// "approved"
+// "paid"
 </code></pre>
 
 ### Tratando erros ao realizar uma transação
@@ -146,10 +146,10 @@ com.pagarme.PagarMeValidationException: Mês de expiração inválido.
 
 ### Cancelando uma transação
 
-Após a transação ser realizada com sucesso, ela terá o status `approved`, como já foi visto:
+Após a transação ser realizada com sucesso, ela terá o status `paid`, como já foi visto:
 
 <pre><code data-language="javascript">System.out.println(transaction.status);
-// "approved
+// "paid
 </code></pre>
 
 Caso você deseja cancelar a transação, estornando o valor pago pelo cliente:
@@ -173,7 +173,7 @@ Consultar os dados de uma transação já realizada é possível com o seu `id`,
     System.out.println(transaction.id);
     // "22"
     System.out.println(transaction.status);
-    // "approved"
+    // "paid"
 } catch (PagarMeException e) {
     System.out.println("Erro ao buscar transação: ");
     e.printStackTrace();
