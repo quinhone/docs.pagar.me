@@ -31,7 +31,7 @@ Antes de iniciar, é necessário incluir a biblioteca no seu código:
 
 Para usar a biblioteca, é necessário configurá-la com a chave de API disponível em seu [dashboard](http://dashboard.pagar.me/):
 
-<pre><code data-language="php">Pagarme::setApiKey("Jy1V5bJcGf8q4gHepttt"); // Insira sua chave de API </code> </pre> 
+<pre><code data-language="php">Pagarme::setApiKey("ak_live_abxA6CDv9yYqlt7ZPmxut9D5qvo0xh"); // Insira sua chave de API </code> </pre> 
 
 ## Passo 2 - Fazendo a primeira transação
 
@@ -196,24 +196,34 @@ O Pagar.me recomenda fortemente o uso de antifraude. Para começar a utilizar o 
 <pre>
 <code data-language="php">
 $transaction = new PagarMe_Transaction(array(
-	'amount' => 70000, 
-	'card_hash' => '5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXR', 
-	'name' => "Jose da Silva", //Nome completo
-	'document_number' => "36433809847", // Documento (CPF/CNPJ)
-	'document_type' => 'cpf', // Tipo do documento "cpf" ou "cnpj"
-	'email' => "henrique@pagar.me",  // Email do cliente
-	'street' => 'Av. Brigadeiro Faria Lima',  // Rua
-	'city' => 'São Paulo', // cidade
-	'state' => 'SP', // Estado
-	'neighborhood' => 'Itaim bibi', // Bairro
-	'zipcode' => '01452000', //CEP
-	'street_number' => 2941, //Número
-	'phone_type' => 'cellphone', // "tipo" do número de telefone
-	'ddd' => 12,  // DDD
-	'number' => '981111111', // Telefone/Celular 
-	'sex' => 'M', //Sexo
-	'born_at' => '0' // Data de nascimento
+	'amount' => 70000,
+	'card_number' => '4901720080344448', 
+	'card_holder_name' => "Jose da silva", 
+	'card_expiracy_month' => 11, 
+	'card_expiracy_year' => "13", 
+	'card_cvv' => 356, 
+	'customer' => array(
+		'name' => "Jose da Silva",  
+		'document_number' => "36433809847", 
+		'document_type' => 'cpf', 
+		'email' => "henrique@pagar.me", 
+		'address' => array(
+			'street' => 'Av. Brigadeiro Faria Lima', 
+			'city' => 'São Paulo', 
+			'state' => 'SP', 
+			'neighborhood' => 'Itaim bibi',
+			'zipcode' => '01452000', 
+			'street_number' => 2941, 
+		),
+		'phone' => array(
+			'type' => 'cellphone', 
+			'ddd' => 12, 
+			'number' => '981433533', 
+		),
+'sex' => 'M', 
+	'born_at' => '0')
 ));
+
 $transaction->charge();
 </code>
 </pre>
