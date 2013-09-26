@@ -6,10 +6,4 @@ title: Modo de testes
 
 O Pagar.me conta com um modo de testes que permite simular transações, cancelamentos, etc, sem que as transações ocorram de verdade. Isso permite testar o Pagar.me sem creditar cartões de crédito ou mexer em suas transações do ambiente de produção.
 
-[Todas os métodos](/docs/restful-api/methods) podem ser usados no modo de testes. Para isso, basta adicionar o seguinte parâmetro a qualquer requisição:
-
-	live=0
-
-Para usar o Pagar.me em produção (modo normal), basta ignorar o parâmetro `live`, ou configurá-lo para `1`:
-
-	live=1
+[Todas os métodos](/docs/restful-api/methods) podem ser usados no modo de testes. Para isso, basta utilizar a `api_key` e a `encryption_key` de teste disponíveis no seu dashboard.
