@@ -22,3 +22,7 @@ A API é [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer
 ## [GET /transactions](/docs/restful-api/transactions/index.html#get-transactions)
 
 ## [GET /transactions/card_hash_key](/docs/restful-api/transactions/index.html#get-card-hash-key)
+
+## [GET /customers](/docs/restful-api/customers/index.html#get-customers)
+
+## [GET /customers/:id](/docs/restful-api/customers/index.html#get-customer)
