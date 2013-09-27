@@ -14,10 +14,9 @@ Para baixar a biblioteca execute esse comando para fazer um clone dela
 
 	git clone https://github.com/PagarMe/pagarme-php.git	
 
-Ou caso não tenha git instalado, baixe-a clickando neste [https://github.com/pagarme/pagarme-php/archive/master.zip
-](https://github.com/pagarme/pagarme-php/archive/master.zip)
+Ou caso não tenha git instalado, baixe-a [clicando aqui](https://github.com/pagarme/pagarme-php/archive/master.zip).
 
-Após baixar a biblioteca, copie-a para a pasta do seu projeto
+Após baixar a biblioteca, copie-a para a pasta do seu projeto.
 
 ### Utilizando a biblioteca
 
@@ -74,16 +73,13 @@ $transaction->setAmount(3000); // Valor da transação em centavos 3000 - R$ 30,
 $transaction->charge();
 </code></pre>
 
-PS: Se você deseja usar nosso sistema antifraude o card_hash deve ser utilizado.
-
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status "paid", ou seja, estará paga:
 
 <pre><code data-language="php">echo $transaction->getStatus();
  => "paid"
 </code></pre>
 
-Lembre-se que transações via cartão de crédito normalmente são aprovadas rapidamente, porém para boletos é necessário configurar uma URL de postback. Veja mais na seção de [postback](#postback)
-
+Lembre-se que transações via cartão de crédito normalmente são aprovadas rapidamente, porém para boletos é recomendado configurar uma URL de postback. Veja mais na seção de [postback](#postback)
 
 ### Tratando erros ao realizar uma transação
 
@@ -139,7 +135,7 @@ Após a transação ser realizada com sucesso, ela terá o status `paid`, como j
 Caso você deseja cancelar a transação, estornando o valor pago pelo cliente:
 
 <pre><code data-language="php">$transaction->refund();
- => "517035290039fc26d9000024" # o id da transação é retornado
+ => "1654" # o id da transação é retornado
 > $transaction->getStatus();
  => "chargebacked"
 </code></pre>
@@ -150,26 +146,24 @@ Se a transação for cancelada com sucesso, seu status mudará para "refunded", 
 
 Consultar os dados de uma transação já realizada é possível com o seu `id`, que é retornado ao realizá-la:
 
-<pre><code data-language="php">> $transaction = PagarMe_Transaction::findById("517035290039fc26d9000024");
+<pre><code data-language="php">> $transaction = PagarMe_Transaction::findById("1654");
 </code></pre>
 
-## Passo 3 - Postback
-Quando um boleto for emitido nosso sistema vai criar uma transação com o status `waiting_payment`. Para você saber quando o boleto foi pago você precisa configurar uma URL de Postback. O que é isso? É uma URL que nosso servidor irá chamar quando o boleto for pago para te avisar que ele foi pago. 
+## Passo 3 - Postback {#postback}
+Quando um boleto for emitido, a transação será criada com o status `waiting_payment`. Para saber quando o boleto foi pago, é recomendado que se configure uma URL de Postback. O Pagar.me usará essa URL para notificar o seu servidor sobre mudanças de status da transação, inclusive quando o boleto foi pago.
 
-### Passando a URL de postback
-Para isso o primeiro passo é passar essa URL que será chamada. Para fazer isso basta acrescentar o `postback_url` a transação, assim:
-<pre>
-<code data-language="php">
-$transaction = new PagarMe_Transaction(array(
+### Configurando a URL de postback
+Para configurar a URL de POSTback, basta acrescentar o parâmetro `postback_url` à transação:
+
+<pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
 	"payment_method" => "boleto",
 	"amount" => 1000,
 	"postback_url" => "https://seusite.com/transactions_postback.php"
 )); 
-</code>
-</pre>
+</code></pre>
 
-### Recebendo o postback
-Após a transação ser aprovada ou recusada nosso servidor irá chamar a URL que você passou, então vamos para o código da transactions_postback.php
+### Recebendo o POSTback
+Quando a transação mudar de `status`, o Pagar.me irá fazer uma requisição a URL definida. O código da página PHP definida como URL de POSTback é:
 
 <pre>
 <code data-language="php">
@@ -186,42 +180,40 @@ Após a transação ser aprovada ou recusada nosso servidor irá chamar a URL qu
 </code>
 </pre>
 
-AVISO: Se você usa um framework que trata os parâmetros $_GET diferente do padrão, você precisará implementar o postback manualmente. Para isso acesse nosso guia sobre [Postback URLS](/docs/restful-api/postback-urls)
-
-
 ## Passo 4 - Antifraude (opcional)
 
-O Pagar.me recomenda fortemente o uso de antifraude. Para começar a utilizar o antifraude basta acessar o dashboard e ativa-lo. Na sua implementação backend basta passar algumas informações a mais, como no exemplo:
+O Pagar.me recomenda fortemente o uso de antifraude. Para começar a utilizar o antifraude basta acessar o dashboard e ativá-lo. Para mais informações, visite o [guia sobre utilização do antifraude](/docs/guides/antifraud).
+
+Quando o antifraude está ativado, é necessário fornecer os dados do cliente que está realizando a transação para que a análise de fraude possa ser realizada:
 
 <pre>
-<code data-language="php">
-$transaction = new PagarMe_Transaction(array(
-	'amount' => 70000,
-	'card_number' => '4901720080344448', 
-	'card_holder_name' => "Jose da silva", 
-	'card_expiracy_month' => 11, 
-	'card_expiracy_year' => "13", 
-	'card_cvv' => 356, 
-	'customer' => array(
-		'name' => "Jose da Silva",  
-		'document_number' => "36433809847", 
-		'document_type' => 'cpf', 
-		'email' => "henrique@pagar.me", 
-		'address' => array(
-			'street' => 'Av. Brigadeiro Faria Lima', 
-			'city' => 'São Paulo', 
-			'state' => 'SP', 
-			'neighborhood' => 'Itaim bibi',
-			'zipcode' => '01452000', 
-			'street_number' => 2941, 
-		),
-		'phone' => array(
-			'type' => 'cellphone', 
-			'ddd' => 12, 
-			'number' => '981433533', 
-		),
-'sex' => 'M', 
-	'born_at' => '0')
+<code data-language="php">$transaction = new PagarMe_Transaction(array(
+    'amount' => 70000,
+    'card_number' => '4901720080344448', 
+    'card_holder_name' => "Jose da silva", 
+    'card_expiracy_month' => 11, 
+    'card_expiracy_year' => "13", 
+    'card_cvv' => 356, 
+    'customer' => array(
+        'name' => "Jose da Silva",  
+        'document_number' => "36433809847", 
+        'document_type' => 'cpf', 
+        'email' => "henrique@pagar.me", 
+        'address' => array(
+            'street' => 'Av. Brigadeiro Faria Lima', 
+            'city' => 'São Paulo', 
+            'state' => 'SP', 
+            'neighborhood' => 'Itaim bibi',
+            'zipcode' => '01452000', 
+            'street_number' => 2941, 
+        ),
+        'phone' => array(
+            'type' => 'cellphone', 
+            'ddd' => 12, 
+            'number' => '981433533', 
+        ),
+    'sex' => 'M', 
+    'born_at' => '0')
 ));
 
 $transaction->charge();
@@ -230,11 +222,10 @@ $transaction->charge();
 
 ## Customers (Clientes)
 
-Caso você faça uma transação e passe informações do seu cliente final como `street` e `sex` o Pagar.me irá criar um `Customer` para você. Para acessar esse customer use o método `getCustomer` de uma transaction.
+Caso os dados do cliente sejam fornecidos ao realizar uma transação, o Pagar.me se encarregará de criar um cliente (`customer`) automaticamente para você. Para acessar o cliente de uma transação:
 
 <pre>
-<code data-language="php">
-$customer = $transaction->getCustomer(); // Cliente
+<code data-language="php">$customer = $transaction->getCustomer(); // Cliente
 $customer->getName(); // Nome do cliente
 $customer->getAddresses(); // Array com os endereços dos clientes
 $customer->getPhones(); // Array com os telefones do cliente
@@ -243,14 +234,8 @@ $customer->getDocumentNumber(); // CPF/CNPJ do cliente
 </pre>
 
 Para uma lista completa de todas as informações de um customer clique aqui. Não se esqueça que para utilizar o antifraude também é necessária uma alteração no frontend. Basta adicionar esse método na sua página de checkout:
-<pre>
-<code data-language="javascript">
-PagarMe.enableAntifraudProfiling(); 
-</code>
-</pre>
 
 ## Planos/Assinaturas
-Essa seção vai te ensinar como criar e gerenciar transações recorrentes e one-click buy.
 
 ### Planos
 Um plano é um valor a ser cobrado periódicamente, ou seja a cada X dias será cobrado automaticamente um valor fixo do cartão de credito daquele cliente.
