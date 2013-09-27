@@ -66,10 +66,8 @@ Na página de pagamento, deverá haver um form para digitar os dados do cartão 
 Um exemplo de utilização da biblioteca do Pagar.me sua página, que deve ser inserido dentro de uma tag `script` dentro do `head`:
 
 <pre><code data-language="javascript">$(document).ready(function() { // o jQuery precisa estar carregado para obter os dados do form...
-    // insira sua encryption_key, disponível no seu dashboard
+    // insira sua encryption_key, disponível no dashboard
     PagarMe.encryption_key = "< sua encryption_key >";
-	// PagarMe.enableAntifraudProfiling(); //Adicione isso caso deseje utilizar o antifraude
-
 
     var form = $("#payment_form");
 
