@@ -24,7 +24,7 @@ Caso a transação seja realizada a partir do browser, é essencial o [uso do `c
 
 - `card_hash` - o `card_hash` gerado no browser do cliente usando a [biblioteca em Javascript](/docs/apis/javascript) do Pagar.me.
 
-Para transações com antifraude, é necessário fornecer os dados do cliente para a análise de fraude:
+Também é possível fornecer os dados do cliente que está realizando a transação, para futuras estatísticas. Para transações com antifraude, é obrigatóio fornecer os dados do cliente para a análise de fraude:
 
 - `customer[name]` - o nome completo ou razão social do cliente que está realizando a transação.
 - `customer[document_type]` - o tipo de documento que identifica o cliente. Opções: `cpf` e `cnpj`.
