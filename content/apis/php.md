@@ -51,8 +51,8 @@ $transaction->charge();
 Você também pode inicializar o objeto de transação com um array:
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
-	"amount" => "1000", // Valor em centavos - 1000 = R$ 10,00
-	"payment_method" => "credit_card", // Meio de pagamento
+    "amount" => "1000", // Valor em centavos - 1000 = R$ 10,00
+    "payment_method" => "credit_card", // Meio de pagamento
     "card_number" => "4901720080344448", // Número do cartão
     "card_holder_name" => "Jose da Silva", // Nome do proprietário do cartão
     "card_expiracy_month" => "10", // Mês de expiração do cartão
@@ -154,9 +154,9 @@ Quando um boleto for emitido, a transação será criada com o status `waiting_p
 Para configurar a URL de POSTback, basta acrescentar o parâmetro `postback_url` à transação:
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
-	"payment_method" => "boleto",
-	"amount" => 1000,
-	"postback_url" => "https://seusite.com/transactions_postback.php"
+    "payment_method" => "boleto",
+    "amount" => 1000,
+    "postback_url" => "https://seusite.com/transactions_postback.php"
 )); 
 </code></pre>
 
@@ -242,12 +242,11 @@ Um plano é um valor a ser cobrado periódicamente, ou seja a cada X dias será 
 Um plano pode ser criado pelo nosso [Dashboard](https://dashboard.pagar.me) ou pela nossa API. Para criar com a nossa API basta executar o seguinte código:
 
 <pre>
-<code data-language="php">
-$plan = new PagarMe_Plan(array(
-	"amount" => 3000, // Valor do plano em centavos
-	"trial_days" => 5, // Dias para o cliente testar o plano antes de ser cobrado
-	"days" => 30, //De quantos em quantos dias o cliente será cobrado
-	"name" => "Plano Basico", //Nome do plano
+<code data-language="php">$plan = new PagarMe_Plan(array(
+    "amount" => 3000, // Valor do plano em centavos
+    "trial_days" => 5, // Dias para o cliente testar o plano antes de ser cobrado
+    "days" => 30, //De quantos em quantos dias o cliente será cobrado
+    "name" => "Plano Basico", //Nome do plano
 ));
 
 $plan->create(); // Cria o plano!
@@ -262,17 +261,16 @@ Assinaturas representam clientes. Uma assinatura PODE OU NÃO ter um plano.
 #### Criando uma assinatura dentro de um plano
 Se você já tem um plano e quer adicionar um cliente a esse plano basta executar esse código:
 <pre>
-<code data-language="php">
-$subscription = new PagarMe_Subscription(array(
-		'plan_id' => '3', // ID do plano no qual esse cliente vai assinar
-		'customer_email' => "customer@pagar.me", // Email do cliente
-		'payment_method' => "credit_card", "Meio de cobrança - Cartão de crédito ou boleto"
-		'postback_url' => 'http://testepagarme.com', // URL de Postback. Você será notificado toda vez que um cliente for cobrado.
-		'card_number' => '4111111111111111', // Número do cartão do cliente
-		'card_holder_name' => "Jose da Silva", // Nome do cliente
-		'card_expiracy_month' => "12", // Mês de expiração do cartã
-		'card_expiracy_year' => '15', // Ano de expiração do cartão
-		'card_cvv' => "123" // Cvv
+<code data-language="php">$subscription = new PagarMe_Subscription(array(
+    'plan_id' => '3', // ID do plano no qual esse cliente vai assinar
+    'customer_email' => "customer@pagar.me", // Email do cliente
+    'payment_method' => "credit_card", "Meio de cobrança - Cartão de crédito ou boleto"
+    'postback_url' => 'http://testepagarme.com', // URL de Postback. Você será notificado toda vez que um cliente for cobrado.
+    'card_number' => '4111111111111111', // Número do cartão do cliente
+    'card_holder_name' => "Jose da Silva", // Nome do cliente
+    'card_expiracy_month' => "12", // Mês de expiração do cartã
+    'card_expiracy_year' => '15', // Ano de expiração do cartão
+    'card_cvv' => "123" // Cvv
 ));
 
 $subscription->create();
@@ -284,16 +282,15 @@ Com esse código o cliente será cobrado periodicamente.
 #### Criando uma assinatura sem um plano / One-click buy
 Para fazer o one-click buy ou uma transação recorrente variável basta criar uma assinatura e cobrar ela quando achar devido.
 <pre>
-<code data-language="php">
-$subscription = new PagarMe_Subscription(array(
-		'customer_email' => "customer@pagar.me", // Email do cliente
-		'payment_method' => "credit_card", "Meio de cobrança - Cartão de crédito ou boleto"
-		'postback_url' => 'http://testepagarme.com', // URL de Postback. Você será notificado toda vez que um cliente for cobrado.
-		'card_number' => '4111111111111111', // Número do cartão do cliente
-		'card_holder_name' => "Jose da Silva", // Nome do cliente
-		'card_expiracy_month' => "12", // Mês de expiração do cartã
-		'card_expiracy_year' => '15', // Ano de expiração do cartão
-		'card_cvv' => "123" // Cvv
+<code data-language="php">$subscription = new PagarMe_Subscription(array(
+    'customer_email' => "customer@pagar.me", // Email do cliente
+    'payment_method' => "credit_card", "Meio de cobrança - Cartão de crédito ou boleto"
+    'postback_url' => 'http://testepagarme.com', // URL de Postback. Você será notificado toda vez que um cliente for cobrado.
+    'card_number' => '4111111111111111', // Número do cartão do cliente
+    'card_holder_name' => "Jose da Silva", // Nome do cliente
+    'card_expiracy_month' => "12", // Mês de expiração do cartã
+    'card_expiracy_year' => '15', // Ano de expiração do cartão
+    'card_cvv' => "123" // Cvv
 ));
 $subscription->create();
 $subscription->charge(1000); //Cobra em centavos o cartão do cliente - 1000 = R$ 10,00
