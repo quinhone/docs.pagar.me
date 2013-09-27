@@ -8,11 +8,11 @@ title: Guia de integração em PHP
 
 ### Baixando a biblioteca 
 
-Para baixar a biblioteca execute esse comando para fazer um clone dela
+Para baixar a biblioteca, faça um `clone` usando o `git`:
 
 	git clone https://github.com/PagarMe/pagarme-php.git	
 
-Ou caso não tenha git instalado, baixe-a [clicando aqui](https://github.com/pagarme/pagarme-php/archive/master.zip).
+Ou caso não tenha o `git` instalado, baixe-a [clicando aqui](https://github.com/pagarme/pagarme-php/archive/master.zip).
 
 Após baixar a biblioteca, copie-a para a pasta do seu projeto.
 
