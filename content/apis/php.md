@@ -4,8 +4,6 @@ title: Guia de integração em PHP
 
 # Guia de integração em PHP
 
-Para iniciar sua integração backend vamos seguir 3 passos:
-
 ## Passo 1 - Instalação
 
 ### Baixando a biblioteca 
