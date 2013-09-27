@@ -50,7 +50,7 @@ O servidor retornará:
 
 <pre><code data-language="javascript">{
     "date_created": "2013-04-13T21:42:03.886Z",
-    "id": "5169d12b3da665f36e00000a",
+    "id": "1654",
     "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv71aNn1njtjcSrPXW7LF\nZlxajpBht/jq/+pl77eiZEVyNnP1nHlmkM4ufZmZQF7Q8seTUEBjR2PjoocCrFsP\nsu9+ITFnqAqlYmAVXKFf/gCCQfPDfhsavQXVauDAHXyl/69ooWIMUrYmCmxpZfSU\ne9E/4dl7sUg1ywllU8EpMKIn8Zd7blk49pNZ8I2FlkLRLk3yS9JXDIe8dAZLHoZP\nyT1c/5p1czLoB7Q9k5ic2A4ZM3cwCVkbIKC4wEmFuQCQx4tu1J96kvXhVLYoZlvV\n6+u8apFpFQVpTAK71IVYJbTQjHHty1qtZMImw42YM0kFz0GqhfQk3LKziBDX/FHq\nRQIDAQAB\n-----END PUBLIC KEY-----\n"
 }</code></pre>
 
@@ -88,7 +88,7 @@ O `card_hash` deve conter o `id` retornado pelo servidor ao requisitar a chave p
 
 O `id` retornado pelo servidor nesse exemplo foi `5169d12b3da665f36e00000a`. Logo, o `card_hash` é:
 
-	5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==
+	1654_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==
 
 Ele deve ser enviado para o seu servidor através de uma requisição HTTP ou HTTPS. O seu servidor se comunicará com a API do Pagar.me novamente para realizar a transação com os dados de cartão criptografados presentes no `card_hash`.
 
@@ -101,8 +101,8 @@ Uma vez com o `card_hash` em seu servidor, você deve utilizar nossas biblioteca
 Caso você deseja realizar a transação com o `card_hash` manualmente, temos um exemplo de utilização do `card_hash` com o cURL:
 
 <pre><code data-language="shell">curl 'https://api.pagar.me/1/transactions' \
-    -d 'api_key=Jy1V5bJcGf8q4gHepttt' \
-    -d 'card_hash=5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==' \
+    -d 'api_key=ak_test_KGXIjQ4GicOa2BLGZrDRTR5qNQxDWo' \
+    -d 'card_hash=1654_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==' \
     -d 'amount=1500' \
     -X POST 
 </code></pre>
@@ -110,14 +110,24 @@ Caso você deseja realizar a transação com o `card_hash` manualmente, temos um
 O servidor retornará:
 
 <pre><code data-language="javascript">{
-    "status": "approved",
-    "date_created": "2013-04-08T01:01:56.672Z",
-    "amount": "1500",
-    "installments": "4",
-    "id": "516217040ef16fc9fc00000f",
-    "live": true,
-    "costumer_name": "Usuario de Teste",
-    "card_last_digits": "4448"
+    "status": "paid",
+    "refuse_reason": null,
+    "date_created": "2013-09-27T14:54:28.000Z",
+    "amount": 1590,
+    "installments": 1,
+    "id": 1396,
+    "card_holder_name": "Usuario de Teste",
+    "card_last_digits": "4448",
+    "card_brand": "visa",
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "subscription_id": null,
+    "customer": null,
+    "address": null,
+    "phone": null
 }</code></pre>
 
 A transação foi realizada utilizando os dados de cartão de crédito presentes no `card_hash`.

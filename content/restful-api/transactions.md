@@ -20,7 +20,11 @@ Se a transação for com cartão de crédito, os dados do cartão devem ser envi
 - `card_expiracy_date` - mês (2 dígitos) seguido do ano (2 dígitos) de expiração.
 - `card_cvv` - o código de segurança do cartão.
 
-Caso o antifraude esteja habilitado, é necessário que os dados do cartão sejam enviados utilizando o `card_hash` gerado no browser do cliente. Para mais informações, consulte a [página de `card_hash`](/docs/restful-api/card-hash). Também é preciso enviar os dados do cliente para a análise de fraude:
+Caso a transação seja realizada a partir do browser, é essencial o [uso do `card_hash`](/docs/restful-api/card-hash) para proteger os dados do cartão de crédito. Dessa forma, só será necessário o envio de um único parâmetro que conterá todos os dados do cartão:
+
+- `card_hash` - o `card_hash` gerado no browser do cliente usando a [biblioteca em Javascript](/docs/apis/javascript) do Pagar.me.
+
+Também é possível fornecer os dados do cliente que está realizando a transação, para futuras estatísticas. Para transações com antifraude, é obrigatóio fornecer os dados do cliente para a análise de fraude:
 
 - `customer[name]` - o nome completo ou razão social do cliente que está realizando a transação.
 - `customer[document_type]` - o tipo de documento que identifica o cliente. Opções: `cpf` e `cnpj`.
