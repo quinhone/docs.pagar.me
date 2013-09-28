@@ -63,7 +63,6 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
 -d 'card_cvv=314' \
 -d 'customer[name]=Jose da Silva' \
 -d 'customer[document_number]=51472745531' \
--d 'customer[document_type]=cpf' \
 -d 'customer[email]=josedasilva@gmail.com' \
 -d 'customer[address][street]=Av. Brigadeiro Faria Lima' \
 -d 'customer[address][street_number]=2941' \
