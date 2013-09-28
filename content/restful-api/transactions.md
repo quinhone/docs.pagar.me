@@ -36,7 +36,7 @@ Também é possível fornecer os dados do cliente que está realizando a transa�
 - `customer[address][neighborhood]` - o bairro (rua, avenida) do cliente.
 - `customer[address][zipcode]` - o CEP do cliente, sem separadores.
 
-Os outros dados do endereço do cliente (rua, bairro, cidade e estado) são obtidos a partir do CEP fornecido.
+A cidade e o estado do cliente são obtidos a partir do CEP fornecido.
 
 - `customer[phone][ddd]` - o DDD do telefone do cliente.
 - `customer[phone][number]` - o número de telefone do cliente.
