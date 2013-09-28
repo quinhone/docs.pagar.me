@@ -24,23 +24,18 @@ Caso a transação seja realizada a partir do browser, é essencial o [uso do `c
 
 - `card_hash` - o `card_hash` gerado no browser do cliente usando a [biblioteca em Javascript](/docs/apis/javascript) do Pagar.me.
 
-Também é possível fornecer os dados do cliente que está realizando a transação, para futuras estatísticas. Para transações com antifraude, é obrigatóio fornecer os dados do cliente para a análise de fraude:
+Também é possível fornecer os dados do cliente que está realizando a transação, para futuras estatísticas. Para transações com antifraude, é obrigatório fornecer os dados do cliente para a análise de fraude:
 
 - `customer[name]` - o nome completo ou razão social do cliente que está realizando a transação.
-- `customer[document_type]` - o tipo de documento que identifica o cliente. Opções: `cpf` e `cnpj`.
-- `customer[document_number]` - o número do documento que identifica o cliente, sem separadores.
+- `customer[document_number]` - o número do documento que identifica o cliente (CPF ou CNPJ), sem separadores.
 - `customer[email]` - o email do cliente.
 
-- `customer[address][street]` - o logradouro (rua, avenida, etc) do cliente.
 - `customer[address][street_number]` - o número da casa/edifício do cliente.
-- `customer[address][street_2]` - o complemento (sala, número do apartamento, etc) do cliente.
-- `customer[address][neighborhood]` - o bairro do cliente.
-- `customer[address][city]` - a cidade do cliente.
-- `customer[address][state]` - o estado do cliente, abreviado em duas letras. Ex: `SP`.
+- `customer[address][complementary]` - o complemento (sala, número do apartamento, etc) do cliente.
 - `customer[address][zipcode]` - o CEP do cliente, sem separadores.
-- `customer[address][country]` - o país do cliente (Brasil).
 
-- `customer[phone][type]` - o tipo do telefone do cliente. Opções: `home`, `work`, `cellphone`.
+Os outros dados do endereço do cliente (rua, bairro, cidade e estado) são obtidos a partir do CEP fornecido.
+
 - `customer[phone][ddd]` - o DDD do telefone do cliente.
 - `customer[phone][number]` - o número de telefone do cliente.
 
