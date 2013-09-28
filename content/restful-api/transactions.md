@@ -30,8 +30,10 @@ Também é possível fornecer os dados do cliente que está realizando a transa�
 - `customer[document_number]` - o número do documento que identifica o cliente (CPF ou CNPJ), sem separadores.
 - `customer[email]` - o email do cliente.
 
+- `customer[address][street]` - o logradouro (rua, avenida) do cliente.
 - `customer[address][street_number]` - o número da casa/edifício do cliente.
 - `customer[address][complementary]` - o complemento (sala, número do apartamento, etc) do cliente.
+- `customer[address][neighborhood]` - o bairro (rua, avenida) do cliente.
 - `customer[address][zipcode]` - o CEP do cliente, sem separadores.
 
 Os outros dados do endereço do cliente (rua, bairro, cidade e estado) são obtidos a partir do CEP fornecido.
@@ -65,13 +67,9 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
 -d 'customer[email]=josedasilva@gmail.com' \
 -d 'customer[address][street]=Av. Brigadeiro Faria Lima' \
 -d 'customer[address][street_number]=2941' \
--d 'customer[address][street_2]=5 andar' \
+-d 'customer[address][complementary]=5 andar' \
 -d 'customer[address][neighborhood]=Itaim Bibi' \
--d 'customer[address][city]=Sao Paulo' \
--d 'customer[address][state]=SP' \
 -d 'customer[address][zipcode]=01452000' \
--d 'customer[address][country]=Brasil' \
--d 'customer[phone][type]=cellphone' \
 -d 'customer[phone][ddd]=11' \
 -d 'customer[phone][number]=981836482' \
 -d 'customer[sex]=M' \
@@ -117,7 +115,6 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
             "id": 12
         }],
         "phones": [{
-            "type": "cellphone",
             "ddi": "55",
             "ddd": "11",
             "number": "981836482",
@@ -136,7 +133,6 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
         "id": 12
     },
     "phone": {
-        "type": "cellphone",
         "ddi": "55",
         "ddd": "11",
         "number": "981836482",
@@ -194,7 +190,6 @@ Estorna uma transação.
             "id": 12
         }],
         "phones": [{
-            "type": "cellphone",
             "ddi": "55",
             "ddd": "11",
             "number": "981836482",
@@ -213,7 +208,6 @@ Estorna uma transação.
         "id": 12
     },
     "phone": {
-        "type": "cellphone",
         "ddi": "55",
         "ddd": "11",
         "number": "981836482",
