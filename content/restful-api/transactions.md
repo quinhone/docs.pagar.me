@@ -33,7 +33,7 @@ Também é possível fornecer os dados do cliente que está realizando a transa�
 - `customer[address][street]` - o logradouro (rua, avenida) do cliente.
 - `customer[address][street_number]` - o número da casa/edifício do cliente.
 - `customer[address][complementary]` - o complemento (sala, número do apartamento, etc) do cliente.
-- `customer[address][neighborhood]` - o bairro (rua, avenida) do cliente.
+- `customer[address][neighborhood]` - o bairro do cliente.
 - `customer[address][zipcode]` - o CEP do cliente, sem separadores.
 
 A cidade e o estado do cliente são obtidos a partir do CEP fornecido.
