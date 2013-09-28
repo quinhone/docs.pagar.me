@@ -105,7 +105,7 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
         "id": 10,
         "addresses": [{
             "street": "Av. Brigadeiro Faria Lima",
-            "street_2": "5 andar",
+            "complementary": "5 andar",
             "street_number": "2941",
             "neighborhood": "Itaimbibi",
             "city": "Sao Paulo",
@@ -123,7 +123,7 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
     },
     "address": {
         "street": "Av. Brigadeiro Faria Lima",
-        "street_2": "5 andar",
+        "complementary": "5 andar",
         "street_number": "2941",
         "neighborhood": "Itaimbibi",
         "city": "Sao Paulo",
@@ -180,7 +180,7 @@ Estorna uma transação.
         "id": 10,
         "addresses": [{
             "street": "Av. Brigadeiro Faria Lima",
-            "street_2": "5 andar",
+            "complementary": "5 andar",
             "street_number": "2941",
             "neighborhood": "Itaimbibi",
             "city": "Sao Paulo",
@@ -198,7 +198,7 @@ Estorna uma transação.
     },
     "address": {
         "street": "Av. Brigadeiro Faria Lima",
-        "street_2": "5 andar",
+        "complementary": "5 andar",
         "street_number": "2941",
         "neighborhood": "Itaimbibi",
         "city": "Sao Paulo",
@@ -255,7 +255,7 @@ Retorna uma transação já criada a partir do seu `id`.
         "id": 10,
         "addresses": [{
             "street": "Av. Brigadeiro Faria Lima",
-            "street_2": "5 andar",
+            "complementary": "5 andar",
             "street_number": "2941",
             "neighborhood": "Itaimbibi",
             "city": "Sao Paulo",
@@ -274,7 +274,7 @@ Retorna uma transação já criada a partir do seu `id`.
     },
     "address": {
         "street": "Av. Brigadeiro Faria Lima",
-        "street_2": "5 andar",
+        "complementary": "5 andar",
         "street_number": "2941",
         "neighborhood": "Itaimbibi",
         "city": "Sao Paulo",
