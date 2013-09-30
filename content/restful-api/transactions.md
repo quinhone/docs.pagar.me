@@ -24,23 +24,20 @@ Caso a transação seja realizada a partir do browser, é essencial o [uso do `c
 
 - `card_hash` - o `card_hash` gerado no browser do cliente usando a [biblioteca em Javascript](/docs/apis/javascript) do Pagar.me.
 
-Também é possível fornecer os dados do cliente que está realizando a transação, para futuras estatísticas. Para transações com antifraude, é obrigatóio fornecer os dados do cliente para a análise de fraude:
+Também é possível fornecer os dados do cliente que está realizando a transação, para futuras estatísticas. Para transações com antifraude, é obrigatório fornecer os dados do cliente para a análise de fraude:
 
 - `customer[name]` - o nome completo ou razão social do cliente que está realizando a transação.
-- `customer[document_type]` - o tipo de documento que identifica o cliente. Opções: `cpf` e `cnpj`.
-- `customer[document_number]` - o número do documento que identifica o cliente, sem separadores.
+- `customer[document_number]` - o número do documento que identifica o cliente (CPF ou CNPJ), sem separadores.
 - `customer[email]` - o email do cliente.
 
-- `customer[address][street]` - o logradouro (rua, avenida, etc) do cliente.
+- `customer[address][street]` - o logradouro (rua, avenida) do cliente.
 - `customer[address][street_number]` - o número da casa/edifício do cliente.
-- `customer[address][street_2]` - o complemento (sala, número do apartamento, etc) do cliente.
+- `customer[address][complementary]` - o complemento (sala, número do apartamento, etc) do cliente.
 - `customer[address][neighborhood]` - o bairro do cliente.
-- `customer[address][city]` - a cidade do cliente.
-- `customer[address][state]` - o estado do cliente, abreviado em duas letras. Ex: `SP`.
 - `customer[address][zipcode]` - o CEP do cliente, sem separadores.
-- `customer[address][country]` - o país do cliente (Brasil).
 
-- `customer[phone][type]` - o tipo do telefone do cliente. Opções: `home`, `work`, `cellphone`.
+A cidade e o estado do cliente são obtidos a partir do CEP fornecido.
+
 - `customer[phone][ddd]` - o DDD do telefone do cliente.
 - `customer[phone][number]` - o número de telefone do cliente.
 
@@ -66,17 +63,12 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
 -d 'card_cvv=314' \
 -d 'customer[name]=Jose da Silva' \
 -d 'customer[document_number]=51472745531' \
--d 'customer[document_type]=cpf' \
 -d 'customer[email]=josedasilva@gmail.com' \
 -d 'customer[address][street]=Av. Brigadeiro Faria Lima' \
 -d 'customer[address][street_number]=2941' \
--d 'customer[address][street_2]=5 andar' \
+-d 'customer[address][complementary]=5 andar' \
 -d 'customer[address][neighborhood]=Itaim Bibi' \
--d 'customer[address][city]=Sao Paulo' \
--d 'customer[address][state]=SP' \
 -d 'customer[address][zipcode]=01452000' \
--d 'customer[address][country]=Brasil' \
--d 'customer[phone][type]=cellphone' \
 -d 'customer[phone][ddd]=11' \
 -d 'customer[phone][number]=981836482' \
 -d 'customer[sex]=M' \
@@ -112,7 +104,7 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
         "id": 10,
         "addresses": [{
             "street": "Av. Brigadeiro Faria Lima",
-            "street_2": "5 andar",
+            "complementary": "5 andar",
             "street_number": "2941",
             "neighborhood": "Itaimbibi",
             "city": "Sao Paulo",
@@ -122,7 +114,6 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
             "id": 12
         }],
         "phones": [{
-            "type": "cellphone",
             "ddi": "55",
             "ddd": "11",
             "number": "981836482",
@@ -131,7 +122,7 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
     },
     "address": {
         "street": "Av. Brigadeiro Faria Lima",
-        "street_2": "5 andar",
+        "complementary": "5 andar",
         "street_number": "2941",
         "neighborhood": "Itaimbibi",
         "city": "Sao Paulo",
@@ -141,7 +132,6 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
         "id": 12
     },
     "phone": {
-        "type": "cellphone",
         "ddi": "55",
         "ddd": "11",
         "number": "981836482",
@@ -189,7 +179,7 @@ Estorna uma transação.
         "id": 10,
         "addresses": [{
             "street": "Av. Brigadeiro Faria Lima",
-            "street_2": "5 andar",
+            "complementary": "5 andar",
             "street_number": "2941",
             "neighborhood": "Itaimbibi",
             "city": "Sao Paulo",
@@ -199,7 +189,6 @@ Estorna uma transação.
             "id": 12
         }],
         "phones": [{
-            "type": "cellphone",
             "ddi": "55",
             "ddd": "11",
             "number": "981836482",
@@ -208,7 +197,7 @@ Estorna uma transação.
     },
     "address": {
         "street": "Av. Brigadeiro Faria Lima",
-        "street_2": "5 andar",
+        "complementary": "5 andar",
         "street_number": "2941",
         "neighborhood": "Itaimbibi",
         "city": "Sao Paulo",
@@ -218,7 +207,6 @@ Estorna uma transação.
         "id": 12
     },
     "phone": {
-        "type": "cellphone",
         "ddi": "55",
         "ddd": "11",
         "number": "981836482",
@@ -266,7 +254,7 @@ Retorna uma transação já criada a partir do seu `id`.
         "id": 10,
         "addresses": [{
             "street": "Av. Brigadeiro Faria Lima",
-            "street_2": "5 andar",
+            "complementary": "5 andar",
             "street_number": "2941",
             "neighborhood": "Itaimbibi",
             "city": "Sao Paulo",
@@ -285,7 +273,7 @@ Retorna uma transação já criada a partir do seu `id`.
     },
     "address": {
         "street": "Av. Brigadeiro Faria Lima",
-        "street_2": "5 andar",
+        "complementary": "5 andar",
         "street_number": "2941",
         "neighborhood": "Itaimbibi",
         "city": "Sao Paulo",
