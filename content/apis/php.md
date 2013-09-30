@@ -148,7 +148,7 @@ Consultar os dados de uma transação já realizada é possível com o seu `id`,
 </code></pre>
 
 ## Passo 3 - Postback {#postback}
-Quando um boleto for emitido, a transação será criada com o status `waiting_payment`. Para saber quando o boleto foi pago, é recomendado que se configure uma URL de Postback. O Pagar.me usará essa URL para notificar o seu servidor sobre mudanças de status da transação, inclusive quando o boleto foi pago.
+Quando um boleto for emitido, a transação será criada com o status `waiting_payment`. Para saber quando o boleto foi pago, é recomendado que se configure uma URL de Postback. O Pagar.me usará essa URL para notificar o seu servidor sobre mudanças de status da transação, inclusive quando o boleto foi pago. A URL de postback também é recomendada quando o antifraude está ligado.
 
 ### Configurando a URL de postback
 Para configurar a URL de POSTback, basta acrescentar o parâmetro `postback_url` à transação:
@@ -165,16 +165,11 @@ Quando a transação mudar de `status`, o Pagar.me irá fazer uma requisição a
 
 <pre>
 <code data-language="php">
-	//transactions_postback.php
-	$postback = new PagarMe_Postback(); // Carrega os dados do postback
-	$id = $postback->getId(); // Pega o ID da transação
-	if(postback->worked()) { // SE funcionou a sua requisição, ou seja foi aprovada/reprovada com sucesso
-		if($postback->getCurrentStatus() == 'paid') {
-			// Enviar produto para o cliente	
-		} elseif($postback->getCurrentStatus() == 'refunded')  {
-			// Avisar cliente que a transação dele foi cancelada
-		}
-	}
+
+	$id = $_GET['id'];
+	$current_status = $_GET['current_status'];
+	$old_status = $_GET['old_status'];
+
 </code>
 </pre>
 
@@ -195,23 +190,19 @@ Quando o antifraude está ativado, é necessário fornecer os dados do cliente q
     'customer' => array(
         'name' => "Jose da Silva",  
         'document_number' => "36433809847", 
-        'document_type' => 'cpf', 
         'email' => "henrique@pagar.me", 
         'address' => array(
             'street' => 'Av. Brigadeiro Faria Lima', 
-            'city' => 'São Paulo', 
-            'state' => 'SP', 
             'neighborhood' => 'Itaim bibi',
             'zipcode' => '01452000', 
             'street_number' => 2941, 
         ),
         'phone' => array(
-            'type' => 'cellphone', 
             'ddd' => 12, 
             'number' => '981433533', 
         ),
     'sex' => 'M', 
-    'born_at' => '0')
+    'born_at' => '1970-10-11')
 ));
 
 $transaction->charge();
