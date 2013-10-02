@@ -169,6 +169,13 @@ Quando a transação mudar de `status`, o Pagar.me irá fazer uma requisição a
 	$id = $_GET['id'];
 	$current_status = $_GET['current_status'];
 	$old_status = $_GET['old_status'];
+	$finger_print = $_GET['fingerprint'];
+
+	if(PagarMe::checkFingerprint($id, $finger_print)) {
+		if($current_status == 'paid') {
+			//Pago...
+		}
+	}
 
 </code>
 </pre>
