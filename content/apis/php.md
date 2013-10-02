@@ -174,6 +174,8 @@ Quando a transação mudar de `status`, o Pagar.me irá fazer uma requisição a
 	if(PagarMe::checkFingerprint($id, $finger_print)) {
 		if($current_status == 'paid') {
 			//Pago...
+		} else {
+			// Não funcionou...
 		}
 	}
 
