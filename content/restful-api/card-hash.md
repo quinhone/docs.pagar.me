@@ -86,7 +86,7 @@ O `card_hash` deve conter o `id` retornado pelo servidor ao requisitar a chave p
 
 	(id retornado pelo servidor)_(resultado da criptografia dos dados do cartão formatados em base64)
 
-O `id` retornado pelo servidor nesse exemplo foi `5169d12b3da665f36e00000a`. Logo, o `card_hash` é:
+O `id` retornado pelo servidor nesse exemplo foi `1654`. Logo, o `card_hash` é:
 
 	1654_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==
 
