@@ -4,6 +4,15 @@ title: Transações
 
 # Transações
 
+## Status de transações {#transactions-status}
+Existem 5 estados diferentes para uma transação: 
+
+- `processing` - a transação e está em processamento
+- `paid` - a transação foi aprovada no pela operatora de cartão ou o boleto foi pago.
+- `waiting_payment` - o boleto foi emitido porém ainda não foi pago
+- `refused` - a transação foi reprovada pela operadora do cartão ou pelo antifraude (ver `refuse_reason`) 
+- `refunded` - a transação foi estornada/cancelada 
+
 ## POST /transactions {#post-transaction}
 
 Cria uma transação
