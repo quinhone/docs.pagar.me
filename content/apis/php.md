@@ -168,9 +168,9 @@ Quando a transação mudar de `status`, o Pagar.me irá fazer uma requisição a
 $id = $_GET['id'];
 $current_status = $_GET['current_status'];
 $old_status = $_GET['old_status'];
-$finger_print = $_GET['fingerprint'];
+$fingerprint = $_GET['fingerprint'];
 
-if(PagarMe::checkFingerprint($id, $finger_print)) {
+if(PagarMe::validateFingerprint($id, $fingerprint)) {
 	if($current_status == 'paid') {
 		//Pago...
 	} else {
@@ -179,6 +179,8 @@ if(PagarMe::checkFingerprint($id, $finger_print)) {
 }
 </code>
 </pre>
+
+Para saber mais sobre cada `status`, visite a sessão de status nas [ referências de transações ]( /docs/restful-api/transactions/index.html#transactions-status )
 
 ## Passo 4 - Antifraude (opcional)
 
