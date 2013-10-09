@@ -47,6 +47,13 @@ $transaction->setCardCvv("314"); // Código de segurança
 $transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 
 $transaction->charge();
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 Você também pode inicializar o objeto de transação com um array:
@@ -63,6 +70,13 @@ Você também pode inicializar o objeto de transação com um array:
 ));
 
 $transaction->charge(); // Cobre! 
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 ... ou com um `card_hash` que foi recebido do browser do cliente:
@@ -72,6 +86,13 @@ $transaction->charge(); // Cobre!
 $transaction->setAmount(3000); // Valor da transação em centavos 3000 - R$ 30,00
 $transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 $transaction->charge();
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status "paid", ou seja, estará paga:
@@ -81,6 +102,19 @@ Independente da forma com que a transação foi realizada, se não ocorreu nenhu
 </code></pre>
 
 Lembre-se que transações via cartão de crédito normalmente são aprovadas rapidamente, porém para boletos é recomendado configurar uma URL de postback. Veja mais na seção de [postback](#postback)
+
+### Boletos
+Para realizar uma transação com boleto...
+
+<pre>
+<code data-language="php">
+$transaction = new PagarMe_Transaction(array(
+	'payment_method' => 'boleto',
+	'amount' => 1000, // 1000 = R$ 10,00
+	'postback_url' => 'http://seusite.com/postback.php'
+));
+
+Lembre-se de ler a seção de [postback](#postback) ser notificado quando o boleto foi pago.
 
 ### Tratando erros ao realizar uma transação
 
@@ -96,6 +130,13 @@ Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca
 ));
 
 $transaction->charge();
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 Resultado:
@@ -125,6 +166,26 @@ Dessa vez, o resultado será:
 <pre><code data-language="php">Invalid expiracy date month.</code></pre>
 
 O erro foi "resgatado" pelo `catch`. É nesse ponto onde o tratamento de erro específico deve ser feito (e respondido para o cliente).
+
+
+#### Lista de mensagens de erro
+
+-  `Número do cartão inválido.`
+
+- `Nome do portador do cartão inválido.`
+
+- `Nome do portador do cartão inválido`
+
+- `Mês de expiração do cartão inválido`
+
+- `Ano de expiração do cartão inválido`
+
+- `Cartão expirado`
+
+- `Código de segurança inválido`
+
+- `Faltam informações do cliente`
+
 
 ### Cancelando uma transação
 
