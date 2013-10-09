@@ -113,7 +113,8 @@ $transaction = new PagarMe_Transaction(array(
 	'amount' => 1000, // 1000 = R$ 10,00
 	'postback_url' => 'http://seusite.com/postback.php'
 ));
-
+</code>
+</pre>
 Lembre-se de ler a seção de [postback](#postback) ser notificado quando o boleto foi pago.
 
 ### Tratando erros ao realizar uma transação
