@@ -44,6 +44,7 @@ $transaction->setCardHolderName("Jose da Silva"); // Nome do proprietário do ca
 $transaction->setCardExpiracyMonth("10"); //Mes da data de expiração
 $transaction->setCardExpiracyYear("15"); // Ano da data de expiração
 $transaction->setCardCvv("314"); // Código de segurança
+$transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 
 $transaction->charge();
 </code></pre>
@@ -57,7 +58,8 @@ Você também pode inicializar o objeto de transação com um array:
     "card_holder_name" => "Jose da Silva", // Nome do proprietário do cartão
     "card_expiracy_month" => "10", // Mês de expiração do cartão
     "card_expiracy_year" => "15", // Ano de expiração do cartão
-    "card_cvv" => "314" // Código de segurança
+    "card_cvv" => "314", // Código de segurança
+	"installments" => 6 // Numero de parcelas - OPCIONAL
 ));
 
 $transaction->charge(); // Cobre! 
@@ -68,6 +70,7 @@ $transaction->charge(); // Cobre!
 <pre><code data-language="php">$transaction = new PagarMe_Transaction("5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==");
 
 $transaction->setAmount(3000); // Valor da transação em centavos 3000 - R$ 30,00
+$transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 $transaction->charge();
 </code></pre>
 
@@ -88,7 +91,8 @@ Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca
     "card_holder_name" => "Jose da Silva",
     "card_expiracy_month" => "13",
     "card_expiracy_year" => "15",
-    "card_cvv" => "314"
+    "card_cvv" => "314",
+	"installments" => 6, // Número de parcelas - OPCIONAL
 ));
 
 $transaction->charge();
