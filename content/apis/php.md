@@ -106,8 +106,7 @@ Lembre-se que transações via cartão de crédito normalmente são aprovadas ra
 ### Boletos
 Para realizar uma transação com boleto...
 
-<pre>
-<code data-language="php">
+<pre><code data-language="php">
 $transaction = new PagarMe_Transaction(array(
 	'payment_method' => 'boleto',
 	'amount' => 1000, // 1000 = R$ 10,00
@@ -156,9 +155,16 @@ Para tratar erros desse tipo, você pode inserir um `try` `catch` no código aci
 ));
 
 try {
-    $transaction->charge();
+	$transaction->charge();
+	if($transaction->getStatus() == 'paid') {
+		//Transação foi aprovada
+	} else if($transaction->getStatus() == 'refuse') {
+		//Transação foi recusada
+		// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+	}
+
 } catch(PagarMe_Exception $e) {
-    echo $e->getMessage();
+	echo $e->getMessage();
 }
 </code></pre>
 
