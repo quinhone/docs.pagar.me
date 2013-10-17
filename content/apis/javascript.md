@@ -13,7 +13,7 @@ O objetivo da biblioteca em Javascript é [gerar o `card_hash`](/docs/restful-ap
 Para importar a biblioteca em Javascript, adicione ao `head` de sua página HTML:
 
 <pre><code data-language="html"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://pagar.me/assets/pagarme.js"></script>
+<script src="https://pagar.me/assets/pagarme.js"></script>
 </code></pre>
 
 Dessa forma, tem-se uma página HTML similar a:
@@ -112,14 +112,6 @@ Quando o `form` é enviado, é criado um objeto com os dados de cartão de créd
 Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são removidos, já que o `card_hash` contém as informações de todos eles. A partir daí, o `form` é enviado para o seu servidor.
 
 ## Antifraude (Opcional)
-
-Caso deseje utilizar o antifraude adicione o seguinte código a sua pagina de pagamento:
-
-<pre>
-<code data-language='javascript'>
-	PagarMe.enableAntifraudProfiling();
-</code>
-</pre>
 
 No seu servidor, você deve utilizar o `card_hash` recebido para realizar a transação com o Pagar.me. Isso pode ser feito manualmente ou através de uma de nossas bibliotecas prontas. Agora vamos para a integração backend! Qual linguagem você usa?
 [Ruby](/docs/apis/ruby/), [Java](/docs/api/java/) ou [PHP](/docs/api/php).
