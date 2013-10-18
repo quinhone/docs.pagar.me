@@ -44,8 +44,16 @@ $transaction->setCardHolderName("Jose da Silva"); // Nome do proprietário do ca
 $transaction->setCardExpiracyMonth("10"); //Mes da data de expiração
 $transaction->setCardExpiracyYear("15"); // Ano da data de expiração
 $transaction->setCardCvv("314"); // Código de segurança
+$transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 
 $transaction->charge();
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 Você também pode inicializar o objeto de transação com um array:
@@ -57,18 +65,37 @@ Você também pode inicializar o objeto de transação com um array:
     "card_holder_name" => "Jose da Silva", // Nome do proprietário do cartão
     "card_expiracy_month" => "10", // Mês de expiração do cartão
     "card_expiracy_year" => "15", // Ano de expiração do cartão
-    "card_cvv" => "314" // Código de segurança
+    "card_cvv" => "314", // Código de segurança
+	"installments" => 6 // Numero de parcelas - OPCIONAL
 ));
 
 $transaction->charge(); // Cobre! 
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 ... ou com um `card_hash` que foi recebido do browser do cliente:
 
-<pre><code data-language="php">$transaction = new PagarMe_Transaction("5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==");
+<pre><code data-language="php">$transaction = new PagarMe_Transaction(
+array(
+'card_hash' => 
+"5169d12b3da665f36e00000a_FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww=="));
 
 $transaction->setAmount(3000); // Valor da transação em centavos 3000 - R$ 30,00
+$transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 $transaction->charge();
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status "paid", ou seja, estará paga:
@@ -79,6 +106,19 @@ Independente da forma com que a transação foi realizada, se não ocorreu nenhu
 
 Lembre-se que transações via cartão de crédito normalmente são aprovadas rapidamente, porém para boletos é recomendado configurar uma URL de postback. Veja mais na seção de [postback](#postback)
 
+### Boletos
+Para realizar uma transação com boleto...
+
+<pre><code data-language="php">
+$transaction = new PagarMe_Transaction(array(
+	'payment_method' => 'boleto',
+	'amount' => 1000, // 1000 = R$ 10,00
+	'postback_url' => 'http://seusite.com/postback.php'
+));
+</code>
+</pre>
+Lembre-se de ler a seção de [postback](#postback) ser notificado quando o boleto foi pago.
+
 ### Tratando erros ao realizar uma transação
 
 Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca irá dar `throw` em um erro do tipo `PagarMe_Exception`:
@@ -88,10 +128,18 @@ Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca
     "card_holder_name" => "Jose da Silva",
     "card_expiracy_month" => "13",
     "card_expiracy_year" => "15",
-    "card_cvv" => "314"
+    "card_cvv" => "314",
+	"installments" => 6, // Número de parcelas - OPCIONAL
 ));
 
 $transaction->charge();
+
+if($transaction->getStatus() == 'paid') {
+	//Transação foi aprovada
+} else if($transaction->getStatus() == 'refuse') {
+	//Transação foi recusada
+	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+}
 </code></pre>
 
 Resultado:
@@ -110,9 +158,16 @@ Para tratar erros desse tipo, você pode inserir um `try` `catch` no código aci
 ));
 
 try {
-    $transaction->charge();
+	$transaction->charge();
+	if($transaction->getStatus() == 'paid') {
+		//Transação foi aprovada
+	} else if($transaction->getStatus() == 'refuse') {
+		//Transação foi recusada
+		// $transaction->getRefuseReason() - mostra por que a transação foi recusada
+	}
+
 } catch(PagarMe_Exception $e) {
-    echo $e->getMessage();
+	echo $e->getMessage();
 }
 </code></pre>
 
@@ -121,6 +176,26 @@ Dessa vez, o resultado será:
 <pre><code data-language="php">Invalid expiracy date month.</code></pre>
 
 O erro foi "resgatado" pelo `catch`. É nesse ponto onde o tratamento de erro específico deve ser feito (e respondido para o cliente).
+
+
+#### Lista de mensagens de erro
+
+-  `Número do cartão inválido.`
+
+- `Nome do portador do cartão inválido.`
+
+- `Nome do portador do cartão inválido`
+
+- `Mês de expiração do cartão inválido`
+
+- `Ano de expiração do cartão inválido`
+
+- `Cartão expirado`
+
+- `Código de segurança inválido`
+
+- `Faltam informações do cliente`
+
 
 ### Cancelando uma transação
 
