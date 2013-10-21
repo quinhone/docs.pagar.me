@@ -115,6 +115,11 @@ $transaction = new PagarMe_Transaction(array(
 	'amount' => 1000, // 1000 = R$ 10,00
 	'postback_url' => 'http://seusite.com/postback.php'
 ));
+
+$transaction->charge();
+
+$transaction->getBoletoUrl(); // Retorna a URL do boleto gerado. PS: Em modo TESTE retorna SEMPRE `null`
+
 </code>
 </pre>
 Lembre-se de ler a seção de [postback](#postback) ser notificado quando o boleto foi pago.
