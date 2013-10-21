@@ -26,7 +26,7 @@ Quando o status da transação mudar, o Pagar.me fará uma requisição HTTP POS
 
 - `id` - id da transação (retornado ao realizá-la)
 - `old_status` - status da transação antes de ter mudado
-- `desired_status` - status desejado. Caso se deseja aprovar a transação, o status desejado seria `paid`. Caso se deseja cancelá-la, o status desejado seria `chargebacked`.
+- `desired_status` - status desejado. Caso se deseja aprovar a transação, o status desejado seria `paid`. Caso se deseja estorná-la, o status desejado seria `refunded`.
 - `current_status` - status atual (modificado) da transação.
 - `fingerprint` - validador da origem do POSTback. Veja mais na seção de [validação de origem](#validate-origin).
 
@@ -135,8 +135,8 @@ A transação será retornada com o status `paid`, porque o cancelamento ainda e
 
 - `id`: `1557`
 - `old_status`: `paid`
-- `desired_status`: `chargebacked`
-- `current_status`: `chargebacked`
+- `desired_status`: `refunded`
+- `current_status`: `refunded`
 
 A partir desses parâmetros, seu servidor pode realizar as ações/modificações necessárias, como por exemplo cancelar a conta de um cliente que teve a transação cancelada.
 
