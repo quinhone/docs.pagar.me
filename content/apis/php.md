@@ -155,7 +155,7 @@ Resultado:
 Para tratar erros desse tipo, você pode inserir um `try` `catch` no código acima para tratar erros do PagarMe (`PagarMeError`):
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
-    "card_number" => "4901720080344448",
+    "card_number" => "123123",
     "card_holder_name" => "Jose da Silva",
     "card_expiracy_month" => "13",
     "card_expiracy_year" => "15",
@@ -172,18 +172,36 @@ try {
 	}
 
 } catch(PagarMe_Exception $e) {
-	echo $e->getMessage();
+	echo $e->getMessage(); // Retorna todos os erros concatendaos.
 }
 </code></pre>
 
 Dessa vez, o resultado será:
 
-<pre><code data-language="php">Invalid expiracy date month.</code></pre>
+<pre><code data-language="php"> Mês de expiração inválido
+Número do cartão inválido
+</code></pre>
 
 O erro foi "resgatado" pelo `catch`. É nesse ponto onde o tratamento de erro específico deve ser feito (e respondido para o cliente).
 
+Caso deseje fazer uma validação mais avançada disponibilizamos mais detalhes sobre o erro no objeto `errors` da Exception...
+
+<pre><code data-language="php">
+try {
+	$transaction->charge();
+} catch(PagarMe_Exception $e) {
+	echo $e->getMessage(); // Retorna todos os erros concatendaos.
+	$errors = $e->getErrors();
+	$errors[0]->getMessage(); // Mensagem do primeiro erro. Ex: Número do cartão inválido
+	$errors[0]->getType(); // Tipo do erro - invalid_parameter, internal_error, action_forbidden 
+	$errors[0]->getParameterName(); // Parâmetro que teve um erro. Ex: 'card_holder_name', 'card_cvv', etc
+	
+}
+</code></pre>
 
 #### Lista de mensagens de erro
+
+Essas são algumas das mensagens de erro possíveis. Mas não são as únicas.
 
 -  `Número do cartão inválido.`
 
