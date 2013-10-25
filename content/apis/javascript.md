@@ -76,7 +76,7 @@ Um exemplo de utilização da biblioteca do Pagar.me sua página, que deve ser i
         // com os dados do form
         var creditCard = new PagarMe.creditCard();
 	creditCard.cardHolderName = $("#payment_form #card_holder_name").val();
-	creditCard.cardExpiracyMonth = $("#payment_form #card_exipracy_month").val();
+	creditCard.cardExpiracyMonth = $("#payment_form #card_expiracy_month").val();
 	creditCard.cardExpiracyYear = $("#payment_form #card_expiracy_year").val();
 	creditCard.cardNumber = $("#payment_form #card_number").val();
 	creditCard.cardCVV = $("#payment_form #card_cvv").val();
