@@ -1,12 +1,14 @@
 ---
-title: Guia de integração em Javascript
+title: Guia de integração em Javascript - Pagarme.js
 ---
 
-# Guia de integração em Javascript (Front-end)
+# Guia de integração em Javascript - Pagarme.js
 
-Para manter sua página de pagamento segura é necessário integrar com nossa biblioteca Javascript, que irá cuidar de toda segurança na sua página.
+Para manter sua página de pagamento segura é necessário integrar com nossa biblioteca Javascript, o `Pagarme.js`, que irá cuidar de toda segurança na sua página.
 
-O objetivo da biblioteca em Javascript é [gerar o `card_hash`](/docs/restful-api/card-hash), que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do Pagar.me, onde a transação será efetuada.
+O objetivo do `Pagarme.js` é [gerar o `card_hash`](/docs/restful-api/card-hash), que permitirá transmitir de forma segura os dados do cartão de crédito do browser do seu cliente para o seu servidor e, posteriormente, para o servidor do Pagar.me, onde a transação será efetuada.
+
+Se o seu site não utiliza `HTTPS`, o uso do `Pagarme.js` é obrigatório.
 
 ## Importando a biblioteca
 
@@ -110,8 +112,3 @@ Um exemplo de utilização da biblioteca do Pagar.me sua página, que deve ser i
 Quando o `form` é enviado, é criado um objeto com os dados de cartão de crédito presentes nele. Se forem encontrados erros de validação nos dados do `form`, eles são alertados.
 
 Caso não hajam erros de validação dos campos, o `card_hash` é gerado e inserido no `form`. Todos os outros campos com os dados de cartão são removidos, já que o `card_hash` contém as informações de todos eles. A partir daí, o `form` é enviado para o seu servidor.
-
-## Antifraude (Opcional)
-
-No seu servidor, você deve utilizar o `card_hash` recebido para realizar a transação com o Pagar.me. Isso pode ser feito manualmente ou através de uma de nossas bibliotecas prontas. Agora vamos para a integração backend! Qual linguagem você usa?
-[Ruby](/docs/apis/ruby/), [Java](/docs/api/java/) ou [PHP](/docs/api/php).
