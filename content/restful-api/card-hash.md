@@ -62,14 +62,14 @@ Nesse exemplo, usaremos os seguintes dados do cartão de crédito:
 
 - `card_number` - 4901720080344448
 - `card_holder_name` - Usuario de Teste
-- `card_expiracy_date` - 1213
+- `card_expiration_date` - 1213
 - `card_cvv` - 314
 
 Para mais informações sobre os parâmetros que contém os dados do cartão, [consulte a referência dos métodos da API](/docs/restful-api/methods).
 
 O conteúdo que deve ser encriptado pela chave retornada pelo servidor é uma string com os dados do cartão de crédito formatados como parâmetros HTTP:
 
-<pre><code data-language="html">card_number=4901720080344448&card_holder_name=Usuario de Teste&card_expiracy_date=1213&card_cvv=314</code></pre>
+<pre><code data-language="html">card_number=4901720080344448&card_holder_name=Usuario de Teste&card_expiration_date=1213&card_cvv=314</code></pre>
 
 Você deve, com essa string,
 

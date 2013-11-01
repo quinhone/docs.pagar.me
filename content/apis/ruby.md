@@ -31,8 +31,8 @@ Para realizar uma transação...
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new
 transaction.card_number = "4901720080344448"
 transaction.card_holder_name = "Jose da Silva"
-transaction.card_expiracy_month = "10"
-transaction.card_expiracy_year = "15"
+transaction.card_expiration_month = "10"
+transaction.card_expiration_year = "15"
 transaction.card_cvv = "314"
 transaction.amount = 1000
 
@@ -44,8 +44,8 @@ Você também pode inicializar o objeto de transação com um hash:
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new({
     :card_number => "4901720080344448",
     :card_holder_name => "Jose da Silva",
-    :card_expiracy_month => "10",
-    :card_expiracy_year => "15",
+    :card_expiration_month => "10",
+    :card_expiration_year => "15",
     :card_cvv => "314",
     :amount => 1000
 })
@@ -73,8 +73,8 @@ Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new
 transaction.card_number = "4901720080344448"
 transaction.card_holder_name = "Jose da Silva"
-transaction.card_expiracy_month = "13" # o mês 13 é maior do que 12 (dezembro) -> parâmetro inválido!
-transaction.card_expiracy_year = "15"
+transaction.card_expiration_month = "13" # o mês 13 é maior do que 12 (dezembro) -> parâmetro inválido!
+transaction.card_expiration_year = "15"
 transaction.card_cvv = "314"
 transaction.amount = 1000
 
@@ -83,7 +83,7 @@ transaction.charge
 
 Resultado:
 
-<pre><code data-language="ruby">PagarMe::TransactionError: PagarMe::TransactionError - Invalid expiracy date month.
+<pre><code data-language="ruby">PagarMe::TransactionError: PagarMe::TransactionError - Invalid expiration date month.
 	from /Users/pedrofranceschi/.rvm/gems/ruby-1.9.3-p0/gems/pagarme-0.11/lib/pagarme/transaction.rb:80:in `charge'
 	from (irb):13
 	from /Users/pedrofranceschi/.rvm/rubies/ruby-1.9.3-p0/bin/irb:16:in `main'
@@ -94,8 +94,8 @@ Para tratar erros desse tipo, você pode inserir um `begin` `rescue` no código 
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new
 transaction.card_number = "4901720080344448"
 transaction.card_holder_name = "Jose da Silva"
-transaction.card_expiracy_month = "13" # o mês 13 é maior do que 12 (dezembro) -> parâmetro inválido!
-transaction.card_expiracy_year = "15"
+transaction.card_expiration_month = "13" # o mês 13 é maior do que 12 (dezembro) -> parâmetro inválido!
+transaction.card_expiration_year = "15"
 transaction.card_cvv = "314"
 transaction.amount = 1000
 
@@ -108,7 +108,7 @@ end
 
 Dessa vez, o resultado será:
 
-<pre><code data-language="ruby">Erro na transação: PagarMe::TransactionError - Invalid expiracy date month.</code></pre>
+<pre><code data-language="ruby">Erro na transação: PagarMe::TransactionError - Invalid expiration date month.</code></pre>
 
 O erro foi "resgatado" pelo `rescue`. É nesse ponto onde o tratamento de erro específico deve ser feito (e respondido para o cliente).
 
@@ -135,7 +135,7 @@ Se a transação for cancelada com sucesso, seu status mudará para `:chargeback
 Consultar os dados de uma transação já realizada é possível com o seu `id`, que é retornado ao realizá-la:
 
 <pre><code data-language="ruby">> transaction = PagarMe::Transaction.find_by_id("517035290039fc26d9000024")
- => #<PagarMe::Transaction:0x007fa071371ef0 @statuses_codes={:local=>0, :paid=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
+ => #<PagarMe::Transaction:0x007fa071371ef0 @statuses_codes={:local=>0, :paid=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiration_year="", @card_expiration_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
 > transaction.id
  => "517035290039fc26d9000024"
 > transaction.status
@@ -150,7 +150,7 @@ Para buscar as últimas transações realizadas em sua conta:
 > transactions.length
  => 10
 > transactions[0]
- => #<PagarMe::Transaction:0x007fa0712bcfc8 @statuses_codes={:local=>0, :paid=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
+ => #<PagarMe::Transaction:0x007fa0712bcfc8 @statuses_codes={:local=>0, :paid=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-18T18:02:17.540Z", @id="517035290039fc26d9000024", @status=4, @live=true, @installments=1, @card_cvv="", @card_expiration_year="", @card_expiration_month="", @card_holder_name="Jose da Silva", @card_number="", @amount="1000">
 </code></pre>
 
 Também é possível especificar a página do resultado desejada, assim como o número de transações retornadas por página:
@@ -159,7 +159,7 @@ Também é possível especificar a página do resultado desejada, assim como o n
 > transactions.length
  => 5
 > transactions[0]
- => #<PagarMe::Transaction:0x007fa071252f38 @statuses_codes={:local=>0, :paid=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-16T02:39:03.412Z", @id="516cb9c70039fc26d9000010", @status=1, @live=true, @installments=5, @card_cvv="", @card_expiracy_year="", @card_expiracy_month="", @card_holder_name="Test User", @card_number="", @amount="10000">
+ => #<PagarMe::Transaction:0x007fa071252f38 @statuses_codes={:local=>0, :paid=>1, :processing=>2, :refused=>3, :chargebacked=>4}, @date_created="2013-04-16T02:39:03.412Z", @id="516cb9c70039fc26d9000010", @status=1, @live=true, @installments=5, @card_cvv="", @card_expiration_year="", @card_expiration_month="", @card_holder_name="Test User", @card_number="", @amount="10000">
 </code></pre>
 
 ## Aplicação Rails de exemplo

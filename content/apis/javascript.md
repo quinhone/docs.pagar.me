@@ -46,9 +46,9 @@ Na página de pagamento, deverá haver um form para digitar os dados do cartão 
             &lt;br/&gt;
             Nome (como escrito no cartão): &lt;input type=&quot;text&quot; id=&quot;card_holder_name&quot;/&gt;
             &lt;br/&gt;
-            Mês de expiração: &lt;input type=&quot;text&quot; id=&quot;card_expiracy_month&quot;/&gt;
+            Mês de expiração: &lt;input type=&quot;text&quot; id=&quot;card_expiration_month&quot;/&gt;
             &lt;br/&gt;
-            Ano de expiração: &lt;input type=&quot;text&quot; id=&quot;card_expiracy_year&quot;/&gt;
+            Ano de expiração: &lt;input type=&quot;text&quot; id=&quot;card_expiration_year&quot;/&gt;
             &lt;br/&gt;
             Código de segurança: &lt;input type=&quot;text&quot; id=&quot;card_cvv&quot;/&gt;
             &lt;br/&gt;
@@ -76,8 +76,8 @@ Um exemplo de utilização da biblioteca do Pagar.me sua página, que deve ser i
         // com os dados do form
         var creditCard = new PagarMe.creditCard();
 	creditCard.cardHolderName = $("#payment_form #card_holder_name").val();
-	creditCard.cardExpiracyMonth = $("#payment_form #card_exipracy_month").val();
-	creditCard.cardExpiracyYear = $("#payment_form #card_expiracy_year").val();
+	creditCard.cardexpirationMonth = $("#payment_form #card_exipracy_month").val();
+	creditCard.cardexpirationYear = $("#payment_form #card_expiration_year").val();
 	creditCard.cardNumber = $("#payment_form #card_number").val();
 	creditCard.cardCVV = $("#payment_form #card_cvv").val();
 

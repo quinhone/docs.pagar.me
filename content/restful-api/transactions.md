@@ -26,7 +26,7 @@ Se a transação for com cartão de crédito, os dados do cartão devem ser envi
 
 - `card_number` - o número do cartão de crédito, sem espaços ou separações.
 - `card_holder_name` - o nome do portador do cartão, como escrito nele.
-- `card_expiracy_date` - mês (2 dígitos) seguido do ano (2 dígitos) de expiração.
+- `card_expiration_date` - mês (2 dígitos) seguido do ano (2 dígitos) de expiração.
 - `card_cvv` - o código de segurança do cartão.
 
 Caso a transação seja realizada a partir do browser, é essencial o [uso do `card_hash`](/docs/restful-api/card-hash) para proteger os dados do cartão de crédito. Dessa forma, só será necessário o envio de um único parâmetro que conterá todos os dados do cartão:
@@ -68,7 +68,7 @@ Para receber notificações sobre a mudança de `status` dessa transação, é p
 -d 'amount=1590' \
 -d 'card_number=4901720080344448' \
 -d 'card_holder_name=Jose da Silva' \
--d 'card_expiracy_date=1215' \
+-d 'card_expiration_date=1215' \
 -d 'card_cvv=314' \
 -d 'customer[name]=Jose da Silva' \
 -d 'customer[document_number]=51472745531' \

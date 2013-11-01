@@ -63,7 +63,7 @@ Realizando a transação com o cURL:
 -d 'amount=1590' \
 -d 'card_number=4901720080344448' \
 -d 'card_holder_name=Jose da Silva' \
--d 'card_expiracy_date=1215' \
+-d 'card_expiration_date=1215' \
 -d 'card_cvv=314' \
 -d 'postback_url=http://www.meusite.com.br/transactions_postback'
 </code></pre>

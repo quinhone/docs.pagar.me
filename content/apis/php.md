@@ -41,8 +41,8 @@ $transaction->setAmount(1000); // Valor em centavos - 1000 = R$ 10,00
 $transaction->setPaymentMethod("credit_card"); // Meio de pagamento 
 $transaction->setCardNumber("4901720080344448"); // Número do cartão
 $transaction->setCardHolderName("Jose da Silva"); // Nome do proprietário do cartão
-$transaction->setCardExpiracyMonth("10"); //Mes da data de expiração
-$transaction->setCardExpiracyYear("15"); // Ano da data de expiração
+$transaction->setCardexpirationMonth("10"); //Mes da data de expiração
+$transaction->setCardexpirationYear("15"); // Ano da data de expiração
 $transaction->setCardCvv("314"); // Código de segurança
 $transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 
@@ -63,8 +63,8 @@ Você também pode inicializar o objeto de transação com um array:
     "payment_method" => "credit_card", // Meio de pagamento
     "card_number" => "4901720080344448", // Número do cartão
     "card_holder_name" => "Jose da Silva", // Nome do proprietário do cartão
-    "card_expiracy_month" => "10", // Mês de expiração do cartão
-    "card_expiracy_year" => "15", // Ano de expiração do cartão
+    "card_expiration_month" => "10", // Mês de expiração do cartão
+    "card_expiration_year" => "15", // Ano de expiração do cartão
     "card_cvv" => "314", // Código de segurança
 	"installments" => 6 // Numero de parcelas - OPCIONAL
 ));
@@ -131,8 +131,8 @@ Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
     "card_number" => "4901720080344448",
     "card_holder_name" => "Jose da Silva",
-    "card_expiracy_month" => "13",
-    "card_expiracy_year" => "15",
+    "card_expiration_month" => "13",
+    "card_expiration_year" => "15",
     "card_cvv" => "314",
 	"installments" => 6, // Número de parcelas - OPCIONAL
 ));
@@ -149,7 +149,7 @@ if($transaction->getStatus() == 'paid') {
 
 Resultado:
 
-<pre><code data-language="php">Fatal error: Uncaught exception 'PagarMe_Exception' with message 'Invalid expiracy month.' in /Users/henriquedubugras/Sites/Pagarme/Transaction.php:91 Stack trace: #0 /Users/henriquedubugras/Sites/test-rest.php(9): PagarMe_Transaction->charge()
+<pre><code data-language="php">Fatal error: Uncaught exception 'PagarMe_Exception' with message 'Invalid expiration month.' in /Users/henriquedubugras/Sites/Pagarme/Transaction.php:91 Stack trace: #0 /Users/henriquedubugras/Sites/test-rest.php(9): PagarMe_Transaction->charge()
 </code></pre>
 
 Para tratar erros desse tipo, você pode inserir um `try` `catch` no código acima para tratar erros do PagarMe (`PagarMeError`):
@@ -157,8 +157,8 @@ Para tratar erros desse tipo, você pode inserir um `try` `catch` no código aci
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
     "card_number" => "123123",
     "card_holder_name" => "Jose da Silva",
-    "card_expiracy_month" => "13",
-    "card_expiracy_year" => "15",
+    "card_expiration_month" => "13",
+    "card_expiration_year" => "15",
     "card_cvv" => "314"
 ));
 
@@ -291,8 +291,8 @@ Quando o antifraude está ativado, é necessário fornecer os dados do cliente q
     'amount' => 70000,
     'card_number' => '4901720080344448', 
     'card_holder_name' => "Jose da silva", 
-    'card_expiracy_month' => 11, 
-    'card_expiracy_year' => "13", 
+    'card_expiration_month' => 11, 
+    'card_expiration_year' => "13", 
     'card_cvv' => 356, 
     'customer' => array(
         'name' => "Jose da Silva",  
@@ -366,8 +366,8 @@ Se você já tem um plano e quer adicionar um cliente a esse plano basta executa
     'postback_url' => 'http://testepagarme.com', // URL de Postback. Você será notificado toda vez que um cliente for cobrado.
     'card_number' => '4111111111111111', // Número do cartão do cliente
     'card_holder_name' => "Jose da Silva", // Nome do cliente
-    'card_expiracy_month' => "12", // Mês de expiração do cartã
-    'card_expiracy_year' => '15', // Ano de expiração do cartão
+    'card_expiration_month' => "12", // Mês de expiração do cartã
+    'card_expiration_year' => '15', // Ano de expiração do cartão
     'card_cvv' => "123" // Cvv
 ));
 
@@ -386,8 +386,8 @@ Para fazer o one-click buy ou uma transação recorrente variável basta criar u
     'postback_url' => 'http://testepagarme.com', // URL de Postback. Você será notificado toda vez que um cliente for cobrado.
     'card_number' => '4111111111111111', // Número do cartão do cliente
     'card_holder_name' => "Jose da Silva", // Nome do cliente
-    'card_expiracy_month' => "12", // Mês de expiração do cartã
-    'card_expiracy_year' => '15', // Ano de expiração do cartão
+    'card_expiration_month' => "12", // Mês de expiração do cartã
+    'card_expiration_year' => '15', // Ano de expiração do cartão
     'card_cvv' => "123" // Cvv
 ));
 $subscription->create();

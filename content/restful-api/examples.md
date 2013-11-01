@@ -26,7 +26,7 @@ Uma transação exige os seguintes parâmetros
 
 - `card_number` - O número do cartão de crédito para a cobrança.
 - `card_holder_name` - O nome do portador do cartão, como escrito nele.
-- `card_expiracy_date` - O mês e os dois últimos digitos do ano de expiração do cartão, seguidos, sem separação.
+- `card_expiration_date` - O mês e os dois últimos digitos do ano de expiração do cartão, seguidos, sem separação.
 - `card_cvv` - O código de segurança do cartão.
 - `amount` - O valor a ser transacionado, com centavos, sem vírgulas ou pontos.
 
@@ -36,7 +36,7 @@ Realizando uma transação com o cURL:
     -d 'api_key=Jy1V5bJcGf8q4gHepttt' \
     -d 'card_number=4901720080344448' \
     -d 'card_holder_name=Usuario de Teste' \
-    -d 'card_expiracy_date=1213' \
+    -d 'card_expiration_date=1213' \
     -d 'card_cvv=314' \
     -d 'amount=1000' \
     -X POST 
