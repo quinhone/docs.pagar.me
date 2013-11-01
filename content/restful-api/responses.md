@@ -15,12 +15,27 @@ Respostas da API com o código HTTP diferente de 200 significam que a requisiç�
 Todas as respostas de erro do servidor apresentam, além do código de resposta HTTP diferente de 200, o seguinte formato:
 
 <pre><code data-language="javascript">{
-    "error": "Mensagem de erro",
-    "url": "/url/da/requisicao",
-    "method": "método da requisição ('get' ou 'post')"
+  "errors": [
+    {
+      "type": "tipo do erro",
+      "parameter_name": "nome do parâmetro inválido",
+      "message": "mensagem do erro"
+    }
+  ],
+  "url": "/transactions",
+  "method": "post"
 }</code></pre>
 
-Além da mensagem de erro retornada, os códigos de resposta HTTP representam:
+Um array de erros que ocorreram é retornado dentro de `errors`. Cada elemento apresenta um `type`, indicando o tipo do erro ocorrido; um `parameter_name`, indicando o nome do parâmetro que causou o erro (se houver algum); e uma `message`, sendo uma mensagem em português sobre o erro.
+
+### Tipos de erro
+
+- `invalid_parameter`: parâmetro inválido ou vazio. Verificar o `parameter_name` e `message` para saber o motivo do erro e qual parâmetro o causou.
+- `action_forbidden`: ação não permitida. Ocorre quando se tenta realizar algo inválido (como estornar uma transação já estornada).
+- `not_found`: objeto não encontrado. Ocorre quando se tenta realizar alguma operação em um objeto que não existe (como, por exemplo, ao tentar obter dados de uma transação com um `id` inválido).
+- `internal_error`: erro interno. Ocorre quando ocorre um erro interno no Pagar.me, nãa havendo relação com os dados enviados.
+
+Além dos tipos de erro, os códigos de resposta HTTP representam:
 
 ### HTTP 400
 
