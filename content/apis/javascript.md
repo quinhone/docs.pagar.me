@@ -24,7 +24,7 @@ Dessa forma, tem-se uma página HTML similar a:
     &lt;head&gt;
         &lt;!-- conte&uacute;do do seu head --&gt;
         &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;https://api.pagar.me/libraries/pagarme.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;https://pagar.me/assets/pagarme.js&quot;&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         <!-- conte&uacute;do da sua p&aacute;gina -->
@@ -40,7 +40,7 @@ Na página de pagamento, deverá haver um form para digitar os dados do cartão 
     &lt;head&gt;
         &lt;!-- conte&uacute;do do seu head --&gt;
         &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;
-        &lt;script src=&quot;https://api.pagar.me/libraries/pagarme.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;https://pagar.me/assets/pagarme.js&quot;&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;form id=&quot;payment_form&quot; action=&quot;https://seusite.com.br/transactions/new&quot; method=&quot;POST&quot;&gt;

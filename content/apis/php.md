@@ -41,8 +41,8 @@ $transaction->setAmount(1000); // Valor em centavos - 1000 = R$ 10,00
 $transaction->setPaymentMethod("credit_card"); // Meio de pagamento 
 $transaction->setCardNumber("4901720080344448"); // Número do cartão
 $transaction->setCardHolderName("Jose da Silva"); // Nome do proprietário do cartão
-$transaction->setCardexpirationMonth("10"); //Mes da data de expiração
-$transaction->setCardexpirationYear("15"); // Ano da data de expiração
+$transaction->setCardExpirationMonth("10"); //Mes da data de expiração
+$transaction->setCardExpirationYear("15"); // Ano da data de expiração
 $transaction->setCardCvv("314"); // Código de segurança
 $transaction->setInstallments(6); // Número de parcelas - OPCIONAL
 
