@@ -207,8 +207,6 @@ Essas são algumas das mensagens de erro possíveis. Mas não são as únicas.
 
 - `Nome do portador do cartão inválido.`
 
-- `Nome do portador do cartão inválido`
-
 - `Mês de expiração do cartão inválido`
 
 - `Ano de expiração do cartão inválido`
