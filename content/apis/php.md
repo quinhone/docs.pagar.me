@@ -32,6 +32,8 @@ Para usar a biblioteca, é necessário configurá-la com a chave de API disponí
 
 ## Passo 2 - Fazendo a primeira transação
 
+<strong> Se você não tiver um SSL instalado no seu servidor, utilize a nossa biblioteca de [javascript](http://pagar.me/docs/apis/javascript/) e inicialize uma transação com [card_hash](#card_hash) </strong>
+
 ### Realizando uma transação
 
 Para realizar uma transação simples...
@@ -79,7 +81,9 @@ if($transaction->getStatus() == 'paid') {
 }
 </code></pre>
 
-... ou com um `card_hash` que foi recebido do browser do cliente:
+### Realizando uma transação sem SSL {#card_hash}
+
+ Para realizar uma transação com um `card_hash` que foi recebido do browser do cliente:
 
 <pre><code data-language="php">$transaction = new PagarMe_Transaction(
 array(
@@ -104,10 +108,31 @@ Independente da forma com que a transação foi realizada, se não ocorreu nenhu
  => "paid"
 </code></pre>
 
-Lembre-se que transações via cartão de crédito normalmente são aprovadas rapidamente, porém para boletos é recomendado configurar uma URL de postback. Veja mais na seção de [postback](#postback)
+Lembre-se que algumas transações via cartão de crédito e transações via boleto demoram para ser aprovadas. Portanto, é recomendado configurar uma URL de postback.
+
+### Realizando uma transação com URL de postback
+É recomendado usar a URL de postback quando o antifraude está ativado, pois ele as vezes demora para responder. Para realiza-la...
+
+<pre>
+<code data-language="php">
+$transaction = new PagarMe_Transaction(array(
+    "amount" => "1000", // Valor em centavos - 1000 = R$ 10,00
+    "payment_method" => "credit_card", // Meio de pagamento
+    "card_number" => "4901720080344448", // Número do cartão
+    "card_holder_name" => "Jose da Silva", // Nome do proprietário do cartão
+    "card_expiration_month" => "10", // Mês de expiração do cartão
+    "card_expiration_year" => "15", // Ano de expiração do cartão
+    "card_cvv" => "314", // Código de segurança
+	"installments" => 6, // Numero de parcelas - OPCIONAL
+	"postback_url" => "www.seusite.com/postback.php"
+));
+
+$transaction->charge(); // Cobre! 
+</code>
+</pre>
 
 ### Boletos
-Para realizar uma transação com boleto...
+Para realizar uma transação com boleto é necessário passar uma URL de postback. Para realiza-la...
 
 <pre><code data-language="php">
 $transaction = new PagarMe_Transaction(array(

@@ -76,7 +76,7 @@ end
 </code></pre>
 
 ### Realizando uma transação sem SSL {#card_hash}
-... ou com um `card_hash` que foi recebido do browser do cliente:
+Para realizar uma transação com um `card_hash` que foi recebido do browser do cliente:
 
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new({
 :card_hash => 
@@ -87,18 +87,31 @@ transaction.amount = 1000 # Valor em centavos - 1000 = R$ 10.00
 transaction.charge
 </code></pre>
 
-<strong> Se você não tiver um SSL instalado no seu servidor, utilize a nossa biblioteca de [javascript](http://pagar.me/docs/apis/javascript/) e inicialize uma transação com card_hash </strong>
-
 Independente da forma com que a transação foi realizada, se não ocorreu nenhum erro, a transação passará a ter status `:paid`, ou seja, estará aprovada:
 
 <pre><code data-language="ruby">> transaction.status
  => :paid
 </code></pre>
 
-Lembre-se que transações via cartão de crédito normalmente são aprovadas rapidamente, porém para boletos é recomendado configurar uma URL de postback. Veja mais na seção de [postback](#postback)
+### Realizando uma transação com URL de postback
+É recomendado usar a URL de postback quando o antifraude está ativado, pois ele as vezes demora para responder. Para realiza-la...
+<pre>
+<code data-language="ruby">transaction = PagarMe::Transaction.new({
+    :card_number => "4901720080344448", # Número do cartão
+    :card_holder_name => "Jose da Silva", #Nome do portador do cartão
+    :card_expiration_month => "10", # Mês da data de expiração
+    :card_expiration_year => "15",  # Ano da data de expiração
+    :card_cvv => "314", # Código de segurança
+    :amount => 1000, # Valor em centavos - 1000 = R$ 10,00
+    :installments => 6 # Número de parcelas - OPCIONAL
+})
+
+transaction.charge
+</code>
+</pre>
 
 ### Boletos
-Para realizar uma transação com boleto...
+Para realizar uma transação com boleto é necessário passar uma URL de postback. Para realiza-la...
 
 <pre><code data-language="ruby">transaction = PagarMe::Transaction.new({
 :payment_method => 'boleto', # Forma de pagemtno 'boleto' ou 'credit_card'
