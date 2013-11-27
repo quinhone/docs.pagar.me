@@ -318,7 +318,7 @@ customer.document_number # CPF/CNPJ do cliente
 </code>
 </pre>
 
-Para uma lista completa de todas as informações de um customer clique aqui. Não se esqueça que para utilizar o antifraude também é necessária uma alteração no frontend. Basta adicionar esse método na sua página de checkout:
+Para uma lista completa de todas as informações de um customer [clique aqui](/docs/restful-api/customers/). Não se esqueça que para utilizar o antifraude também é necessária uma alteração no frontend. Basta adicionar esse método na sua página de checkout:
 
 ## Planos/Assinaturas
 
