@@ -40,7 +40,7 @@ Para realizar uma transação simples...
 $transaction->setAmount(1000); // Valor em centavos - 1000 = R$ 10,00
 $transaction->setPaymentMethod("credit_card"); // Meio de pagamento 
 $transaction->setCardNumber("4901720080344448"); // Número do cartão
-$transaction->setCardHolderName("Jose da Silva"); // Nome do proprietário do cartão
+$transaction->setCardHolderName("Jose da Silva"); // Nome do portador do cartão
 $transaction->setCardExpirationMonth("10"); //Mes da data de expiração
 $transaction->setCardExpirationYear("15"); // Ano da data de expiração
 $transaction->setCardCvv("314"); // Código de segurança
@@ -50,7 +50,7 @@ $transaction->charge();
 
 if($transaction->getStatus() == 'paid') {
 	//Transação foi aprovada
-} else if($transaction->getStatus() == 'refuse') {
+} else if($transaction->getStatus() == 'refused') {
 	//Transação foi recusada
 	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
 }
@@ -73,7 +73,7 @@ $transaction->charge(); // Cobre!
 
 if($transaction->getStatus() == 'paid') {
 	//Transação foi aprovada
-} else if($transaction->getStatus() == 'refuse') {
+} else if($transaction->getStatus() == 'refused') {
 	//Transação foi recusada
 	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
 }
@@ -92,7 +92,7 @@ $transaction->charge();
 
 if($transaction->getStatus() == 'paid') {
 	//Transação foi aprovada
-} else if($transaction->getStatus() == 'refuse') {
+} else if($transaction->getStatus() == 'refused') {
 	//Transação foi recusada
 	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
 }
@@ -141,7 +141,7 @@ $transaction->charge();
 
 if($transaction->getStatus() == 'paid') {
 	//Transação foi aprovada
-} else if($transaction->getStatus() == 'refuse') {
+} else if($transaction->getStatus() == 'refused') {
 	//Transação foi recusada
 	// $transaction->getRefuseReason() - mostra por que a transação foi recusada
 }
@@ -166,7 +166,7 @@ try {
 	$transaction->charge();
 	if($transaction->getStatus() == 'paid') {
 		//Transação foi aprovada
-	} else if($transaction->getStatus() == 'refuse') {
+	} else if($transaction->getStatus() == 'refused') {
 		//Transação foi recusada
 		// $transaction->getRefuseReason() - mostra por que a transação foi recusada
 	}
@@ -198,27 +198,6 @@ try {
 	
 }
 </code></pre>
-
-#### Lista de mensagens de erro
-
-Essas são algumas das mensagens de erro possíveis. Mas não são as únicas.
-
--  `Número do cartão inválido.`
-
-- `Nome do portador do cartão inválido.`
-
-- `Nome do portador do cartão inválido`
-
-- `Mês de expiração do cartão inválido`
-
-- `Ano de expiração do cartão inválido`
-
-- `Cartão expirado`
-
-- `Código de segurança inválido`
-
-- `Faltam informações do cliente`
-
 
 ### Cancelando uma transação
 
