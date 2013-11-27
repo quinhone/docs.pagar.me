@@ -14,7 +14,7 @@ A biblioteca está disponível no [GitHub](https://github.com/pagarme/pagarme-ne
 
 ### Instanciando o PagarMeProvider
 
-Antes de iniciar, é necessário instanciar a cclasse PagarMeProvider informando a chave da API e de criptografia
+Antes de iniciar, é necessário instanciar a cclasse `PagarMeProvider` informando a chave da API e de criptografia
 
 <pre><code data-language="csharp">PagarMeProvider pagarme = new PagarMeProvider("chave da api", "chave de criptografia");</code></pre>
 
@@ -32,9 +32,9 @@ Para realizar uma transação...
 Transaction transaction = pagarme.PostTransaction(transactionData);
 </code></pre>
 
-Se não ocorreu nenhum erro, o metodo PostTransaction retornara os dados da nova transação.
+Se não ocorreu nenhum erro, o metodo `PostTransaction` retornara os dados da nova transação.
 
-O CardHash deve ser adquirido pelo browser usando nossa biblioteca em javascript, [pagarme-js](/docs/apis/javascript/) ou usando a classe CreditCard:
+O CardHash deve ser adquirido pelo browser usando nossa biblioteca em javascript, [pagarme-js](/docs/apis/javascript/) ou usando a classe `CreditCard`:
 
 <pre><code data-language="csharp">CreditCard creditcard = new CreditCard();
 creditcard.CardholderName = "Jose da Silva";
@@ -78,7 +78,7 @@ Note que o suporte a condições ainda é pequeno e apenas os operadores `==`, `
 
 ### Boletos
 
-Para realizar uma transação com boleto, pasta setar o PaymentType para PaymentType.Boleto...
+Para realizar uma transação com boleto, pasta setar o `PaymentType` para `PaymentType.Boleto`...
 
 <pre><code data-language="csharp">TransactionSetup transactionData = new TransactionSetup
 {
@@ -216,7 +216,7 @@ subscription.Charge(10.99m); // Cobra em reais o cartão do cliente
 
 ### Tratando erros ao realizar uma operação na API
 
-Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca irá disparar uma PagarMeException contendo informações sobre o erro
+Caso um dos parâmetros seja inválido ao realizar uma transação, a biblioteca irá disparar uma `PagarMeException` contendo informações sobre o erro
 
 #### Lista de mensagens de erro
 
