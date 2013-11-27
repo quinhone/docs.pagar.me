@@ -285,7 +285,7 @@ Quando o antifraude está ativado, é necessário fornecer os dados do cliente q
         ),
         'phone' => array(
             'ddd' => 12, 
-            'number' => '981433533', 
+            'number' => '981234567', 
         ),
     'sex' => 'M', 
     'born_at' => '1970-10-11')
