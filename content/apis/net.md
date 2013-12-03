@@ -8,7 +8,7 @@ title: Guia de integração em .NET
 
 A biblioteca está disponível no [GitHub](https://github.com/pagarme/pagarme-net) ou pelo NuGet:
 
-	PM> Install-Package Pagarme
+	PM> Install-Package Pagar.me
 
 ## Utilizando a biblioteca
 
