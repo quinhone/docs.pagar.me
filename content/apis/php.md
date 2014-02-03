@@ -123,8 +123,8 @@ $transaction = new PagarMe_Transaction(array(
     "card_expiration_month" => "10", // Mês de expiração do cartão
     "card_expiration_year" => "15", // Ano de expiração do cartão
     "card_cvv" => "314", // Código de segurança
-	"installments" => 6, // Numero de parcelas - OPCIONAL
-	"postback_url" => "www.seusite.com/postback.php"
+    "installments" => 6, // Numero de parcelas - OPCIONAL
+    "postback_url" => "www.seusite.com/postback.php"
 ));
 
 $transaction->charge(); // Cobre! 
@@ -134,11 +134,10 @@ $transaction->charge(); // Cobre!
 ### Boletos
 Para realizar uma transação com boleto é necessário passar uma URL de postback. Para realiza-la...
 
-<pre><code data-language="php">
-$transaction = new PagarMe_Transaction(array(
+<pre><code data-language="php">$transaction = new PagarMe_Transaction(array(
 	'payment_method' => 'boleto',
 	'amount' => 1000, // 1000 = R$ 10,00
-	'postback_url' => 'http://seusite.com/postback.php'
+    'postback_url' => 'http://seusite.com/postback.php'
 ));
 
 $transaction->charge();
@@ -397,6 +396,17 @@ Para fazer o one-click buy ou uma transação recorrente variável basta criar u
 $subscription->create();
 $subscription->charge(1000); //Cobra em centavos o cartão do cliente - 1000 = R$ 10,00
 </code>
+</pre>
+
+#### Cancelando uma assinatura
+Para cancelar uma assinatura basta busca-la e usar o metodo "cancel"
+<pre>
+<code data-language="php"> $subscription = PagarMe_Subscription::findById(123);
+$subscription->cancel(); // Cancel
+
+if($subscription->getStatus() == 'canceled') {
+	// cancelado
+}
 </pre>
 
 
