@@ -103,6 +103,7 @@ Independente da forma com que a transação foi realizada, se não ocorreu nenhu
     :card_expiration_year => "15",  # Ano da data de expiração
     :card_cvv => "314", # Código de segurança
     :amount => 1000, # Valor em centavos - 1000 = R$ 10,00
+	:postback_url => 'https://seusite.com/payments_postback',
     :installments => 6 # Número de parcelas - OPCIONAL
 })
 
