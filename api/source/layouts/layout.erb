@@ -1,228 +1,102 @@
+<%#
+Copyright 2008-2013 Concur Technologies, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may
+not use this file except in compliance with the License. You may obtain
+a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+%>
+<% language_tabs = current_page.data.language_tabs %>
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
-    
-    <!-- Always force latest IE rendering engine or request Chrome Frame -->
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    
-    <!-- Use title if it's in the page YAML frontmatter -->
-    <title><%= current_page.data.title || "The Middleman" %></title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title><%= current_page.data.title || "API Documentation" %></title>
+
+    <%= stylesheet_link_tag :screen, media: :screen %>
+    <%= stylesheet_link_tag :print, media: :print %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <%= stylesheet_link_tag "highlight/zenburn", "bootstrap" %>
-    <%= javascript_include_tag "all", "highlight" %>
+    <% if current_page.data.search %>
+      <%= javascript_include_tag  "all" %>
+    <% else %>
+      <%= javascript_include_tag  "all_nosearch" %>
+    <% end %>
+
+    <% if language_tabs %>
+      <script>
+        $(function() {
+          setupLanguages(<%= language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>);
+        });
+      </script>
+    <% end %>
   </head>
-  
-  <body>
- <!-- Fixed navbar -->
-    <div id="navbar-top" class="navbar navbar-default navbar-fixed-top row" role="navigation">
-        <div class="cotai"  >
-            <div class="navbar-header right" >
 
-            <a class="navbar-brand" href="/"><img src="images/logo-pagarme.png" class="logotipo-pagarme"></a>
-            <div class="container-fluid">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="bs-example-js-navbar-collapse">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-           </div><!-- /.container-fluid -->
-           </div>
+  <body class="<%= page_classes %>">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <%= image_tag('navbar.png') %>
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <%= image_tag "logo.png" %>
+      <% if language_tabs %>
+        <div class="lang-selector">
+          <% language_tabs.each do |lang| %>
+            <% if lang.is_a? Hash %>
+              <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+            <% else %>
+              <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+            <% end %>
+          <% end %>
         </div>
-
-
+      <% end %>
+      <% if current_page.data.search %>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <% end %>
+      <div id="toc">
+      </div>
+      <% if current_page.data.toc_footers %>
+        <ul class="toc-footer">
+          <% current_page.data.toc_footers.each do |footer| %>
+            <li><%= footer %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
-    <!-- Fixed navbar -->   
-
-    <!-- sidebar-module -->   
-    <div class="sidebar-module navbar navbar-fixed-top col-xs-12 col-sm-2 col-md-2 col-lg-2">
-
-      <div class="panel-group" id="accordion">
-
-
-        <!-- TAB  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-              <h4 class="panel-title">Intro</h4>
-            </a>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <%= yield %>
+        <% current_page.data.includes && current_page.data.includes.each do |include| %>
+          <%= partial "includes/#{include}" %>
+        <% end %>
+      </div>
+      <div class="dark-box">
+        <% if language_tabs %>
+          <div class="lang-selector">
+            <% language_tabs.each do |lang| %>
+              <% if lang.is_a? Hash %>
+                <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+              <% else %>
+                <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+              <% end %>
+            <% end %>
           </div>
-          <div id="collapse1" class="panel-collapse collapse">
-            <ul class="panel-body">
-              <li><a href="#">Introdução</a></li>
-              <li><a href="#">HowTo's e exemplos</a></li>
-              <li><a href="#">Helper Libraries</a></li>
-              <li><a href="#">TwiML Reference</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- TAB  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h4 class="panel-title">HowTo's and Examples</h4></a>
-          </div>
-          <div id="collapse2" class="panel-collapse collapse ">
-            <ul class="panel-body">
-              <li><a href="#">Introdução</a></li>
-              <li><a href="#">HowTo's e exemplos</a></li>
-              <li><a href="#">Helper Libraries</a></li>
-              <li><a href="#">TwiML Reference</a></li>
-            </ul>
-          </div>
-        </div>
-
-
-        <!-- TAB  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h4 class="panel-title">Helper Libraries</h4></a>
-          </div>
-          <div id="collapse3" class="panel-collapse collapse ">
-            <ul class="panel-body">
-              <li><a href="#">Introdução</a></li>
-              <li><a href="#">HowTo's e exemplos</a></li>
-              <li><a href="#">Helper Libraries</a></li>
-              <li><a href="#">TwiML Reference</a></li>
-            </ul>
-          </div>
-        </div>
-
-
-
-        <!-- TAB  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse4"><h4 class="panel-title">TwiML Reference</h4></a>
-          </div>
-          <div id="collapse4" class="panel-collapse collapse ">
-            <ul class="panel-body">
-              <li><a href="#">Introdução</a></li>
-              <li><a href="#">HowTo's e exemplos</a></li>
-              <li><a href="#">Helper Libraries</a></li>
-              <li><a href="#">TwiML Reference</a></li>
-            </ul>
-          </div>
-        </div>
-
-
-
-
-        <!-- TAB  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse5"><h4 class="panel-title">REST API Reference</h4></a>
-          </div>
-          <div id="collapse5" class="panel-collapse collapse ">
-            <ul class="panel-body">
-              <li><a href="#">Introdução</a></li>
-              <li><a href="#">HowTo's e exemplos</a></li>
-              <li><a href="#">Helper Libraries</a></li>
-              <li><a href="#">TwiML Reference</a></li>
-            </ul>
-          </div>
-        </div>
-
-
-
-
-        <!-- TAB  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a  data-toggle="collapse" data-parent="#accordion" href="#collapse6"><h4 class="panel-title">SIP Reference</h4></a>
-          </div>
-          <div id="collapse6" class="panel-collapse collapse ">
-            <ul class="panel-body">
-              <li><a href="#">Introdução</a></li>
-              <li><a href="#">HowTo's e exemplos</a></li>
-              <li><a href="#">Helper Libraries</a></li>
-              <li><a href="#">TwiML Reference</a></li>
-            </ul>
-          </div>
-        </div>
-
-
+        <% end %>
       </div>
     </div>
-    <!-- /sidebar-module -->  
-
-
-
-   <div class="content-articles col-xs-12 col-sm-12 col-md-10 col-lg-10 pull-right">
-
-
-
-
-
-      <div class="code col-xs-12 col-sm-12 col-md-6 col-lg-6 code-examples">
- 
-        <ul id="language-nav" class="list-inline fixed-top pull-right">
-          <li><a class="active" href="#">CURL</a></li>
-          <li><a href="#">RUBY</a></li>
-          <li><a href="#">PYTHON</a></li>
-          <li><a href="#">PHP</a></li>
-          <li><a href="#">JAVA</a></li>
-          <li><a href="#">NODE</a></li>
-       </ul>
-
-
-  <h2>Code</h2>
-  <pre><code class="hljs js">var timeouts = [];
-    function errorMsg() {
-    console.error("Something must be wrong with the 
-    connection ...");
-  }
-
-  cluster.on('fork', function(worker) {
-    timeouts[worker.id] = setTimeout(errorMsg, 2000);
-  });
-  cluster.on('listening', function(worker, address) {
-    clearTimeout(timeouts[worker.id]);
-  });
-  cluster.on('exit', function(worker, code, signal) {
-    clearTimeout(timeouts[worker.id]);
-    errorMsg();
-  });
-
-
-  var timeouts = [];
-    function errorMsg() {
-    console.error("Something must be wrong with the 
-    connection ...");
-  }
-
-  });
-
-  </code>
-  </pre>
-
-
-
-       
-      </div>
-
-
-
-
-
-      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 code-article">
-        <h2 class="">Api References</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at magna porta purus interdum dignissim id cursus augue. Sed eu bibendum mauris. Donec nec gravida sapien. Suspendisse potenti. Nunc luctus placerat nibh, quis molestie dui ultrices et. Nunc convallis, dolor at iaculis fermentum, ipsum mi fermentum enim, in semper augue sapien eget neque. Donec interdum a justo auctor tincidunt. Curabitur nulla ipsum, malesuada non nibh eget, suscipit ullamcorper ipsum. In auctor orci sed vestibulum porttitor. Vestibulum urna dolor, tristique a facilisis sit amet, varius eu metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras eleifend ut diam facilisis vestibulum.</p>
-
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at magna porta purus interdum dignissim id cursus augue. Sed eu bibendum mauris. Donec nec gravida sapien. Suspendisse potenti. Nunc luctus placerat nibh, quis molestie dui ultrices et. Nunc convallis, dolor at iaculis fermentum, ipsum mi fermentum enim, in semper augue sapien eget neque. Donec interdum a justo auctor tincidunt. Curabitur nulla ipsum, malesuada non nibh eget, suscipit ullamcorper ipsum. In auctor orci sed vestibulum porttitor. Vestibulum urna dolor, tristique a facilisis sit amet, varius eu metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras eleifend ut diam facilisis vestibulum.</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at magna porta purus interdum dignissim id cursus augue. Sed eu bibendum mauris. Donec nec gravida sapien. Suspendisse potenti. Nunc luctus placerat nibh, quis molestie dui ultrices et. Nunc convallis, dolor at iaculis fermentum, ipsum mi fermentum enim, in semper augue sapien eget neque. Donec interdum a justo auctor tincidunt. Curabitur nulla ipsum, malesuada non nibh eget, suscipit ullamcorper ipsum. In auctor orci sed vestibulum porttitor. Vestibulum urna dolor, tristique a facilisis sit amet, varius eu metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras eleifend ut diam facilisis vestibulum.</p>
-
-        <a>Comece a <br/>programar já!</a>
-     
-      </div>
-
-    </div>
-
-
-  
-    <%= yield %>
   </body>
 </html>
