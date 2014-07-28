@@ -73,6 +73,8 @@ curl -X POST "https://api.pagar.me/1/transactions/{TOKEN}/capture"
 ```ruby
 require 'pagarme'
 
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
 transaction = PagarMe::Transaction.find_by_id("{TOKEN}")
 transaction.capture(1000)
 ```
@@ -81,10 +83,16 @@ transaction.capture(1000)
 <?php
 	require("pagarme-php/Pagarme.php");
 
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
 	$transaction = PagarMe_Transaction::findById("{TOKEN}");
 	$transaction->capture(1000);
 ?>
 ```
+
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu
+> [Dashboard](https://dashboard.pagar.me/).
 
 Com o `token` em mãos no seu servidor, agora basta realizar a captura da
 transação.
