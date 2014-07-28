@@ -48,7 +48,7 @@ Quando a transação for concluída, um `token` referente a transação realizad
 será adicionado ao `form`. O `form`, então, será submetido para o seu servidor,
 onde a transação será capturada.
 
-### Tags do formulário
+### Configurações do Checkout
 
 Tag | Padrão | Descrição
 --- | ------ | ---------
@@ -94,8 +94,15 @@ transaction.capture(1000)
 > sua chave de API disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
-Com o `token` em mãos no seu servidor, agora basta realizar a captura da
-transação.
+Com o `token` em mãos, agora basta realizar a captura da transação no seu
+servidor. Por motivos de segurança, você precisará fornecer novamente o valor a
+ser capturado.
 
-Por motivos de segurança, você precisará fornecer novamente o valor a ser
-capturado.
+Após realizar a captura de uma transação de cartão de crédito, a transação
+ficará com status `paid` e o cartão do usuário foi debitado com sucesso.
+
+Caso a transação seja um boleto bancário, a transação terá status
+`waiting_payment` e a URL do boleto bancário para pagamento está disponível na
+variável `boleto_url`.
+
+<aside class="notice">Após a finalização da transação em sua página, você tem 05 minutos para capturá-la no seu servidor. Após esse período, a transação será recusada pelo motivo `capture_timeout`.</aside>
