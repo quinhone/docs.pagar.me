@@ -99,10 +99,12 @@ servidor. Por motivos de segurança, você precisará fornecer novamente o valor
 ser capturado.
 
 Após realizar a captura de uma transação de cartão de crédito, a transação
-ficará com status `paid` e o cartão do usuário foi debitado com sucesso.
+terá status `paid`, indicando que o cartão do usuário foi debitado com sucesso.
 
 Caso a transação seja um boleto bancário, a transação terá status
-`waiting_payment` e a URL do boleto bancário para pagamento está disponível na
+`waiting_payment` e a URL do boleto bancário para pagamento estará disponível na
 variável `boleto_url`.
 
-<aside class="notice">Após a finalização da transação em sua página, você terá 05 minutos para capturá-la no seu servidor. Após esse período, a transação será recusada pelo motivo `capture_timeout`.</aside>
+<aside class="notice">Após a finalização da transação em sua página, você terá
+05 minutos para capturá-la no seu servidor. Após esse período, a transação será
+recusada pelo motivo `capture_timeout`.</aside>
