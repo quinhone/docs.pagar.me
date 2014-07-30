@@ -1,5 +1,5 @@
 ---
-title: Checkout
+title: Integração via Checkout
 
 language_tabs:
   - shell
@@ -9,7 +9,7 @@ language_tabs:
 search: true
 ---
 
-# Checkout
+# Integração via Checkout
 
 O Checkout é a forma mais simples de realizar a integração com o Pagar.me.
 
