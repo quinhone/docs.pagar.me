@@ -70,15 +70,15 @@ html, body {
   @include transition(left ease-in-out 0.3s);
   overflow-y: auto;
   overflow-x: hidden;
-  position: fixed;
+  position: relative;
   z-index: 30;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  // top: 0;
+  // bottom: 0;
   width: $nav-width;
   background-color: $nav-bg;
   font-size: 13px;
   font-weight: bold;
+  float: left;
 
   // language selector for mobile devices
   .lang-selector {
@@ -92,7 +92,7 @@ html, body {
   // This is the logo at the top of the ToC
   &>img {
     display: block;
-    // margin-top: 10px;
+    margin-top: 20px;
     margin-left: 15px;
   }
 
@@ -122,7 +122,7 @@ html, body {
   }
 
   img+.tocify {
-    margin-top: $logo-margin;
+    // margin-top: $logo-margin;
   }
 
   .search-results {
@@ -267,6 +267,22 @@ html, body {
 ////////////////////////////////////////////////////////////////////////////////
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
 ////////////////////////////////////////////////////////////////////////////////
+.container{
+  width: 990px;
+  margin: 0px auto;
+  background-color: $nav-bg;
+  @include border-top-radius(5px);
+  @include border-bottom-radius(5px);
+  overflow: hidden;
+  &.header{
+    background-color: transparent;
+    margin: 10px auto 0 auto;
+    img{
+      margin: 10px;
+    }
+  }
+}
+
 
 .page-wrapper {
   margin-left: $nav-width;
@@ -281,7 +297,7 @@ html, body {
   // I know, it's hackish, but it's the simplist way to make the left
   // half of the content always this background color.
   .dark-box {
-    width: $examples-width;
+    // width: $examples-width;
     background-color: $examples-bg;
     position: absolute;
     right: 0;
@@ -335,7 +351,9 @@ html, body {
   // to place content above the dark box
   position: relative;
   z-index: 30;
-
+  float: right;
+  background-color: #ffffff;
+  // border: 1px solid $code-bg;
   &:after {
     content: '';
     display: block;
@@ -535,9 +553,9 @@ html, body {
 
     padding: 2em $main-padding;
     margin: 0;
-    width: $examples-width;
+    // width: $examples-width;
 
-    float:right;
+    // float:right;
     clear:right;
 
     @include box-sizing(border-box);
@@ -625,3 +643,7 @@ html, body {
     margin-top: $main-padding;
   }
 }
+
+
+//STUFF
+.clear{clear: both;}
