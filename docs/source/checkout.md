@@ -64,6 +64,10 @@ data-ui-color | `#1a6ee1` | Cor primária da interface de Checkout.
 
 ## Capturando a transação
 
+Com o `token` em mãos, agora basta realizar a captura da transação no seu
+servidor. Por motivos de segurança, você precisará fornecer novamente o valor a
+ser capturado.
+
 ```shell
 curl -X POST "https://api.pagar.me/1/transactions/{TOKEN}/capture"
   -d 'amount=1000'
@@ -93,10 +97,6 @@ transaction.capture(1000)
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
-
-Com o `token` em mãos, agora basta realizar a captura da transação no seu
-servidor. Por motivos de segurança, você precisará fornecer novamente o valor a
-ser capturado.
 
 Após realizar a captura de uma transação de cartão de crédito, a transação
 terá status `paid`, indicando que o cartão do usuário foi debitado com sucesso.
