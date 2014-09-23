@@ -166,3 +166,7 @@ Parameter | Description
 --------- | -----------
 ID | The ID of the cat to retrieve
 
+## Get no kitten
+
+Dumb ass
+
