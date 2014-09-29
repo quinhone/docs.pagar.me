@@ -1,47 +1,50 @@
 (function (global) {
 
-  var closeToc = function() {
-    $(".tocify-wrapper").removeClass('open');
-    $("#nav-button").removeClass('open');
-  };
+	var closeToc = function() {
+		$(".tocify-wrapper").removeClass('open');
+		$("#nav-button").removeClass('open');
+	};
 
-  var makeToc = function() {
-    global.toc = $("#toc").tocify({
-      selectors: 'h1, h2',
-      extendPage: false,
-      theme: 'none',
-      smoothScroll: false,
-      showEffectSpeed: 0,
-      hideEffectSpeed: 180,
-      ignoreSelector: '.toc-ignore',
-      highlightOffset: 60,
-      scrollTo: -1,
-      scrollHistory: true,
-      hashGenerator: function (text, element) {
-        return element.prop('id');
-      }
-    }).data('toc-tocify');
+	var makeToc = function() {
+		var $toc = $('<div id="toc"></div>');
+		$('a[href="' + window.location.pathname + '"]').after($toc);
 
-    $("#nav-button").click(function() {
-      $(".tocify-wrapper").toggleClass('open');
-      $("#nav-button").toggleClass('open');
-      return false;
-    });
+		global.toc = $toc.tocify({
+			selectors: 'h1, h2',
+			extendPage: false,
+			theme: 'none',
+			smoothScroll: false,
+			showEffectSpeed: 0,
+			hideEffectSpeed: 180,
+			ignoreSelector: '.toc-ignore',
+			highlightOffset: 60,
+			scrollTo: -1,
+			scrollHistory: true,
+			hashGenerator: function (text, element) {
+				return element.prop('id');
+			}
+		}).data('toc-tocify');
 
-    $(".page-wrapper").click(closeToc);
-    $(".tocify-item").click(closeToc);
-  };
+		$("#nav-button").click(function() {
+			$(".tocify-wrapper").toggleClass('open');
+			$("#nav-button").toggleClass('open');
+			return false;
+		});
 
-  // Hack to make already open sections to start opened,
-  // instead of displaying an ugly animation
-  function animate () {
-    setTimeout(function() {
-      toc.setOption('showEffectSpeed', 180);
-    }, 50);
-  }
+		$(".page-wrapper").click(closeToc);
+		$(".tocify-item").click(closeToc);
+	};
 
-  $(makeToc);
-  $(animate);
+	// Hack to make already open sections to start opened,
+	// instead of displaying an ugly animation
+	function animate () {
+		setTimeout(function() {
+			toc.setOption('showEffectSpeed', 180);
+		}, 50);
+	}
+
+	$(makeToc);
+	$(animate);
 
 })(window);
 
