@@ -14,69 +14,92 @@ License for the specific language governing permissions and limitations
 under the License.
 */
 (function (global) {
-  var languages = [];
+	var lang = 'shell';
+	var scriptBlocks = [];
 
-  global.setupLanguages = setupLanguages;
-  global.activateLanguage = activateLanguage;
+	var activateLang = function(lang) {
+		$.each(scriptBlocks, function(i, scriptBlockObj) {
+			if (scriptBlockObj.codeBlocks.length <= 1) {
+				return;
+			}
 
-  function activateLanguage(language) {
-    if (!language) return;
-    if (language === "") return;
+			$.each(scriptBlockObj.codeBlocks, function(i, codeBlock) {
+				if (!codeBlock.hasClass(lang)) {
+					codeBlock.hide();
+				} else {
+					codeBlock.show();
+				}
+			});
 
-    $(".lang-selector a").removeClass('active');
-    $(".lang-selector a[data-language-name='" + language + "']").addClass('active');
-    for (var i=0; i < languages.length; i++) {
-      $(".highlight." + languages[i]).hide();
-    }
-    $(".highlight." + language).show();
+			$('.code-selector .active').removeClass('active');
+			$('.code-selector [data-lang="' + lang + '"]').addClass('active');
+		});
+	};
 
-    // scroll to the new location of the position
-    $(window.location.hash).get(0).scrollIntoView(true);
-  }
+	var createBlockLinks = function(langs) {
+		var $links = $('<ul></ul>', {
+			class: 'code-selector'
+		});
 
-  // if a button is clicked, add the state to the history
-  function pushURL(language) {
-    if (!history) { return; }
-    var hash = window.location.hash;
-    if (hash) {
-      hash = hash.replace(/^#+/, '');
-    }
-    history.pushState({}, '', '?' + language + '#' + hash);
+		$.each(langs, function(i, lang) {
+			var $linkLi = $('<li></li>');
+			var $link = $('<a></a>', {
+				attr: {
+					href: '#' + lang,
+					'data-lang': lang
+				},
+				text: lang
+			});
 
-    // save language as next default
-    localStorage.setItem("language", language);
-  }
+			$linkLi.append($link);
+			$links.append($linkLi);
+		});
 
-  function setupLanguages(l) {
-    var currentLanguage = l[0];
-    var defaultLanguage = localStorage.getItem("language");
+		return $links;
+	};
 
-    languages = l;
+	$(function() {
+		var $leadingCodeBlocks = $(':not(pre) + pre');
 
-    if ((location.search.substr(1) !== "") && (jQuery.inArray(location.search.substr(1), languages)) != -1) {
-      // the language is in the URL, so use that language!
-      activateLanguage(location.search.substr(1));
+		$leadingCodeBlocks.each(function() {
+			var $current = $(this);
+			var $next = $current.next();
+			var codeBlocksInGroup = [$current];
 
-      localStorage.setItem("language", location.search.substr(1));
-    } else if ((defaultLanguage !== null) && (jQuery.inArray(defaultLanguage, languages) != -1)) {
-      // the language was the last selected one saved in localstorage, so use that language!
-      activateLanguage(defaultLanguage);
-    } else {
-      // no language selected, so use the default
-      activateLanguage(languages[0]);
-    }
-  }
+			while ($next.length && $next.prop('tagName').toLowerCase() == 'pre') {
+				codeBlocksInGroup.push($next);
+				$next = $next.next();
+			}
 
-  // if we click on a language tab, activate that language
-  $(function() {
-    $(".lang-selector a").on("click", function() {
-      var language = $(this).data("language-name");
-      pushURL(language);
-      activateLanguage(language);
-      return false;
-    });
-    window.onpopstate = function(event) {
-      activateLanguage(window.location.search.substr(1));
-    };
-  });
+			// Add links on top of each group
+			if (codeBlocksInGroup.length > 1) {
+				var langs = [];
+
+				$.each(codeBlocksInGroup, function(i, $codeBlock) {
+					var classes = $codeBlock.attr('class').split(/\s/);
+
+					$.each(classes, function(i, objClass) {
+						if (objClass !== 'highlight') {
+							langs.push(objClass);
+						}
+					});
+				});
+
+				var $links = createBlockLinks(langs);
+				codeBlocksInGroup[0].before($links);
+			}
+
+			scriptBlocks.push({
+				codeBlocks: codeBlocksInGroup,
+			});
+		});
+
+		activateLang(lang);
+
+		$('.page-wrapper').on('click', '.code-selector a', function(e) {
+			e.preventDefault();
+			
+			activateLang($(this).data('lang'));
+		});
+	});
 })(window);
