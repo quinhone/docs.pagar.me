@@ -217,6 +217,129 @@ bancário. A URL do boleto bancário para pagamento estará disponível na vari�
 Quando o boleto bancário for detectado como pago, a transação passará a ter o
 status `paid`.
 
+## Recebendo notificações de mudança de status da transação (POSTback)
+
+Ao realizar uma transação, diversos serviços externos (como empresas de
+antifraude, operadoras de cartão e bancos) são consultados. Por isso, esse
+processo pode demorar um pouco mais do que uma requisição HTTP normal, que
+costuma durar menos de um segundo.
+
+Para evitar que o tempo de resposta da requisição prejudique sua aplicação, ao
+criar uma transação, você pode fornecer uma `postback_url`. Dessa forma, quando
+a transação mudar de status, o Pagar.me notificará sua aplicação e o fluxo de
+compra pode ser finalizado.
+
+As URLs de POSTback também são úteis ao criar transações de boleto bancário.
+Dessa forma, quando o pagamento do boleto for detectado junto ao banco, sua
+aplicação será notificada e o fluxo de compra pode ser finalizado.
+
+Caso a transação seja estornada, a URL de POSTback também será notificada sobre
+a mudança de status.
+
+```shell
+curl -X POST 'https://api.pagar.me/1/transactions' \
+    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+    -d 'amount=1000' \
+    -d 'card_hash={CARD_HASH}' \
+	-d 'postback_url=http://seusite.com/payments/2718'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+transaction = PagarMe::Transaction.new({
+	:amount => 1000,
+    :card_hash => "{CARD_HASH}",
+	:postback_url => "http://seusite.com/payments/2718"
+})
+
+transaction.charge
+```
+
+```php
+<?php
+	require("pagarme-php/Pagarme.php");
+
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$transaction = new PagarMe_Transaction(array(
+		'amount' => 1000,
+		'card_hash' => "{CARD_HASH}",
+		'postback_url' => "http://seusite.com/payments/2718"
+	));
+
+	$transaction->charge();
+?>
+```
+
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
+
+<aside class="notice">Você pode utilizar o serviço
+[RequestBin](http://requestb.in) para gerar URLs de POSTback de teste e
+visualizar as requisições enviadas pelo Pagar.me.</aside>
+
+Quando a `postback_url` é passada, as mudanças de status da transação serão
+enviadas para o seu servidor na URL de POSTback através de um request `HTTP
+POST` com os seguintes parâmetros:
+
+Parâmetro | Descrição | Valor padrão 
+--- | --- | ---------
+object | Objeto que originou a notificação de POSTback | `transaction`
+id | ID do objeto (transação) que originou a notificação de POSTback | ---
+event | Evento que originou a notificação de POSTback | `transaction_status_changed`
+current_status | Status da transação após o evento | ---
+old_status | Status da transação antes do evento | Para transações de cartão de crédito: `processing`. Para transações de boleto bancário: `waiting_payment`
+desired_status | Status desejado após o evento | Ao criar a transação: `paid`. Ao estornar a transação: `refunded` |
+fingerprint | Parâmetro usado para validar a notificação de POSTback (ver abaixo) | ---
+
+### Validando a origem do POSTback
+
+Você pode validar a origem do POSTback, isto é, se ele foi realmente enviado
+pelo Pagar.me, pelo parâmetro `fingerprint`. O `fingerprint` é enviada pelo
+Pagar.me ao notificar a sua `postback_url`.
+
+<aside class="notice">O `fingerprint` é o hash `SHA1` calculado a partir da string:
+`id_da_transacao#sua_chave_de_api`.</aside>
+
+```shell
+EXPECTED_FINGERPRINT=`echo -n "149784#ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0" | openssl sha1`
+FINGERPRINT=1213e67a3b34c2848f8317d29bcb8cbc9e0979b8
+if [ "$FINGERPRINT" = "$EXPECTED_FINGERPRINT" ]; then
+	echo "Fingerprint válido"
+fi
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+if PagarMe::validate_fingerprint("149784", "1213e67a3b34c2848f8317d29bcb8cbc9e0979b8")
+	puts "Fingerprint válido"
+end
+```
+
+```php
+<?php
+	require("pagarme-php/Pagarme.php");
+
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	if(PagarMe::validateFingerprint("149784", "1213e67a3b34c2848f8317d29bcb8cbc9e0979b8")) {
+		echo "Fingerprint válido";
+	}
+?>
+```
+
+> Não se esqueça de substituir `149784` pelo ID da transação,
+> `1213e67a3b34c2848f8317d29bcb8cbc9e0979b8` pelo `fingerprint` recebido e
+> `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela sua chave de API disponível no
+> seu [Dashboard](https://dashboard.pagar.me/).
+
+
 ## Enviando dados adicionais para o Pagar.me (metadata)
 
 Você pode também enviar dados adicionais para o Pagar.me (ID do pedido em seu
@@ -270,3 +393,5 @@ transaction.charge
 	$transaction->charge();
 ?>
 ```
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
