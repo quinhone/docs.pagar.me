@@ -301,7 +301,7 @@ Você pode validar a origem do POSTback, isto é, se ele foi realmente enviado
 pelo Pagar.me, pelo parâmetro `fingerprint`. O `fingerprint` é enviada pelo
 Pagar.me ao notificar a sua `postback_url`.
 
-<aside class="notice">O `fingerprint` é o hash `SHA1` calculado a partir da string:
+<aside class="notice">O `fingerprint` é o hash `SHA1` calculado a partir da string:<br/>
 `id_da_transacao#sua_chave_de_api`.</aside>
 
 ```shell
@@ -334,10 +334,11 @@ end
 ?>
 ```
 
-> Não se esqueça de substituir `149784` pelo ID da transação,
-> `1213e67a3b34c2848f8317d29bcb8cbc9e0979b8` pelo `fingerprint` recebido e
-> `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela sua chave de API disponível no
-> seu [Dashboard](https://dashboard.pagar.me/).
+> Não se esqueça de substituir:<br/>
+> - `149784` pelo ID da transação,<br/>
+> - `1213e67a3b34c2848f8317d29bcb8cbc9e0979b8` pelo `fingerprint` recebido,<br/>
+> - `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela sua chave de API disponível<br/>
+>   no seu [Dashboard](https://dashboard.pagar.me/).
 
 
 ## Enviando dados adicionais para o Pagar.me (metadata)
