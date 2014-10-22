@@ -340,6 +340,90 @@ end
 > - `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela sua chave de API disponível<br/>
 >   no seu [Dashboard](https://dashboard.pagar.me/).
 
+## Enviando dados do cliente para o Pagar.me (antifraude)
+
+Para ter um maior controle dos seus clientes, principalmente através do
+Dashboard do Pagar.me, recomendamos que você também envie os dados do cliente
+ao realizar a transação.
+
+<aside class="notice">Para utilizar o recurso antifraude, é obrigatório o envio
+dos dados do cliente para o Pagar.me.</aside>
+
+```shell
+curl -X POST 'https://api.pagar.me/1/transactions' \
+    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+    -d 'amount=1000' \
+    -d 'card_hash={CARD_HASH}' \
+	-d 'customer[name]=John Appleseed' \
+	-d 'customer[document_number]=92545278157' \
+	-d 'customer[email]=jappleseed@apple.com' \
+	-d 'customer[address][street]=Av. Brigadeiro Faria Lima' \
+	-d 'customer[address][zipcode]=01452000' \
+	-d 'customer[address][street_number]=2941' \
+	-d 'customer[address][complementary]=8º andar' \
+	-d 'customer[phone][ddd]=11' \
+	-d 'customer[phone][number]=30713261' \
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+transaction = PagarMe::Transaction.new({
+	:amount => 1000,
+    :card_hash => "{CARD_HASH}",
+	:customer => {
+		:name => "John Appleseed",
+		:document_number => "92545278157",
+		:email => "jappleseed@apple.com",
+		:address => {
+			:street => "Av. Brigadeiro Faria Lima",
+			:zipcode => "01452000",
+			:street_number => "2941",
+			:complementary => "8º andar"
+		},
+		:phone => {
+			:ddd => "11"
+			:number => "30713261"
+		}
+	}
+})
+
+transaction.charge
+```
+
+```php
+<?php
+	require("pagarme-php/Pagarme.php");
+
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$transaction = new PagarMe_Transaction(array(
+		"amount" => 1000,
+		"card_hash" => "{CARD_HASH}",
+		"customer" => array(
+			"name" => "John Appleseed",
+			"document_number" => "92545278157",
+			"email" => "jappleseed@apple.com",
+			"address" => array(
+				"street" => "Av. Brigadeiro Faria Lima",
+				"zipcode" => "01452000",
+				"street_number" => "2941",
+				"complementary" => "8º andar"
+			),
+			"phone" => array(
+				"ddd" => "11",
+				"number" => "30713261"
+			)
+		}
+	));
+
+	$transaction->charge();
+?>
+```
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
 ## Enviando dados adicionais para o Pagar.me (metadata)
 
