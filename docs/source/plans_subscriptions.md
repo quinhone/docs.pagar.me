@@ -86,7 +86,8 @@ Para criar uma assinatura de cartão de crédito atrelada ao plano criado
 anteriormente, basta fornecer o ID do plano criado e o `card_hash` contendo os
 dados de cartão.
 
-Para mais informações sobre a geração do `card_hash`, veja nosso [guia de integração com formulário próprio](/custom_form.html). 
+Para mais informações sobre a geração do `card_hash`, veja nosso [guia de
+integração com formulário próprio](/custom_form.html). 
 
 ```shell
 curl -X POST 'https://api.pagar.me/1/subscriptions' \
