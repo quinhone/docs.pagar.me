@@ -208,3 +208,41 @@ Caso no fim do período o boleto não seja pago, a assinatura entrará no status
 `pending_payment` e o usuário será notificado por e-mail.
 
 ### Durante o status `pending_payment`
+
+Quando a assinatura atinge o fim do período atual sem ser paga, a mesma muda
+para o status `pending_payment`. Durante esse status, tentaremos cobrar o
+usuário todos os dias e iremos notificá-lo por e-mail caso o pagamento falhe ou
+não seja detectado novamente.
+
+Sempre que o usuário é notificado por e-mail, mandamos um link para uma página
+onde ele poderá alterar a forma de pagamento ou o cartão de crédito utilizado
+na assinatura.
+
+O tempo que a assinatura ficará `pending_payment` caso o pagamento não seja
+detectado é, por padrão, de 5 dias. Esse valor (`payment_deadline`) pode ser
+configurado pelo seu Dashboard e é único para sua conta.
+
+Caso após todas as 5 tentativas de cobrança a assinatura continue não paga, a
+mesma passará para o status `unpaid`.
+
+### Durante o status `unpaid`
+
+Quando a assinatura atinge o status `unpaid`, você deve cortar o acesso do
+usuário ao seu serviço/sistema, pois o mesmo encontra-se inadimplente há 5
+dias.
+
+Durante o status `unpaid`, faremos mais `4` tentativas de cobrança com um
+intervalo de `3` dias entre elas. Tanto o número de tentativas quanto o
+intervalo entre elas pode ser configurada pelo seu Dashboard, e são únicos para
+a sua conta.
+
+Você pode, opcionalmente, optar por automaticamente cancelar a assinatura caso
+após todas as tentativas de cobrança (do status `pending_payment` e `unpaid`)
+ela continue não paga. Essa opção pode ser configurada pelo seu Dashboard e por
+padrão está desabilitada.
+
+### Durante o status `canceled`
+
+Após a assinatura ser cancelada, nenhuma tentativa de cobrança será mais feita.
+
+Uma assinatura cancelada não pode ser cobrada novamente.
