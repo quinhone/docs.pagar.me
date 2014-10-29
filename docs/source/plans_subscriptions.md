@@ -139,181 +139,72 @@ subscription.create
 
 ## Fluxo de cobrança
 
-## Inserindo o Pagarme.js
+Toda assinatura tem um `current_period_start` e um `current_period_end`,
+indicando, respectivamente, o início e o fim do período de cobrança atual.
 
-Primeiro, insira o seguinte código antes do final da seção `head` da sua página HTML:
+Dessa forma, uma assinatura com um plano de 30 dias criada hoje, terá
+hoje como `current_period_start`, e daqui a 30 dias como `current_period_end`.
 
-```html
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://pagar.me/assets/pagarme.js"></script>
-```
+As cobranças serão sempre realizadas na data do `current_period_end`.
 
-Depois, insira o seu formulário para digitar os dados de cartão.
+A última transação realizada dentro de uma assinatura está disponível na
+variável `current_transaction`. Dessa forma, você pode acessar, por exemplo, os
+dados do boleto bancário da assinatura sem precisar realizar outra requisição.
 
-```html
-<form id="payment_form" action="https://seusite.com.br/transactions/new" method="POST">
-	Número do cartão: <input type="text" id="card_number"/>
-	<br/>
-	Nome (como escrito no cartão): <input type="text" id="card_holder_name"/>
-	<br/>
-	Mês de expiração: <input type="text" id="card_expiration_month"/>
-	<br/>
-	Ano de expiração: <input type="text" id="card_expiration_year"/>
-	<br/>
-	Código de segurança: <input type="text" id="card_cvv"/>
-	<br/>
-	<div id="field_errors">
-	</div>
-	<br/>
-	<input type="submit"></input>
-</form>
-```
+### Na criação da assinatura
 
-Agora, no seu JavaScript, você precisará detectar quando o botão do formulário
-for pressionado e, a partir daí, chamar o `Pagarme.js` para gerar o `card_hash`:
+#### Cartão de crédito
 
-```javascript
-$(document).ready(function() { // quando o jQuery estiver carregado...
-	PagarMe.encryption_key = "ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk";
+Ao criar uma assinatura de cartão de crédito, tentaremos na mesma hora realizar
+a primeira cobrança no cartão do usuário. A assinatura passará a ter o status
+`paid` caso a cobrança ocorra com sucesso.
 
-	var form = $("#payment_form");
+Se o plano tiver um período de trial, iremos validar o cartão antes de
+armazená-lo, e a primeira cobrança só será realizada ao fim do trial. Até lá, a
+assinatura terá o status `trialing`.
 
-	form.submit(function(event) { // quando o form for enviado...
-		// inicializa um objeto de cartão de crédito e completa
-		// com os dados do form
-		var creditCard = new PagarMe.creditCard();
-		creditCard.cardHolderName = $("#payment_form #card_holder_name").val();
-		creditCard.cardExpirationMonth = $("#payment_form #card_expiration_month").val();
-		creditCard.cardExpirationYear = $("#payment_form #card_expiration_year").val();
-		creditCard.cardNumber = $("#payment_form #card_number").val();
-		creditCard.cardCVV = $("#payment_form #card_cvv").val();
+Caso a primeira cobrança ou a validação do cartão de crédito falhe, a
+assinatura não será criada e um erro será retornado.
 
-		// pega os erros de validação nos campos do form
-		var fieldErrors = creditCard.fieldErrors();
+#### Boleto bancário
 
-		//Verifica se há erros
-		var hasErrors = false;
-		for(var field in fieldErrors) { hasErrors = true; break; }
+Ao criar uma assinatura de boleto bancário, será emitido um boleto com 7 dias
+de validade. A assinatura terá status `unpaid` até que o boleto bancários seja
+pago. Ao detectarmos o pagamento, o status mudará para `paid`.
 
-		if(hasErrors) {
-			// realiza o tratamento de errors
-			alert(fieldErrors);
-		} else {
-			// se não há erros, gera o card_hash...
-			creditCard.generateHash(function(cardHash) {
-				// ...coloca-o no form...
-				form.append($('<input type="hidden" name="card_hash">').val(cardHash));
-				// ...remove os campos com os dados de cartão do form...
-				PagarMe.removeCardFieldsFromForm(form);
-				// e envia o form
-				form.get(0).submit();
-			});
-		}
+Se o plano tiver um período de trial, o boleto será emitido com data de
+validade para o fim do período de trial e a assinatura terá status `trialing`.
+Ao fim do trial, se o boleto for pago, a assinatura irá para o status `paid`.
 
-		return false;
-	});
-});
-```
+Caso o boleto não tenha sido pago até o fim do trial, a assinatura passará para
+`unpaid`.
 
-> Não se esqueça de substituir `ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk` pela
-> sua chave de encriptação disponível no seu
-> [Dashboard](https://dashboard.pagar.me/).
+### Ao fim do período de cobrança atual
 
-## Realizando uma transação de cartão de crédito
+#### Cartão de crédito
 
-Com o `card_hash` em mãos, agora basta realizar a transação no seu servidor:
+Ao fim do período atual (`current_period_end`), iremos realizar a próxima
+cobrança na assinatura. Se a cobrança ocorrer com sucesso, a assinatura
+permanecerá no status `paid`, e o `current_period_start` e `current_period_end`
+serão atualizados.
 
-```shell
-curl -X POST 'https://api.pagar.me/1/transactions' \
-    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
-    -d 'amount=1000' \
-    -d 'card_hash={CARD_HASH}'
-```
+Caso a cobrança falhe por algum motivo (falta de saldo, transação negada pelo
+banco, etc), a assinatura entrará no status `pending_payment` e o usuário será
+notificado por e-mail.
 
-```ruby
-require 'pagarme'
+#### Boleto bancário 
 
-PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+Sempre que um boleto de uma assinatura é pago, o próximo boleto é emitido e já
+está disponível para pagamento. Dessa forma, após o último pagamento, o boleto
+correspondente ao período atual já poderá ser pago pelo cliente.
 
-transaction = PagarMe::Transaction.new({
-	:amount => 1000,
-    :card_hash => "{CARD_HASH}"
-})
+Ao detectarmos o pagamento do boleto do período atual, a assinatura continuará
+com o status `paid` e o `current_period_start` e `current_period_end` serão
+atualizados respeitando a data de pagamento do boleto. Dessa forma, se o
+usuário efetuar o pagamento 5 dias antes do fim da assinatura, o
+`current_period_end` terá um acréscimo de 5 dias.
 
-transaction.charge
-```
+Caso no fim do período o boleto não seja pago, a assinatura entrará no status
+`pending_payment` e o usuário será notificado por e-mail.
 
-```php
-<?php
-	require("pagarme-php/Pagarme.php");
-
-	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
-
-	$transaction = new PagarMe_Transaction(array(
-		'amount' => 1000,
-		'card_hash' => "{CARD_HASH}"
-	));
-
-	$transaction->charge();
-?>
-```
-
-> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
-> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
-
-Após realizar uma transação de cartão de crédito, a mesma terá status
-`paid`, indicando que o cartão do usuário foi debitado com sucesso.
-
-Se a transação for recusada pelas operadoras de cartão, a mesma terá status
-`refused`.
-
-## Realizando uma transação de boleto bancário
-
-Uma transação de boleto bancária deve ser realizada diretamente do seu
-servidor, sem o uso do `card_hash` já que não há transmissão de dados sensíveis
-para o Pagar.me
-
-```shell
-curl -X POST 'https://api.pagar.me/1/transactions' \
-    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
-    -d 'amount=1000' \
-    -d 'payment_method=boleto'
-```
-
-```ruby
-require 'pagarme'
-
-PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
-
-transaction = PagarMe::Transaction.new({
-	:amount => 1000,
-    :payment_method => "boleto"
-})
-
-transaction.charge
-```
-
-```php
-<?php
-	require("pagarme-php/Pagarme.php");
-
-	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
-
-	$transaction = new PagarMe_Transaction(array(
-		'amount' => 1000,
-		'payment_method' => "boleto"
-	));
-
-	$transaction->charge();
-?>
-```
-
-> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
-> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
-
-A transação terá status `waiting_payment` até o pagamento do boleto
-bancário. A URL do boleto bancário para pagamento estará disponível na variável
-`boleto_url`.
-
-Quando o boleto bancário for detectado como pago, a transação passará a ter o
-status `paid`.
+### Durante o status `pending_payment`
