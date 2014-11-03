@@ -201,11 +201,11 @@ correspondente ao período atual já poderá ser pago pelo cliente.
 Ao detectarmos o pagamento do boleto do período atual, a assinatura continuará
 com o status `paid` e o `current_period_start` e `current_period_end` serão
 atualizados respeitando a data de pagamento do boleto. Dessa forma, se o
-usuário efetuar o pagamento 5 dias antes do fim da assinatura, o
+usuário efetuar o pagamento 5 dias antes do fim do período atual, o
 `current_period_end` terá um acréscimo de 5 dias.
 
-Caso no fim do período o boleto não seja pago, a assinatura entrará no status
-`pending_payment` e o usuário será notificado por e-mail.
+Caso o boleto não seja pago até o fim do período, a assinatura entrará no
+status `pending_payment` e o usuário será notificado por e-mail.
 
 ### Durante o status `pending_payment`
 
