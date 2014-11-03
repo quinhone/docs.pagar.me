@@ -321,4 +321,4 @@ event | Evento que originou a notificação de POSTback | `subscription_status_c
 current_status | Status da assinatura após o evento | ---
 old_status | Status da assinatura antes do evento | ---
 desired_status | Status desejado após o evento | `paid`
-fingerprint | Parâmetro usado para validar a notificação de POSTback (ver abaixo) | ---
+fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba mais](/advanced#validando-a-origem-de-um-postback)) | ---
