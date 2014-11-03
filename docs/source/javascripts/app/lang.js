@@ -98,8 +98,16 @@ under the License.
 
 		$('.page-wrapper').on('click', '.code-selector a', function(e) {
 			e.preventDefault();
+
+			var $window = $(window);
+			var $link = $(this);
+
+			var delta = $link.offset().top;
 			
 			activateLang($(this).data('lang'));
+			delta -= $link.offset().top;
+
+			$('window, body').scrollTop($(window).scrollTop() - delta);
 		});
 	});
 })(window);
