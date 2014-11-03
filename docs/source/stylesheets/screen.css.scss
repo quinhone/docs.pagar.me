@@ -43,6 +43,12 @@ html, body {
   font-family: 'Titillium Web', sans-serif;
 }
 
+.hidden-xs {
+	@media (max-width: $screen-xs-max) {
+		display: none;
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
@@ -343,6 +349,44 @@ html, body {
     img{
       margin: 10px;
     }
+
+	.top-nav {
+		float: right;
+		list-style-type: none;
+		margin: 0;
+		padding: 10px 0;
+
+		li {
+			display: inline-block;
+
+			border-radius: 4px;
+
+			&.button {
+				background-color: #f4400f;
+
+				a,
+				a:link,
+				a:hover,
+				a:visited,
+				a:focus {
+					color: #fff;
+				}
+			}
+			
+			a,
+			a:link,
+			a:hover,
+			a:visited,
+			a:focus {
+				padding: 12px 17px;
+				text-decoration: none;
+				color: #6b6b6b;
+				font-size: 16px;
+				font-weight: 400;
+				display: block;
+			}
+		}
+	}
   }
 }
 
