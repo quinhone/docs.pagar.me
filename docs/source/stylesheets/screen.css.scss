@@ -691,6 +691,10 @@ html, body {
 	overflow: auto;
 	word-wrap: normal;
 	white-space: pre;
+
+	* {
+		@extend %code-font;
+	}
   }
 
   blockquote {
