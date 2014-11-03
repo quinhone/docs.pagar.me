@@ -236,6 +236,14 @@ html, body {
   .tocify-header .tocify-item > a {
       font-size: 14px;
       padding-left: $nav-padding + $nav-indent;
+
+	  line-height: 1.2em;
+	  text-overflow: clip;
+	  white-space: normal;
+	  padding-right: 5px;
+	  padding-top: 10px;
+	  padding-bottom: 10px;
+	  font-weight: 600;
   }
 
   .tocify-subheader {
