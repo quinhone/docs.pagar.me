@@ -246,3 +246,79 @@ padrão está desabilitada.
 Após a assinatura ser cancelada, nenhuma tentativa de cobrança será mais feita.
 
 Uma assinatura cancelada não pode ser cobrada novamente.
+
+## Recebendo notificações de mudança de status da assinatura (POSTback)
+
+Ao fornecer uma `postback_url` ao criar a assinatura, iremos notificar su
+aplicação sempre que o status da assinatura mudar. Dessa forma, você pode
+cortar e reativar o serviço de um cliente baseado nas mudanças de status da
+assinatura.
+
+<aside class="notice">Quando a assinatura passa para o status `unpaid`, você
+deve cortar o serviço do cliente, já que a mesma está inadimplente.</aside>
+
+```shell
+curl -X POST 'https://api.pagar.me/1/subscriptions' \
+    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+    -d 'plan_id=1234' \
+    -d 'card_hash={CARD_HASH}' \
+	-d 'customer[email]=email.do.cliente@gmail.com' \
+	-d 'postback_url=http://seusite.com/subscriptions/2718'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+subscription = PagarMe::Subscription.new({
+	:plan => PagarMe::Plan.find_by_id("1234"),
+	:card_hash => "{CARD_HASH}",
+	:customer => {
+		:email => "email.do.cliente@gmail.com"
+	},
+	:postback_url => "http://seusite.com/subscriptions/2718"
+})
+
+subscription.create
+```
+
+```php
+<?php
+	require("pagarme-php/Pagarme.php");
+
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$subscription = new PagarMe_Subscription(array(
+		'plan' => PagarMe_Plan::findById("1234"),
+		'card_hash' => "{CARD_HASH}",
+		'customer' => array(
+			'email' => "email.do.cliente@gmail.com"
+		),
+		'postback_url' => "http://seusite.com/subscriptions/2718"
+	));
+
+	$subscription->create();
+?>
+```
+
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
+
+<aside class="notice">Você pode utilizar o serviço
+[RequestBin](http://requestb.in) para gerar URLs de POSTback de teste e
+visualizar as requisições enviadas pelo Pagar.me.</aside>
+
+Quando a `postback_url` é passada, as mudanças de status da transação serão
+enviadas para o seu servidor na URL de POSTback através de um request `HTTP
+POST` com os seguintes parâmetros:
+
+Parâmetro | Descrição | Valor padrão 
+--- | --- | ---------
+object | Objeto que originou a notificação de POSTback | `subscription`
+id | ID do objeto (assinatura) que originou a notificação de POSTback | ---
+event | Evento que originou a notificação de POSTback | `subscription_status_changed`
+current_status | Status da assinatura após o evento | ---
+old_status | Status da assinatura antes do evento | ---
+desired_status | Status desejado após o evento | `paid`
+fingerprint | Parâmetro usado para validar a notificação de POSTback (ver abaixo) | ---
