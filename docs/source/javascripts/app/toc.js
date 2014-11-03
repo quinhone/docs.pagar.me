@@ -8,7 +8,8 @@
 	var makeToc = function() {
 		var $toc = $('<div id="toc"></div>');
 		var pathname = window.location.pathname;
-		$('a[href~="' + pathname.substr(pathname.lastIndexOf('/')+1) + '"]').addClass('active').after($toc);
+		// $('a[href~="' + pathname.substr(pathname.lastIndexOf('/')+1) + '"]').addClass('active').after($toc);
+		$('a[href~="' + pathname + '"]').addClass('active').after($toc);
 
 		global.toc = $toc.tocify({
 			selectors: 'h2, h3',
