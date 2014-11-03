@@ -325,6 +325,14 @@ html, body {
 
   .content {
 	  max-width: $container-lg-size - $nav-width;
+
+	  a,
+	  a:link,
+	  a:hover,
+	  a:focus,
+	  a:visited {
+		  color: #333;
+	  }
   }
 
   @media (max-width: $screen-md-max) and (min-width: $screen-md-min) {
@@ -668,41 +676,60 @@ html, body {
 ////////////////////////////////////////////////////////////////////////////////
 // This is all the stuff that appears in the right half of the page
 
+.container {
+	.content {
+		pre, blockquote, .code-selector {
+			a,
+			a:link,
+			a:focus,
+			a:active,
+			a:visited {
+				color: #fff;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
 .content {
   pre, blockquote {
-    background-color: $code-bg;
-    color: #fff;
+	  background-color: $code-bg;
+	  color: #fff;
 
-    padding: 2em $main-padding;
-    margin: 0;
-    // width: $examples-width;
+	  padding: 2em $main-padding;
+	  margin: 0;
+	  // width: $examples-width;
 
-    // float:right;
-    clear:right;
+	  // float:right;
+	  clear:right;
 
-    @include box-sizing(border-box);
-    @include text-shadow(0px 1px 2px rgba(0,0,0,0.4));
+	  @include box-sizing(border-box);
+	  @include text-shadow(0px 1px 2px rgba(0,0,0,0.4));
 
-    @extend %right-col;
+	  @extend %right-col;
 
-    &>p { margin: 0; }
+	  &>p { margin: 0; }
 
-    a {
-      color: #fff;
-      text-decoration: none;
-      border-bottom: dashed 1px #ccc;
-    }
+	  a,
+	  a:link,
+	  a:focus,
+	  a:active,
+	  a:visited {
+		  color: #fff;
+		  text-decoration: none;
+		  border-bottom: dashed 1px #ccc;
+	  }
   }
 
   pre {
-    @extend %code-font;
-	overflow: auto;
-	word-wrap: normal;
-	white-space: pre;
+	  @extend %code-font;
+	  overflow: auto;
+	  word-wrap: normal;
+	  white-space: pre;
 
-	* {
-		@extend %code-font;
-	}
+	  * {
+		  @extend %code-font;
+	  }
   }
 
   blockquote {
