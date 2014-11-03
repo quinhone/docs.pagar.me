@@ -79,10 +79,10 @@ under the License.
         <ul class="search-results"></ul>
       <% end %>
       <div id="main-links-wrapper">
-		  <a href="<%= settings.base_url %>/" class="home">Início</a>
-		  <a href="<%= settings.base_url %>/custom_form">Formulário próprio</a>
-		  <a href="<%= settings.base_url %>/checkout">Checkout</a>
-		  <a href="<%= settings.base_url %>/plans_subscriptions">Planos e assinaturas</a>
+		  <%= relative_link_to 'Início', '/' %>
+		  <%= relative_link_to 'Formulário próprio', '/custom_form' %>
+		  <%= relative_link_to 'Checkout', '/checkout' %>
+		  <%= relative_link_to 'Planos e assinaturas', '/plans_subscriptions' %>
       </div>
       <% if current_page.data.toc_footers %>
         <ul class="toc-footer">

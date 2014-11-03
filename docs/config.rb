@@ -23,6 +23,12 @@ activate :directory_indexes
 
 set :base_url, ''
 
+helpers do
+  def relative_link_to(title, url)
+	link_to title, settings.base_url + url
+  end
+end
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
