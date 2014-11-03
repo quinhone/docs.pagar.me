@@ -28,7 +28,8 @@ $examples-bg: #393939;
 $code-bg: #292929;
 $code-annotation-bg: #1c1c1c;
 $nav-subitem-bg: #262626;
-$nav-active-bg: #f4400f; 
+// $nav-active-bg: #f4400f; 
+$nav-active-bg: #b93b18; 
 $lang-select-border: #000;
 $lang-select-bg: #222;
 $lang-select-active-bg: $examples-bg; // feel free to change this to blue or something
@@ -61,9 +62,21 @@ $nav-v-padding: 10px; // padding used vertically around search boxes and results
 $nav-indent: 20px; // extra padding for ToC subitems
 $code-annotation-padding: 13px; // padding inside code annotations
 $h1-margin-bottom: 21px; // padding under the largest header tags
-$tablet-width: 930px; // min width before reverting to tablet size
-$phone-width: $tablet-width - $nav-width; // min width before reverting to mobile size
 
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+$screen-xs-max: $screen-sm-min;
+$screen-sm-max: $screen-md-min;
+$screen-md-max: $screen-lg-min;
+
+$container-sm-size: 750px;
+$container-md-size: 970px;
+$container-lg-size: 1170px;
+
+$tablet-width: $screen-sm-max; // min width before reverting to tablet size
+$phone-width: $screen-xs-max; // min width before reverting to mobile size
 
 // FONTS
 ////////////////////

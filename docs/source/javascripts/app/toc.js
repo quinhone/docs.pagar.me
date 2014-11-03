@@ -7,10 +7,12 @@
 
 	var makeToc = function() {
 		var $toc = $('<div id="toc"></div>');
-		$('a[href="' + window.location.pathname + '"]').after($toc);
+		$('a[href~="' + window.location.pathname.substr(1) + '"]').addClass('active').after($toc);
+
+		console.log(window.location.pathname, $('a[href="' + window.location.pathname + '"]').length);
 
 		global.toc = $toc.tocify({
-			selectors: 'h1, h2',
+			selectors: 'h2, h3',
 			extendPage: false,
 			theme: 'none',
 			smoothScroll: false,

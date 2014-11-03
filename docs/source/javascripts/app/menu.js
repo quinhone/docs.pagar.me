@@ -1,5 +1,10 @@
 (function($) {
 	$(document).ready(function() {
+		console.log($(window).width());
+		if ($(window).width() < 992) {
+			return;
+		}
+
 		var menu = $('.tocify-wrapper');
 		var state = 'static';
 		var menuPosition = menu.offset().top;

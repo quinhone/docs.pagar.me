@@ -5,6 +5,8 @@
 @import 'syntax';
 @import 'icon-font';
 
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,200,600,700);
+
 /*
 Copyright 2008-2013 Concur Technologies, Inc.
 
@@ -35,6 +37,10 @@ html, body {
   background-color: $main-bg;
   height: 100%;
   -webkit-text-size-adjust: none; /* Never autoresize text */
+}
+
+* {
+  font-family: 'Titillium Web', sans-serif;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -158,11 +164,13 @@ html, body {
 
 
   #main-links-wrapper>a, .tocify-item>a, .toc-footer li {
-    padding: 0 $nav-padding 0 $nav-padding;
-    display: block;
-    overflow-x: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	  font-size: 16px;
+	  font-weight: 600;
+	  padding: 0 $nav-padding 0 $nav-padding;
+	  display: block;
+	  overflow-x: hidden;
+	  white-space: nowrap;
+	  text-overflow: ellipsis;
   }
 
   // The Table of Contents is composed of multiple nested
@@ -175,12 +183,18 @@ html, body {
     line-height: 40px;
   }
 
-  li, #main-links-wrapper>a {
-    color: $nav-text;
-    @include transition-property('background');
-    @include transition-timing-function('linear');
-    @include transition-duration(230ms);
-  }
+	li, #main-links-wrapper>a {
+		// color: $nav-text;
+		color: #9f9f9f;
+		@include transition-property('background');
+		@include transition-timing-function('linear');
+		@include transition-duration(230ms);
+
+		&.active {
+			color: #fff;
+			background-color: #f4400f;
+		}
+	}
 
   #main-links-wrapper {
 	  a,
@@ -288,12 +302,41 @@ html, body {
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
 ////////////////////////////////////////////////////////////////////////////////
 .container{
-  width: 990px;
+  width: 1170px;
   margin: 0px auto;
   background-color: $nav-bg;
   @include border-top-radius(5px);
   @include border-bottom-radius(5px);
   overflow: hidden;
+
+  .content {
+	  max-width: $container-lg-size - $nav-width;
+  }
+
+  @media (max-width: $screen-md-max) and (min-width: $screen-md-min) {
+	  width: $container-md-size;
+
+	  .content {
+		  width: $container-md-size - $nav-width;
+	  }
+  }
+
+  @media (max-width: $screen-sm-max) and (min-width: $screen-sm-min) {
+	  width: $container-sm-size;
+
+	  .content {
+		  width: $container-sm-size;
+	  }
+  }
+
+  @media (max-width: $screen-xs-max) {
+	  width: 100%;
+
+	  .content {
+		  width: 100%;
+	  }
+  }
+
   &.header{
     background-color: transparent;
     margin: 10px auto 0 auto;
@@ -373,6 +416,8 @@ html, body {
   z-index: 30;
   float: right;
   background-color: #ffffff;
+  padding-bottom: 50px;
+  // max-width: 740px;
   // border: 1px solid $code-bg;
   &:after {
     content: '';
@@ -401,9 +446,13 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 30px;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+	color: #343434;
+    font-size: 22px;
+	font-weight: 600;
+	text-transform: uppercase;
+
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
     border-bottom: 1px solid #ccc;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
@@ -421,9 +470,11 @@ html, body {
   h2 {
     @extend %header-font;
     font-size: 20px;
+	font-weight: 600;
     margin-top: 4em;
-    margin-bottom: 0;
+    margin-bottom: 1em;
     border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
     // @include background-image(
@@ -498,7 +549,6 @@ html, body {
 
   p, li, dt, dd {
     line-height: 1.6;
-    margin-top: 0;
   }
 
   img {
@@ -594,6 +644,9 @@ html, body {
 
   pre {
     @extend %code-font;
+	overflow: auto;
+	word-wrap: normal;
+	white-space: pre;
   }
 
   blockquote {
@@ -617,10 +670,21 @@ html, body {
 @media (max-width: $tablet-width) {
   .tocify-wrapper {
     left: -$nav-width;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 
     &.open {
       left: 0;
     }
+  }
+
+  .content {
+	  max-width: none;
+	  width: 100%;
   }
 
   .page-wrapper {
