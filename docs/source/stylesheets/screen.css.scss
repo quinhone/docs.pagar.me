@@ -275,7 +275,27 @@ html, body {
       text-decoration: none;
     }
   }
+}
 
+#sidebar-footer {
+	margin-top: 20px;
+	padding: 20px;
+	color: #afafaf;
+	font-weight: 400;
+	line-height: 1.2em;
+	border-top: 1px dashed #afafaf;
+	
+	p {
+		margin: 0;
+	}
+
+	a,
+	a:link,
+	a:visited,
+	a:focus,
+	a:hover {
+		color: #afafaf;
+	}
 }
 
 // button to show navigation on mobile devices
