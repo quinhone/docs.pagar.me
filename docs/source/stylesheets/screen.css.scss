@@ -324,7 +324,7 @@ html, body {
   overflow: hidden;
 
   .content {
-	  max-width: $container-lg-size - $nav-width;
+	  width: $container-lg-size - $nav-width;
 
 	  a,
 	  a:link,
