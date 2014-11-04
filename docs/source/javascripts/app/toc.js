@@ -12,7 +12,7 @@
 		$('a[href~="' + pathname + '"]').addClass('active').after($toc);
 
 		global.toc = $toc.tocify({
-			selectors: 'h2, h3',
+			selectors: 'h2',
 			extendPage: false,
 			theme: 'none',
 			smoothScroll: false,
