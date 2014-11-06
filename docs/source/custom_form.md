@@ -16,10 +16,6 @@ cliente precise sair da sua página. Para que o processo aconteça de forma
 segura, você precisará incluir nosso JavaScript (`Pagarme.js`) na sua página
 para realizar a captura desses dados.
 
-O `Pagarme.js` irá realizar a geração do `card_hash`, um valor que representa
-de forma segura os dados de cartão do cliente. O `card_hash` é o único dado de
-cartão que deverá ser enviado do browser do cliente para o seu servidor.
-
 Após receber o `card_hash`, o seu servidor deve realizar a transação junto ao
 Pagar.me, que efetuará a transação no cartão do cliente.
 
@@ -27,7 +23,7 @@ Para boletos bancários, não é necessário utilizar o `Pagarme.js`, já que n�
 a transmissão de dados sensíveis entre o browser do cliente, o seu servidor e o
 Pagar.me.
 
-## Inserindo o Pagarme.js na sua página
+## Inserindo o Pagarme.js na sua página {#inserting-pagarme-js}
 
 Primeiro, insira o seguinte código antes do final da seção `head` da sua página HTML:
 
