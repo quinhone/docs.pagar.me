@@ -86,8 +86,9 @@ Para criar uma assinatura de cartão de crédito atrelada ao plano criado
 anteriormente, basta fornecer o ID do plano criado, o `card_hash` contendo os
 dados de cartão e o e-mail do cliente.
 
-Para mais informações sobre a geração do `card_hash`, veja nosso [guia de
-integração com formulário próprio](custom_form.html). 
+Para mais informações sobre a geração do `card_hash`, veja como [inserir o
+Pagarme.js na sua página](custom_form#inserting-pagarme-js) no nosso [guia de
+pagamento dentro do seu site](custom_form). 
 
 Para criar uma assinatura com boleto bancário, basta passar `boleto` como o
 `payment_method`.
