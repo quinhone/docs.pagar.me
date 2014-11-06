@@ -1,5 +1,5 @@
 ---
-title: One-click-buy
+title: Cobrando um cartão posteriormente
 
 language_tabs:
   - shell
@@ -18,7 +18,7 @@ Dessa forma, você pode implementar funcionalidades como o one-click-buy (compra
 por um clique) e realizar transações sem que o usuário precise reentrar ou
 lembrar seus dados de cartão.
 
-## Armazenando um cartão
+## Armazenando um cartão {#storing-a-card}
 
 Para armazenar um cartão, basta passar um `card_hash` contendo os dados do
 cartão. Para mais informações sobre a geração do `card_hash`, veja nosso [guia
@@ -68,7 +68,7 @@ card_id = card.id
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Recuperando o cartão de uma transação anterior
+## Recuperando o cartão de uma transação anterior {#card-from-transaction}
 
 Você pode também recuperar um cartão de uma transação feita anteriormente e
 utilizá-lo para realizar novas cobranças. Para isso, basta armazenar o `id` do
@@ -104,7 +104,7 @@ card_id = transaction.card.id
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Realizando uma transação usando um cartão
+## Realizando uma transação usando um cartão {#charging-a-card}
 
 Agora que você tem o `id` do `card` em mãos, basta [criar uma
 transação](/custom_form) passando o `card_id`. Os demais parâmetros da

@@ -1,5 +1,5 @@
 ---
-title: Integração via formulário próprio
+title: Pagamento dentro do seu site
 
 language_tabs:
   - shell
@@ -9,7 +9,7 @@ language_tabs:
 search: true
 ---
 
-# Integração via formulário próprio
+# Pagamento dentro do seu site
 
 Com o Pagar.me, você pode realizar a captura dos dados de cartão sem que o seu
 cliente precise sair da sua página. Para que o processo aconteça de forma
