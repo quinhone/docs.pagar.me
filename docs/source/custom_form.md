@@ -27,10 +27,6 @@ Para boletos bancários, não é necessário utilizar o `Pagarme.js`, já que n�
 a transmissão de dados sensíveis entre o browser do cliente, o seu servidor e o
 Pagar.me.
 
-<aside class="notice">Caso você prefira uma integração mais simples, você
-também pode usar o nosso <a href="/checkout.html">Checkout</a> para se conectar
-com o Pagar.me</aside>
-
 ## Inserindo o Pagarme.js na sua página
 
 Primeiro, insira o seguinte código antes do final da seção `head` da sua página HTML:
