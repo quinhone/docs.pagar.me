@@ -25,7 +25,7 @@ inadimplência para você.
 
 O primeiro passo é criar um plano.
 
-Nesse exemplo, vamos criar um plano de R$49,90 e 30 dias:
+Nesse exemplo, criaremos um plano de R$49,90 e 30 dias:
 
 ```shell
 curl -X POST 'https://api.pagar.me/1/plans' \
