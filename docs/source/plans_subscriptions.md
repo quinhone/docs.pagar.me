@@ -83,11 +83,14 @@ installments | `1` | Número de parcelas a ser cobrado no cartão de crédito. �
 ## Criando uma assinatura
 
 Para criar uma assinatura de cartão de crédito atrelada ao plano criado
-anteriormente, basta fornecer o ID do plano criado e o `card_hash` contendo os
-dados de cartão.
+anteriormente, basta fornecer o ID do plano criado, o `card_hash` contendo os
+dados de cartão e o e-mail do cliente.
 
 Para mais informações sobre a geração do `card_hash`, veja nosso [guia de
 integração com formulário próprio](custom_form.html). 
+
+Para criar uma assinatura com boleto bancário, basta passar `boleto` como o
+`payment_method`.
 
 ```shell
 curl -X POST 'https://api.pagar.me/1/subscriptions' \
@@ -247,7 +250,7 @@ Após a assinatura ser cancelada, nenhuma tentativa de cobrança será mais feit
 
 Uma assinatura cancelada não pode ser cobrada novamente.
 
-## Recebendo notificações de mudança de status da assinatura (POSTback)
+## Recebendo notificações de mudança de status (POSTback)
 
 Ao fornecer uma `postback_url` ao criar a assinatura, iremos notificar su
 aplicação sempre que o status da assinatura mudar. Dessa forma, você pode
