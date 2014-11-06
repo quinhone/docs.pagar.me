@@ -7,7 +7,7 @@ search: true
 # Início
 
 Seja bem-vindo a documentação do Pagar.me! Aqui você encontrará guias e
-referências sobre como integrar com o Pagar.me.
+referências sobre como usar nossa infraestrutura de pagamentos.
 
 ### Para começar...
 
