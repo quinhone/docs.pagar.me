@@ -104,7 +104,7 @@ card_id = transaction.card.id
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Cobrando um cartão
+## Realizando uma transação usando um cartão
 
 Agora que você tem o `id` do `card` em mãos, basta [criar uma
 transação](/custom_form) passando o `card_id`. Os demais parâmetros da
