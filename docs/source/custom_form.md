@@ -110,7 +110,7 @@ $(document).ready(function() { // quando o jQuery estiver carregado...
 > sua chave de encriptação disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
-## Realizando uma transação de cartão de crédito
+## Realizando uma transação de cartão de crédito {#credit-card-transaction}
 
 Com o `card_hash` em mãos no seu servidor, agora basta realizar a transação:
 
@@ -174,7 +174,7 @@ postback_url | --- | URL para receber notificações sobre alterações da trans
 soft-descriptor | --- | Texto (de até 13 caracteres) que será aparecerá na fatura do cartão do cliente ao lado do nome da sua loja
 capture | `true` | Passar `false` para apenas autorizar a transação e realizar a captura posteriormente
 
-## Realizando uma transação de boleto bancário
+## Realizando uma transação de boleto bancário {#boleto-transaction}
 
 Uma transação de boleto bancária deve ser realizada diretamente do seu
 servidor, sem a necessidade de utilizar o `card_hash`, já que não há
@@ -318,7 +318,7 @@ old_status | Status da transação antes do evento | ---
 desired_status | Status desejado após o evento | Ao criar a transação: `paid`. Ao estornar a transação: `refunded` |
 fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba mais](/advanced#validando-a-origem-de-um-postback)) | ---
 
-## Enviando dados do cliente para o Pagar.me (antifraude)
+## Enviando dados do cliente para o Pagar.me (antifraude) {#customer-data}
 
 Para ter um maior controle dos seus clientes, principalmente através do
 Dashboard do Pagar.me, recomendamos que você também envie os dados do cliente
