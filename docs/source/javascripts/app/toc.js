@@ -15,6 +15,7 @@
 
 		// $('a[href~="' + pathname.substr(pathname.lastIndexOf('/')+1) + '"]').addClass('active').after($toc);
 		$('a[href="' + pathname + '"]').addClass('active').after($toc);
+		console.log($('a[href="' + pathname + '"]'));
 
 		global.toc = $toc.tocify({
 			selectors: 'h2',
