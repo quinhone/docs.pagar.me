@@ -107,7 +107,7 @@ card_id = transaction.card.id
 ## Realizando uma transação usando um cartão {#charging-a-card}
 
 Agora que você tem o `id` do `card` em mãos, basta [criar uma
-transação](/custom_form) passando o `card_id`. Os demais parâmetros da
+transação](custom_form) passando o `card_id`. Os demais parâmetros da
 transação (valor, número de parcelas, etc.) também podem ser passados
 normalmente.
 
