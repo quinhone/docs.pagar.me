@@ -22,7 +22,7 @@ lembrar seus dados de cartão.
 
 Para armazenar um cartão, basta passar um `card_hash` contendo os dados do
 cartão. Para mais informações sobre a geração do `card_hash`, veja nosso [guia
-de integração com formulário próprio](custom_form.html). 
+de integração com formulário próprio](/custom_form.html). 
 
 Você deve armazenar o `id` do objeto `card` para realizar as cobranças futuras
 (veja abaixo).
@@ -107,7 +107,7 @@ card_id = transaction.card.id
 ## Realizando uma transação usando um cartão {#charging-a-card}
 
 Agora que você tem o `id` do `card` em mãos, basta [criar uma
-transação](custom_form) passando o `card_id`. Os demais parâmetros da
+transação](/custom_form) passando o `card_id`. Os demais parâmetros da
 transação (valor, número de parcelas, etc.) também podem ser passados
 normalmente.
 
