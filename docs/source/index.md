@@ -28,15 +28,9 @@ instalar a biblioteca em Ruby:
 gem install pagarme
 ```
 
-E a biblioteca em PHP:
-
-```
-composer install pagarme-php
-```
-
-Você também pode baixar a [biblioteca PHP do nosso
+Para instalar a biblioteca PHP, basta [baixá-la do nosso
 Github](https://github.com/pagarme/pagarme-php) e copiá-la para a pasta do seu
-projeto.
+projeto. Você também pode instalá-la usando o [Composer](https://getcomposer.org).
 
 ### Para começar...
 
