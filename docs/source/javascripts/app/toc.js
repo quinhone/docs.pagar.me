@@ -13,9 +13,8 @@
 			pathname = pathname.substr(0, pathname.length-1);
 		}
 
-		// $('a[href~="' + pathname.substr(pathname.lastIndexOf('/')+1) + '"]').addClass('active').after($toc);
-		$('a[href="' + pathname + '"]').addClass('active').after($toc);
-		console.log($('a[href="' + pathname + '"]'));
+		var link = $('a[href*="' + pathname + '"]').eq(0);
+		link.addClass('active').after($toc);
 
 		global.toc = $toc.tocify({
 			selectors: 'h2',
