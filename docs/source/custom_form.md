@@ -28,7 +28,7 @@ Pagar.me.
 Primeiro, insira o seguinte código antes do final da seção `head` da sua página HTML:
 
 ```html
-<script src="https://pagar.me/assets/pagarme.js"></script>
+<script src="https://pagar.me/assets/pagarme-v2.min.js"></script>
 ```
 
 Depois, insira o seu formulário para digitar os dados de cartão.
