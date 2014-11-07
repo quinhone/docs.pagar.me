@@ -162,6 +162,18 @@ Após realizar uma transação de cartão de crédito, a mesma terá status
 Se a transação for recusada pelas operadoras de cartão, a mesma terá status
 `refused`.
 
+### Configurações da transação
+
+Tag | Padrão | Descrição
+--- | ------ | ---------
+amount | --- | Valor total a ser cobrado (em centavos). Ex: R$14,99 = `1499`
+card_hash | --- | Representação segura dos dados de cartão de crédito gerada pelo `Pagarme.js`
+installments | `1` | Número de parcelas a ser cobrado no cartão de crédito.
+payment_method | `credit_card` | Meio de pagamento a ser utilizado
+postback_url | --- | URL para receber notificações sobre alterações da transação ([saiba mais](#postback))
+soft-descriptor | --- | Texto (de até 13 caracteres) que será aparecerá na fatura do cartão do cliente ao lado do nome da sua loja
+capture | `true` | Passar `false` para apenas autorizar a transação e realizar a captura posteriormente
+
 ## Realizando uma transação de boleto bancário
 
 Uma transação de boleto bancária deve ser realizada diretamente do seu
@@ -219,7 +231,16 @@ bancário. A URL do boleto bancário para pagamento estará disponível na vari�
 Quando o boleto bancário for detectado como pago, a transação passará a ter o
 status `paid`.
 
-## Recebendo notificações de mudança de status da transação (POSTback)
+### Configurações da transação
+
+Tag | Padrão | Descrição
+--- | ------ | ---------
+amount | --- | Valor total a ser cobrado (em centavos). Ex: R$14,99 = `1499`
+payment_method | `boleto` | Meio de pagamento a ser utilizado
+postback_url | --- | URL para receber notificações sobre alterações da transação ([saiba mais](#postback))
+boleto_expiration_date | data atual + 7 dias | Data de vencimento do boleto bancário
+
+## Recebendo notificações de mudança de status da transação (POSTback) {#postback}
 
 Ao realizar uma transação, diversos serviços externos (como empresas de
 antifraude, operadoras de cartão e bancos) são consultados. Por isso, esse
