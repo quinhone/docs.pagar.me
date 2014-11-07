@@ -11,28 +11,31 @@ referências sobre como usar nossa infraestrutura de pagamentos.
 
 ### Endpoints e bibliotecas
 
-Nossa API é RESTful e todas as respostas são em JSON. Todas as requisições são
+Nossa API é
+[RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer) e todas
+as respostas são em [JSON](http://www.json.org). Todas as requisições são
 feitas no endpoint:
 
 ```
 https://api.pagar.me/1
 ```
 
-Nos exemplos que você encontrará pela documentação, usaremos as nossas
-bibliotecas de Ruby e PHP. Para instalar a biblioteca de Ruby:
+Nos exemplos que você encontrará pela documentação, usaremos o
+[cURL](http://curl.haxx.se) e as nossas bibliotecas em [Ruby](https://github.com/pagarme/pagarme-ruby) e [PHP](https://github.com/pagarme/pagarme-php). Para
+instalar a biblioteca em Ruby:
 
 ```
 gem install pagarme
 ```
 
-E a biblioteca de PHP:
+E a biblioteca em PHP:
 
 ```
 composer install pagarme-php
 ```
 
-Você também pode baixar a biblioteca PHP do nosso Github
-(`https://github.com/PagarMe/pagarme-php`) e copiá-la para a pasta do seu
+Você também pode baixar a [biblioteca PHP do nosso
+Github](https://github.com/pagarme/pagarme-php) e copiá-la para a pasta do seu
 projeto.
 
 ### Para começar...
