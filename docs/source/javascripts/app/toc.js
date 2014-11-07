@@ -8,6 +8,11 @@
 	var makeToc = function() {
 		var $toc = $('<div id="toc"></div>');
 		var pathname = window.location.pathname;
+
+		if (pathname.length > 1 && pathname.charAt(pathname.length-1) == '/') {
+			pathname = pathname.substr(0, pathname.length-1);
+		}
+
 		// $('a[href~="' + pathname.substr(pathname.lastIndexOf('/')+1) + '"]').addClass('active').after($toc);
 		$('a[href~="' + pathname + '"]').addClass('active').after($toc);
 
