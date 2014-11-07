@@ -204,8 +204,8 @@ boleto_barcode = transaction.boleto_barcode # código de barras do boleto bancá
 
 	$transaction->charge();
 
-	$boleto_url = transaction->boleto_url; // URL do boleto bancário
-	$boleto_barcode = transaction->boleto_barcode; // código de barras do boleto bancário
+	$boleto_url = $transaction->boleto_url; // URL do boleto bancário
+	$boleto_barcode = $transaction->boleto_barcode; // código de barras do boleto bancário
 ?>
 ```
 
