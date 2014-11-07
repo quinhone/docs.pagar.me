@@ -9,6 +9,14 @@ module RedcarpetHeaderFix
 
     "<h#{level} id='#{clean_id}'>#{text}</h1>"
   end
+
+  def self.included base
+	base.class_eval do
+	  def link(link, title, content)
+		middleman_app.relative_link_to(content, link)
+	  end
+	end
+  end
 end
 
 require 'middleman-core/renderers/redcarpet'
