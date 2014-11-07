@@ -9,6 +9,32 @@ search: true
 Seja bem-vindo a documentação do Pagar.me! Aqui você encontrará guias e
 referências sobre como usar nossa infraestrutura de pagamentos.
 
+### Endpoints e bibliotecas
+
+Nossa API é RESTful e todas as respostas são em JSON. Todas as requisições são
+feitas no endpoint:
+
+```
+https://api.pagar.me/1
+```
+
+Nos exemplos que você encontrará pela documentação, usaremos as nossas
+bibliotecas de Ruby e PHP. Para instalar a biblioteca de Ruby:
+
+```
+gem install pagarme
+```
+
+E a biblioteca de PHP:
+
+```
+composer install pagarme-php
+```
+
+Você também pode baixar a biblioteca PHP do nosso Github
+(`https://github.com/PagarMe/pagarme-php`) e copiá-la para a pasta do seu
+projeto.
+
 ### Para começar...
 
 Recomendamos que você leia o [guia sobre pagamento dentro do seu
