@@ -25,7 +25,7 @@ set :base_url, ''
 
 helpers do
   def relative_link_to(title, url)
-	url = settings.base_url + url unless url.index(':') # Find a better way of detecting if it's relative
+	url = settings.base_url + url if url[0] == '/'
 	link_to title, url
   end
 end
