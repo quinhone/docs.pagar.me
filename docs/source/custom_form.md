@@ -132,6 +132,8 @@ transaction = PagarMe::Transaction.new({
 })
 
 transaction.charge
+
+status = transaction.status # status da transação
 ```
 
 ```php
@@ -146,6 +148,8 @@ transaction.charge
 	));
 
 	$transaction->charge();
+
+	$status = $transaction->status; // status da transação
 ?>
 ```
 
@@ -182,6 +186,9 @@ transaction = PagarMe::Transaction.new({
 })
 
 transaction.charge
+
+boleto_url = transaction.boleto_url # URL do boleto bancário
+boleto_barcode = transaction.boleto_barcode # código de barras do boleto bancário
 ```
 
 ```php
@@ -196,6 +203,9 @@ transaction.charge
 	));
 
 	$transaction->charge();
+
+	$boleto_url = transaction->boleto_url; // URL do boleto bancário
+	$boleto_barcode = transaction->boleto_barcode; // código de barras do boleto bancário
 ?>
 ```
 
@@ -273,9 +283,9 @@ transaction.charge
 [RequestBin](http://requestb.in) para gerar URLs de POSTback de teste e
 visualizar as requisições enviadas pelo Pagar.me.</aside>
 
-Quando a `postback_url` é passada, as mudanças de status da transação serão
-enviadas para o seu servidor na URL de POSTback através de um request `HTTP
-POST` com os seguintes parâmetros:
+Quando a `postback_url` é passada, a transação será retornada com status
+`processing`, e as mudanças de status serão enviadas para o seu servidor na URL
+de POSTback, através de um request `HTTP POST` com os seguintes parâmetros:
 
 Parâmetro | Descrição | Valor padrão 
 --- | --- | ---------
