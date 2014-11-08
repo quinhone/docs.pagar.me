@@ -334,6 +334,7 @@ curl -X POST 'https://api.pagar.me/1/transactions' \
 	-d 'customer[document_number]=92545278157' \
 	-d 'customer[email]=jappleseed@apple.com' \
 	-d 'customer[address][street]=Av. Brigadeiro Faria Lima' \
+	-d 'customer[address][neighborhood]=Jardim Paulistano' \
 	-d 'customer[address][zipcode]=01452000' \
 	-d 'customer[address][street_number]=2941' \
 	-d 'customer[address][complementary]=8º andar' \
@@ -355,6 +356,7 @@ transaction = PagarMe::Transaction.new({
 		:email => "jappleseed@apple.com",
 		:address => {
 			:street => "Av. Brigadeiro Faria Lima",
+			:neighborhood => "Jardim Paulistano",
 			:zipcode => "01452000",
 			:street_number => "2941",
 			:complementary => "8º andar"
@@ -384,6 +386,7 @@ transaction.charge
 			"email" => "jappleseed@apple.com",
 			"address" => array(
 				"street" => "Av. Brigadeiro Faria Lima",
+				"neighborhood" => "Jardim Paulistano",
 				"zipcode" => "01452000",
 				"street_number" => "2941",
 				"complementary" => "8º andar"
