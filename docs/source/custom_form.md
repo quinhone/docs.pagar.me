@@ -169,7 +169,7 @@ card_hash | --- | Representação segura dos dados de cartão de crédito gerada
 installments | `1` | Número de parcelas a ser cobrado no cartão de crédito.
 payment_method | `credit_card` | Meio de pagamento a ser utilizado
 postback_url | --- | URL para receber notificações sobre alterações da transação ([saiba mais](#postback))
-soft-descriptor | --- | Texto (de até 13 caracteres) que será aparecerá na fatura do cartão do cliente ao lado do nome da sua loja
+soft_descriptor | --- | Texto (de até 13 caracteres) que será aparecerá na fatura do cartão do cliente ao lado do nome da sua loja
 capture | `true` | Passar `false` para apenas autorizar a transação e realizar a captura posteriormente
 
 ## Realizando uma transação de boleto bancário {#boleto-transaction}
