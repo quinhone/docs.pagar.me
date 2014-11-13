@@ -64,6 +64,25 @@ data-card-brands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceita
 data-max-installments | `1` | Número máximo de parcelas aceitas.
 data-ui-color | `#1a6ee1` | Cor primária da interface de Checkout.
 
+#### Enviando dados do cliente
+
+Caso você já possua os dados de seu cliente e configure o `data-customer-data` para `false`, eles poderão ser enviados para o `form`. 
+
+Tag | Padrão | Descrição
+--- | ------ | ---------
+data-customer-name | --- | Nome.
+data-customer-email | --- | Email.
+data-customer-document-number | --- | Número do documento (CPF/CNPJ).
+data-customer-address-street | --- | Rua.
+data-customer-address-street-number | --- | Número da Rua.
+data-customer-address-complementary | --- | Complemento.
+data-customer-address-neighborhood | --- | Bairro.
+data-customer-address-city | --- | Cidade.
+data-customer-address-state | --- | Estado.
+data-customer-address-zipcode | --- | CEP.
+data-customer-phone-ddd | --- | DDD.
+data-customer-phone-number | --- | Número do telefone.
+
 ## Capturando a transação
 
 Com o `token` em mãos, agora basta realizar a captura da transação no seu
