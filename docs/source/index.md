@@ -21,8 +21,10 @@ https://api.pagar.me/1
 ```
 
 Nos exemplos que você encontrará pela documentação, usaremos o
-[cURL](http://curl.haxx.se) e as nossas bibliotecas em [Ruby](https://github.com/pagarme/pagarme-ruby) e [PHP](https://github.com/pagarme/pagarme-php). Para
-instalar a biblioteca em Ruby:
+[cURL](http://curl.haxx.se) e as nossas bibliotecas em
+[Ruby](https://github.com/pagarme/pagarme-ruby) e
+[PHP](https://github.com/pagarme/pagarme-php). Para instalar a biblioteca em
+Ruby:
 
 ```
 gem install pagarme
@@ -34,11 +36,19 @@ projeto. Você também pode instalá-la usando o [Composer](https://getcomposer.
 
 ### Para começar...
 
-Recomendamos que você leia o [guia sobre pagamento dentro do seu
-site](/custom_form), que explica como realizar uma transação sem sair da sua
-página de maneira segura. Esse guia também mostra como gerar o `card_hash`, que
-é a forma do Pagar.me de transmitir os dados de cartão com segurança entre o
-browser do cliente e nós.
+Recomendamos que você comece lendo o [guia sobre como capturar os dados de
+cartão](/capturing-card-data), que explica como realizar a captura desses dados
+sem sair da sua página/aplicativo. Esse guia também mostra como gerar o
+`card_hash`, que é a forma do Pagar.me de transmitir os dados de cartão com
+segurança entre o seu cliente e nosso servidor.
+
+### Realizando uma transação
+
+A forma mais simples de usar o Pagar.me é simplesmente [realizando uma
+transação](/transactions) pelo seu servidor. No caso de transações de cartão de
+crédito, você deverá utilizar o `card_hash` gerado no browser/aplicativo do
+cliente para isso. Para transações de boletos bancários, o uso do `card_hash`
+não é necessário.
 
 ### Cobranças recorrentes
 
