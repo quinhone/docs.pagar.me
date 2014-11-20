@@ -21,8 +21,8 @@ lembrar seus dados de cartão.
 ## Armazenando um cartão {#storing-a-card}
 
 Para armazenar um cartão, basta passar um `card_hash` contendo os dados do
-cartão. Para mais informações sobre a geração do `card_hash`, veja nosso [guia
-de integração com formulário próprio](/custom_form). 
+cartão. Para mais informações sobre a geração do `card_hash`, veja como
+[realizar a captura dos dados de cartão](/capturing-card-data).
 
 Você deve armazenar o `id` do objeto `card` para realizar as cobranças futuras
 (veja abaixo).
