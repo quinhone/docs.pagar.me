@@ -163,5 +163,5 @@ if([errors count] != 0) {
 ## Próximos passos
 
 Com o `card_hash` em mãos no seu servidor, você pode [realizar uma
-transação](/transactions), [criar assinaturas](/plans-subscriptions) ou [armazenar
-esse cartão e cobrá-lo posteriormente](/cards).
+transação](/transactions), [criar uma assinatura](/plans-subscriptions) ou
+[armazenar esse cartão e cobrá-lo posteriormente](/cards).
