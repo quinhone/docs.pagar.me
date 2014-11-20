@@ -111,6 +111,55 @@ $(document).ready(function() { // quando o jQuery estiver carregado...
 > sua chave de encriptação disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
+## Capturando os dados em um aplicativo para iOS
+
+Para realizar a geração do `card_hash` dentro de um aplicativo para iOS, você
+precisará incluir nossa biblioteca dentro dele. Para isso, [baixe a biblioca
+para iOS no GitHub do
+Pagar.me](https://github.com/PagarMe/pagarme-ios/archive/master.zip), adicione
+a pasta `PagarMeAPI` e o framework `Security.framework` ao seu projeto.
+
+Para utilizar a biblitoca, primeiro importe os headers:
+
+```objective_c
+#import "PagarMe.h"
+```
+
+E para gerar o `card_hash` a partir dos dados de cartão:
+
+```objective_c
+[PagarMe sharedInstance].encryptionKey = @"ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk";
+
+PagarMeCreditCard *creditCard = [[PagarMeCreditCard alloc] init];
+creditCard.cardNumber = @"4111111111111111";
+creditCard.cardHolderName = @"Test User";
+creditCard.cardExpiracyMonth = 12;
+creditCard.cardExpiracyYear = 15;
+creditCard.cardCvv = @"123";
+
+// Valida os dados do cartão de crédito antes de gerar o card_hash...
+NSDictionary *errors = [creditCard fieldErrors];
+
+if([errors count] != 0) {
+    NSLog(@"Foram encontrados erros nos dados do cartão de crédito: ");
+    NSLog(@"%@", errors);
+} else {
+    [creditCard generateHash:^(NSError *error, NSString *cardHash) {
+        if(error) {
+            NSLog(@"Erro gerando o card_hash: %@", error);
+            return;
+        }
+
+        NSLog(@"card_hash gerado: %@", cardHash);
+        // Agora envie a string cardHash para o seu servidor.
+    }];
+}
+```
+
+> Não se esqueça de substituir `ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk` pela
+> sua chave de encriptação disponível no seu
+> [Dashboard](https://dashboard.pagar.me/).
+
 ## Próximos passos
 
 Com o `card_hash` em mãos no seu servidor, você pode [realizar uma
