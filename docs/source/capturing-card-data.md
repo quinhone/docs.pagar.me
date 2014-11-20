@@ -116,7 +116,7 @@ $(document).ready(function() { // quando o jQuery estiver carregado...
 Para realizar a geração do `card_hash` dentro de um aplicativo para iOS, você
 precisará incluir nossa biblioteca dentro dele. Para isso, [baixe a biblioca
 para iOS no GitHub do
-Pagar.me](https://github.com/PagarMe/pagarme-ios/archive/master.zip), adicione
+Pagar.me](https://github.com/PagarMe/pagarme-ios/archive/master.zip) e adicione
 a pasta `PagarMeAPI` e o framework `Security.framework` ao seu projeto.
 
 Para utilizar a biblitoca, primeiro importe os headers:
