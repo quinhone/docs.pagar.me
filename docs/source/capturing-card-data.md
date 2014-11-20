@@ -1,5 +1,5 @@
 ---
-title: Pagamento dentro do seu site
+title: Capturando os dados de cartão
 
 language_tabs:
   - shell
