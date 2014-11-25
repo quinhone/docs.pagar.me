@@ -55,7 +55,7 @@ plan.create
 
 	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-	$plan = new PagarMe_Transaction(array(
+	$plan = new PagarMe_Plan(array(
 		'amount' => 4990,
 		'days' => 30,
 		'name' => "Plano Mensal"
