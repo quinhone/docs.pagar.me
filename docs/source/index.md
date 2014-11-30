@@ -53,7 +53,7 @@ não é necessário.
 ### Cobranças recorrentes
 
 Se você precisa cobrar seus clientes de maneira recorrente, o Pagar.me suporta
-[planos e assinaturas](/plans_subscriptions). Com eles, basta nos dizer quanto,
+[planos e assinaturas](/plans-subscriptions). Com eles, basta nos dizer quanto,
 como e quando devemos cobrar seus clientes, e nós cuidaremos de todo o resto para
 você :-)
 
