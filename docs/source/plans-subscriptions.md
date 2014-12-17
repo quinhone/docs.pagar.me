@@ -325,3 +325,43 @@ current_status | Status da assinatura após o evento | ---
 old_status | Status da assinatura antes do evento | ---
 desired_status | Status desejado após o evento | `paid`
 fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba mais](/advanced#validando-a-origem-de-um-postback)) | ---
+
+## Cancelando uma assinatura
+
+Para cancelar uma assinatura basta fazer o seguinte:
+
+```shell
+curl -X POST 'https://api.pagar.me/1/subscriptions/{ID da Assinatura}/cancel' \
+    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+subscription = PagarMe::Subscription.find_by_id({ID da Assinatura})
+
+subscription.cancel # Subscription cancelada
+```
+
+```php
+<?php
+	require("pagarme-php/Pagarme.php");
+
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$subscription = PagarMe_Subscription::findById({ID da Assinatura});
+	$subscription->cancel(); // Cancel
+
+	if($subscription->getStatus() == 'canceled') {
+		// cancelado
+	}
+?>
+```
+
+> Não se esqueça de substituir:<br/>
+> - `{ID da Assinatura}` pelo ID da assinatura,<br/>
+> - `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela sua chave de API disponível
+>   no seu [Dashboard](https://dashboard.pagar.me/).
+
