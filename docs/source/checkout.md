@@ -62,6 +62,7 @@ data-customer-data | `true` | Caso não deseje capturar dados do cliente pelo Ch
 data-payment-methods | `credit_card,boleto` | Meios de pagamento disponíveis no Checkout.
 data-card-brands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceitas pelo Checkout.
 data-max-installments | `1` | Número máximo de parcelas aceitas.
+data-interest-rate | --- | Taxa de juros para parcelamento.
 data-ui-color | `#1a6ee1` | Cor primária da interface de Checkout.
 
 ## Capturando a transação
@@ -106,6 +107,39 @@ terá status `paid`, indicando que o cartão do usuário foi debitado com sucess
 Caso a transação seja um boleto bancário, a transação terá status
 `waiting_payment` e a URL do boleto bancário para pagamento estará disponível na
 variável `boleto_url`.
+
+### Capturando a transação com taxa de juros
+
+Para transações com `data-interest-rate`, você precisará calcular o novo valor do
+da transação incluindo os juros baseado no número de parcelas escolhido pelo cliente. 
+
+```shell
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+transaction = PagarMe::Transaction.find_by_id("{TOKEN}")
+transaction.capture(1000)
+```
+
+```php
+<?php
+	require("pagarme-php/Pagarme.php");
+
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$transaction = PagarMe_Transaction::findById("{TOKEN}");
+	
+	$installments = PagarMe_Transaction::calculateInstallmentsAmount(amount, data_interest_rate, $transaction->installments);
+
+	$amountWithFees = $installments["installments"][$transaction->installments]["amount"];
+	
+	$transaction->capture($amountWithFees);
+?>
+```
 
 <aside class="notice">Após a finalização da transação em sua página, você terá
 05 minutos para capturá-la no seu servidor. Após esse período, a transação será
