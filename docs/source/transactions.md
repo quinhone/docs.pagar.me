@@ -71,6 +71,10 @@ Após realizar uma transação de cartão de crédito, a mesma terá status
 Se a transação for recusada pelas operadoras de cartão, a mesma terá status
 `refused`.
 
+<aside class="notice">No ambiente de testes, você pode simular uma transação
+recusada pela operadora de cartão passando um `card_cvv` começando com
+`6`.</aside>
+
 ### Configurações da transação
 
 Tag | Padrão | Descrição
@@ -233,8 +237,12 @@ Para ter um maior controle dos seus clientes, principalmente através do
 Dashboard do Pagar.me, recomendamos que você também envie os dados do cliente
 ao realizar a transação.
 
-<aside class="notice">Para utilizar o recurso antifraude, é obrigatório o envio
-dos dados do cliente para o Pagar.me.</aside>
+Para utilizar o recurso antifraude, é obrigatório o envio
+dos dados do cliente para o Pagar.me.
+
+<aside class="notice">No ambiente de testes, você pode simular uma transação
+recusada pelo antifraude passando o `customer[document_number]` como
+`11111111111`.</aside>
 
 ```shell
 curl -X POST 'https://api.pagar.me/1/transactions' \
