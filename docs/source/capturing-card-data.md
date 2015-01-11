@@ -13,7 +13,7 @@ search: true
 
 Com o Pagar.me, você pode realizar a captura dos dados de cartão sem que o seu
 cliente precise sair da sua página/aplicativo. Para que o processo aconteça de
-forma segura, você precisará incluir nossa bibliote em sua página/aplicativo
+forma segura, você precisará incluir nossa biblioteca em sua página/aplicativo
 para realizar a captura desses dados.
 
 Nossa biblioteca irá realizar a geração do `card_hash`, que é uma representação
