@@ -65,6 +65,18 @@ card_id = card.id
 ?>
 ```
 
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Card card = new Card();
+
+card.CardHash = "{CARD_HASH}";
+
+card.Save();
+
+string cardId = card.Id;
+```
+
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
@@ -99,6 +111,14 @@ card_id = transaction.card.id
 	$transaction = PagarMe_Transaction::findById("{ID DA TRANSAÇÃO}"),
 	$card_id = $transaction->card->id;
 ?>
+```
+
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = PagarMeService.GetDefaultService().Cards.Find("{ID DA TRANSAÇÃO}");
+string cardId = transaction.Card.Id;
 ```
 
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
@@ -144,6 +164,17 @@ transaction.charge
 
 	$transaction->charge();
 ?>
+```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 1000;
+transaction.Card = PagarMeService.GetDefaultService().Cards.Find("{ID DO CARTÃO}");
+
+transaction.Save();
 ```
 
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela

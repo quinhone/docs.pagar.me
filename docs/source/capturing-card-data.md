@@ -160,6 +160,36 @@ if([errors count] != 0) {
 > sua chave de encriptação disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
+## Capturando os dados em um aplicativo para Windows ou Windows Phone(.NET)
+
+Para realizar a geração do `card_hash` dentro de um aplicativo para Windows ou Windows Phone(plataforma .NET)
+você precisará incluir nossa biblioteca dentro dele. Para isso, instale a [biblioteca .NET](https://www.nuget.org/packages/Pagar.me/) ou a [biblioteca portável para .NET](https://www.nuget.org/packages/Portable.Pagar.me/).
+
+Para utilizar a biblitoeca, primeiro importe o namespace:
+
+```cs
+using PagarMe;
+```
+
+E para gerar o `card_hash` a partir dos dados de cartão:
+
+```cs
+PagarMeService.DefaultEncryptionKey = "ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk";
+
+CardHash card = new CardHash();
+
+card.CardNumber = "4111111111111111"c;
+card.CardHolderName = "Test User";
+card.CardExpirationDate = "1017";
+card.CardCvv = "123";
+
+string cardhash = card.Generate();
+```
+
+> Não se esqueça de substituir `ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk` pela
+> sua chave de encriptação disponível no seu
+> [Dashboard](https://dashboard.pagar.me/).
+
 ## Próximos passos
 
 Com o `card_hash` em mãos no seu servidor, você pode [realizar uma

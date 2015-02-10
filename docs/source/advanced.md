@@ -111,5 +111,22 @@ transaction.charge
 	$transaction->charge();
 ?>
 ```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+AbstractModel metadata = new AbstractModel();
+
+metadata["id_pedido"] = 12345;
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 1000;
+transaction.CardHash = "{CARD HASH}";
+transaction.Metadata = metadata;
+
+transaction.Save();
+```
+
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).

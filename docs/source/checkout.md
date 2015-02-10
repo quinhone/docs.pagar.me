@@ -96,6 +96,13 @@ transaction.capture(1000)
 ?>
 ```
 
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = PagarMeService.GetDefaultService().Transactions.Find("{TOKEN}");
+transaction.Capture(1000);
+```
+
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).

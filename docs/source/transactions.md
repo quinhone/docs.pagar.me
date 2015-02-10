@@ -62,6 +62,19 @@ status = transaction.status # status da transação
 ?>
 ```
 
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 1000;
+transaction.CardHash = "{CARD HASH}";
+
+transaction.Save();
+
+TransactionStatus status = transaction.Status;
+```
+
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
@@ -132,6 +145,20 @@ boleto_barcode = transaction.boleto_barcode # código de barras do boleto bancá
 	$boleto_url = $transaction->boleto_url; // URL do boleto bancário
 	$boleto_barcode = $transaction->boleto_barcode; // código de barras do boleto bancário
 ?>
+```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 1000;
+transaction.PaymentMethod = PaymentMethod.Boleto;
+
+transaction.Save();
+
+string boletoUrl = transaction.BoletoUrl;
+string boletoBarcode = transaction.BoletoBarcode;
 ```
 
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
@@ -208,6 +235,18 @@ transaction.charge
 
 	$transaction->charge();
 ?>
+```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 1000;
+transaction.CardHash = "{CARD HASH}";
+transaction.PostbackUrl = "http://seusite.com/payments/2718";
+
+transaction.Save();
 ```
 
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
@@ -320,5 +359,33 @@ transaction.charge
 	$transaction->charge();
 ?>
 ```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 1000;
+transaction.CardHash = "{CARD HASH}";
+transaction.Customer = new Customer() {
+	Name = "John Appleseed",
+	DocumentNumber = "92545278157",
+	Email = "jappleseed@apple.com",
+	Address = new Address() {
+		Street = "Av. Brigadeiro Faria Lima",
+		Neighborhood = "Jardim Paulistano",
+		Zipcode = "01452000",
+		StreetNumber = "2941",
+		Complementary = "8º andar"
+	},
+	Phone = new Phone() {
+		Ddd => "11",
+		Number => "30713261"
+	}
+};
+
+transaction.Save();
+```
+
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
