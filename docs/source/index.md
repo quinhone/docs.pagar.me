@@ -23,12 +23,19 @@ https://api.pagar.me/1
 Nos exemplos que você encontrará pela documentação, usaremos o
 [cURL](http://curl.haxx.se) e as nossas bibliotecas em
 [Ruby](https://github.com/pagarme/pagarme-ruby),
-[PHP](https://github.com/pagarme/pagarme-php) e [C\#](https://github.com/pagarme/pagarme-net). Para instalar a biblioteca em
-Ruby:
+[PHP](https://github.com/pagarme/pagarme-php) e [C\#](https://github.com/pagarme/pagarme-net). 
+
+#### Integração Ruby
+
+Para instalar a biblioteca em Ruby:
 
 ```
 gem install pagarme
 ```
+
+Você pode conferir o código-fonte [aqui](https://github.com/pagarme/pagarme-ruby).
+
+#### Integração PHP
 
 Para instalar a biblioteca PHP, basta [baixá-la do nosso
 Github](https://github.com/pagarme/pagarme-php) e copiá-la para a pasta do seu
