@@ -400,7 +400,7 @@ curl -X POST 'https://api.pagar.me/1/transactions/:id/refund' \
 ```
 
 ```ruby
-transaction = PagarMe::Transaction.find_by_id("517035290039fc26d9000024")
+transaction = PagarMe::Transaction.find_by_id("{ID}")
 transaction.refund
 
 transaction.status
@@ -408,11 +408,15 @@ transaction.status
 ```
 
 ```php
-$transaction = PagarMe_Transaction::findById("1654");
+<?php
+
+$transaction = PagarMe_Transaction::findById("{ID}");
 $transaction->refund();
 
 $transaction->getStatus();
 // "refunded"
+
+?>
 ```
 
 ```cs
