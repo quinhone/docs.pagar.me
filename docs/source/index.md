@@ -25,7 +25,7 @@ Nos exemplos que você encontrará pela documentação, usaremos o
 [Ruby](https://github.com/pagarme/pagarme-ruby),
 [PHP](https://github.com/pagarme/pagarme-php) e [C\#](https://github.com/pagarme/pagarme-net). 
 
-#### Integração Ruby
+### Integração Ruby
 
 Para instalar a biblioteca em Ruby:
 
@@ -35,7 +35,7 @@ gem install pagarme
 
 Você pode conferir o código-fonte [aqui](https://github.com/pagarme/pagarme-ruby).
 
-#### Integração PHP
+### Integração PHP
 
 Para instalar a biblioteca PHP, basta [baixá-la do nosso
 Github](https://github.com/pagarme/pagarme-php) e copiá-la para a pasta do seu
@@ -45,7 +45,9 @@ projeto. Você também pode instalá-la usando o [Composer](https://getcomposer.
 
 Inicie lendo o [guia sobre como capturar os dados de
 cartão](/capturing-card-data), que explica como realizar a captura desses dados
-sem sair da sua página/aplicativo. Esse guia também mostra como gerar o
+sem sair da sua página/aplicativo. 
+
+Esse guia também mostra como gerar o
 `card_hash`, que é a forma do Pagar.me de transmitir os dados de cartão com
 segurança entre o seu cliente e nosso servidor.
 
