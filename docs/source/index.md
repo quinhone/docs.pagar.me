@@ -43,7 +43,7 @@ projeto. Você também pode instalá-la usando o [Composer](https://getcomposer.
 
 ### Para começar...
 
-Recomendamos que você comece lendo o [guia sobre como capturar os dados de
+Inicie lendo o [guia sobre como capturar os dados de
 cartão](/capturing-card-data), que explica como realizar a captura desses dados
 sem sair da sua página/aplicativo. Esse guia também mostra como gerar o
 `card_hash`, que é a forma do Pagar.me de transmitir os dados de cartão com
