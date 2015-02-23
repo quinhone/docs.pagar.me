@@ -389,3 +389,40 @@ transaction.Save();
 
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
+
+## Cancelando uma Transação {#refund}
+
+Para cancelar uma transação, ou seja, fazer um estorno, você deve enviar uma requisição `POST` para a rota `/transactions/:id/refund`, onde `:id` é o `id` da transação.
+
+```shell
+curl -X POST 'https://api.pagar.me/1/transactions/:id/refund' \
+    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+transaction = PagarMe::Transaction.find_by_id("517035290039fc26d9000024")
+transaction.refund
+
+transaction.status
+# refunded
+```
+
+```php
+$transaction = PagarMe_Transaction::findById("1654");
+$transaction->refund();
+
+$transaction->getStatus();
+// "refunded"
+```
+
+```cs
+var transaction = PagarMeService.GetDefaultService().Transactions.Find();
+
+transaction.Refund();
+
+TransactionStatus status = transaction.Status;
+// TransactionStatus.Refunded
+```
+
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
