@@ -27,14 +27,44 @@ https://api.pagar.me/1/
 
 # Transações
 
-Através da rota `/transactions` e suas derivadas, você pode realizar as seguintes ações:
+Através da rota `/transactions` e suas derivadas, você pode criar transações, estornar, capturar, dentre outras atividades relacionadas a estas.
 
-* Criar uma transação (para pagamentos por cartão de crédito ou boleto bancário)
-* Calcular as prestações de pagamentos parcelados
-* Fazer o estorno de alguma transação
-* Fazer a captura de alguma transação previamente autorizada
-* Verificar o resultado da análise do antifraude
-* Pegar uma nova chave para encriptar o card_hash
-* Verificar uma transação efetuada
-* Atualizar uma transação
-* Receber a mensagem de recusa de uma transação
+## Calculando Pagamentos Parcelados
+
+**Rota**: `/transactions/calculate_installments_amount`
+
+**Finalidade**: Usada para calcular o valor de cada uma das parcelas de uma compra.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--:|:--:|:--:|:--:|
+| `max_installments` | Sim | 12 | Valor máximo de parcelas |
+| `free_installments` | Não | 1 | Número de parcelas isentas de juros |
+| `interest_rate` | Sim | - | Valor da taxa de juros |
+| `amount` | Sim | - | Valor do produto/serviço vendido |
+
+Exemplo da rota: `https://api.pagar.me/1/transactions/calculate_installments_amount?api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0&max_installments=3&free_installments=1&interest_rate=13&amount=1300`
+
+JSON retornado:
+
+```js
+{
+    "installments": {
+        "1": {
+            "installment": 1,
+            "amount": 1300,
+            "installment_amount": 1300
+        },
+        "2": {
+            "installment": 2,
+            "amount": 1615,
+            "installment_amount": 807
+        },
+        "3": {
+            "installment": 3,
+            "amount": 1757,
+            "installment_amount": 586
+        }
+    }
+}
+```
+
