@@ -6,12 +6,6 @@ language_tabs:
   - ruby
   - php
 
-toc_footers:
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
-
 search: true
 ---
 
@@ -25,7 +19,7 @@ A primeira coisa que você deve saber é o endpoint que usamos:
 https://api.pagar.me/1/
 `
 
-# Transações
+# Transações 
 
 Através da rota `/transactions` e suas derivadas, você pode criar transações, estornar, capturar, dentre outras atividades relacionadas a estas.
 
@@ -75,3 +69,12 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 }
 ```
 
+## Estorno de transação
+
+**Rota**: `/transactions/:id/refund`
+
+**Finalidade**: Faz o cancelamento de uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+|||||
