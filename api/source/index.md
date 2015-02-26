@@ -5,6 +5,7 @@ language_tabs:
   - shell
   - ruby
   - php
+  - csharp
 
 search: true
 ---
@@ -25,6 +26,81 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
 
 ## Criando uma transação
 
+```shell
+curl -X POST https://api.pagar.me/1/transactions \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'amount=3100' \
+-d 'card_id=card_ci6l9fx8f0042rt16rtb477gj' \
+-d 'postback_url=http://requestb.in/pkt7pgpk' \
+-d 'payment_method=boleto' \
+-d 'boleto_expiration_date=1426215600000'
+-d 'metadata[idProduto]=13933139'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+transaction = PagarMe::Transaction.new({
+    :amount => 3100,
+    :payment_method => "boleto",
+    :card_id => "card_ci6l9fx8f0042rt16rtb477gj",
+    :postback_url => "http://requestb.in/pkt7pgpk",
+    :payment_method => boleto,
+    :boleto_expiration_date => 1426215600000,
+    :metadata[idProduto] => 13933139
+})
+
+transaction.charge
+
+boleto_url = transaction.boleto_url # URL do boleto bancário
+boleto_barcode = transaction.boleto_barcode # código de barras do boleto bancário
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = new PagarMe_Transaction(array(
+        "amount" => 3100,
+        "payment_method' => "boleto",
+        "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+        "postback_url" => "http://requestb.in/pkt7pgpk",
+        "payment_method" => "boleto",
+        "boleto_expiration_date" => 1426215600000,
+        "metadata" => array(
+            "idProduto" => 13933139
+        )
+    ));
+
+    $transaction->charge();
+
+    $boleto_url = $transaction->boleto_url; // URL do boleto bancário
+    $boleto_barcode = $transaction->boleto_barcode; // código de barras do boleto bancário
+?>
+```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 3100;
+transaction.CardHash = "{CARD HASH}";
+transaction.PostbackUrl = "http://requestb.in/pkt7pgpk";
+transaction.BoletoExpirationDate = "1426215600000";
+transaction.Metadata = new Metadata() {
+    IdProduto = 13933139
+};
+
+transaction.Save();
+
+TransactionStatus status = transaction.Status;
+```
+
 **Rota**: `POST` `/transactions`
 
 **Finalidade**: Cria uma transação.
@@ -43,11 +119,65 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
 | `capture` | Não | `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
 | `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
 
+### JSON retornado (exemplo):
+
+```json
+{
+  "object": "transaction",
+  "status": "processing",
+  "refuse_reason": null,
+  "status_reason": "acquirer",
+  "acquirer_response_code": null,
+  "authorization_code": null,
+  "soft_descriptor": "testeDeAPI",
+  "tid": null,
+  "nsu": null,
+  "date_created": "2015-02-25T21:54:56.000Z",
+  "date_updated": "2015-02-25T21:54:56.000Z",
+  "amount": 310000,
+  "installments": 5,
+  "id": 184220,
+  "cost": 0,
+  "card_holder_name": "Api Customer",
+  "card_last_digits": "3123",
+  "card_first_digits": "548045",
+  "card_brand": "mastercard",
+  "postback_url": "http://requestb.in/pkt7pgpk",
+  "payment_method": "credit_card",
+  "antifraud_score": null,
+  "boleto_url": null,
+  "boleto_barcode": null,
+  "boleto_expiration_date": null,
+  "referer": "api_key",
+  "ip": "189.8.94.42",
+  "subscription_id": null,
+  "phone": null,
+  "address": null,
+  "customer": null,
+  "card": {
+    "object": "card",
+    "id": "card_ci6l9fx8f0042rt16rtb477gj",
+    "date_created": "2015-02-25T21:54:56.000Z",
+    "date_updated": "2015-02-25T21:54:56.000Z",
+    "brand": "mastercard",
+    "holder_name": "Api Customer",
+    "first_digits": "548045",
+    "last_digits": "3123",
+    "fingerprint": "HSiLJan2nqwn",
+    "valid": null
+  },
+  "metadata": {
+    "nomeData": "API Doc Test",
+    "idData": 13
+  }
+}
+```
+
 ## Calculando Pagamentos Parcelados
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
--d 'api_key=ak_test_KGXIjQ4GicOa2BLGZrDRTR5qNQxDWo' \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0 \
 -d 'max_installments=3' \
 -d 'free_installments=1' \
 -d 'interest_rate=13' \
