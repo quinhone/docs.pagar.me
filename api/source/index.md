@@ -23,6 +23,26 @@ https://api.pagar.me/1/
 
 Através da rota `/transactions` e suas derivadas, você pode criar transações, estornar, capturar, dentre outras atividades relacionadas a estas.
 
+## Criando uma transação
+
+**Rota**: `POST` `/transactions`
+
+**Finalidade**: Cria uma transação.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `amount` | Sim | - | Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = `1000` |
+| `card_hash` | Sim\* | - | Informações do cartão do cliente criptografadas no navegador. <br>**ps**: Para os dados do cartão você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
+| `card_id` | Sim\* | - | Ao realizar uma transação, retornamos o `card_id` do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do `card_hash` |
+| `payment_method` | Não | `credit_card` | Aceita dois tipos de pagamentos/valores: `credit_card` e `boleto` |
+| `postback_url` | Não | - | Endpoint do seu sistema que receberá informações a cada atualização da transação |
+| `installments` | Não | Mínimo: 1 Máximo: 12 | Se o pagamento for boleto, o padrão é 1 |
+| `boleto_expiration_date` | Não | Data atual + 7 dias | Prazo limite para pagamento do boleto |
+| `soft_descriptor` | Não | - | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
+| `capture` | Não | `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
+| `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
+
 ## Calculando Pagamentos Parcelados
 
 ```shell
@@ -34,7 +54,7 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 -d 'amount=1300'
 ```
 
-**Rota**: `/transactions/calculate_installments_amount`
+**Rota**: `GET` `/transactions/calculate_installments_amount`
 
 **Finalidade**: Usada para calcular o valor de cada uma das parcelas de uma compra.
 
