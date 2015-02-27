@@ -101,7 +101,9 @@ transaction.Save();
 TransactionStatus status = transaction.Status;
 ```
 
-**Rota**: `POST` `/transactions`
+**Rota**: `https://api.pagar.me/1/transactions`
+
+**Método**: `POST`
 
 **Finalidade**: Cria uma transação.
 
@@ -173,6 +175,75 @@ TransactionStatus status = transaction.Status;
 }
 ```
 
+**ps**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
+
+## Retornando uma Transação
+
+**Rota**:  `https://api.pagar.me/1/transactions/:id`
+
+**Método**: `GET`
+
+**Funcionalidade**: Retorna os dados de uma transação realizada
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/194351 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+### JSON Retornado (exemplo):
+
+```json
+{
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-02-26T15:35:32.000Z",
+    "date_updated": "2015-02-26T15:35:47.000Z",
+    "amount": 25000,
+    "installments": 1,
+    "id": 184270,
+    "cost": 115,
+    "card_holder_name": null,
+    "card_last_digits": null,
+    "card_first_digits": null,
+    "card_brand": null,
+    "postback_url": null,
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": "https://pagar.me",
+    "boleto_barcode": "1234 5678",
+    "boleto_expiration_date": "2015-03-02T03:00:00.000Z",
+    "referer": "session_id",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": null,
+    "metadata": {}
+}
+```
+
 ## Calculando Pagamentos Parcelados
 
 ```shell
@@ -184,7 +255,9 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 -d 'amount=1300'
 ```
 
-**Rota**: `GET` `/transactions/calculate_installments_amount`
+**Rota**: `https://api.pagar.me/1/transactions/calculate_installments_amount`
+
+**Método**: `GET`
 
 **Finalidade**: Usada para calcular o valor de cada uma das parcelas de uma compra.
 
