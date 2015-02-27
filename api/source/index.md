@@ -416,6 +416,41 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 }]
 ```
 
+## Notificando cliente sobre boleto à ser pago
+
+```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'email=seu@email.com'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+**Rota**: `https://api.pagar.me/1/transactions/:id/collect_payment`
+
+**Método**: `POST`
+
+**Finalidade**: Envia o link de um boleto pendente para o cliente.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação |
+| `email` | Sim | - | email a ser enviado o link do boleto |
+
+### JSON Retornado (Exemplo)
+
+```json
+
+```
+
 ## Estorno de transação
 
 ```shell
