@@ -26,6 +26,14 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
 
 ## Criando uma transação
 
+> Rota
+
+```
+POST https://api.pagar.me/1/transactions
+```
+
+> Exemplo de Requisição
+
 ```shell
 curl -X POST https://api.pagar.me/1/transactions \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
@@ -101,11 +109,7 @@ transaction.Save();
 TransactionStatus status = transaction.Status;
 ```
 
-**Rota**: `https://api.pagar.me/1/transactions`
-
-**Método**: `POST`
-
-**Finalidade**: Cria uma transação.
+Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua transação, que pode ser feita por cartão de crédito ou por boleto bancário.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -121,7 +125,7 @@ TransactionStatus status = transaction.Status;
 | `capture` | Não | `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
 | `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
 
-### JSON retornado (exemplo):
+> JSON retornado (exemplo):
 
 ```json
 {
@@ -179,11 +183,13 @@ TransactionStatus status = transaction.Status;
 
 ## Retornando uma Transação
 
-**Rota**:  `https://api.pagar.me/1/transactions/:id`
+> Rota
 
-**Método**: `GET`
+```
+GET https://api.pagar.me/1/transactions/:id
+```
 
-**Funcionalidade**: Retorna os dados de uma transação realizada
+> Exemplo de Requisição
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/194351 \
@@ -204,7 +210,11 @@ curl -X GET https://api.pagar.me/1/transactions/194351 \
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `:id` | Sim | - | id da transação previamente criada |
 
-### JSON Retornado (exemplo):
+
+Retorna os dados de uma transação realizada
+
+
+> JSON Retornado (exemplo):
 
 ```json
 {
@@ -247,6 +257,14 @@ curl -X GET https://api.pagar.me/1/transactions/194351 \
 
 ## Calculando Pagamentos Parcelados
 
+> Rota
+
+```
+GET https://api.pagar.me/1/transactions/calculate_installments_amount
+```
+
+> Exemplo de Requisição 
+
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0 \
@@ -256,11 +274,7 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 -d 'amount=1300'
 ```
 
-**Rota**: `https://api.pagar.me/1/transactions/calculate_installments_amount`
-
-**Método**: `GET`
-
-**Finalidade**: Usada para calcular o valor de cada uma das parcelas de uma compra.
+Usada para calcular o valor de cada uma das parcelas de uma compra.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -270,7 +284,7 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 | `interest_rate` | Sim | - | Valor da taxa de juros |
 | `amount` | Sim | - | Valor do produto/serviço vendido |
 
-### JSON retornado (exemplo):
+> JSON retornado (exemplo):
 
 ```json
 {
@@ -296,6 +310,14 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 
 ## Gerando uma nova chave para encriptação do `card_hash`
 
+> Rota
+
+```
+GET https://api.pagar.me/1/transactions/card_hash_key
+```
+
+> Exemplo de Requisição 
+
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
@@ -314,13 +336,9 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
-**Rota**: `https://api.pagar.me/1/transactions/card_hash_key`
+-Adicionar descrição-
 
-**Método**: `GET`
-
-**Finalidade**: -
-
-### JSON Retornado (Exemplo)
+> JSON Retornado (Exemplo)
 
 ```json
 {
@@ -332,6 +350,14 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 ```
 
 ## Retorna uma análise antifraude
+
+> Rota
+
+```
+GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
+```
+
+> Exemplo de Requisição 
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456 \
@@ -347,11 +373,7 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 ```cs
 ```
 
-**Rota**: `https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id`
-
-**Método**: `GET`
-
-**Finalidade**: Retorna uma análise antifraude específica realizada em uma transação.
+Retorna uma análise antifraude específica realizada em uma transação.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -359,7 +381,7 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 | `:transaction_id` | Sim | - | id da transação |
 | `:id` | Sim | - | id da análise previamente feita |
 
-### JSON Retornado (Exemplo)
+> JSON Retornado (Exemplo)
 
 ```json
 {
@@ -376,6 +398,14 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 
 ## Retorna todas as análises antifraude
 
+> Rota
+
+```
+GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses
+```
+
+> Exemplo de Requisição 
+
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
@@ -390,18 +420,14 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 ```cs
 ```
 
-**Rota**: `https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses`
-
-**Método**: `GET`
-
-**Finalidade**: Retorna todas as análises antifraude realizadas em uma transação.
+Retorna todas as análises antifraude realizadas em uma transação.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `:transaction_id` | Sim | - | id da transação |
 
-### JSON Retornado (Exemplo)
+> JSON Retornado (Exemplo)
 
 ```json
 [{
@@ -418,6 +444,14 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 
 ## Notificando cliente sobre boleto à ser pago
 
+> Rota
+
+```
+POST https://api.pagar.me/1/transactions/:id/collect_payment
+```
+
+> Exemplo de Requisição 
+
 ```shell
 curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
@@ -433,11 +467,7 @@ curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
 ```cs
 ```
 
-**Rota**: `https://api.pagar.me/1/transactions/:id/collect_payment`
-
-**Método**: `POST`
-
-**Finalidade**: Envia o link de um boleto pendente para o cliente.
+Envia o link de um boleto pendente para o cliente.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -445,13 +475,21 @@ curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
 | `:id` | Sim | - | id da transação |
 | `email` | Sim | - | email a ser enviado o link do boleto |
 
-### JSON Retornado (Exemplo)
+> JSON Retornado (Exemplo)
 
 ```json
 
 ```
 
-## Estorno de transação
+## Capturando uma transação posteriormente
+
+> Rota
+
+```
+POST https://api.pagar.me/1/transactions/:id/capture
+```
+
+> Exemplo de Requisição 
 
 ```shell
 ```
@@ -465,17 +503,47 @@ curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
 ```cs
 ```
 
-**Rota**: `https://api.pagar.me/1/transactions/:id/refund`
-
-**Método**: ``
-
-**Finalidade**: Faz o cancelamento de uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
+Você pode capturar o valor de uma transação após a autorização desta, no prazo máximo de 5 dias após a autorização.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
-### JSON Retornado (Exemplo)
+> JSON Retornado (Exemplo)
+
+```json
+
+```
+
+## Estorno de transação
+
+> Rota
+
+```
+POST https://api.pagar.me/1/transactions/:id/refund
+```
+
+> Exemplo de Requisição 
+
+```shell
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Faz o cancelamento de uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
 
 ```json
 
