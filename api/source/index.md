@@ -331,7 +331,7 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 }
 ```
 
-## Retorna a análise antifraude de uma transação
+## Retorna uma análise antifraude
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456 \
@@ -351,7 +351,7 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 
 **Método**: `GET`
 
-**Finalidade**: Retorna uma análise antifraude específica.
+**Finalidade**: Retorna uma análise antifraude específica realizada em uma transação.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -372,6 +372,48 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 	"date_updated": "date_updated",
 	"id": "id"
 }
+```
+
+## Retorna todas as análises antifraude
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+**Rota**: `https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses`
+
+**Método**: `GET`
+
+**Finalidade**: Retorna todas as análises antifraude realizadas em uma transação.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | id da transação |
+
+### JSON Retornado (Exemplo)
+
+```json
+[{
+	"object": "antifraud_analysis",
+	"name": "name",
+	"score": "score",
+	"cost": "cost",
+	"status": "status",
+	"date_created": "date_created",
+	"date_updated": "date_updated",
+	"id": "id"
+}]
 ```
 
 ## Estorno de transação
