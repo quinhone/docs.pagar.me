@@ -263,6 +263,7 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `max_installments` | Sim | 12 | Valor máximo de parcelas |
 | `free_installments` | Não | 1 | Número de parcelas isentas de juros |
 | `interest_rate` | Sim | - | Valor da taxa de juros |
@@ -292,12 +293,69 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 }
 ```
 
+## Gerando uma nova chave para encriptação do `card_hash`
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+**Rota**: `https://api.pagar.me/1/transactions/card_hash_key`
+
+**Método**: `GET`
+
+**Finalidade**: -
+
+### JSON Retornado (Exemplo)
+
+```json
+{
+    "date_created": "2015-02-27T15:44:26.000Z",
+    "id": 111111,
+    "ip": "000.0.00.00",
+    "public_key": "-----BEGIN PUBLIC KEY-----\ -----END PUBLIC KEY-----\ "
+}
+```
+
 ## Estorno de transação
 
+```shell
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
 **Rota**: `/transactions/:id/refund`
+
+**Método**: ``
 
 **Finalidade**: Faz o cancelamento de uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
-|||||
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+### JSON Retornado (Exemplo)
+
+```json
+
+```
