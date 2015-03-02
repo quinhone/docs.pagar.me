@@ -492,6 +492,8 @@ POST https://api.pagar.me/1/transactions/:id/capture
 > Exemplo de Requisição 
 
 ```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/capture \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
 ```
 
 ```ruby
@@ -508,11 +510,61 @@ Você pode capturar o valor de uma transação após a autorização desta, no p
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | Id da transação a ser capturada |
 
 > JSON Retornado (Exemplo)
 
 ```json
-
+{
+    "object": "transaction",
+    "status": "authorized",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "132534",
+    "soft_descriptor": "testeDeApi",
+    "tid": "1425302906112",
+    "nsu": "1425302906112",
+    "date_created": "2015-03-02T13:28:25.000Z",
+    "date_updated": "2015-03-02T13:28:26.000Z",
+    "amount": 130000,
+    "installments": 1,
+    "id": 184622,
+    "cost": 0,
+    "card_holder_name": "Api Customer",
+    "card_last_digits": "3123",
+    "card_first_digits": "548045",
+    "card_brand": "mastercard",
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6l9fx8f0042rt16rtb477gj",
+        "date_created": "2015-02-25T21:54:56.000Z",
+        "date_updated": "2015-02-25T21:54:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {
+        "nomeData": "API Doc test",
+        "idData": "13"
+    }
+}
 ```
 
 ## Estorno de transação
