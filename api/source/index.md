@@ -578,6 +578,15 @@ POST https://api.pagar.me/1/transactions/:id/refund
 > Exemplo de Requisição 
 
 ```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/refund \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```shell
+# Estorno de transação paga com boleto bancário
+
+curl -X POST https://api.pagar.me/1/transactions/314578/refund \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
 ```
 
 ```ruby
@@ -589,14 +598,76 @@ POST https://api.pagar.me/1/transactions/:id/refund
 ```cs
 ```
 
-Faz o cancelamento de uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
+Essa rota é utilizada quando se deseja estornar uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
+
+Em caso de estorno de uma transação realizada com cartão de crédito, apenas o `id` da transação é necessário para efetivação do estorno.
+
+Caso a compra tenha sido feita por boleto bancário, você precisará passar os dados da conta bancária que irá receber o valor estornado, ou o id desta conta, que pode ser gerada através da rota `/bank_accounts`.  
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação |
+| `bank_account_id` | Sim\* | - | Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode [criar uma conta]() ou passar os dados da conta via parâmetros |
+| `bank_code` | Sim\* | - | Dígitos que identificam cada banco. Confira a lista dos bancos [aqui](http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp) |
+| `agencia` | Sim\* | - | Número da agência bancária |
+| `agencia_dv` | Não | - | Digito verificador da agência. Obrigatório caso o banco o utilize |
+| `conta` | Sim\* | - | Número da conta |
+| `conta_dv` | Não | - | Dígito verificador da conta. Obrigatório caso o banco o utilize |
+| `document_number` | Sim\* | - | Número do boleto a ser estornado |
+| `legal_name` | Sim\* | - | Nome/razão social do dono da conta bancária |
 
 > JSON Retornado (Exemplo)
 
 ```json
-
+{
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "634306",
+    "soft_descriptor": "testeDeApi",
+    "tid": "1425302928963",
+    "nsu": "1425302928963",
+    "date_created": "2015-03-02T13:28:48.000Z",
+    "date_updated": "2015-03-02T13:37:56.000Z",
+    "amount": 130000,
+    "installments": 1,
+    "id": 184623,
+    "cost": 2000,
+    "card_holder_name": "Api Customer",
+    "card_last_digits": "3123",
+    "card_first_digits": "548045",
+    "card_brand": "mastercard",
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6l9fx8f0042rt16rtb477gj",
+        "date_created": "2015-02-25T21:54:56.000Z",
+        "date_updated": "2015-02-25T21:54:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {
+        "nomeData": "API Doc test",
+        "idData": "13"
+    }
+}
 ```
