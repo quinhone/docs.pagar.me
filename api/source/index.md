@@ -586,7 +586,13 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund \
 # Estorno de transação paga com boleto bancário
 
 curl -X POST https://api.pagar.me/1/transactions/314578/refund \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'bank_account[bank_code]=111' \
+-d 'bank_account[agencia]=1234' \
+-d 'bank_account[conta]=09876' \
+-d 'bank_account[conta_dv]=1' \
+-d 'bank_account[document_number]=12312312312' \
+-d 'bank_account[legal_name]=joao miranda'
 ```
 
 ```ruby
@@ -614,10 +620,10 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 | `agencia_dv` | Não | - | Digito verificador da agência. Obrigatório caso o banco o utilize |
 | `conta` | Sim\* | - | Número da conta |
 | `conta_dv` | Não | - | Dígito verificador da conta. Obrigatório caso o banco o utilize |
-| `document_number` | Sim\* | - | Número do boleto a ser estornado |
-| `legal_name` | Sim\* | - | Nome/razão social do dono da conta bancária |
+| `document_number` | Sim\* | - | CPF ou CNPJ do favorecido |
+| `legal_name` | Sim\* | - | Nome/razão social do favorecido |
 
-> JSON Retornado (Exemplo)
+> JSON Retornado - Estorno de Cartão de Crédito (Exemplo)
 
 ```json
 {
@@ -669,5 +675,57 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
         "nomeData": "API Doc test",
         "idData": "13"
     }
+}
+```
+
+> JSON Retornado - Estorno de Boleto Bancário (Exemplo)
+
+```json
+{
+    "object": "transaction",
+    "status": "pending_refund",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-02-26T19:50:38.000Z",
+    "date_updated": "2015-03-02T17:38:10.000Z",
+    "amount": 3100000,
+    "installments": 1,
+    "id": 184306,
+    "cost": 115,
+    "card_holder_name": null,
+    "card_last_digits": null,
+    "card_first_digits": null,
+    "card_brand": null,
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": "https://pagar.me",
+    "boleto_barcode": "1234 5678",
+    "boleto_expiration_date": "2015-03-13T03:00:00.000Z",
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6l9fx8f0042rt16rtb477gj",
+        "date_created": "2015-02-25T21:54:56.000Z",
+        "date_updated": "2015-02-25T21:54:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {}
 }
 ```
