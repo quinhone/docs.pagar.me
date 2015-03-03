@@ -918,3 +918,53 @@ Atualiza um plano previamente criado. As propriedades que podem ser alteradas s�
     "installments": 1
 }
 ```
+
+## Deletando Planos
+
+> Rota
+
+```
+DELETE https://api.pagar.me/1/plans/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X DELETE https://api.pagar.me/1/plans/12784 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Remove um plano previamente criado. Caso o plano exista, é retornado um objeto vazio, caso não exista, é retornado um objeto com as informações do erro ao tentar excluir o plano.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{ }
+```
+
+> JSON Retornado caso o plano não exista (exemplo)
+
+```json
+{
+    "errors": [{
+        "type": "not_found",
+        "parameter_name": null,
+        "message": "Plan not found."
+    }],
+    "url": "/plans/12784?api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0",
+    "method": "delete"
+}
+```
