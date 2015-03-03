@@ -124,6 +124,18 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | `soft_descriptor` | Não | - | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
 | `capture` | Não | `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
 | `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
+| `customer[name]` | Sim\* (com antifraude) | - | Nome completo ou razão social do cliente que está realizando a transação |
+| `customer[document_number]` | Sim\* (com antifraude) | - | CPF ou CNPJ do cliente, sem separadores |
+| `customer[email]` | Sim\* (com antifraude) | - | email do cliente |
+| `customer[address][street]` | Sim\* (com antifraude) | - | logradouro (rua, avenida, etc) do cliente |
+| `customer[address][street_number]` | Sim\* (com antifraude) | - | Número da residência/estabelecimento do cliente |
+| `customer[address][complementary]` | Sim\* (com antifraude) | - | completo do endereço do cliente |
+| `customer[address][neighborhood]` | Sim\* (com antifraude) | - | bairro de localização do cliente |
+| `customer[address][zipcode]` | Sim\* (com antifraude) | - | CEP do imóvel do cliente, sem separadores |
+| `customer[phone][ddd]` | Sim\* (com antifraude) | - | DDD do telefone do cliente |
+| `customer[phone][number]` | Sim\* (com antifraude) | - | número de telefone do cliente |
+| `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
+| `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
 
 > JSON retornado (exemplo):
 
@@ -213,7 +225,6 @@ curl -X GET https://api.pagar.me/1/transactions/194351 \
 
 Retorna os dados de uma transação realizada
 
-
 > JSON Retornado (exemplo):
 
 ```json
@@ -255,58 +266,6 @@ Retorna os dados de uma transação realizada
 }
 ```
 
-## Calculando Pagamentos Parcelados
-
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions/calculate_installments_amount
-```
-
-> Exemplo de Requisição 
-
-```shell
-curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0 \
--d 'max_installments=3' \
--d 'free_installments=1' \
--d 'interest_rate=13' \
--d 'amount=1300'
-```
-
-Usada para calcular o valor de cada uma das parcelas de uma compra.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `max_installments` | Sim | 12 | Valor máximo de parcelas |
-| `free_installments` | Não | 1 | Número de parcelas isentas de juros |
-| `interest_rate` | Sim | - | Valor da taxa de juros |
-| `amount` | Sim | - | Valor do produto/serviço vendido |
-
-> JSON retornado (exemplo):
-
-```json
-{
-    "installments": {
-        "1": {
-            "installment": 1,
-            "amount": 1300,
-            "installment_amount": 1300
-        },
-        "2": {
-            "installment": 2,
-            "amount": 1615,
-            "installment_amount": 807
-        },
-        "3": {
-            "installment": 3,
-            "amount": 1757,
-            "installment_amount": 586
-        }
-    }
-}
-```
 
 ## Gerando uma nova chave para encriptação do `card_hash`
 
@@ -320,7 +279,7 @@ GET https://api.pagar.me/1/transactions/card_hash_key
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+-d 'encryption_key=ek_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
 ```
 
 ```ruby
@@ -334,9 +293,11 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `encryption_key` | Sim | - | Chave de encriptação (disponível no seu dashboard) |
 
--Adicionar descrição-
+Caso você queira/precise criar o `card_hash` manualmente, essa rota deverá ser utilizada para obtenção de uma chave pública de encriptação dos dados do cartão de seu cliente.
+
+Saiba mais sobre como criar um `card_hash` [aqui]().
 
 > JSON Retornado (Exemplo)
 
@@ -729,3 +690,57 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
     "metadata": {}
 }
 ```
+
+## Calculando Pagamentos Parcelados
+
+> Rota
+
+```
+GET https://api.pagar.me/1/transactions/calculate_installments_amount
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0 \
+-d 'max_installments=3' \
+-d 'free_installments=1' \
+-d 'interest_rate=13' \
+-d 'amount=1300'
+```
+
+Usada para calcular o valor de cada uma das parcelas de uma compra.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `max_installments` | Sim | 12 | Valor máximo de parcelas |
+| `free_installments` | Não | 1 | Número de parcelas isentas de juros |
+| `interest_rate` | Sim | - | Valor da taxa de juros |
+| `amount` | Sim | - | Valor do produto/serviço vendido |
+
+> JSON retornado (exemplo):
+
+```json
+{
+    "installments": {
+        "1": {
+            "installment": 1,
+            "amount": 1300,
+            "installment_amount": 1300
+        },
+        "2": {
+            "installment": 2,
+            "amount": 1615,
+            "installment_amount": 807
+        },
+        "3": {
+            "installment": 3,
+            "amount": 1757,
+            "installment_amount": 586
+        }
+    }
+}
+```
+
