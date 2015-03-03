@@ -815,13 +815,13 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 > Rota
 
 ```
-POST https://api.pagar.me/1/plans/:id
+GET https://api.pagar.me/1/plans/:id
 ```
 
 > Exemplo de Requisição 
 
 ```shell
-curl -X POST https://api.pagar.me/1/plans/13580 \
+curl -X GET https://api.pagar.me/1/plans/13580 \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
 ```
 
@@ -846,11 +846,69 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 ```json
 {
     "object": "plan",
-    "id": 12779,
+    "id": 13580,
     "amount": 31000,
     "days": 30,
     "name": "Plano Ouro",
     "trial_days": 0,
+    "date_created": "2015-03-03T16:28:00.000Z",
+    "payment_methods": [
+        "boleto"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}
+```
+
+## Atualizando Planos
+
+> Rota
+
+```
+PUT https://api.pagar.me/1/plans/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  PUT https://api.pagar.me/1/plans/13580 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'name=Plano Diamong' \
+-d 'trial_days=7'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Atualiza um plano previamente criado. As propriedades que podem ser alteradas são:
+
+* Nome do plano (`name`)
+* Dias de testes gratuito (`trial_days`)
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id`| Sim | - | id de identificação do plano previamente criado |
+| `name` | Não | - | Nome do plano |
+| `trial_days` | Não | - | Dias para testar o produto/serviço gratuitamente |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "plan",
+    "id": 13580,
+    "amount": 31000,
+    "days": 30,
+    "name": "Plano Ouro",
+    "trial_days": 7,
     "date_created": "2015-03-03T16:28:00.000Z",
     "payment_methods": [
         "boleto"
