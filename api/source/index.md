@@ -744,3 +744,70 @@ Usada para calcular o valor de cada uma das parcelas de uma compra.
 }
 ```
 
+# Planos
+
+Através dessas rotas você pode gerenciar todos os planos do seu negócio, para posteriormente criar cobranças recorrentes, que serão as assinaturas.
+
+## Criando Planos
+
+> Rota
+
+```
+POST https://api.pagar.me/1/plans
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X POST https://api.pagar.me/1/plans \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'amount=31000' \
+-d 'days=30' \
+-d 'name=Plano Ouro' \
+-d 'payments_methods[]=boleto'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `amount` | Sim | - | Valor que será cobrado recorrentemente |
+| `days` | Sim | - | Prazo, em dias, para cobrança das parcelas |
+| `name` | Sim | - | Nome do plano |
+| `trial_days` | Não | `0` | Dias para teste gratuito do produto. Valor começará a ser cobrado no dia `trial_days + 1` |
+| `payment_methods` | Não | `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
+| `color` | Não | `null` | Armazena o valor de uma cor para o plano |
+| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 30, charges = 3, installments = 1` |
+| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "plan",
+    "id": 12779,
+    "amount": 31000,
+    "days": 30,
+    "name": "Plano Ouro",
+    "trial_days": 0,
+    "date_created": "2015-03-03T16:28:00.000Z",
+    "payment_methods": [
+        "boleto"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}
+```
+
+
