@@ -810,4 +810,53 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 }
 ```
 
+## Retornando Planos
 
+> Rota
+
+```
+POST https://api.pagar.me/1/plans/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X POST https://api.pagar.me/1/plans/13580 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id`| Sim | - | id de identificação do plano previamente criado |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "plan",
+    "id": 12779,
+    "amount": 31000,
+    "days": 30,
+    "name": "Plano Ouro",
+    "trial_days": 0,
+    "date_created": "2015-03-03T16:28:00.000Z",
+    "payment_methods": [
+        "boleto"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}
+```
