@@ -788,7 +788,7 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 | `payment_methods` | Não | `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
 | `color` | Não | `null` | Armazena o valor de uma cor para o plano |
 | `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 30, charges = 3, installments = 1` <br> **ps**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
-| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` |
+| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **ps**: Boleto sempre terá `installments = 1` |
 
 Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
 
@@ -968,5 +968,150 @@ Remove um plano previamente criado. Caso o plano exista, é retornado um objeto 
     }],
     "url": "/plans/12784?api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0",
     "method": "delete"
+}
+```
+
+# Assinaturas
+
+## Criando assinaturas
+
+> Rota
+
+```
+POST https://api.pagar.me/1/subscriptions
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X POST https://api.pagar.me/1/subscriptions \
+-d 'customer[email]=api@test.com' \
+-d 'api_key=ak_test_KGXIjQ4GicOa2BLGZrDRTR5qNQxDWo' \
+-d 'plan_id=12783' \
+-d 'card_id=card_ci234fx8rr649rt16rtb11132'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Para efetivamente cobrar seu cliente de forma recorrente, você deve criar uma **assinatura**, que atrelada a um **plano**, conterá os dados de cobrança.
+
+A criação de uma `subscription` (assinatura) é parecida com a criação de uma transação. Veja mais detalhes sobre como cobrar seu cliente de forma recorrente [aqui](https://pagar.me/docs/plans-subscriptions/#criando-uma-assinatura).
+
+**ps**: Você pode passar os objetos `customer` e `metadata` na criação de uma assinatura, assim como feito na criação de uma transação. A diferença é que a propriedade `customer[email]` é obrigatória na criação da **assinatura**. 
+
+**OBS**: As transações criadas pelas assinaturas não passam pelo antifraude, devido a ocorrência de fraudes nesse tipo de serviço serem praticamente nulas.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `plan_id` | Sim | - | id do plano a ser associado a uma assinatura |
+| `card_hash` | Sim\* | - | Dados encriptados do cartão do cliente. Você também pode usar o `card_id` ao invés do `card_hash` |
+| `customer[email]` | Sim | - | Email do cliente |
+| `customer[name]` |  | - | Nome completo ou razão social do cliente que está realizando a transação |
+| `customer[document_number]` | Não | - | CPF ou CNPJ do cliente, sem separadores |
+| `customer[address][street]` | Não | - | logradouro (rua, avenida, etc) do cliente |
+| `customer[address][street_number]` | Não | - | Número da residência/estabelecimento do cliente |
+| `customer[address][complementary]` | Não | - | completo do endereço do cliente |
+| `customer[address][neighborhood]` | Não | - | bairro de localização do cliente |
+| `customer[address][zipcode]` | Não | - | CEP do imóvel do cliente, sem separadores |
+| `customer[phone][ddd]` | Não | - | DDD do telefone do cliente |
+| `customer[phone][number]` | Não | - | número de telefone do cliente |
+| `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
+| `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
+| `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "subscription",
+    "plan": {
+        "object": "plan",
+        "id": 12783,
+        "amount": 31000,
+        "days": 30,
+        "name": "Plano Ouro",
+        "trial_days": 0,
+        "date_created": "2015-03-03T16:56:32.000Z",
+        "payment_methods": ["boleto", "credit_card"],
+        "color": null,
+        "charges": null,
+        "installments": 1
+    },
+    "id": 14858,
+    "current_transaction": {
+        "object": "transaction",
+        "status": "paid",
+        "refuse_reason": null,
+        "status_reason": "acquirer",
+        "acquirer_response_code": "00",
+        "acquirer_name": "development",
+        "authorization_code": "11344",
+        "soft_descriptor": null,
+        "tid": "1425494517057",
+        "nsu": "1425494517057",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "amount": 31000,
+        "installments": 1,
+        "id": 185122,
+        "cost": 515,
+        "card_holder_name": "Api Customer",
+        "card_last_digits": "3123",
+        "card_first_digits": "548045",
+        "card_brand": "mastercard",
+        "postback_url": null,
+        "payment_method": "credit_card",
+        "antifraud_score": null,
+        "boleto_url": null,
+        "boleto_barcode": null,
+        "boleto_expiration_date": null,
+        "referer": "api_key",
+        "ip": "189.8.94.42",
+        "subscription_id": 14858,
+        "metadata": {}
+    },
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "card_brand": "mastercard",
+    "card_last_digits": "3123",
+    "current_period_start": "2015-03-04T18:41:56.746Z",
+    "current_period_end": "2015-04-03T18:41:56.746Z",
+    "charges": 0,
+    "status": "paid",
+    "date_created": "2015-03-04T18:41:57.000Z",
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6v2mom200br5616ln4vg10q",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": null
 }
 ```
