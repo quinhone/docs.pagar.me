@@ -1115,3 +1115,125 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
     "metadata": null
 }
 ```
+
+## Retornando Assinaturas
+
+> Rota
+
+```
+GET https://api.pagar.me/1/subscriptions/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/subscriptions/14858 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Essa rota é utilizada para retornar os dados de uma determinada assinatura.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "subscription",
+    "plan": {
+        "object": "plan",
+        "id": 12783,
+        "amount": 31000,
+        "days": 30,
+        "name": "Plano Ouro",
+        "trial_days": 0,
+        "date_created": "2015-03-03T16:56:32.000Z",
+        "payment_methods": [
+            "boleto",
+            "credit_card"
+        ],
+        "color": null,
+        "charges": null,
+        "installments": 1
+    },
+    "id": 14858,
+    "current_transaction": {
+        "object": "transaction",
+        "status": "paid",
+        "refuse_reason": null,
+        "status_reason": "acquirer",
+        "acquirer_response_code": "00",
+        "acquirer_name": "development",
+        "authorization_code": "11344",
+        "soft_descriptor": null,
+        "tid": "1425494517057",
+        "nsu": "1425494517057",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "amount": 31000,
+        "installments": 1,
+        "id": 185122,
+        "cost": 515,
+        "card_holder_name": "Api Customer",
+        "card_last_digits": "3123",
+        "card_first_digits": "548045",
+        "card_brand": "mastercard",
+        "postback_url": null,
+        "payment_method": "credit_card",
+        "antifraud_score": null,
+        "boleto_url": null,
+        "boleto_barcode": null,
+        "boleto_expiration_date": null,
+        "referer": "api_key",
+        "ip": "189.8.94.42",
+        "subscription_id": 14858,
+        "metadata": {}
+    },
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "card_brand": "mastercard",
+    "card_last_digits": "3123",
+    "current_period_start": "2015-03-04T18:41:56.746Z",
+    "current_period_end": "2015-04-03T18:41:56.746Z",
+    "charges": 0,
+    "status": "paid",
+    "date_created": "2015-03-04T18:41:57.000Z",
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6v2mom200br5616ln4vg10q",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": null
+}
+```
