@@ -1771,7 +1771,7 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 }
 ```
 
-# Balanço
+# Balanços
 
 ## Balanço geral das operações
 
