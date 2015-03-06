@@ -1923,7 +1923,7 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
 }]
 ```
 
-## Histórico das operações
+## Histórico específico de uma operação 
 
 > Rota
 
