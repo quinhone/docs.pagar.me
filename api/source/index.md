@@ -1249,7 +1249,7 @@ PUT https://api.pagar.me/1/subscriptions/:id
 > Exemplo de Requisição 
 
 ```shell
-curl -X PUT https://api.pagar.me/1/subscriptions/12784 \
+curl -X PUT https://api.pagar.me/1/subscriptions/14858 \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
 ```
 
@@ -1332,6 +1332,128 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
     "current_period_end": null,
     "charges": 0,
     "status": "unpaid",
+    "date_created": "2015-03-04T18:41:57.000Z",
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6v2mom200br5616ln4vg10q",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": null
+}
+```
+
+## Cancelando uma inscrição
+
+> Rota
+
+```
+POST https://api.pagar.me/1/subscriptions/:id/cancel
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X POST https://api.pagar.me/1/subscriptions/14858/cancel \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/cancel`
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "subscription",
+    "plan": {
+        "object": "plan",
+        "id": 12830,
+        "amount": 1300,
+        "days": 15,
+        "name": "Plano Prata",
+        "trial_days": 0,
+        "date_created": "2015-03-06T17:25:25.000Z",
+        "payment_methods": [
+            "boleto",
+            "credit_card"
+        ],
+        "color": null,
+        "charges": null,
+        "installments": 1
+    },
+    "id": 14858,
+    "current_transaction": {
+        "object": "transaction",
+        "status": "waiting_payment",
+        "refuse_reason": null,
+        "status_reason": "acquirer",
+        "acquirer_response_code": null,
+        "acquirer_name": "development",
+        "authorization_code": null,
+        "soft_descriptor": null,
+        "tid": null,
+        "nsu": null,
+        "date_created": "2015-03-06T18:15:12.000Z",
+        "date_updated": "2015-03-06T18:15:12.000Z",
+        "amount": 1300,
+        "installments": 1,
+        "id": 185486,
+        "cost": 0,
+        "card_holder_name": null,
+        "card_last_digits": null,
+        "card_first_digits": null,
+        "card_brand": null,
+        "postback_url": null,
+        "payment_method": "boleto",
+        "antifraud_score": null,
+        "boleto_url": "https://pagar.me",
+        "boleto_barcode": "1234 5678",
+        "boleto_expiration_date": "2015-03-13T18:15:12.000Z",
+        "referer": null,
+        "ip": null,
+        "subscription_id": 14858,
+        "metadata": {}
+    },
+    "postback_url": null,
+    "payment_method": "boleto",
+    "card_brand": null,
+    "card_last_digits": null,
+    "current_period_start": null,
+    "current_period_end": null,
+    "charges": 0,
+    "status": "canceled",
     "date_created": "2015-03-04T18:41:57.000Z",
     "phone": null,
     "address": null,
