@@ -1483,3 +1483,187 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     "metadata": null
 }
 ```
+
+## Transações em uma assinatura
+
+> Rota
+
+```
+GET https://api.pagar.me/1/subscriptions/:id/transactions
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/subscriptions/14858/transactions \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/cancel`
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "transaction",
+    "status": "waiting_payment",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-03-06T18:15:12.000Z",
+    "date_updated": "2015-03-06T18:15:12.000Z",
+    "amount": 1300,
+    "installments": 1,
+    "id": 185486,
+    "cost": 0,
+    "card_holder_name": null,
+    "card_last_digits": null,
+    "card_first_digits": null,
+    "card_brand": null,
+    "postback_url": null,
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": "https://pagar.me",
+    "boleto_barcode": "1234 5678",
+    "boleto_expiration_date": "2015-03-13T18:15:12.261Z",
+    "referer": null,
+    "ip": null,
+    "subscription_id": 14858,
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6v2mom200br5616ln4vg10q",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {}
+}, {
+    "object": "transaction",
+    "status": "waiting_payment",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-03-06T18:02:25.000Z",
+    "date_updated": "2015-03-06T18:02:26.000Z",
+    "amount": 31000,
+    "installments": 1,
+    "id": 185481,
+    "cost": 0,
+    "card_holder_name": null,
+    "card_last_digits": null,
+    "card_first_digits": null,
+    "card_brand": null,
+    "postback_url": null,
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": "https://pagar.me",
+    "boleto_barcode": "1234 5678",
+    "boleto_expiration_date": "2015-03-13T18:02:25.904Z",
+    "referer": null,
+    "ip": null,
+    "subscription_id": 14858,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": null,
+    "metadata": {}
+}, {
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "11344",
+    "soft_descriptor": null,
+    "tid": 1425494517057,
+    "nsu": 1425494517057,
+    "date_created": "2015-03-04T18:41:56.000Z",
+    "date_updated": "2015-03-04T18:41:57.000Z",
+    "amount": 31000,
+    "installments": 1,
+    "id": 185122,
+    "cost": 515,
+    "card_holder_name": "Api Customer",
+    "card_last_digits": "3123",
+    "card_first_digits": "548045",
+    "card_brand": "mastercard",
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": 14858,
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6v2mom200br5616ln4vg10q",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {}
+}]
+```
+
