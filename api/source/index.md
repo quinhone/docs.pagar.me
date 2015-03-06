@@ -1722,3 +1722,52 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 }
 ```
 
+## Retornando um cartão salvo
+
+> Rota
+
+```
+POST https://api.pagar.me/1/cards
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  PUT https://api.pagar.me/1/plans/13580 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'name=Plano Diamong' \
+-d 'trial_days=7'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "card",
+    "id": "card_ci6y37hc00030a416wrxsmzyi",
+    "date_created": "2015-03-06T21:21:25.000Z",
+    "date_updated": "2015-03-06T21:21:26.000Z",
+    "brand": "visa",
+    "holder_name": "API CUSTOMER",
+    "first_digits": "401872",
+    "last_digits": "8048",
+    "fingerprint": "Jl9oOIiDjAjR",
+    "customer": null,
+    "valid": true
+}
+```
