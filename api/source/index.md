@@ -1679,10 +1679,11 @@ POST https://api.pagar.me/1/cards
 > Exemplo de Requisição 
 
 ```shell
-curl -X  PUT https://api.pagar.me/1/plans/13580 \
+curl -X  POST https://api.pagar.me/1/plans/13580 \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
--d 'name=Plano Diamong' \
--d 'trial_days=7'
+-d 'card_number=4018720572598048' \
+-d 'holder_name=API Customer' \
+-d 'card_expiration_date=0116'
 ```
 
 ```ruby
@@ -1709,7 +1710,7 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 ```json
 {
     "object": "card",
-    "id": "card_ci6y37hc00030a416wrxsmzyi",
+    "id": "card_ci6y37h16wrxsmzyi",
     "date_created": "2015-03-06T21:21:25.000Z",
     "date_updated": "2015-03-06T21:21:26.000Z",
     "brand": "visa",
@@ -1727,16 +1728,14 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 > Rota
 
 ```
-POST https://api.pagar.me/1/cards
+GET https://api.pagar.me/1/cards/:id
 ```
 
 > Exemplo de Requisição 
 
 ```shell
-curl -X  PUT https://api.pagar.me/1/plans/13580 \
+curl -X  GET https://api.pagar.me/1/cards/card_ci6y37h16wrxsmzyi \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
--d 'name=Plano Diamong' \
--d 'trial_days=7'
 ```
 
 ```ruby
@@ -1759,7 +1758,7 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 ```json
 {
     "object": "card",
-    "id": "card_ci6y37hc00030a416wrxsmzyi",
+    "id": "card_ci6y37h16wrxsmzyi",
     "date_created": "2015-03-06T21:21:25.000Z",
     "date_updated": "2015-03-06T21:21:26.000Z",
     "brand": "visa",
@@ -1771,3 +1770,55 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
     "valid": true
 }
 ```
+
+# Balanço
+
+## Balanço geral das operações
+
+> Rota
+
+```
+GET https://api.pagar.me/1/balance
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  GET https://api.pagar.me/1/balance \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Com essa rota `/balance` você poderá consultar o balanço das transações da sua companhia.
+
+**ps**: os valores retornados estão em **centavos**.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "balance",
+    "waiting_funds": {
+        "amount": 0
+    },
+    "available": {
+        "amount": 3019898
+    },
+    "transferred": {
+        "amount": 3163500
+    }
+}
+```
+
