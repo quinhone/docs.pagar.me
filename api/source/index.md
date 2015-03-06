@@ -1666,4 +1666,59 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     "metadata": {}
 }]
 ```
+# Cartões
+
+## Criando um cartão
+
+> Rota
+
+```
+POST https://api.pagar.me/1/cards
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  PUT https://api.pagar.me/1/plans/13580 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'name=Plano Diamong' \
+-d 'trial_days=7'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Você pode armazenar os dados do cartão do seu cliente através da rota `/cards`, assim você poderá usar o `id` do objeto gerado para realizar futuras transações, no lugar do `card_hash`.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `card_number` | Sim | - | Número do portador do cartão |
+| `card_holder_name` ou `holder_name` | Sim | - | Nome do portador do cartão |
+| `card_expiration_date` ou `expiration_date` | Sim | - | Data de expiração do  |
+| `customer_id` | Não | - | Você pode usar o `id` do objeto `customer` para associar mais informações do cliente ao `card` a ser gerado |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "card",
+    "id": "card_ci6y37hc00030a416wrxsmzyi",
+    "date_created": "2015-03-06T21:21:25.000Z",
+    "date_updated": "2015-03-06T21:21:26.000Z",
+    "brand": "visa",
+    "holder_name": "API CUSTOMER",
+    "first_digits": "401872",
+    "last_digits": "8048",
+    "fingerprint": "Jl9oOIiDjAjR",
+    "customer": null,
+    "valid": true
+}
+```
 
