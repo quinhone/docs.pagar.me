@@ -1923,3 +1923,60 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
 }]
 ```
 
+## Histórico das operações
+
+> Rota
+
+```
+GET https://api.pagar.me/1/balance/operations/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  GET https://api.pagar.me/1/balance/operations/4861 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Com a rota `/balance/operations/:id` você poderá ver uma operação específica ocorrida no balanço da sua conta.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "balance_operation",
+    "id": 4861,
+    "status": "available",
+    "balance_amount": 3019898,
+    "balance_old_amount": 2920013,
+    "movement_type": "payable",
+    "amount": 100000,
+    "fee": 115,
+    "date_created": "2015-03-06T21:00:31.000Z",
+    "movement_object": {
+        "object": "payable",
+        "id": 1297,
+        "status": "paid",
+        "amount": 100000,
+        "fee": 115,
+        "installment": 1,
+        "transaction_id": 185537,
+        "payment_date": "2015-03-06T03:00:00.000Z",
+        "date_created": "2015-03-06T21:00:31.000Z"
+    }
+}
+```
+
