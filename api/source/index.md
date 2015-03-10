@@ -24,6 +24,40 @@ https://api.pagar.me/1/
 
 Através da rota `/transactions` e suas derivadas, você pode criar transações, estornar, capturar, dentre outras atividades relacionadas a estas.
 
+## Objeto `transaction`
+
+Ao criar ou atualizar uma transação, este será o objeto que você irá receber como resposta.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` |  |
+| `status` | `String` |  |
+| `status_reason` | `String` |  |
+| `acquirer_response_code` | `String` |  |
+| `authorization_code` | `String` |  |
+| `soft_descriptor` | `String` |  |
+| `tid` | `String` |  |
+| `nsu` | `String` |  |
+| `date_created` | `Date` (ISODate) |  |
+| `date_updated` | `Date` (ISODate) |  |
+| `amount` | `Number` |  |
+| `installments` | `Number` |  |
+| `id` | `Number` |  |
+| `cost` | `Number` |  |
+| `postback_url` | `String` |  |
+| `payment_method` | `String` |  |
+| `boleto_url` | `String` |  |
+| `boleto_barcode` | `String` |  |
+| `boleto_expiration_date` | `String` |  |
+| `referer` | `String` |  |
+| `ip` | `String` |  |
+| `subscription_id` | `Number` |  |
+| `phone` | `Object` |  |
+| `address` | `Object` |  |
+| `customer` | `Object` |  |
+| `card` | `Object` |  |
+| `metadata` | `Object` |  |
+
 ## Criando uma transação
 
 > Rota
