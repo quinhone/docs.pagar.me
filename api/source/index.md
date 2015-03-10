@@ -30,33 +30,33 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 
 | Propriedade | Tipo | Descrição |
 |:--|:--:|:--|
-| `object` | `String` |  |
-| `status` | `String` |  |
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
+| `status` | `String` | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
 | `status_reason` | `String` |  |
 | `acquirer_response_code` | `String` |  |
 | `authorization_code` | `String` |  |
-| `soft_descriptor` | `String` |  |
+| `soft_descriptor` | `String` | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **ps**: Limite de 13 caracteres. |
 | `tid` | `String` |  |
 | `nsu` | `String` |  |
-| `date_created` | `Date` (ISODate) |  |
-| `date_updated` | `Date` (ISODate) |  |
-| `amount` | `Number` |  |
-| `installments` | `Number` |  |
-| `id` | `Number` |  |
-| `cost` | `Number` |  |
-| `postback_url` | `String` |  |
-| `payment_method` | `String` |  |
-| `boleto_url` | `String` |  |
-| `boleto_barcode` | `String` |  |
-| `boleto_expiration_date` | `String` |  |
+| `date_created` | `Date` (ISODate) | Data de criação da transação no formato ISODate |
+| `date_updated` | `Date` (ISODate) | Data de atualização da transação no formato ISODate |
+| `amount` | `Number` | Valor, em centavos, da transação |
+| `installments` | `Number` | Número de parcelas/prestações a serem cobradas |
+| `id` | `Number` | Número identificador da transação |
+| `cost` | `Number` | Custo da transação para o lojista |
+| `postback_url` | `String` | URL (endpoint) do sistema integrado a Pagar.me que receberá as respostas a cada atualização do processamento da transação |
+| `payment_method` | `String` | Método de pagamento possíveis: `credit_card` e `boleto`  |
+| `boleto_url` | `String` | URL do boleto para impressão |
+| `boleto_barcode` | `String` | Código de barras do boleto gerado na transação |
+| `boleto_expiration_date` | `String` | Data de expiração do boleto (em ISODate) |
 | `referer` | `String` |  |
 | `ip` | `String` |  |
-| `subscription_id` | `Number` |  |
-| `phone` | `Object` |  |
-| `address` | `Object` |  |
-| `customer` | `Object` |  |
-| `card` | `Object` |  |
-| `metadata` | `Object` |  |
+| `subscription_id` | `Number` | Caso essa transação tenha sido originada na cobrança de uma assinatura, o `id` desta será o valor dessa propriedade  |
+| `phone` | `Object` | Objeto com dados do telefone do cliente |
+| `address` | `Object` | Objeto com dados do endereço do cliente |
+| `customer` | `Object` | Objeto com dados do cliente |
+| `card` | `Object` | Objeto com dados do cartão do cliente |
+| `metadata` | `Object` | Objeto com dados adicionais do cliente/produto/serviço vendido |
 
 ## Criando uma transação
 
