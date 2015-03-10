@@ -300,6 +300,173 @@ Retorna os dados de uma transação realizada
 }
 ```
 
+## Retornando transações
+
+> Rota
+
+```
+GET https://api.pagar.me/1/transactions \
+```
+
+> Exemplo de Requisição
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'count=3' \
+-d 'page=3'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação previamente criada |
+| `count` | Não | `10` | Retorna `n` objetos de transação |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
+
+Retorna um `Array` contendo objetos de transações realizadas.
+
+> JSON Retornado (exemplo):
+
+```json
+[{
+    "object": "transaction",
+    "status": "refused",
+    "refuse_reason": "acquirer",
+    "status_reason": "acquirer",
+    "acquirer_response_code": "51",
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": 1425933798340,
+    "nsu": 1425933798340,
+    "date_created": "2015-03-09T20:43:17.000Z",
+    "date_updated": "2015-03-09T20:43:18.000Z",
+    "amount": 54496,
+    "installments": "10",
+    "id": 185679,
+    "cost": 0,
+    "card_holder_name": "murilo junqueira",
+    "card_last_digits": "1111",
+    "card_first_digits": "411111",
+    "card_brand": "visa",
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "encryption_key",
+    "ip": "179.185.132.108",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci1u3yidd00036t16wkzev8s8",
+        "date_created": "2014-10-29T03:12:50.000Z",
+        "date_updated": "2015-03-07T19:43:08.000Z",
+        "brand": "visa",
+        "holder_name": "murilo junqueira",
+        "first_digits": "411111",
+        "last_digits": "1111",
+        "fingerprint": "HEiFgPIQJqXG",
+        "valid": true
+    },
+    "metadata": {}
+}, {
+    "object": "transaction",
+    "status": "authorized",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-03-09T20:41:20.000Z",
+    "date_updated": "2015-03-09T20:41:20.000Z",
+    "amount": 50000,
+    "installments": 1,
+    "id": 185676,
+    "cost": 0,
+    "card_holder_name": null,
+    "card_last_digits": null,
+    "card_first_digits": null,
+    "card_brand": null,
+    "postback_url": null,
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": "2015-03-16T03:00:00.126Z",
+    "referer": "encryption_key",
+    "ip": "177.157.206.15",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": null,
+    "metadata": {}
+}, {
+    "object": "transaction",
+    "status": "authorized",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "854653",
+    "soft_descriptor": null,
+    "tid": 1425933651790,
+    "nsu": 1425933651790,
+    "date_created": "2015-03-09T20:40:51.000Z",
+    "date_updated": "2015-03-09T20:40:51.000Z",
+    "amount": 50000,
+    "installments": 1,
+    "id": 185675,
+    "cost": 0,
+    "card_holder_name": "John Appleseed",
+    "card_last_digits": "4446",
+    "card_first_digits": "590072",
+    "card_brand": "mastercard",
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "encryption_key",
+    "ip": "177.157.206.15",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6ttnn2y007n5616jhotcfof",
+        "date_created": "2015-03-03T21:42:58.000Z",
+        "date_updated": "2015-03-09T20:06:15.000Z",
+        "brand": "mastercard",
+        "holder_name": "John Appleseed",
+        "first_digits": "590072",
+        "last_digits": "4446",
+        "fingerprint": "XHLU9UYzU3+x",
+        "valid": true
+    },
+    "metadata": {}
+}]
+```
 
 ## Gerando uma nova chave para encriptação do `card_hash`
 
