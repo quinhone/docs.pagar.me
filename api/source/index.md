@@ -1004,6 +1004,44 @@ Usada para calcular o valor de cada uma das parcelas de uma compra.
 
 Através dessas rotas você pode gerenciar todos os planos do seu negócio, para posteriormente criar cobranças recorrentes, que serão as assinaturas.
 
+## Objeto `plan`
+
+Com o objeto `plan` você consegue definir um plano no qual assinaturas poderão estar atreladas a este plano. Informações como **valor do plano**, **nome**, **dias de teste**, entre outras informações, são armazenadas pelos planos.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `plan` |
+| `id` | `Number` | Número identificador do plano |
+| `amount` | `Number` | Preço do plano, em centavos |
+| `days` | `Number` | Dias para efetuação da próxima cobrança da assinatura atrelada ao plano. |
+| `name` | `String` | Nome do plano |
+| `trial_days` | `Number` | Dias que o usuário poderá testar o serviço gratuitamente |
+| `date_created` | `String` | Data da criação do plano (ISODate) |
+| `payment_methods` | `Array` | Array de Strings contendo os possíveis métodos de pagamento deste plano. <br> **Valores possíveis**: `credit_card`, `boleto` |
+| `color` | `String` | Propriedade opcional para atribuição de uma cor ao plano. <br> **Valor padrão**: `null` |
+| `charges` | `Number` | Número de cobranças que podem ser feitas em uma assinatura. <br> **Ex**: Plano anual com no máximo 3 cobranças, `days = 365` e `charges = 3` |
+| `installments` | `Number` | Informa em quantas vezes o pagamento será parcelado entre cada cobrança |
+
+> Objeto plan
+
+```json
+{
+    "object": "plan",
+    "id": 13731,
+    "amount": 31000,
+    "days": 30,
+    "name": "Plano Diamond",
+    "trial_days": 7,
+    "date_created": "2015-03-03T17:31:47.000Z",
+    "payment_methods": [
+        "boleto"
+    ],
+    "color": "gold",
+    "charges": null,
+    "installments": 1
+}
+```
+
 ## Criando Planos
 
 > Rota
@@ -1043,7 +1081,7 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 | `trial_days` | Não | `0` | Dias para teste gratuito do produto. Valor começará a ser cobrado no dia `trial_days + 1` |
 | `payment_methods` | Não | `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
 | `color` | Não | `null` | Armazena o valor de uma cor para o plano |
-| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 30, charges = 3, installments = 1` <br> **ps**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
+| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, charges = 3, installments = 1` <br> **ps**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
 | `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **ps**: Boleto sempre terá `installments = 1` |
 
 Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
@@ -2244,7 +2282,7 @@ Objeto retornado após a análise antifraude feita em uma transação.
 
 | Propriedade | Tipo | Descrição |
 |:--|:--:|:--|
-| `object` | `Number` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `antifraud_analysis` |
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `antifraud_analysis` |
 | `name` | `String` | Nome do antifraude utilizado |
 | `score` | `Number` | pontuação, de 0 a 100, da probabilidade de fraude na transação realizada |
 | `cost` | `Number` | Custo da análise antifraude |
