@@ -1267,6 +1267,123 @@ Remove um plano previamente criado. Caso o plano exista, é retornado um objeto 
 
 # Assinaturas
 
+## Objeto `subscription`
+
+Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são atreladas a um **plano**.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `plan` | `Object` | Objeto com os dados do plano que a assinatura está associada |
+| `id` | `Number` | Número identificador do plano |
+| `current_transaction` | `Object` | Objeto com os dados da última transação realizada nessa assinatura |
+| `postback_url` | `String` | Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a cada atualização dos processos |
+| `payment_method` | `String` | Método de pagamento associado a essa assinatura |
+| `card_brand` | `String` | Nome da operadora do cartão |
+| `card_last_digits` | `String` | Últimos dígitos do cartão |
+| `current_period_start` | `String` |  |
+| `current_period_end` | `String` |  |
+| `charges` | `Number` | Número de cobranças a serem efetuadas |
+| `status` | `String` | Possíveis estados da transação/assinatura <br> **Valores possíveis**: `trialing`, `paid`, `pending_payment`, `unpaid`, `canceled`, `ended` |
+| `date_created` | `String` | Data da criação d assinatura |
+| `phone` | `Object` | Objeto com dados do telefone do cliente |
+| `address` | `Object` | Objeto com dados do endereço do cliente |
+| `customer` | `Object` | Objeto com dados do cliente |
+| `card` | `Object` | Objeto com dados do cartão do cliente |
+| `metadata` | `Object` | Objeto com dados adicionais do cliente/produto/serviço vendido |
+
+> Objeto `subscription`
+
+```json
+{
+    "object": "subscription",
+    "plan": {
+        "object": "plan",
+        "id": 12830,
+        "amount": 1300,
+        "days": 15,
+        "name": "Plano Prata",
+        "trial_days": 0,
+        "date_created": "2015-03-06T17:25:25.000Z",
+        "payment_methods": [
+            "boleto",
+            "credit_card"
+        ],
+        "color": null,
+        "charges": null,
+        "installments": 1
+    },
+    "id": 14858,
+    "current_transaction": {
+        "object": "transaction",
+        "status": "waiting_payment",
+        "refuse_reason": null,
+        "status_reason": "acquirer",
+        "acquirer_response_code": null,
+        "acquirer_name": "development",
+        "authorization_code": null,
+        "soft_descriptor": null,
+        "tid": null,
+        "nsu": null,
+        "date_created": "2015-03-06T18:15:12.000Z",
+        "date_updated": "2015-03-06T18:15:12.000Z",
+        "amount": 1300,
+        "installments": 1,
+        "id": 185486,
+        "cost": 0,
+        "card_holder_name": null,
+        "card_last_digits": null,
+        "card_first_digits": null,
+        "card_brand": null,
+        "postback_url": null,
+        "payment_method": "boleto",
+        "antifraud_score": null,
+        "boleto_url": "https://pagar.me",
+        "boleto_barcode": "1234 5678",
+        "boleto_expiration_date": "2015-03-13T18:15:12.000Z",
+        "referer": null,
+        "ip": null,
+        "subscription_id": 14858,
+        "metadata": {}
+    },
+    "postback_url": null,
+    "payment_method": "boleto",
+    "card_brand": null,
+    "card_last_digits": null,
+    "current_period_start": null,
+    "current_period_end": null,
+    "charges": 0,
+    "status": "canceled",
+    "date_created": "2015-03-04T18:41:57.000Z",
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6v2mom200br5616ln4vg10q",
+        "date_created": "2015-03-04T18:41:56.000Z",
+        "date_updated": "2015-03-04T18:41:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": null
+}
+```
+
 ## Criando assinaturas
 
 > Rota
