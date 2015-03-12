@@ -2218,9 +2218,38 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 }
 ```
 
-# Balanços
+# Saldo
 
-## Balanço geral das operações
+## Objeto `balance`
+
+Com este objeto, você pode obter informações gerais sobre o saldo da sua conta.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `waiting_funds` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem... |
+| `available` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível para receber |
+| `transferred` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta (quanto já recebeu efetivamente) |
+
+
+> Objeto balance
+
+```json
+{
+    "object": "balance",
+    "waiting_funds": {
+        "amount": 0
+    },
+    "available": {
+        "amount": 3169323
+    },
+    "transferred": {
+        "amount": 3163500
+    }
+}
+```
+
+## Saldo geral das operações
 
 > Rota
 
@@ -2244,7 +2273,7 @@ curl -X  GET https://api.pagar.me/1/balance \
 ```cs
 ```
 
-Com essa rota `/balance` você poderá consultar o balanço das transações da sua companhia.
+Com essa rota `/balance` você poderá consultar o saldo das transações da sua companhia.
 
 **ps**: os valores retornados estão em **centavos**.
 
@@ -2295,7 +2324,7 @@ curl -X  GET https://api.pagar.me/1/balance/operations \
 ```cs
 ```
 
-Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos no balanço da sua conta.
+Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos no saldo da sua conta.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -2394,7 +2423,7 @@ curl -X  GET https://api.pagar.me/1/balance/operations/4861 \
 ```cs
 ```
 
-Com a rota `/balance/operations/:id` você poderá ver uma operação específica ocorrida no balanço da sua conta.
+Com a rota `/balance/operations/:id` você poderá ver uma operação específica ocorrida no saldo da sua conta.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
