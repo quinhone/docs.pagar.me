@@ -2300,6 +2300,51 @@ Com essa rota `/balance` você poderá consultar o saldo das transações da sua
 
 # Operações
 
+## Objeto `balance_operation`
+
+Com este objeto você poderá acompanhar como estava/está seu saldo a cada movimentação bancária.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `balance_operation` |
+| `id` | `String` | Identificador da operação |
+| `status` | `String` | Estado do saldo da conta. <br> **Valores possíveis**: `waiting_funds`, `available` e `transferred` |
+| `balance_amount` | `Number` | Saldo atual da conta |
+| `balance_old_amount` | `Number` | Saldo antes da última movimentação |
+| `movement_type` | `String` |  |
+| `amount` | `Number` | Valor transacionado para a conta |
+| `fee` | `Number` | Taxa cobrada pela transação |
+| `date_created` | `String` | Data da movimentação |
+| `movement_object` | `Object` |  |
+
+
+> Objeto balance_operation
+
+```json
+{
+    "object": "balance_operation",
+    "id": 4861,
+    "status": "available",
+    "balance_amount": 3019898,
+    "balance_old_amount": 2920013,
+    "movement_type": "payable",
+    "amount": 100000,
+    "fee": 115,
+    "date_created": "2015-03-06T21:00:31.000Z",
+    "movement_object": {
+        "object": "payable",
+        "id": 1297,
+        "status": "paid",
+        "amount": 100000,
+        "fee": 115,
+        "installment": 1,
+        "transaction_id": 185537,
+        "payment_date": "2015-03-06T03:00:00.000Z",
+        "date_created": "2015-03-06T21:00:31.000Z"
+    }
+}
+```
+
 ## Histórico das operações
 
 > Rota
