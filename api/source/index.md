@@ -2079,6 +2079,42 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
 ```
 # Cartões
 
+## Objeto `card`
+
+Sempre que você faz uma requisição através da nossa API nós guardamos as informações do portador do cartão, para que, futuramente, você possa utilizar essas informações para novas cobranças, ou implementação de features como *one-click-buy*.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `id` | `String` | Identificador do cartão |
+| `date_created` | `String` | Data de criação do objeto `card` |
+| `date_updated` | `String` | Data de atualização do objeto `card` |
+| `brand` | `String` | Marca da operadora do cartão |
+| `holder_name` | `String` | Nome do portador do cartão |
+| `first_digits` | `String` | Primeiros dígitos do cartão (6 dígitos) |
+| `last_digits` | `String` | Últimos dígitos do cartão (4 dígitos) |
+| `fingerprint` | `String` | Parâmetro usado para validar a notificação de POSTback ([saiba mais](https://pagar.me/docs/advanced/#validando-a-origem-de-um-postback)) |
+| `customer` | `Object` | Objeto com dados do comprador |
+| `valid` | `Boolean` | Propriedade para verificar a validade do cartão |
+
+> Objeto card
+
+```json
+{
+    "object": "card",
+    "id": "card_ci6y37hc00030a416wrxsmzyi",
+    "date_created": "2015-03-06T21:21:25.000Z",
+    "date_updated": "2015-03-06T21:21:26.000Z",
+    "brand": "visa",
+    "holder_name": "API CUSTOMER",
+    "first_digits": "401872",
+    "last_digits": "8048",
+    "fingerprint": "Jl9oOIiDjAjR",
+    "customer": null,
+    "valid": true
+}
+```
+
 ## Criando um cartão
 
 > Rota
