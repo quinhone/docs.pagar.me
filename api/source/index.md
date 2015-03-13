@@ -2501,6 +2501,73 @@ Com a rota `/balance/operations/:id` você poderá ver uma operação específic
 }
 ```
 
+# Clientes
+
+## Retornando dados do cliente
+
+> Rota
+
+```
+GET https://api.pagar.me/1/customers/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  GET https://api.pagar.me/1/customers/11222 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através da rota `/customers/:id` você recebe todos os dados do seu cliente, previamente cadastrado na realização de uma transação, quando os dados deste é passado pelos parâmetros `customer[nomeDaPropriedade]`.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "customer",
+    "document_number": "31442053332",
+    "document_type": "cpf",
+    "name": "api customer fullname",
+    "email": "api@customer.com.br",
+    "born_at": null,
+    "gender": null,
+    "date_created": "2014-10-13T10:51:38.000Z",
+    "id": 11222,
+    "phones": [{
+        "object": "phone",
+        "ddi": "55",
+        "ddd": "22",
+        "number": "99887766",
+        "id": 12345
+    }],
+    "addresses": [{
+        "object": "address",
+        "street": "Rua Veneza",
+        "complementary": null,
+        "street_number": "31",
+        "neighborhood": "São Paulo",
+        "city": "Av API",
+        "state": "SP",
+        "zipcode": "15078731",
+        "country": "Brasil",
+        "id": 13743
+    }]
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
@@ -2532,3 +2599,5 @@ Objeto retornado após a análise antifraude feita em uma transação.
     "status": "approved"
 }
 ```
+
+
