@@ -2572,9 +2572,13 @@ Através da rota `/customers/:id` você recebe todos os dados do seu cliente, pr
 
 ## Objeto `company`
 
-Através deste objeto você consegue ter vários dados da sua companhia, como:
+Através deste objeto você consegue visualizar vários dados da sua companhia, como:
 
-- 
+- Usuários
+- chaves de Api e Encriptação
+- dados de assinaturas
+- dados do antifraude
+- etc
 
 | Propriedade | Tipo | Descrição |
 |:--|:--:|:--|
@@ -2583,38 +2587,43 @@ Através deste objeto você consegue ter vários dados da sua companhia, como:
 | `status` | `String` | Estado da companhia atual. <br> **Valores possíveis**: `temporary`, `pending_confirmation`,  `pending_activation`, `paid` |
 | `id` | `String` | Identificador da companhia |
 | `date_created` | `String` | Data de criação da companhia |
-| `preferences` | `Object` | Objeto com dados da sua marca |
-| `branding` | `` |  |
+| `preferences` | `` |  |
+| `branding` | `Object` | Objeto com dados da sua marca |
 | `branding[primary_color]` | `String` | Valor hexadecimal da cor previamente configurada da sua marca. <br> **Ex**: `#ccff00` |
 | `branding[logo]` | `String` | URL do seu logo |
 | `users` | `Array` | Array de objetos `user` |
 | `user` | `Object` | Dados de um usuário. Veja mais [aqui](/?shell#objeto-user) |
-| `api_key` | `` |  |
-| `encryption_key` | `` |  |
-| `subscriptions` | `` |  |
-| `antifraud` | `` |  |
-| `transaction_cost` | `` |  |
-| `transaction_spread` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
-| `` | `` |  |
+| `api_key` | `Object` | Objeto com as chaves `live` e `test` da API |
+| `api_key[live]` | `String` | Chave *live* da API |
+| `api_key[test]` | `String` | Chave *test* da API |
+| `encryption_key` | `Object` | Objeto com chaves `live` e `test` de encriptação |
+| `encryption_key[live]` | `String` | Chave *live* de encriptação |
+| `encryption_key[test]` | `String` | Chave *test* de encriptação |
+| `subscriptions` | `Object` | Objeto com detalhes de configuração das assinaturas |
+| `subscriptions[payment_deadline]` | `Number` | Dias que o usuário pode ficar inadimplemente antes de ter a assinatura cancelada. <br> **Padrão**: `5` |
+| `subscriptions[email_customers]` | `Boolean` | Variável que informa se o cliente será notificado ou não, independente do tipo da notificação. |
+| `subscriptions[charge_attempts]` | `Number` | Número de tentativas de cobrança |
+| `subscriptions[chrages_interva;_in_days]` | `Number` | Espaço, em dias, entre uma cobrança e outra |
+| `subscriptions[cancel_after_failed_charges]` | `Boolean` | Caso as cobranças não sejam bem sucedidas, você pode optar por cancelar essa assinatura automaticamente |
+| `subscriptions[customer_can_cancel_subscription]` | `Boolean` | Habilita a opção do seu cliente cancelar uma assinatura |
+| `antifraud` | `Object` | Dados de configuração do seu antifraude. Dentro deste objeto, existem mais dois objetos, `test` e `live`, que contém as mesmas propriedades |
+| `antifraud[test / live][providers]` | `Array` | Contém objetos literais com propriedades identificando os dados do(s) antifraude(s) |
+| `antifraud[test / live][providers][0][id]` | `String` | Identificador do antifraude |
+| `antifraud[test / live][providers][0][enabled]` | `Boolean` | Propriedade que identifica se o antifraude está ativo ou não |
+| `antifraud[test / live][providers][0][name]` | `String` | Nome do antifraude |
+| `antifraud[test / live][providers][0][date_created]` | `String` | Data de ativação do antifraude (ISODate) |
+| `antifraud[test / live][providers][0][date_updated]` | `String` | Data de atualização do antifraude (ISODate) |
+| `antifraud[test / live][providers][0][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
+| `antifraud[test / live][enabled]` | `Boolean` | Propriedade que sinaliza se o antifraude está habilitado ou não nas transações do cliente |
+| `antifraud[test / live][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
+| `antifraud[test / live][rule]` | `String` | Regra para validar se o cliente/transação é confiável ou não |
+| `transaction_cost` | `Object` | Objeto com dados dos custos das transações por boleto e por cart
+ào de crédito |
+| `transaction_cost[credit_card]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando cartão de crédito |
+| `transaction_cost[boleto]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando boleto |
+| `transaction_spread` | `Object` |  |
+| `transaction_spread[credit_card]` | `Number` |  |
+| `transaction_spread[boleto]` | `Number` |  |
 
 > Objeto company
 
@@ -2639,7 +2648,7 @@ Através deste objeto você consegue ter vários dados da sua companhia, como:
         "date_created": "2014-12-10T00:35:54.939Z"
     }, {
         "object": "user",
-        "id": "52d7faa6d8dd64e210f6c4e3",
+        "id": "iauASUGQqweoiu123OIUAais",
         "email": "ciclano@pagar.me",
         "name": "Ciclano da Silva",
         "permission": "read_write",
@@ -2677,7 +2686,7 @@ Através deste objeto você consegue ter vários dados da sua companhia, como:
         },
         "live": {
             "providers": [{
-                "id": "549746c6c84c56f929000c35",
+                "id": "3245237456YAGSDgsdgasyas",
                 "enabled": true,
                 "name": "clearsale",
                 "date_created": "2014-12-21T22:16:38.990Z",
