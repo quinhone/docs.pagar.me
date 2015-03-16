@@ -2568,6 +2568,138 @@ Através da rota `/customers/:id` você recebe todos os dados do seu cliente, pr
 }
 ```
 
+# Companhia
+
+## Objeto `company`
+
+Através deste objeto você consegue ter vários dados da sua companhia, como:
+
+- 
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `company` |
+| `name` | `String` | Nome da companhia |
+| `status` | `String` | Estado da companhia atual. <br> **Valores possíveis**: `temporary`, `pending_confirmation`,  `pending_activation`, `paid` |
+| `id` | `String` | Identificador da companhia |
+| `date_created` | `String` | Data de criação da companhia |
+| `preferences` | `Object` | Objeto com dados da sua marca |
+| `branding` | `` |  |
+| `branding[primary_color]` | `String` | Valor hexadecimal da cor previamente configurada da sua marca. <br> **Ex**: `#ccff00` |
+| `branding[logo]` | `String` | URL do seu logo |
+| `users` | `Array` | Array de objetos `user` |
+| `user` | `Object` | Dados de um usuário. Veja mais [aqui](/?shell#objeto-user) |
+| `api_key` | `` |  |
+| `encryption_key` | `` |  |
+| `subscriptions` | `` |  |
+| `antifraud` | `` |  |
+| `transaction_cost` | `` |  |
+| `transaction_spread` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+| `` | `` |  |
+
+> Objeto company
+
+```json
+{
+    "object": "company",
+    "name": "Pagar.me",
+    "status": "active",
+    "id": "5240a52b1bbc9cb50e000003",
+    "date_created": "2013-10-10T20:35:54.941Z",
+    "preferences": {},
+    "branding": {
+        "primary_color": "#ef6d00",
+        "logo": "https://d1fzuw5mzeho8x.cloudfront.net/companies/5240a52b1bbc9cb50e000003/branding/logo_1417732661478.jpg"
+    },
+    "users": [{
+        "object": "user",
+        "id": "5240a52b1bbc9cb50e000004",
+        "email": "fulano@pagar.me",
+        "name": "Pagar.me",
+        "permission": "admin",
+        "date_created": "2014-12-10T00:35:54.939Z"
+    }, {
+        "object": "user",
+        "id": "52d7faa6d8dd64e210f6c4e3",
+        "email": "ciclano@pagar.me",
+        "name": "Ciclano da Silva",
+        "permission": "read_write",
+        "date_created": "2014-01-16T15:28:38.201Z"
+    }],
+    "api_key": {
+        "live": "ak_live_ASDFGBR4omAE469CEghXsh12cKsoao",
+        "test": "ak_test_ASXAUXHAicOa2BLAsdkoajopq7x788"
+    },
+    "encryption_key": {
+        "live": "ek_live_bspDfASIdiasudads87yas7d7qyap1v",
+        "test": "ek_test_879asdhasjdq124ASUhdahusdOA123a"
+    },
+    "subscriptions": {
+        "payment_deadline": 5,
+        "email_customers": true,
+        "charge_attempts": 4,
+        "charges_interval_in_days": 3,
+        "cancel_after_failed_charges": false,
+        "customer_can_cancel_subscription": true
+    },
+    "antifraud": {
+        "test": {
+            "providers": [{
+                "id": "87a6sd6qdas87d6asduqyu12",
+                "enabled": true,
+                "name": "development",
+                "date_created": "2014-12-21T22:16:38.990Z",
+                "date_updated": "2015-03-12T19:05:52.740Z",
+                "last_enabled_change": null
+            }],
+            "enabled": false,
+            "last_enabled_change": "2015-02-02T18:24:24.192Z",
+            "rule": "development.score <= 95.0 || development.status == 'failed'"
+        },
+        "live": {
+            "providers": [{
+                "id": "549746c6c84c56f929000c35",
+                "enabled": true,
+                "name": "clearsale",
+                "date_created": "2014-12-21T22:16:38.990Z",
+                "date_updated": "2015-03-12T19:05:52.740Z",
+                "last_enabled_change": null
+            }],
+            "enabled": false,
+            "last_enabled_change": "2015-03-04T19:47:15.575Z",
+            "rule": "clearsale.score <= 95.0 || clearsale.status == 'failed'"
+        }
+    },
+    "transaction_cost": {
+        "credit_card": 50,
+        "boleto": 115
+    },
+    "transaction_spread": {
+        "credit_card": 1.5,
+        "boleto": 0
+    }
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
@@ -2600,4 +2732,30 @@ Objeto retornado após a análise antifraude feita em uma transação.
 }
 ```
 
+# Usuário
 
+## Objeto `user`
+
+Dados de um usuário registrado no nosso sistema.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `user` |
+| `id` | `String` | Identificador do usuário |
+| `email` | `String` | Email do usuário |
+| `name` | `String` | Nome do usuário |
+| `permission` | `String` | Tipo de permissão do usuário. <br> **Tipos**: `admin`, `read_write`, `read_only` |
+| `date_created` | `String` | Data da criação do usuário (ISODate) |
+
+> Objeto user
+
+```json
+{
+    "object": "user",
+    "id": "52d7faa6d8dd64e210f6c4e3",
+    "email": "ciclano@pagar.me",
+    "name": "Ciclano da Silva",
+    "permission": "read_write",
+    "date_created": "2014-01-16T15:28:38.201Z"
+}
+```
