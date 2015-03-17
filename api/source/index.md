@@ -2823,6 +2823,50 @@ Através dessa URL você irá receber diversos dados da sua companhia, pelo obje
 }
 ```
 
+## Obtendo estatísticas da companhia
+
+> Rota
+
+```
+GET https://api.pagar.me/1/company/statistics
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X  GET https://api.pagar.me/1/company/statistics \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através dessa URL você irá receber diversos dados estatísticos da sua companhia, como volume de transações mensais, semanais, diárias, número de assinaturas, etc.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "month_transactions_count": 43,
+    "month_transactions_volume": 1637236,
+    "week_transactions_count": 20,
+    "week_transactions_volume": 749741,
+    "day_transactions_count": 0,
+    "day_transactions_volume": 0,
+    "subscriptions_count": 99
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
