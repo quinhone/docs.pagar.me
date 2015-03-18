@@ -2999,6 +2999,120 @@ Através dessa URL você irá receber diversos dados estatísticos da sua compan
 }
 ```
 
+## Resetando as chaves de API e Encriptação
+
+> Rota
+
+```
+PUT https://api.pagar.me/1/company/reset_keys
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X PUT https://api.pagar.me/1/company/reset_keys \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a essa chamada é o objeto `company`, já com as novas chaves.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "company",
+    "name": "Pagar.me",
+    "status": "active",
+    "id": "5240a52b1bbc9cb50e000003",
+    "date_created": "2013-10-10T20:35:54.941Z",
+    "preferences": {},
+    "branding": {
+        "primary_color": "#ef6d00",
+        "logo": "https://d1fzuw5mzeho8x.cloudfront.net/companies/5240a52b1bbc9cb50e000003/branding/logo_1417732661478.jpg"
+    },
+    "users": [{
+        "object": "user",
+        "id": "5240a52b1bbc9cb50e000004",
+        "email": "fulano@pagar.me",
+        "name": "Pagar.me",
+        "permission": "admin",
+        "date_created": "2014-12-10T00:35:54.939Z"
+    }, {
+        "object": "user",
+        "id": "iauASUGQqweoiu123OIUAais",
+        "email": "ciclano@pagar.me",
+        "name": "Ciclano da Silva",
+        "permission": "read_write",
+        "date_created": "2014-01-16T15:28:38.201Z"
+    }],
+    "api_key": {
+        "live": "ak_live_ASDFGBR4omAE469CEghXsh12cKsoao",
+        "test": "ak_test_ASXAUXHAicOa2BLAsdkoajopq7x788"
+    },
+    "encryption_key": {
+        "live": "ek_live_bspDfASIdiasudads87yas7d7qyap1v",
+        "test": "ek_test_879asdhasjdq124ASUhdahusdOA123a"
+    },
+    "subscriptions": {
+        "payment_deadline": 6,
+        "email_customers": false,
+        "charge_attempts": 5,
+        "charges_interval_in_days": 4,
+        "cancel_after_failed_charges": false,
+        "customer_can_cancel_subscription": true
+    },
+    "antifraud": {
+        "test": {
+            "providers": [{
+                "id": "87a6sd6qdas87d6asduqyu12",
+                "enabled": true,
+                "name": "development",
+                "date_created": "2014-12-21T22:16:38.990Z",
+                "date_updated": "2015-03-12T19:05:52.740Z",
+                "last_enabled_change": null
+            }],
+            "enabled": false,
+            "last_enabled_change": "2015-02-02T18:24:24.192Z",
+            "rule": "development.score <= 95.0 || development.status == 'failed'"
+        },
+        "live": {
+            "providers": [{
+                "id": "3245237456YAGSDgsdgasyas",
+                "enabled": true,
+                "name": "clearsale",
+                "date_created": "2014-12-21T22:16:38.990Z",
+                "date_updated": "2015-03-12T19:05:52.740Z",
+                "last_enabled_change": null
+            }],
+            "enabled": false,
+            "last_enabled_change": "2015-03-04T19:47:15.575Z",
+            "rule": "clearsale.score <= 95.0 || clearsale.status == 'failed'"
+        }
+    },
+    "transaction_cost": {
+        "credit_card": 50,
+        "boleto": 115
+    },
+    "transaction_spread": {
+        "credit_card": 1.5,
+        "boleto": 0
+    }
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
