@@ -20,7 +20,7 @@ etc.
 Basta inserir nosso JavaScript na sua página e depois realizar a captura da
 transação pelo seu servidor. Nós cuidaremos de todo o resto! :)
 
-[Clique aqui](https://pagar.me/assets/checkout-demo/) para testar o Checkout.
+[Clique aqui](https://pagar.me/checkout) para testar o Checkout.
 
 ## Inserindo o formulário
 
