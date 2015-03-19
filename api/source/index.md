@@ -3113,6 +3113,71 @@ Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a
 }
 ```
 
+# Contas bancárias
+
+## Criando uma conta bancária
+
+> Rota
+
+```
+POST https://api.pagar.me/1/company/bank_accounts
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X POST https://api.pagar.me/1/bank_accounts \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'bank_code=341' \
+-d 'agencia=0932' \
+-d 'agencia_dv=5' \
+-d 'conta=58054' \
+-d 'conta_dv=1' \
+-d 'document_number=26268738888' \
+-d 'legal_name=API BANK ACCOUNT'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a essa chamada é o objeto `company`, já com as novas chaves.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `bank_code` | Sim | - | Código do banco |
+| `agencia` | Sim | - | Agência onde sua conta foi criada |
+| `agencia_dv` | Não | - | Dígito verificador da sua agência |
+| `conta` | Sim | - | Número da conta bancária |
+| `conta_dv` | Sim | - | Dígito verificador da conta |
+| `document_number` | Sim | - | Documento identificador do titular da conta (cpf ou cnpj) |
+| `legal_name` | Sim | - | Nome completo (se pessoa física) ou razão social (se pessoa jurídica) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "bank_account",
+    "id": 4840,
+    "bank_code": "341",
+    "agencia": "0932",
+    "agencia_dv": "5",
+    "conta": "58054",
+    "conta_dv": "1",
+    "document_type": "cpf",
+    "document_number": "26268738888",
+    "legal_name": "API BANK ACCOUNT",
+    "charge_transfer_fees": false,
+    "date_created": "2015-03-19T15:35:40.000Z"
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
