@@ -3264,6 +3264,85 @@ Através dessa rota você consegue retornar os dados de uma conta bancária espe
 }
 ```
 
+## Retornando várias contas bancárias
+
+> Rota
+
+```
+GET https://api.pagar.me/1/company/bank_accounts
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'count=3' \
+-d 'page=2'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através dessa rota você consegue retornar os dados de várias contas bancárias.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | - | Número de contas que serão retornadas por chamada |
+| `page` | Não | - | Número da página de resultados |
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "bank_account",
+    "id": 4841,
+    "bank_code": "341",
+    "agencia": "0932",
+    "agencia_dv": "5",
+    "conta": "58054",
+    "conta_dv": "1",
+    "document_type": "cpf",
+    "document_number": "26268738888",
+    "legal_name": "API BANK ACCOUNT",
+    "charge_transfer_fees": false,
+    "date_created": "2015-03-19T15:40:51.000Z"
+}, {
+    "object": "bank_account",
+    "id": 4840,
+    "bank_code": "341",
+    "agencia": "0932",
+    "agencia_dv": "5",
+    "conta": "58054",
+    "conta_dv": "1",
+    "document_type": "cpf",
+    "document_number": "26268738888",
+    "legal_name": "API BANK ACCOUNT",
+    "charge_transfer_fees": false,
+    "date_created": "2015-03-19T15:35:40.000Z"
+}, {
+    "object": "bank_account",
+    "id": 4839,
+    "bank_code": "341",
+    "agencia": "0932",
+    "agencia_dv": "5",
+    "conta": "58054",
+    "conta_dv": "1",
+    "document_type": "cpf",
+    "document_number": "26268738888",
+    "legal_name": "API BANK ACCOUNT",
+    "charge_transfer_fees": false,
+    "date_created": "2015-03-19T15:35:14.000Z"
+}]
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
