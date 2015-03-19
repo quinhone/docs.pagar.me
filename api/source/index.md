@@ -3183,7 +3183,7 @@ curl -X POST https://api.pagar.me/1/bank_accounts \
 ```cs
 ```
 
-Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a essa chamada é o objeto `company`, já com as novas chaves.
+Cria uma conta bancária para futuros pagamentos.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -3195,6 +3195,55 @@ Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a
 | `conta_dv` | Sim | - | Dígito verificador da conta |
 | `document_number` | Sim | - | Documento identificador do titular da conta (cpf ou cnpj) |
 | `legal_name` | Sim | - | Nome completo (se pessoa física) ou razão social (se pessoa jurídica) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "bank_account",
+    "id": 4840,
+    "bank_code": "341",
+    "agencia": "0932",
+    "agencia_dv": "5",
+    "conta": "58054",
+    "conta_dv": "1",
+    "document_type": "cpf",
+    "document_number": "26268738888",
+    "legal_name": "API BANK ACCOUNT",
+    "charge_transfer_fees": false,
+    "date_created": "2015-03-19T15:35:40.000Z"
+}
+```
+
+## Retornando uma conta bancária
+
+> Rota
+
+```
+GET https://api.pagar.me/1/company/bank_accounts/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através dessa rota você consegue retornar os dados de uma conta bancária específica.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
