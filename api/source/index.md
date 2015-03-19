@@ -3115,6 +3115,43 @@ Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a
 
 # Contas bancárias
 
+## Objeto `bank_account`
+
+Contém os dados de uma conta bancária para futuros pagamentos.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `bank_account` |
+| `id` | `String` | Identificador da conta bancária |
+| `bank_code` | `String` | Valor identificador do código do banco |
+| `agencia` | `String` | Valor identificador da agência a qual a conta pertence |
+| `agencia_dv` | `String` | Dígito verificador da agência |
+| `conta` | `String` | Número da conta bancária |
+| `conta_dv` | `String` | Dígito verificador da conta |
+| `document_type` | `String` | Tipo do documento do titular da conta |
+| `document_number` | `String` | Número do documento do titular da conta (cpf ou cnpj) |
+| `legal_name` | `String` | Nome completo (se pessoa física) ou Razão Social (se pessoa jurídica) |
+| `date_created` | `String` | Data de criação da conta bancária (ISODate) |
+
+> Objeto bank_account
+
+```json
+{
+    "object": "bank_account",
+    "id": 4840,
+    "bank_code": "341",
+    "agencia": "0932",
+    "agencia_dv": "5",
+    "conta": "58054",
+    "conta_dv": "1",
+    "document_type": "cpf",
+    "document_number": "26268738888",
+    "legal_name": "API BANK ACCOUNT",
+    "charge_transfer_fees": false,
+    "date_created": "2015-03-19T15:35:40.000Z"
+}
+```
+
 ## Criando uma conta bancária
 
 > Rota
@@ -3237,3 +3274,5 @@ Dados de um usuário registrado no nosso sistema.
     "date_created": "2014-01-16T15:28:38.201Z"
 }
 ```
+
+
