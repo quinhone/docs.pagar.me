@@ -3275,7 +3275,7 @@ GET https://api.pagar.me/1/company/bank_accounts
 > Exemplo de Requisição 
 
 ```shell
-curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
+curl -X GET https://api.pagar.me/1/bank_accounts \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
 -d 'count=3' \
 -d 'page=2'
