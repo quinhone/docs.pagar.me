@@ -3343,6 +3343,55 @@ Através dessa rota você consegue retornar os dados de várias contas bancária
 }]
 ```
 
+# Transferências
+
+## Objeto `transfer`
+
+Objeto retornado ao se criar uma transferência bancária.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transfer` |
+| `id` | `Number` | Número identificador da transação |
+| `amount` | `Number` | Valor, em centavos, do valor transferido |
+| `type` | `String` | Tipo da transação. <br> **Valores possíveis**: `ted`, `doc` ou `credito_em_conta` |
+| `status` | `String` | Estado no qual a transação se encontra. <br> **Valores possíveis**: `pending_transfer`, `transferred`, `failed`, `processing` ou `canceled` |
+| `fee` | `Number` | Taxa cobrada pela transferência, em centavos. |
+| `funding_date` | `String` | Data da ocorrência da transferência |
+| `funding_estimated_date` | `String` | Data estimada para efetivação da transferência (ISODate) |
+| `transaction_id` | `Number` | Identificador da transação estornada |
+| `bank_account` | `Object` | Objeto contendo os dados da [conta bancária](/?shell#objeto-bank_account) que irá receber a transferência |
+| `date_created` | `String` | Data da criação da transferência (ISODate) |
+
+> Objeto transfer
+
+```json
+{
+    "object": "transfer",
+    "id": 480,
+    "amount": 13000,
+    "type": "doc",
+    "status": "pending_transfer",
+    "fee": 367,
+    "funding_estimated_date": "2015-03-21T15:44:14.417Z",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4840,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": "5",
+        "conta": "58054",
+        "conta_dv": "1",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "API BANK ACCOUNT",
+        "charge_transfer_fees": false,
+        "date_created": "2015-03-19T15:35:40.000Z"
+    },
+    "date_created": "2015-03-20T15:44:14.000Z"
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
