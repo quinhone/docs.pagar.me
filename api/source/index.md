@@ -3636,6 +3636,50 @@ Cancela uma transferência previamente realizada.
 }
 ```
 
+# Códigos postais
+
+## Consulta de CEP
+
+> Rota
+
+```
+GET https://api.pagar.me/1/zipcodes/:id
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/zipcodes/01452001 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Com essa rota você pode verificar os dados de um determinado CEP.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "neighborhood": "Jardim Paulistano",
+    "street": "Avenida Brigadeiro Faria Lima",
+    "city": "São Paulo",
+    "state": "SP",
+    "zipcode": "01452001"
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
