@@ -3295,8 +3295,8 @@ Através dessa rota você consegue retornar os dados de várias contas bancária
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `count` | Não | - | Número de contas que serão retornadas por chamada |
-| `page` | Não | - | Número da página de resultados |
+| `count` | Não | `10` | Retorna `n` objetos de conta bancária |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados | 
 
 > JSON Retornado (Exemplo)
 
@@ -3514,6 +3514,66 @@ Retorna os dados de uma transferência previamente realizada.
 }
 ```
 
+## Vendo dados de várias transferências
+
+> Rota
+
+```
+GET https://api.pagar.me/1/transfers
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X GET https://api.pagar.me/1/transfers \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna os dados de todas as transferências previamente realizadas.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos de transferência |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "transfer",
+    "id": 480,
+    "amount": 13000,
+    "type": "doc",
+    "status": "pending_transfer",
+    "fee": 367,
+    "funding_estimated_date": "2015-03-21T15:44:14.417Z",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4840,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": "5",
+        "conta": "58054",
+        "conta_dv": "1",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "API BANK ACCOUNT",
+        "charge_transfer_fees": false,
+        "date_created": "2015-03-19T15:35:40.000Z"
+    },
+    "date_created": "2015-03-20T15:44:14.000Z"
+}
+```
 
 # Antifraude
 
