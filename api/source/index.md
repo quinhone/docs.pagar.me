@@ -3575,6 +3575,67 @@ Retorna os dados de todas as transferências previamente realizadas.
 }
 ```
 
+## Cancelando uma transferência
+
+> Rota
+
+```
+POST https://api.pagar.me/1/transfers/:id/cancel
+```
+
+> Exemplo de Requisição 
+
+```shell
+curl -X POST https://api.pagar.me/1/transfers/480/cancel \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Cancela uma transferência previamente realizada.
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "transfer",
+    "id": 480,
+    "amount": 13000,
+    "type": "doc",
+    "status": "canceled",
+    "fee": 367,
+    "funding_date": null,
+    "funding_estimated_date": "2015-03-21T15:44:14.000Z",
+    "transaction_id": null,
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4840,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": "5",
+        "conta": "58054",
+        "conta_dv": "1",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "API BANK ACCOUNT",
+        "charge_transfer_fees": false,
+        "date_created": "2015-03-19T15:35:40.000Z"
+    },
+    "date_created": "2015-03-20T15:44:14.000Z"
+}
+```
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
