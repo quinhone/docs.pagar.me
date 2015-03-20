@@ -1773,7 +1773,7 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
 }
 ```
 
-## Cancelando uma inscrição
+## Cancelando uma assinatura
 
 > Rota
 
