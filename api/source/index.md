@@ -35,7 +35,7 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 | `status_reason` | `String` |  |
 | `acquirer_response_code` | `String` |  |
 | `authorization_code` | `String` |  |
-| `soft_descriptor` | `String` | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **ps**: Limite de 13 caracteres. |
+| `soft_descriptor` | `String` | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **OBS**: Limite de 13 caracteres. |
 | `tid` | `String` |  |
 | `nsu` | `String` |  |
 | `date_created` | `String` | Data de criação da transação no formato ISODate |
@@ -77,10 +77,6 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
   "installments": 5,
   "id": 184220,
   "cost": 0,
-  "card_holder_name": "Api Customer",
-  "card_last_digits": "3123",
-  "card_first_digits": "548045",
-  "card_brand": "mastercard",
   "postback_url": "http://requestb.in/pkt7pgpk",
   "payment_method": "credit_card",
   "antifraud_score": null,
@@ -115,13 +111,7 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 
 ## Criando uma transação
 
-> Rota
-
-```
-POST https://api.pagar.me/1/transactions
-```
-
-> Exemplo de Requisição
+> POST https://api.pagar.me/1/transactions
 
 ```shell
 curl -X POST https://api.pagar.me/1/transactions \
@@ -129,8 +119,6 @@ curl -X POST https://api.pagar.me/1/transactions \
 -d 'amount=3100' \
 -d 'card_id=card_ci6l9fx8f0042rt16rtb477gj' \
 -d 'postback_url=http://requestb.in/pkt7pgpk' \
--d 'payment_method=boleto' \
--d 'boleto_expiration_date=1426215600000'
 -d 'metadata[idProduto]=13933139'
 ```
 
@@ -141,18 +129,12 @@ PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 
 transaction = PagarMe::Transaction.new({
     :amount => 3100,
-    :payment_method => "boleto",
     :card_id => "card_ci6l9fx8f0042rt16rtb477gj",
     :postback_url => "http://requestb.in/pkt7pgpk",
-    :payment_method => boleto,
-    :boleto_expiration_date => 1426215600000,
     :metadata[idProduto] => 13933139
 })
 
 transaction.charge
-
-boleto_url = transaction.boleto_url # URL do boleto bancário
-boleto_barcode = transaction.boleto_barcode # código de barras do boleto bancário
 ```
 
 ```php
@@ -163,20 +145,14 @@ boleto_barcode = transaction.boleto_barcode # código de barras do boleto bancá
 
     $transaction = new PagarMe_Transaction(array(
         "amount" => 3100,
-        "payment_method' => "boleto",
         "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
         "postback_url" => "http://requestb.in/pkt7pgpk",
-        "payment_method" => "boleto",
-        "boleto_expiration_date" => 1426215600000,
         "metadata" => array(
             "idProduto" => 13933139
         )
     ));
 
     $transaction->charge();
-
-    $boleto_url = $transaction->boleto_url; // URL do boleto bancário
-    $boleto_barcode = $transaction->boleto_barcode; // código de barras do boleto bancário
 ?>
 ```
 
@@ -186,16 +162,13 @@ PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 Transaction transaction = new Transaction();
 
 transaction.Amount = 3100;
-transaction.CardHash = "{CARD HASH}";
+transaction.CardId = "card_ci6l9fx8f0042rt16rtb477gj";
 transaction.PostbackUrl = "http://requestb.in/pkt7pgpk";
-transaction.BoletoExpirationDate = "1426215600000";
 transaction.Metadata = new Metadata() {
     IdProduto = 13933139
 };
 
 transaction.Save();
-
-TransactionStatus status = transaction.Status;
 ```
 
 Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua transação, que pode ser feita por cartão de crédito ou por boleto bancário.
@@ -204,7 +177,7 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `amount` | Sim | - | Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = `1000` |
-| `card_hash` | Sim\* | - | Informações do cartão do cliente criptografadas no navegador. <br>**ps**: Para os dados do cartão você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
+| `card_hash` | Sim\* | - | Informações do cartão do cliente criptografadas no navegador. <br>**OBS**: Para os dados do cartão você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
 | `card_id` | Sim\* | - | Ao realizar uma transação, retornamos o `card_id` do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do `card_hash` |
 | `payment_method` | Não | `credit_card` | Aceita dois tipos de pagamentos/valores: `credit_card` e `boleto` |
 | `postback_url` | Não | - | Endpoint do seu sistema que receberá informações a cada atualização da transação |
@@ -245,10 +218,6 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
   "installments": 5,
   "id": 184220,
   "cost": 0,
-  "card_holder_name": "Api Customer",
-  "card_last_digits": "3123",
-  "card_first_digits": "548045",
-  "card_brand": "mastercard",
   "postback_url": "http://requestb.in/pkt7pgpk",
   "payment_method": "credit_card",
   "antifraud_score": null,
@@ -274,23 +243,16 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
     "valid": null
   },
   "metadata": {
-    "nomeData": "API Doc Test",
-    "idData": 13
+    "idProduto": "13933139"
   }
 }
 ```
 
-**ps**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
+**OBS**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
 
 ## Retornando uma Transação
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions/:id
-```
-
-> Exemplo de Requisição
+> GET https://api.pagar.me/1/transactions/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/194351 \
@@ -334,10 +296,6 @@ Retorna os dados de uma transação realizada
     "installments": 1,
     "id": 184270,
     "cost": 115,
-    "card_holder_name": null,
-    "card_last_digits": null,
-    "card_first_digits": null,
-    "card_brand": null,
     "postback_url": null,
     "payment_method": "boleto",
     "antifraud_score": null,
@@ -357,13 +315,7 @@ Retorna os dados de uma transação realizada
 
 ## Retornando transações
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions \
-```
-
-> Exemplo de Requisição
+> GET https://api.pagar.me/1/transactions
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions \
@@ -410,10 +362,6 @@ Retorna um `Array` contendo objetos de transações realizadas.
     "installments": "10",
     "id": 185679,
     "cost": 0,
-    "card_holder_name": "murilo junqueira",
-    "card_last_digits": "1111",
-    "card_first_digits": "411111",
-    "card_brand": "visa",
     "postback_url": null,
     "payment_method": "credit_card",
     "antifraud_score": null,
@@ -456,10 +404,6 @@ Retorna um `Array` contendo objetos de transações realizadas.
     "installments": 1,
     "id": 185676,
     "cost": 0,
-    "card_holder_name": null,
-    "card_last_digits": null,
-    "card_first_digits": null,
-    "card_brand": null,
     "postback_url": null,
     "payment_method": "boleto",
     "antifraud_score": null,
@@ -491,10 +435,6 @@ Retorna um `Array` contendo objetos de transações realizadas.
     "installments": 1,
     "id": 185675,
     "cost": 0,
-    "card_holder_name": "John Appleseed",
-    "card_last_digits": "4446",
-    "card_first_digits": "590072",
-    "card_brand": "mastercard",
     "postback_url": null,
     "payment_method": "credit_card",
     "antifraud_score": null,
@@ -525,13 +465,7 @@ Retorna um `Array` contendo objetos de transações realizadas.
 
 ## Gerando uma nova chave para encriptação do `card_hash`
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions/card_hash_key
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/transactions/card_hash_key
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
@@ -568,13 +502,7 @@ Saiba mais sobre como criar um `card_hash` [aqui]().
 
 ## Retorna uma análise antifraude
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456 \
@@ -615,13 +543,7 @@ Retorna uma análise antifraude específica realizada em uma transação.
 
 ## Retorna todas as análises antifraude
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
@@ -661,13 +583,7 @@ Retorna todas as análises antifraude realizadas em uma transação.
 
 ## Notificando cliente sobre boleto à ser pago
 
-> Rota
-
-```
-POST https://api.pagar.me/1/transactions/:id/collect_payment
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/transactions/:id/collect_payment
 
 ```shell
 curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
@@ -700,13 +616,7 @@ Envia o link de um boleto pendente para o cliente.
 
 ## Capturando uma transação posteriormente
 
-> Rota
-
-```
-POST https://api.pagar.me/1/transactions/:id/capture
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/transactions/:id/capture
 
 ```shell
 curl -X POST https://api.pagar.me/1/transactions/314578/capture \
@@ -749,10 +659,6 @@ Você pode capturar o valor de uma transação após a autorização desta, no p
     "installments": 1,
     "id": 184622,
     "cost": 0,
-    "card_holder_name": "Api Customer",
-    "card_last_digits": "3123",
-    "card_first_digits": "548045",
-    "card_brand": "mastercard",
     "postback_url": "http://requestb.in/pkt7pgpk",
     "payment_method": "credit_card",
     "antifraud_score": null,
@@ -786,13 +692,7 @@ Você pode capturar o valor de uma transação após a autorização desta, no p
 
 ## Estorno de transação
 
-> Rota
-
-```
-POST https://api.pagar.me/1/transactions/:id/refund
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/transactions/:id/refund
 
 ```shell
 curl -X POST https://api.pagar.me/1/transactions/314578/refund \
@@ -860,10 +760,6 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
     "installments": 1,
     "id": 184623,
     "cost": 2000,
-    "card_holder_name": "Api Customer",
-    "card_last_digits": "3123",
-    "card_first_digits": "548045",
-    "card_brand": "mastercard",
     "postback_url": "http://requestb.in/pkt7pgpk",
     "payment_method": "credit_card",
     "antifraud_score": null,
@@ -915,10 +811,6 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
     "installments": 1,
     "id": 184306,
     "cost": 115,
-    "card_holder_name": null,
-    "card_last_digits": null,
-    "card_first_digits": null,
-    "card_brand": null,
     "postback_url": "http://requestb.in/pkt7pgpk",
     "payment_method": "boleto",
     "antifraud_score": null,
@@ -949,13 +841,7 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 
 ## Calculando Pagamentos Parcelados
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transactions/calculate_installments_amount
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/transactions/calculate_installments_amount
 
 ```shell
 curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
@@ -1044,13 +930,7 @@ Com o objeto `plan` você consegue definir um plano no qual assinaturas poderão
 
 ## Criando Planos
 
-> Rota
-
-```
-POST https://api.pagar.me/1/plans
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/plans
 
 ```shell
 curl -X POST https://api.pagar.me/1/plans \
@@ -1081,8 +961,8 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 | `trial_days` | Não | `0` | Dias para teste gratuito do produto. Valor começará a ser cobrado no dia `trial_days + 1` |
 | `payment_methods` | Não | `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
 | `color` | Não | `null` | Armazena o valor de uma cor para o plano |
-| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, charges = 3, installments = 1` <br> **ps**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
-| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **ps**: Boleto sempre terá `installments = 1` |
+| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, charges = 3, installments = 1` <br> **OBS**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
+| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **OBS**: Boleto sempre terá `installments = 1` |
 
 Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
 
@@ -1108,13 +988,7 @@ Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscript
 
 ## Retornando Planos
 
-> Rota
-
-```
-GET https://api.pagar.me/1/plans/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/plans/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/plans/13580 \
@@ -1159,13 +1033,7 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 
 ## Atualizando Planos
 
-> Rota
-
-```
-PUT https://api.pagar.me/1/plans/:id
-```
-
-> Exemplo de Requisição 
+> PUT https://api.pagar.me/1/plans/:id
 
 ```shell
 curl -X  PUT https://api.pagar.me/1/plans/13580 \
@@ -1217,13 +1085,7 @@ Atualiza um plano previamente criado. As propriedades que podem ser alteradas s�
 
 ## Deletando Planos
 
-> Rota
-
-```
-DELETE https://api.pagar.me/1/plans/:id
-```
-
-> Exemplo de Requisição 
+> DELETE https://api.pagar.me/1/plans/:id
 
 ```shell
 curl -X DELETE https://api.pagar.me/1/plans/12784 \
@@ -1279,8 +1141,6 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 | `current_transaction` | `Object` | Objeto com os dados da última transação realizada nessa assinatura |
 | `postback_url` | `String` | Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a cada atualização dos processos |
 | `payment_method` | `String` | Método de pagamento associado a essa assinatura |
-| `card_brand` | `String` | Nome da operadora do cartão |
-| `card_last_digits` | `String` | Últimos dígitos do cartão |
 | `current_period_start` | `String` |  |
 | `current_period_end` | `String` |  |
 | `charges` | `Number` | Número de cobranças a serem efetuadas |
@@ -1331,10 +1191,6 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
         "installments": 1,
         "id": 185486,
         "cost": 0,
-        "card_holder_name": null,
-        "card_last_digits": null,
-        "card_first_digits": null,
-        "card_brand": null,
         "postback_url": null,
         "payment_method": "boleto",
         "antifraud_score": null,
@@ -1348,8 +1204,6 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
     },
     "postback_url": null,
     "payment_method": "boleto",
-    "card_brand": null,
-    "card_last_digits": null,
     "current_period_start": null,
     "current_period_end": null,
     "charges": 0,
@@ -1386,13 +1240,7 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 
 ## Criando assinaturas
 
-> Rota
-
-```
-POST https://api.pagar.me/1/subscriptions
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/subscriptions
 
 ```shell
 curl -X POST https://api.pagar.me/1/subscriptions \
@@ -1415,7 +1263,7 @@ Para efetivamente cobrar seu cliente de forma recorrente, você deve criar uma *
 
 A criação de uma `subscription` (assinatura) é parecida com a criação de uma transação. Veja mais detalhes sobre como cobrar seu cliente de forma recorrente [aqui](https://pagar.me/docs/plans-subscriptions/#criando-uma-assinatura).
 
-**ps**: Você pode passar os objetos `customer` e `metadata` na criação de uma assinatura, assim como feito na criação de uma transação. A diferença é que a propriedade `customer[email]` é obrigatória na criação da **assinatura**. 
+**OBS**: Você pode passar os objetos `customer` e `metadata` na criação de uma assinatura, assim como feito na criação de uma transação. A diferença é que a propriedade `customer[email]` é obrigatória na criação da **assinatura**. 
 
 **OBS**: As transações criadas pelas assinaturas não passam pelo antifraude, devido a ocorrência de fraudes nesse tipo de serviço serem praticamente nulas.
 
@@ -1474,10 +1322,6 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
         "installments": 1,
         "id": 185122,
         "cost": 515,
-        "card_holder_name": "Api Customer",
-        "card_last_digits": "3123",
-        "card_first_digits": "548045",
-        "card_brand": "mastercard",
         "postback_url": null,
         "payment_method": "credit_card",
         "antifraud_score": null,
@@ -1491,8 +1335,6 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
     },
     "postback_url": null,
     "payment_method": "credit_card",
-    "card_brand": "mastercard",
-    "card_last_digits": "3123",
     "current_period_start": "2015-03-04T18:41:56.746Z",
     "current_period_end": "2015-04-03T18:41:56.746Z",
     "charges": 0,
@@ -1529,13 +1371,7 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 
 ## Retornando Assinaturas
 
-> Rota
-
-```
-GET https://api.pagar.me/1/subscriptions/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/subscriptions/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/subscriptions/14858 \
@@ -1596,10 +1432,6 @@ Essa rota é utilizada para retornar os dados de uma determinada assinatura.
         "installments": 1,
         "id": 185122,
         "cost": 515,
-        "card_holder_name": "Api Customer",
-        "card_last_digits": "3123",
-        "card_first_digits": "548045",
-        "card_brand": "mastercard",
         "postback_url": null,
         "payment_method": "credit_card",
         "antifraud_score": null,
@@ -1613,8 +1445,6 @@ Essa rota é utilizada para retornar os dados de uma determinada assinatura.
     },
     "postback_url": null,
     "payment_method": "credit_card",
-    "card_brand": "mastercard",
-    "card_last_digits": "3123",
     "current_period_start": "2015-03-04T18:41:56.746Z",
     "current_period_end": "2015-04-03T18:41:56.746Z",
     "charges": 0,
@@ -1651,13 +1481,7 @@ Essa rota é utilizada para retornar os dados de uma determinada assinatura.
 
 ## Atualizando uma assinatura
 
-> Rota
-
-```
-PUT https://api.pagar.me/1/subscriptions/:id
-```
-
-> Exemplo de Requisição 
+> PUT https://api.pagar.me/1/subscriptions/:id
 
 ```shell
 curl -X PUT https://api.pagar.me/1/subscriptions/14858 \
@@ -1720,10 +1544,6 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
         "installments": 1,
         "id": 185486,
         "cost": 0,
-        "card_holder_name": null,
-        "card_last_digits": null,
-        "card_first_digits": null,
-        "card_brand": null,
         "postback_url": null,
         "payment_method": "boleto",
         "antifraud_score": null,
@@ -1737,8 +1557,6 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
     },
     "postback_url": null,
     "payment_method": "boleto",
-    "card_brand": null,
-    "card_last_digits": null,
     "current_period_start": null,
     "current_period_end": null,
     "charges": 0,
@@ -1775,13 +1593,7 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
 
 ## Cancelando uma assinatura
 
-> Rota
-
-```
-POST https://api.pagar.me/1/subscriptions/:id/cancel
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/subscriptions/:id/cancel
 
 ```shell
 curl -X POST https://api.pagar.me/1/subscriptions/14858/cancel \
@@ -1842,10 +1654,6 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
         "installments": 1,
         "id": 185486,
         "cost": 0,
-        "card_holder_name": null,
-        "card_last_digits": null,
-        "card_first_digits": null,
-        "card_brand": null,
         "postback_url": null,
         "payment_method": "boleto",
         "antifraud_score": null,
@@ -1859,8 +1667,6 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     },
     "postback_url": null,
     "payment_method": "boleto",
-    "card_brand": null,
-    "card_last_digits": null,
     "current_period_start": null,
     "current_period_end": null,
     "charges": 0,
@@ -1897,13 +1703,7 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
 
 ## Transações em uma assinatura
 
-> Rota
-
-```
-GET https://api.pagar.me/1/subscriptions/:id/transactions
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/subscriptions/:id/transactions
 
 ```shell
 curl -X GET https://api.pagar.me/1/subscriptions/14858/transactions \
@@ -1945,10 +1745,6 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     "installments": 1,
     "id": 185486,
     "cost": 0,
-    "card_holder_name": null,
-    "card_last_digits": null,
-    "card_first_digits": null,
-    "card_brand": null,
     "postback_url": null,
     "payment_method": "boleto",
     "antifraud_score": null,
@@ -2001,10 +1797,6 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     "installments": 1,
     "id": 185481,
     "cost": 0,
-    "card_holder_name": null,
-    "card_last_digits": null,
-    "card_first_digits": null,
-    "card_brand": null,
     "postback_url": null,
     "payment_method": "boleto",
     "antifraud_score": null,
@@ -2036,10 +1828,6 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     "installments": 1,
     "id": 185122,
     "cost": 515,
-    "card_holder_name": "Api Customer",
-    "card_last_digits": "3123",
-    "card_first_digits": "548045",
-    "card_brand": "mastercard",
     "postback_url": null,
     "payment_method": "credit_card",
     "antifraud_score": null,
@@ -2117,13 +1905,7 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
 
 ## Criando um cartão
 
-> Rota
-
-```
-POST https://api.pagar.me/1/cards
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/cards
 
 ```shell
 curl -X  POST https://api.pagar.me/1/plans/13580 \
@@ -2148,7 +1930,6 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `card_number` | Sim | - | Número do portador do cartão |
-| `card_holder_name` ou `holder_name` | Sim | - | Nome do portador do cartão |
 | `card_expiration_date` ou `expiration_date` | Sim | - | Data de expiração do  |
 | `customer_id` | Não | - | Você pode usar o `id` do objeto `customer` para associar mais informações do cliente ao `card` a ser gerado |
 
@@ -2172,13 +1953,7 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 
 ## Retornando um cartão salvo
 
-> Rota
-
-```
-GET https://api.pagar.me/1/cards/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/cards/:id
 
 ```shell
 curl -X  GET https://api.pagar.me/1/cards/card_ci6y37h16wrxsmzyi \
@@ -2251,13 +2026,7 @@ Com este objeto, você pode obter informações gerais sobre o saldo da sua cont
 
 ## Saldo geral das operações
 
-> Rota
-
-```
-GET https://api.pagar.me/1/balance
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/balance
 
 ```shell
 curl -X  GET https://api.pagar.me/1/balance \
@@ -2275,7 +2044,7 @@ curl -X  GET https://api.pagar.me/1/balance \
 
 Com essa rota `/balance` você poderá consultar o saldo das transações da sua companhia.
 
-**ps**: os valores retornados estão em **centavos**.
+**OBS**: os valores retornados estão em **centavos**.
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
@@ -2347,13 +2116,7 @@ Com este objeto você poderá acompanhar como estava/está seu saldo a cada movi
 
 ## Histórico das operações
 
-> Rota
-
-```
-GET https://api.pagar.me/1/balance/operations
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/balance/operations
 
 ```shell
 curl -X  GET https://api.pagar.me/1/balance/operations \
@@ -2446,13 +2209,7 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
 
 ## Histórico específico de uma operação 
 
-> Rota
-
-```
-GET https://api.pagar.me/1/balance/operations/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/balance/operations/:id
 
 ```shell
 curl -X  GET https://api.pagar.me/1/balance/operations/4861 \
@@ -2505,13 +2262,7 @@ Com a rota `/balance/operations/:id` você poderá ver uma operação específic
 
 ## Retornando dados do cliente
 
-> Rota
-
-```
-GET https://api.pagar.me/1/customers/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/customers/:id
 
 ```shell
 curl -X  GET https://api.pagar.me/1/customers/11222 \
@@ -2711,13 +2462,7 @@ Através deste objeto você consegue visualizar vários dados da sua companhia, 
 
 ## Retornando dados da companhia
 
-> Rota
-
-```
-GET https://api.pagar.me/1/company
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/company
 
 ```shell
 curl -X  GET https://api.pagar.me/1/company \
@@ -2825,13 +2570,7 @@ Através dessa URL você irá receber diversos dados da sua companhia, pelo obje
 
 ## Obtendo estatísticas da companhia
 
-> Rota
-
-```
-GET https://api.pagar.me/1/company/statistics
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/company/statistics
 
 ```shell
 curl -X  GET https://api.pagar.me/1/company/statistics \
@@ -2869,13 +2608,7 @@ Através dessa URL você irá receber diversos dados estatísticos da sua compan
 
 ## Atualizando dados da companhia
 
-> Rota
-
-```
-PUT https://api.pagar.me/1/company
-```
-
-> Exemplo de Requisição 
+> PUT https://api.pagar.me/1/company
 
 ```shell
 curl -X PUT https://api.pagar.me/1/company \
@@ -2913,7 +2646,7 @@ Através dessa URL você irá receber diversos dados estatísticos da sua compan
 | `subscriptions[customer_can_cancel_subscription]` | Não | - | Habilita a opção do seu cliente cancelar uma assinatura |
 | `branding[primary_color]` | Não | - | Permite alterar a cor padrão da dashboard mostrada para o cliente |
 | `name` | Não | - | Altera o nome da empresa exibido na dashboard |
-| `antifraud` | Não | - | Liga ou desliga o antifraude. <br> **ps**: Você poderá alterar o status do antifraude no mínimo a cada 30 dias |
+| `antifraud` | Não | - | Liga ou desliga o antifraude. <br> **OBS**: Você poderá alterar o status do antifraude no mínimo a cada 30 dias |
 
 > JSON Retornado (Exemplo)
 
@@ -3001,13 +2734,7 @@ Através dessa URL você irá receber diversos dados estatísticos da sua compan
 
 ## Resetando as chaves de API e Encriptação
 
-> Rota
-
-```
-PUT https://api.pagar.me/1/company/reset_keys
-```
-
-> Exemplo de Requisição 
+> PUT https://api.pagar.me/1/company/reset_keys
 
 ```shell
 curl -X PUT https://api.pagar.me/1/company/reset_keys \
@@ -3154,13 +2881,7 @@ Contém os dados de uma conta bancária para futuros pagamentos.
 
 ## Criando uma conta bancária
 
-> Rota
-
-```
-POST https://api.pagar.me/1/company/bank_accounts
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/company/bank_accounts
 
 ```shell
 curl -X POST https://api.pagar.me/1/bank_accounts \
@@ -3217,13 +2938,7 @@ Cria uma conta bancária para futuros pagamentos.
 
 ## Retornando uma conta bancária
 
-> Rota
-
-```
-GET https://api.pagar.me/1/company/bank_accounts/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/company/bank_accounts/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
@@ -3266,13 +2981,7 @@ Através dessa rota você consegue retornar os dados de uma conta bancária espe
 
 ## Retornando várias contas bancárias
 
-> Rota
-
-```
-GET https://api.pagar.me/1/bank_accounts
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/bank_accounts
 
 ```shell
 curl -X GET https://api.pagar.me/1/bank_accounts \
@@ -3394,13 +3103,7 @@ Objeto retornado ao se criar uma transferência bancária.
 
 ## Criando uma transferência
 
-> Rota
-
-```
-POST https://api.pagar.me/1/transfers
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/transfers
 
 ```shell
 curl -X POST https://api.pagar.me/1/transfers \
@@ -3457,13 +3160,7 @@ Realiza uma transferência para uma conta bancária previamente criada.
 
 ## Vendo dados de uma transferência
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transfers/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/transfers/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/transfers/484 \
@@ -3516,13 +3213,7 @@ Retorna os dados de uma transferência previamente realizada.
 
 ## Vendo dados de várias transferências
 
-> Rota
-
-```
-GET https://api.pagar.me/1/transfers
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/transfers
 
 ```shell
 curl -X GET https://api.pagar.me/1/transfers \
@@ -3577,13 +3268,7 @@ Retorna os dados de todas as transferências previamente realizadas.
 
 ## Cancelando uma transferência
 
-> Rota
-
-```
-POST https://api.pagar.me/1/transfers/:id/cancel
-```
-
-> Exemplo de Requisição 
+> POST https://api.pagar.me/1/transfers/:id/cancel
 
 ```shell
 curl -X POST https://api.pagar.me/1/transfers/480/cancel \
@@ -3640,13 +3325,7 @@ Cancela uma transferência previamente realizada.
 
 ## Consulta de CEP
 
-> Rota
-
-```
-GET https://api.pagar.me/1/zipcodes/:id
-```
-
-> Exemplo de Requisição 
+> GET https://api.pagar.me/1/zipcodes/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/zipcodes/01452001 \
