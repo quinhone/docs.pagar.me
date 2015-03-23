@@ -1054,13 +1054,6 @@ Atualiza um plano previamente criado. As propriedades que podem ser alteradas s�
 * Nome do plano (`name`)
 * Dias de testes gratuito (`trial_days`)
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id`| Sim | - | id de identificação do plano previamente criado |
-| `name` | Não | - | Nome do plano |
-| `trial_days` | Não | - | Dias para testar o produto/serviço gratuitamente |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -1080,6 +1073,13 @@ Atualiza um plano previamente criado. As propriedades que podem ser alteradas s�
     "installments": 1
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id`| Sim | - | id de identificação do plano previamente criado |
+| `name` | Não | - | Nome do plano |
+| `trial_days` | Não | - | Dias para testar o produto/serviço gratuitamente |
 
 ## Deletando Planos
 
@@ -1101,10 +1101,6 @@ curl -X DELETE https://api.pagar.me/1/plans/12784 \
 
 Remove um plano previamente criado. Caso o plano exista, é retornado um objeto vazio, caso não exista, é retornado um objeto com as informações do erro ao tentar excluir o plano.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -1125,30 +1121,13 @@ Remove um plano previamente criado. Caso o plano exista, é retornado um objeto 
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Assinaturas
 
 ## Objeto `subscription`
-
-Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são atreladas a um **plano**.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
-| `plan` | `Object` | Objeto com os dados do plano que a assinatura está associada |
-| `id` | `Number` | Número identificador do plano |
-| `current_transaction` | `Object` | Objeto com os dados da última transação realizada nessa assinatura |
-| `postback_url` | `String` | Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a cada atualização dos processos |
-| `payment_method` | `String` | Método de pagamento associado a essa assinatura |
-| `current_period_start` | `String` |  |
-| `current_period_end` | `String` |  |
-| `charges` | `Number` | Número de cobranças a serem efetuadas |
-| `status` | `String` | Possíveis estados da transação/assinatura <br> **Valores possíveis**: `trialing`, `paid`, `pending_payment`, `unpaid`, `canceled`, `ended` |
-| `date_created` | `String` | Data da criação d assinatura |
-| `phone` | `Object` | Objeto com dados do telefone do cliente |
-| `address` | `Object` | Objeto com dados do endereço do cliente |
-| `customer` | `Object` | Objeto com dados do cliente |
-| `card` | `Object` | Objeto com dados do cartão do cliente |
-| `metadata` | `Object` | Objeto com dados adicionais do cliente/produto/serviço vendido |
 
 > Objeto `subscription`
 
@@ -1236,6 +1215,27 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 }
 ```
 
+Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são atreladas a um **plano**.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `plan` | `Object` | Objeto com os dados do plano que a assinatura está associada |
+| `id` | `Number` | Número identificador do plano |
+| `current_transaction` | `Object` | Objeto com os dados da última transação realizada nessa assinatura |
+| `postback_url` | `String` | Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a cada atualização dos processos |
+| `payment_method` | `String` | Método de pagamento associado a essa assinatura |
+| `current_period_start` | `String` |  |
+| `current_period_end` | `String` |  |
+| `charges` | `Number` | Número de cobranças a serem efetuadas |
+| `status` | `String` | Possíveis estados da transação/assinatura <br> **Valores possíveis**: `trialing`, `paid`, `pending_payment`, `unpaid`, `canceled`, `ended` |
+| `date_created` | `String` | Data da criação d assinatura |
+| `phone` | `Object` | Objeto com dados do telefone do cliente |
+| `address` | `Object` | Objeto com dados do endereço do cliente |
+| `customer` | `Object` | Objeto com dados do cliente |
+| `card` | `Object` | Objeto com dados do cartão do cliente |
+| `metadata` | `Object` | Objeto com dados adicionais do cliente/produto/serviço vendido |
+
 ## Criando assinaturas
 
 > POST https://api.pagar.me/1/subscriptions
@@ -1264,25 +1264,6 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 **OBS**: Você pode passar os objetos `customer` e `metadata` na criação de uma assinatura, assim como feito na criação de uma transação. A diferença é que a propriedade `customer[email]` é obrigatória na criação da **assinatura**. 
 
 **OBS**: As transações criadas pelas assinaturas não passam pelo antifraude, devido a ocorrência de fraudes nesse tipo de serviço serem praticamente nulas.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `plan_id` | Sim | - | id do plano a ser associado a uma assinatura |
-| `card_hash` | Sim\* | - | Dados encriptados do cartão do cliente. Você também pode usar o `card_id` ao invés do `card_hash` |
-| `customer[email]` | Sim | - | Email do cliente |
-| `customer[name]` |  | - | Nome completo ou razão social do cliente que está realizando a transação |
-| `customer[document_number]` | Não | - | CPF ou CNPJ do cliente, sem separadores |
-| `customer[address][street]` | Não | - | logradouro (rua, avenida, etc) do cliente |
-| `customer[address][street_number]` | Não | - | Número da residência/estabelecimento do cliente |
-| `customer[address][complementary]` | Não | - | completo do endereço do cliente |
-| `customer[address][neighborhood]` | Não | - | bairro de localização do cliente |
-| `customer[address][zipcode]` | Não | - | CEP do imóvel do cliente, sem separadores |
-| `customer[phone][ddd]` | Não | - | DDD do telefone do cliente |
-| `customer[phone][number]` | Não | - | número de telefone do cliente |
-| `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
-| `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
-| `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
 
 > JSON Retornado (Exemplo)
 
@@ -1367,6 +1348,25 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `plan_id` | Sim | - | id do plano a ser associado a uma assinatura |
+| `card_hash` | Sim\* | - | Dados encriptados do cartão do cliente. Você também pode usar o `card_id` ao invés do `card_hash` |
+| `customer[email]` | Sim | - | Email do cliente |
+| `customer[name]` |  | - | Nome completo ou razão social do cliente que está realizando a transação |
+| `customer[document_number]` | Não | - | CPF ou CNPJ do cliente, sem separadores |
+| `customer[address][street]` | Não | - | logradouro (rua, avenida, etc) do cliente |
+| `customer[address][street_number]` | Não | - | Número da residência/estabelecimento do cliente |
+| `customer[address][complementary]` | Não | - | completo do endereço do cliente |
+| `customer[address][neighborhood]` | Não | - | bairro de localização do cliente |
+| `customer[address][zipcode]` | Não | - | CEP do imóvel do cliente, sem separadores |
+| `customer[phone][ddd]` | Não | - | DDD do telefone do cliente |
+| `customer[phone][number]` | Não | - | número de telefone do cliente |
+| `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
+| `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
+| `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
+
 ## Retornando Assinaturas
 
 > GET https://api.pagar.me/1/subscriptions/:id
@@ -1386,10 +1386,6 @@ curl -X GET https://api.pagar.me/1/subscriptions/14858 \
 ```
 
 Essa rota é utilizada para retornar os dados de uma determinada assinatura.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -1477,6 +1473,10 @@ Essa rota é utilizada para retornar os dados de uma determinada assinatura.
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 ## Atualizando uma assinatura
 
 > PUT https://api.pagar.me/1/subscriptions/:id
@@ -1496,12 +1496,6 @@ curl -X PUT https://api.pagar.me/1/subscriptions/14858 \
 ```
 
 Após criar uma assinatura, você pode atualizar os dados do **método do pagamento** e o **plano** que essa assinatura está atrelada.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `plan_id` | Não | - | id do novo plano atrelado a assinatura |
-| `payment_method` | Não | - | meio de pagamento  |
 
 > JSON Retornado (Exemplo)
 
@@ -1589,6 +1583,12 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `plan_id` | Não | - | id do novo plano atrelado a assinatura |
+| `payment_method` | Não | - | meio de pagamento  |
+
 ## Cancelando uma assinatura
 
 > POST https://api.pagar.me/1/subscriptions/:id/cancel
@@ -1608,10 +1608,6 @@ curl -X POST https://api.pagar.me/1/subscriptions/14858/cancel \
 ```
 
 Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/cancel`
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -1699,6 +1695,10 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 ## Transações em uma assinatura
 
 > GET https://api.pagar.me/1/subscriptions/:id/transactions
@@ -1718,10 +1718,6 @@ curl -X GET https://api.pagar.me/1/subscriptions/14858/transactions \
 ```
 
 Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/cancel`
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -1863,25 +1859,14 @@ Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/canc
     "metadata": {}
 }]
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Cartões
 
 ## Objeto `card`
-
-Sempre que você faz uma requisição através da nossa API nós guardamos as informações do portador do cartão, para que, futuramente, você possa utilizar essas informações para novas cobranças, ou implementação de features como *one-click-buy*.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
-| `id` | `String` | Identificador do cartão |
-| `date_created` | `String` | Data de criação do objeto `card` |
-| `date_updated` | `String` | Data de atualização do objeto `card` |
-| `brand` | `String` | Marca da operadora do cartão |
-| `holder_name` | `String` | Nome do portador do cartão |
-| `first_digits` | `String` | Primeiros dígitos do cartão (6 dígitos) |
-| `last_digits` | `String` | Últimos dígitos do cartão (4 dígitos) |
-| `fingerprint` | `String` | Parâmetro usado para validar a notificação de POSTback ([saiba mais](https://pagar.me/docs/advanced/#validando-a-origem-de-um-postback)) |
-| `customer` | `Object` | Objeto com dados do comprador |
-| `valid` | `Boolean` | Propriedade para verificar a validade do cartão |
 
 > Objeto card
 
@@ -1900,6 +1885,22 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
     "valid": true
 }
 ```
+
+Sempre que você faz uma requisição através da nossa API nós guardamos as informações do portador do cartão, para que, futuramente, você possa utilizar essas informações para novas cobranças, ou implementação de features como *one-click-buy*.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `id` | `String` | Identificador do cartão |
+| `date_created` | `String` | Data de criação do objeto `card` |
+| `date_updated` | `String` | Data de atualização do objeto `card` |
+| `brand` | `String` | Marca da operadora do cartão |
+| `holder_name` | `String` | Nome do portador do cartão |
+| `first_digits` | `String` | Primeiros dígitos do cartão (6 dígitos) |
+| `last_digits` | `String` | Últimos dígitos do cartão (4 dígitos) |
+| `fingerprint` | `String` | Parâmetro usado para validar a notificação de POSTback ([saiba mais](https://pagar.me/docs/advanced/#validando-a-origem-de-um-postback)) |
+| `customer` | `Object` | Objeto com dados do comprador |
+| `valid` | `Boolean` | Propriedade para verificar a validade do cartão |
 
 ## Criando um cartão
 
@@ -1924,13 +1925,6 @@ curl -X  POST https://api.pagar.me/1/plans/13580 \
 
 Você pode armazenar os dados do cartão do seu cliente através da rota `/cards`, assim você poderá usar o `id` do objeto gerado para realizar futuras transações, no lugar do `card_hash`.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `card_number` | Sim | - | Número do portador do cartão |
-| `card_expiration_date` ou `expiration_date` | Sim | - | Data de expiração do  |
-| `customer_id` | Não | - | Você pode usar o `id` do objeto `customer` para associar mais informações do cliente ao `card` a ser gerado |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -1948,6 +1942,13 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
     "valid": true
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `card_number` | Sim | - | Número do portador do cartão |
+| `card_expiration_date` ou `expiration_date` | Sim | - | Data de expiração do  |
+| `customer_id` | Não | - | Você pode usar o `id` do objeto `customer` para associar mais informações do cliente ao `card` a ser gerado |
 
 ## Retornando um cartão salvo
 
@@ -1969,10 +1970,6 @@ curl -X  GET https://api.pagar.me/1/cards/card_ci6y37h16wrxsmzyi \
 
 Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -1991,19 +1988,13 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Saldo
 
 ## Objeto `balance`
-
-Com este objeto, você pode obter informações gerais sobre o saldo da sua conta.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
-| `waiting_funds` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem... |
-| `available` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível para receber |
-| `transferred` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta (quanto já recebeu efetivamente) |
-
 
 > Objeto balance
 
@@ -2021,6 +2012,15 @@ Com este objeto, você pode obter informações gerais sobre o saldo da sua cont
     }
 }
 ```
+
+Com este objeto, você pode obter informações gerais sobre o saldo da sua conta.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `waiting_funds` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem... |
+| `available` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível para receber |
+| `transferred` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta (quanto já recebeu efetivamente) |
 
 ## Saldo geral das operações
 
@@ -2044,10 +2044,6 @@ Com essa rota `/balance` você poderá consultar o saldo das transações da sua
 
 **OBS**: os valores retornados estão em **centavos**.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -2065,25 +2061,13 @@ Com essa rota `/balance` você poderá consultar o saldo das transações da sua
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Operações
 
 ## Objeto `balance_operation`
-
-Com este objeto você poderá acompanhar como estava/está seu saldo a cada movimentação bancária.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `balance_operation` |
-| `id` | `String` | Identificador da operação |
-| `status` | `String` | Estado do saldo da conta. <br> **Valores possíveis**: `waiting_funds`, `available` e `transferred` |
-| `balance_amount` | `Number` | Saldo atual da conta |
-| `balance_old_amount` | `Number` | Saldo antes da última movimentação |
-| `movement_type` | `String` |  |
-| `amount` | `Number` | Valor transacionado para a conta |
-| `fee` | `Number` | Taxa cobrada pela transação |
-| `date_created` | `String` | Data da movimentação |
-| `movement_object` | `Object` |  |
-
 
 > Objeto balance_operation
 
@@ -2112,6 +2096,21 @@ Com este objeto você poderá acompanhar como estava/está seu saldo a cada movi
 }
 ```
 
+Com este objeto você poderá acompanhar como estava/está seu saldo a cada movimentação bancária.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `balance_operation` |
+| `id` | `String` | Identificador da operação |
+| `status` | `String` | Estado do saldo da conta. <br> **Valores possíveis**: `waiting_funds`, `available` e `transferred` |
+| `balance_amount` | `Number` | Saldo atual da conta |
+| `balance_old_amount` | `Number` | Saldo antes da última movimentação |
+| `movement_type` | `String` |  |
+| `amount` | `Number` | Valor transacionado para a conta |
+| `fee` | `Number` | Taxa cobrada pela transação |
+| `date_created` | `String` | Data da movimentação |
+| `movement_object` | `Object` |  |
+
 ## Histórico das operações
 
 > GET https://api.pagar.me/1/balance/operations
@@ -2131,10 +2130,6 @@ curl -X  GET https://api.pagar.me/1/balance/operations \
 ```
 
 Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos no saldo da sua conta.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -2205,6 +2200,10 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
 }]
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 ## Histórico específico de uma operação 
 
 > GET https://api.pagar.me/1/balance/operations/:id
@@ -2224,10 +2223,6 @@ curl -X  GET https://api.pagar.me/1/balance/operations/4861 \
 ```
 
 Com a rota `/balance/operations/:id` você poderá ver uma operação específica ocorrida no saldo da sua conta.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -2256,6 +2251,10 @@ Com a rota `/balance/operations/:id` você poderá ver uma operação específic
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Clientes
 
 ## Retornando dados do cliente
@@ -2277,10 +2276,6 @@ curl -X  GET https://api.pagar.me/1/customers/11222 \
 ```
 
 Através da rota `/customers/:id` você recebe todos os dados do seu cliente, previamente cadastrado na realização de uma transação, quando os dados deste é passado pelos parâmetros `customer[nomeDaPropriedade]`.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -2317,62 +2312,13 @@ Através da rota `/customers/:id` você recebe todos os dados do seu cliente, pr
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Companhia
 
 ## Objeto `company`
-
-Através deste objeto você consegue visualizar vários dados da sua companhia, como:
-
-- Usuários
-- chaves de Api e Encriptação
-- dados de assinaturas
-- dados do antifraude
-- etc
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `company` |
-| `name` | `String` | Nome da companhia |
-| `status` | `String` | Estado da companhia atual. <br> **Valores possíveis**: `temporary`, `pending_confirmation`,  `pending_activation`, `paid` |
-| `id` | `String` | Identificador da companhia |
-| `date_created` | `String` | Data de criação da companhia |
-| `preferences` | `` |  |
-| `branding` | `Object` | Objeto com dados da sua marca |
-| `branding[primary_color]` | `String` | Valor hexadecimal da cor previamente configurada da sua marca. <br> **Ex**: `#ccff00` |
-| `branding[logo]` | `String` | URL do seu logo |
-| `users` | `Array` | Array de objetos `user` |
-| `user` | `Object` | Dados de um usuário. Veja mais [aqui](/?shell#objeto-user) |
-| `api_key` | `Object` | Objeto com as chaves `live` e `test` da API |
-| `api_key[live]` | `String` | Chave *live* da API |
-| `api_key[test]` | `String` | Chave *test* da API |
-| `encryption_key` | `Object` | Objeto com chaves `live` e `test` de encriptação |
-| `encryption_key[live]` | `String` | Chave *live* de encriptação |
-| `encryption_key[test]` | `String` | Chave *test* de encriptação |
-| `subscriptions` | `Object` | Objeto com detalhes de configuração das assinaturas |
-| `subscriptions[payment_deadline]` | `Number` | Dias que o usuário pode ficar inadimplemente antes de ter a assinatura cancelada. <br> **Padrão**: `5` |
-| `subscriptions[email_customers]` | `Boolean` | Variável que informa se o cliente será notificado ou não, independente do tipo da notificação. |
-| `subscriptions[charge_attempts]` | `Number` | Número de tentativas de cobrança |
-| `subscriptions[chrages_interva;_in_days]` | `Number` | Espaço, em dias, entre uma cobrança e outra |
-| `subscriptions[cancel_after_failed_charges]` | `Boolean` | Caso as cobranças não sejam bem sucedidas, você pode optar por cancelar essa assinatura automaticamente |
-| `subscriptions[customer_can_cancel_subscription]` | `Boolean` | Habilita a opção do seu cliente cancelar uma assinatura |
-| `antifraud` | `Object` | Dados de configuração do seu antifraude. Dentro deste objeto, existem mais dois objetos, `test` e `live`, que contém as mesmas propriedades |
-| `antifraud[test / live][providers]` | `Array` | Contém objetos literais com propriedades identificando os dados do(s) antifraude(s) |
-| `antifraud[test / live][providers][0][id]` | `String` | Identificador do antifraude |
-| `antifraud[test / live][providers][0][enabled]` | `Boolean` | Propriedade que identifica se o antifraude está ativo ou não |
-| `antifraud[test / live][providers][0][name]` | `String` | Nome do antifraude |
-| `antifraud[test / live][providers][0][date_created]` | `String` | Data de ativação do antifraude (ISODate) |
-| `antifraud[test / live][providers][0][date_updated]` | `String` | Data de atualização do antifraude (ISODate) |
-| `antifraud[test / live][providers][0][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
-| `antifraud[test / live][enabled]` | `Boolean` | Propriedade que sinaliza se o antifraude está habilitado ou não nas transações do cliente |
-| `antifraud[test / live][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
-| `antifraud[test / live][rule]` | `String` | Regra para validar se o cliente/transação é confiável ou não |
-| `transaction_cost` | `Object` | Objeto com dados dos custos das transações por boleto e por cart
-ào de crédito |
-| `transaction_cost[credit_card]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando cartão de crédito |
-| `transaction_cost[boleto]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando boleto |
-| `transaction_spread` | `Object` |  |
-| `transaction_spread[credit_card]` | `Number` |  |
-| `transaction_spread[boleto]` | `Number` |  |
 
 > Objeto company
 
@@ -2458,6 +2404,59 @@ Através deste objeto você consegue visualizar vários dados da sua companhia, 
 }
 ```
 
+Através deste objeto você consegue visualizar vários dados da sua companhia, como:
+
+- Usuários
+- chaves de Api e Encriptação
+- dados de assinaturas
+- dados do antifraude
+- etc
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `company` |
+| `name` | `String` | Nome da companhia |
+| `status` | `String` | Estado da companhia atual. <br> **Valores possíveis**: `temporary`, `pending_confirmation`,  `pending_activation`, `paid` |
+| `id` | `String` | Identificador da companhia |
+| `date_created` | `String` | Data de criação da companhia |
+| `preferences` | `` |  |
+| `branding` | `Object` | Objeto com dados da sua marca |
+| `branding[primary_color]` | `String` | Valor hexadecimal da cor previamente configurada da sua marca. <br> **Ex**: `#ccff00` |
+| `branding[logo]` | `String` | URL do seu logo |
+| `users` | `Array` | Array de objetos `user` |
+| `user` | `Object` | Dados de um usuário. Veja mais [aqui](/?shell#objeto-user) |
+| `api_key` | `Object` | Objeto com as chaves `live` e `test` da API |
+| `api_key[live]` | `String` | Chave *live* da API |
+| `api_key[test]` | `String` | Chave *test* da API |
+| `encryption_key` | `Object` | Objeto com chaves `live` e `test` de encriptação |
+| `encryption_key[live]` | `String` | Chave *live* de encriptação |
+| `encryption_key[test]` | `String` | Chave *test* de encriptação |
+| `subscriptions` | `Object` | Objeto com detalhes de configuração das assinaturas |
+| `subscriptions[payment_deadline]` | `Number` | Dias que o usuário pode ficar inadimplemente antes de ter a assinatura cancelada. <br> **Padrão**: `5` |
+| `subscriptions[email_customers]` | `Boolean` | Variável que informa se o cliente será notificado ou não, independente do tipo da notificação. |
+| `subscriptions[charge_attempts]` | `Number` | Número de tentativas de cobrança |
+| `subscriptions[chrages_interva;_in_days]` | `Number` | Espaço, em dias, entre uma cobrança e outra |
+| `subscriptions[cancel_after_failed_charges]` | `Boolean` | Caso as cobranças não sejam bem sucedidas, você pode optar por cancelar essa assinatura automaticamente |
+| `subscriptions[customer_can_cancel_subscription]` | `Boolean` | Habilita a opção do seu cliente cancelar uma assinatura |
+| `antifraud` | `Object` | Dados de configuração do seu antifraude. Dentro deste objeto, existem mais dois objetos, `test` e `live`, que contém as mesmas propriedades |
+| `antifraud[test / live][providers]` | `Array` | Contém objetos literais com propriedades identificando os dados do(s) antifraude(s) |
+| `antifraud[test / live][providers][0][id]` | `String` | Identificador do antifraude |
+| `antifraud[test / live][providers][0][enabled]` | `Boolean` | Propriedade que identifica se o antifraude está ativo ou não |
+| `antifraud[test / live][providers][0][name]` | `String` | Nome do antifraude |
+| `antifraud[test / live][providers][0][date_created]` | `String` | Data de ativação do antifraude (ISODate) |
+| `antifraud[test / live][providers][0][date_updated]` | `String` | Data de atualização do antifraude (ISODate) |
+| `antifraud[test / live][providers][0][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
+| `antifraud[test / live][enabled]` | `Boolean` | Propriedade que sinaliza se o antifraude está habilitado ou não nas transações do cliente |
+| `antifraud[test / live][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
+| `antifraud[test / live][rule]` | `String` | Regra para validar se o cliente/transação é confiável ou não |
+| `transaction_cost` | `Object` | Objeto com dados dos custos das transações por boleto e por cart
+ào de crédito |
+| `transaction_cost[credit_card]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando cartão de crédito |
+| `transaction_cost[boleto]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando boleto |
+| `transaction_spread` | `Object` |  |
+| `transaction_spread[credit_card]` | `Number` |  |
+| `transaction_spread[boleto]` | `Number` |  |
+
 ## Retornando dados da companhia
 
 > GET https://api.pagar.me/1/company
@@ -2477,10 +2476,6 @@ curl -X  GET https://api.pagar.me/1/company \
 ```
 
 Através dessa URL você irá receber diversos dados da sua companhia, pelo objeto `company`.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -2566,6 +2561,10 @@ Através dessa URL você irá receber diversos dados da sua companhia, pelo obje
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 ## Obtendo estatísticas da companhia
 
 > GET https://api.pagar.me/1/company/statistics
@@ -2586,10 +2585,6 @@ curl -X  GET https://api.pagar.me/1/company/statistics \
 
 Através dessa URL você irá receber diversos dados estatísticos da sua companhia, como volume de transações mensais, semanais, diárias, número de assinaturas, etc.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -2603,6 +2598,10 @@ Através dessa URL você irá receber diversos dados estatísticos da sua compan
     "subscriptions_count": 99
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 ## Atualizando dados da companhia
 
@@ -2633,19 +2632,6 @@ curl -X PUT https://api.pagar.me/1/company \
 
 Através dessa URL você irá receber diversos dados estatísticos da sua companhia, como volume de transações mensais, semanais, diárias, número de assinaturas, etc.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `subscriptions[payment_deadline]` | Não | - | Dias que o usuário pode ficar inadimplemente antes de ter a assinatura cancelada. <br> **Padrão**: `5` |
-| `subscriptions[email_customers]` | Não | - |Variável que informa se o cliente será notificado ou não, independente do tipo da notificação. |
-| `subscriptions[charge_attempts]` | Não | - | Número de tentativas de cobrança |
-| `subscriptions[chrages_interval_in_days]` | Não | - | Espaço, em dias, entre uma cobrança e outra |
-| `subscriptions[cancel_after_failed_charges]` | Não | - | Caso as cobranças não sejam bem sucedidas, você pode optar por cancelar essa assinatura automaticamente |
-| `subscriptions[customer_can_cancel_subscription]` | Não | - | Habilita a opção do seu cliente cancelar uma assinatura |
-| `branding[primary_color]` | Não | - | Permite alterar a cor padrão da dashboard mostrada para o cliente |
-| `name` | Não | - | Altera o nome da empresa exibido na dashboard |
-| `antifraud` | Não | - | Liga ou desliga o antifraude. <br> **OBS**: Você poderá alterar o status do antifraude no mínimo a cada 30 dias |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -2729,6 +2715,19 @@ Através dessa URL você irá receber diversos dados estatísticos da sua compan
     }
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `subscriptions[payment_deadline]` | Não | - | Dias que o usuário pode ficar inadimplemente antes de ter a assinatura cancelada. <br> **Padrão**: `5` |
+| `subscriptions[email_customers]` | Não | - |Variável que informa se o cliente será notificado ou não, independente do tipo da notificação. |
+| `subscriptions[charge_attempts]` | Não | - | Número de tentativas de cobrança |
+| `subscriptions[chrages_interval_in_days]` | Não | - | Espaço, em dias, entre uma cobrança e outra |
+| `subscriptions[cancel_after_failed_charges]` | Não | - | Caso as cobranças não sejam bem sucedidas, você pode optar por cancelar essa assinatura automaticamente |
+| `subscriptions[customer_can_cancel_subscription]` | Não | - | Habilita a opção do seu cliente cancelar uma assinatura |
+| `branding[primary_color]` | Não | - | Permite alterar a cor padrão da dashboard mostrada para o cliente |
+| `name` | Não | - | Altera o nome da empresa exibido na dashboard |
+| `antifraud` | Não | - | Liga ou desliga o antifraude. <br> **OBS**: Você poderá alterar o status do antifraude no mínimo a cada 30 dias |
 
 ## Resetando as chaves de API e Encriptação
 
@@ -2750,10 +2749,6 @@ curl -X PUT https://api.pagar.me/1/company/reset_keys \
 
 Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a essa chamada é o objeto `company`, já com as novas chaves.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -2838,25 +2833,13 @@ Através dessa URL você reseta suas chaves da API e Encriptação. A resposta a
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Contas bancárias
 
 ## Objeto `bank_account`
-
-Contém os dados de uma conta bancária para futuros pagamentos.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `bank_account` |
-| `id` | `String` | Identificador da conta bancária |
-| `bank_code` | `String` | Valor identificador do código do banco |
-| `agencia` | `String` | Valor identificador da agência a qual a conta pertence |
-| `agencia_dv` | `String` | Dígito verificador da agência |
-| `conta` | `String` | Número da conta bancária |
-| `conta_dv` | `String` | Dígito verificador da conta |
-| `document_type` | `String` | Tipo do documento do titular da conta |
-| `document_number` | `String` | Número do documento do titular da conta (cpf ou cnpj) |
-| `legal_name` | `String` | Nome completo (se pessoa física) ou Razão Social (se pessoa jurídica) |
-| `date_created` | `String` | Data de criação da conta bancária (ISODate) |
 
 > Objeto bank_account
 
@@ -2876,6 +2859,22 @@ Contém os dados de uma conta bancária para futuros pagamentos.
     "date_created": "2015-03-19T15:35:40.000Z"
 }
 ```
+
+Contém os dados de uma conta bancária para futuros pagamentos.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `bank_account` |
+| `id` | `String` | Identificador da conta bancária |
+| `bank_code` | `String` | Valor identificador do código do banco |
+| `agencia` | `String` | Valor identificador da agência a qual a conta pertence |
+| `agencia_dv` | `String` | Dígito verificador da agência |
+| `conta` | `String` | Número da conta bancária |
+| `conta_dv` | `String` | Dígito verificador da conta |
+| `document_type` | `String` | Tipo do documento do titular da conta |
+| `document_number` | `String` | Número do documento do titular da conta (cpf ou cnpj) |
+| `legal_name` | `String` | Nome completo (se pessoa física) ou Razão Social (se pessoa jurídica) |
+| `date_created` | `String` | Data de criação da conta bancária (ISODate) |
 
 ## Criando uma conta bancária
 
@@ -2904,17 +2903,6 @@ curl -X POST https://api.pagar.me/1/bank_accounts \
 
 Cria uma conta bancária para futuros pagamentos.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `bank_code` | Sim | - | Código do banco |
-| `agencia` | Sim | - | Agência onde sua conta foi criada |
-| `agencia_dv` | Não | - | Dígito verificador da sua agência |
-| `conta` | Sim | - | Número da conta bancária |
-| `conta_dv` | Sim | - | Dígito verificador da conta |
-| `document_number` | Sim | - | Documento identificador do titular da conta (cpf ou cnpj) |
-| `legal_name` | Sim | - | Nome completo (se pessoa física) ou razão social (se pessoa jurídica) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -2933,6 +2921,17 @@ Cria uma conta bancária para futuros pagamentos.
     "date_created": "2015-03-19T15:35:40.000Z"
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `bank_code` | Sim | - | Código do banco |
+| `agencia` | Sim | - | Agência onde sua conta foi criada |
+| `agencia_dv` | Não | - | Dígito verificador da sua agência |
+| `conta` | Sim | - | Número da conta bancária |
+| `conta_dv` | Sim | - | Dígito verificador da conta |
+| `document_number` | Sim | - | Documento identificador do titular da conta (cpf ou cnpj) |
+| `legal_name` | Sim | - | Nome completo (se pessoa física) ou razão social (se pessoa jurídica) |
 
 ## Retornando uma conta bancária
 
@@ -2954,10 +2953,6 @@ curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
 
 Através dessa rota você consegue retornar os dados de uma conta bancária específica.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -2976,6 +2971,10 @@ Através dessa rota você consegue retornar os dados de uma conta bancária espe
     "date_created": "2015-03-19T15:35:40.000Z"
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 ## Retornando várias contas bancárias
 
@@ -2998,12 +2997,6 @@ curl -X GET https://api.pagar.me/1/bank_accounts \
 ```
 
 Através dessa rota você consegue retornar os dados de várias contas bancárias.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `count` | Não | `10` | Retorna `n` objetos de conta bancária |
-| `page` | Não | `1` | Útil para implementação de uma paginação de resultados | 
 
 > JSON Retornado (Exemplo)
 
@@ -3050,25 +3043,15 @@ Através dessa rota você consegue retornar os dados de várias contas bancária
 }]
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos de conta bancária |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados | 
+
 # Transferências
 
 ## Objeto `transfer`
-
-Objeto retornado ao se criar uma transferência bancária.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transfer` |
-| `id` | `Number` | Número identificador da transação |
-| `amount` | `Number` | Valor, em centavos, do valor transferido |
-| `type` | `String` | Tipo da transação. <br> **Valores possíveis**: `ted`, `doc` ou `credito_em_conta` |
-| `status` | `String` | Estado no qual a transação se encontra. <br> **Valores possíveis**: `pending_transfer`, `transferred`, `failed`, `processing` ou `canceled` |
-| `fee` | `Number` | Taxa cobrada pela transferência, em centavos. |
-| `funding_date` | `String` | Data da ocorrência da transferência |
-| `funding_estimated_date` | `String` | Data estimada para efetivação da transferência (ISODate) |
-| `transaction_id` | `Number` | Identificador da transação estornada |
-| `bank_account` | `Object` | Objeto contendo os dados da [conta bancária](/?shell#objeto-bank_account) que irá receber a transferência |
-| `date_created` | `String` | Data da criação da transferência (ISODate) |
 
 > Objeto transfer
 
@@ -3099,6 +3082,22 @@ Objeto retornado ao se criar uma transferência bancária.
 }
 ```
 
+Objeto retornado ao se criar uma transferência bancária.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transfer` |
+| `id` | `Number` | Número identificador da transação |
+| `amount` | `Number` | Valor, em centavos, do valor transferido |
+| `type` | `String` | Tipo da transação. <br> **Valores possíveis**: `ted`, `doc` ou `credito_em_conta` |
+| `status` | `String` | Estado no qual a transação se encontra. <br> **Valores possíveis**: `pending_transfer`, `transferred`, `failed`, `processing` ou `canceled` |
+| `fee` | `Number` | Taxa cobrada pela transferência, em centavos. |
+| `funding_date` | `String` | Data da ocorrência da transferência |
+| `funding_estimated_date` | `String` | Data estimada para efetivação da transferência (ISODate) |
+| `transaction_id` | `Number` | Identificador da transação estornada |
+| `bank_account` | `Object` | Objeto contendo os dados da [conta bancária](/?shell#objeto-bank_account) que irá receber a transferência |
+| `date_created` | `String` | Data da criação da transferência (ISODate) |
+
 ## Criando uma transferência
 
 > POST https://api.pagar.me/1/transfers
@@ -3121,12 +3120,6 @@ curl -X POST https://api.pagar.me/1/transfers \
 
 Realiza uma transferência para uma conta bancária previamente criada.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `amount` | Sim | - | Valor, em centavos, a ser transferido para uma determinada conta bancária |
-| `bank_account_id` | Sim | - | Número identificador da conta bancária que irá receber a transferência |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -3155,6 +3148,12 @@ Realiza uma transferência para uma conta bancária previamente criada.
     "date_created": "2015-03-20T15:44:14.000Z"
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `amount` | Sim | - | Valor, em centavos, a ser transferido para uma determinada conta bancária |
+| `bank_account_id` | Sim | - | Número identificador da conta bancária que irá receber a transferência |
 
 ## Vendo dados de uma transferência
 
@@ -3176,10 +3175,6 @@ curl -X GET https://api.pagar.me/1/transfers/484 \
 
 Retorna os dados de uma transferência previamente realizada.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -3208,6 +3203,10 @@ Retorna os dados de uma transferência previamente realizada.
     "date_created": "2015-03-20T15:44:14.000Z"
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 ## Vendo dados de várias transferências
 
@@ -3229,12 +3228,6 @@ curl -X GET https://api.pagar.me/1/transfers \
 
 Retorna os dados de todas as transferências previamente realizadas.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `count` | Não | `10` | Retorna `n` objetos de transferência |
-| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -3264,6 +3257,12 @@ Retorna os dados de todas as transferências previamente realizadas.
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos de transferência |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
+
 ## Cancelando uma transferência
 
 > POST https://api.pagar.me/1/transfers/:id/cancel
@@ -3283,10 +3282,6 @@ curl -X POST https://api.pagar.me/1/transfers/480/cancel \
 ```
 
 Cancela uma transferência previamente realizada.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 > JSON Retornado (Exemplo)
 
@@ -3319,6 +3314,10 @@ Cancela uma transferência previamente realizada.
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Códigos postais
 
 ## Consulta de CEP
@@ -3341,10 +3340,6 @@ curl -X GET https://api.pagar.me/1/zipcodes/01452001 \
 
 Com essa rota você pode verificar os dados de um determinado CEP.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -3356,6 +3351,10 @@ Com essa rota você pode verificar os dados de um determinado CEP.
     "zipcode": "01452001"
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 # Buscas avançadas
 
@@ -3386,13 +3385,6 @@ curl -X GET https://api.pagar.me/1/search \
 ```
 
 Através da rota `/search` você consegue fazer consultas usando o [ElasticSearch](https://www.elastic.co/products/elasticsearch) em nossa base dados. Essas consultas são extremamente otimizadas, e permitem que você minere os dados de suas transações e demais informações armazenadas no Pagar.me da forma que lhe for mais conveniente.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `type` | Sim | - | Objeto a ser buscado na base de dados |
-| `query` | Não | - | Filtros a serem utilizados para obtenção dos resultados esperados. Veja mais sobre as buscas no Elasticsearch [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search.html) |
-| `search_type` | Não | - | Informa o tipo de busca que deve ser feita na base de dados. Mais sobre tipos de pesquisa [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search-request-search-type.html) |
 
 > JSON Retornado (Exemplo)
 
@@ -3455,22 +3447,16 @@ Através da rota `/search` você consegue fazer consultas usando o [ElasticSearc
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `type` | Sim | - | Objeto a ser buscado na base de dados |
+| `query` | Não | - | Filtros a serem utilizados para obtenção dos resultados esperados. Veja mais sobre as buscas no Elasticsearch [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search.html) |
+| `search_type` | Não | - | Informa o tipo de busca que deve ser feita na base de dados. Mais sobre tipos de pesquisa [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search-request-search-type.html) |
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
-
-Objeto retornado após a análise antifraude feita em uma transação.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `antifraud_analysis` |
-| `name` | `String` | Nome do antifraude utilizado |
-| `score` | `Number` | pontuação, de 0 a 100, da probabilidade de fraude na transação realizada |
-| `cost` | `Number` | Custo da análise antifraude |
-| `status` | `String` | Possíveis valores de estado para as análises antifraude: `processing`, `approved`, `refused` e `failed` |
-| `date_created` | `String` | Data de criação da transação no formato ISODate |
-| `date_updated` | `String` | Data de atualização da transação no formato ISODate |
-| `id` | `Number` | Número identificador da análise antifraude |
 
 > Objeto antifraud_analysis
 
@@ -3487,20 +3473,22 @@ Objeto retornado após a análise antifraude feita em uma transação.
 }
 ```
 
-# Usuário
-
-## Objeto `user`
-
-Dados de um usuário registrado no nosso sistema.
+Objeto retornado após a análise antifraude feita em uma transação.
 
 | Propriedade | Tipo | Descrição |
 |:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `user` |
-| `id` | `String` | Identificador do usuário |
-| `email` | `String` | Email do usuário |
-| `name` | `String` | Nome do usuário |
-| `permission` | `String` | Tipo de permissão do usuário. <br> **Tipos**: `admin`, `read_write`, `read_only` |
-| `date_created` | `String` | Data da criação do usuário (ISODate) |
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `antifraud_analysis` |
+| `name` | `String` | Nome do antifraude utilizado |
+| `score` | `Number` | pontuação, de 0 a 100, da probabilidade de fraude na transação realizada |
+| `cost` | `Number` | Custo da análise antifraude |
+| `status` | `String` | Possíveis valores de estado para as análises antifraude: `processing`, `approved`, `refused` e `failed` |
+| `date_created` | `String` | Data de criação da transação no formato ISODate |
+| `date_updated` | `String` | Data de atualização da transação no formato ISODate |
+| `id` | `Number` | Número identificador da análise antifraude |
+
+# Usuário
+
+## Objeto `user`
 
 > Objeto user
 
@@ -3515,4 +3503,14 @@ Dados de um usuário registrado no nosso sistema.
 }
 ```
 
+Dados de um usuário registrado no nosso sistema.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `user` |
+| `id` | `String` | Identificador do usuário |
+| `email` | `String` | Email do usuário |
+| `name` | `String` | Nome do usuário |
+| `permission` | `String` | Tipo de permissão do usuário. <br> **Tipos**: `admin`, `read_write`, `read_only` |
+| `date_created` | `String` | Data da criação do usuário (ISODate) |
 
