@@ -247,8 +247,6 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
 | `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
 
-
-
 **OBS**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
 
 ## Retornando uma Transação
@@ -269,13 +267,7 @@ curl -X GET https://api.pagar.me/1/transactions/194351 \
 ```cs
 ```
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id` | Sim | - | id da transação previamente criada |
-
-
-Retorna os dados de uma transação realizada
+Retorna os dados de uma transação realizada.
 
 > JSON Retornado (exemplo):
 
@@ -314,6 +306,11 @@ Retorna os dados de uma transação realizada
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação previamente criada |
+
 ## Retornando transações
 
 > GET https://api.pagar.me/1/transactions
@@ -333,13 +330,6 @@ curl -X GET https://api.pagar.me/1/transactions \
 
 ```cs
 ```
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id` | Sim | - | id da transação previamente criada |
-| `count` | Não | `10` | Retorna `n` objetos de transação |
-| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
 Retorna um `Array` contendo objetos de transações realizadas.
 
@@ -464,6 +454,13 @@ Retorna um `Array` contendo objetos de transações realizadas.
 }]
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação previamente criada |
+| `count` | Não | `10` | Retorna `n` objetos de transação |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
+
 ## Gerando uma nova chave para encriptação do `card_hash`
 
 > GET https://api.pagar.me/1/transactions/card_hash_key
@@ -482,10 +479,6 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 ```cs
 ```
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `encryption_key` | Sim | - | Chave de encriptação (disponível no seu dashboard) |
-
 Caso você queira/precise criar o `card_hash` manualmente, essa rota deverá ser utilizada para obtenção de uma chave pública de encriptação dos dados do cartão de seu cliente.
 
 Saiba mais sobre como criar um `card_hash` [aqui]().
@@ -500,6 +493,10 @@ Saiba mais sobre como criar um `card_hash` [aqui]().
     "public_key": "-----BEGIN PUBLIC KEY-----\ -----END PUBLIC KEY-----\ "
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `encryption_key` | Sim | - | Chave de encriptação (disponível no seu dashboard) |
 
 ## Retorna uma análise antifraude
 
@@ -521,12 +518,6 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 
 Retorna uma análise antifraude específica realizada em uma transação.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:transaction_id` | Sim | - | id da transação |
-| `:id` | Sim | - | id da análise previamente feita |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -541,6 +532,12 @@ Retorna uma análise antifraude específica realizada em uma transação.
 	"id": "id"
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | id da transação |
+| `:id` | Sim | - | id da análise previamente feita |
 
 ## Retorna todas as análises antifraude
 
@@ -562,11 +559,6 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 
 Retorna todas as análises antifraude realizadas em uma transação.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:transaction_id` | Sim | - | id da transação |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -581,6 +573,11 @@ Retorna todas as análises antifraude realizadas em uma transação.
 	"id": "id"
 }]
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | id da transação |
 
 ## Notificando cliente sobre boleto à ser pago
 
@@ -603,17 +600,17 @@ curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
 
 Envia o link de um boleto pendente para o cliente.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id` | Sim | - | id da transação |
-| `email` | Sim | - | email a ser enviado o link do boleto |
-
 > JSON Retornado (Exemplo)
 
 ```json
 
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação |
+| `email` | Sim | - | email a ser enviado o link do boleto |
 
 ## Capturando uma transação posteriormente
 
@@ -634,11 +631,6 @@ curl -X POST https://api.pagar.me/1/transactions/314578/capture \
 ```
 
 Você pode capturar o valor de uma transação após a autorização desta, no prazo máximo de 5 dias após a autorização.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id` | Sim | - | Id da transação a ser capturada |
 
 > JSON Retornado (Exemplo)
 
@@ -691,6 +683,11 @@ Você pode capturar o valor de uma transação após a autorização desta, no p
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | Id da transação a ser capturada |
+
 ## Estorno de transação
 
 > POST https://api.pagar.me/1/transactions/:id/refund
@@ -727,19 +724,6 @@ Essa rota é utilizada quando se deseja estornar uma transação, realizada por 
 Em caso de estorno de uma transação realizada com cartão de crédito, apenas o `id` da transação é necessário para efetivação do estorno.
 
 Caso a compra tenha sido feita por boleto bancário, você precisará passar os dados da conta bancária que irá receber o valor estornado, ou o id desta conta, que pode ser gerada através da rota `/bank_accounts`.  
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id` | Sim | - | id da transação |
-| `bank_account_id` | Sim\* | - | Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode [criar uma conta]() ou passar os dados da conta via parâmetros |
-| `bank_code` | Sim\* | - | Dígitos que identificam cada banco. Confira a lista dos bancos [aqui](http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp) |
-| `agencia` | Sim\* | - | Número da agência bancária |
-| `agencia_dv` | Não | - | Digito verificador da agência. Obrigatório caso o banco o utilize |
-| `conta` | Sim\* | - | Número da conta |
-| `conta_dv` | Não | - | Dígito verificador da conta. Obrigatório caso o banco o utilize |
-| `document_number` | Sim\* | - | CPF ou CNPJ do favorecido |
-| `legal_name` | Sim\* | - | Nome/razão social do favorecido |
 
 > JSON Retornado - Estorno de Cartão de Crédito (Exemplo)
 
@@ -840,6 +824,19 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id` | Sim | - | id da transação |
+| `bank_account_id` | Sim\* | - | Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode [criar uma conta]() ou passar os dados da conta via parâmetros |
+| `bank_code` | Sim\* | - | Dígitos que identificam cada banco. Confira a lista dos bancos [aqui](http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp) |
+| `agencia` | Sim\* | - | Número da agência bancária |
+| `agencia_dv` | Não | - | Digito verificador da agência. Obrigatório caso o banco o utilize |
+| `conta` | Sim\* | - | Número da conta |
+| `conta_dv` | Não | - | Dígito verificador da conta. Obrigatório caso o banco o utilize |
+| `document_number` | Sim\* | - | CPF ou CNPJ do favorecido |
+| `legal_name` | Sim\* | - | Nome/razão social do favorecido |
+
 ## Calculando Pagamentos Parcelados
 
 > GET https://api.pagar.me/1/transactions/calculate_installments_amount
@@ -854,14 +851,6 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 ```
 
 Usada para calcular o valor de cada uma das parcelas de uma compra.
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `max_installments` | Sim | 12 | Valor máximo de parcelas |
-| `free_installments` | Não | 1 | Número de parcelas isentas de juros |
-| `interest_rate` | Sim | - | Valor da taxa de juros |
-| `amount` | Sim | - | Valor do produto/serviço vendido |
 
 > JSON retornado (exemplo):
 
@@ -887,27 +876,19 @@ Usada para calcular o valor de cada uma das parcelas de uma compra.
 }
 ```
 
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `max_installments` | Sim | 12 | Valor máximo de parcelas |
+| `free_installments` | Não | 1 | Número de parcelas isentas de juros |
+| `interest_rate` | Sim | - | Valor da taxa de juros |
+| `amount` | Sim | - | Valor do produto/serviço vendido |
+
 # Planos
 
 Através dessas rotas você pode gerenciar todos os planos do seu negócio, para posteriormente criar cobranças recorrentes, que serão as assinaturas.
 
 ## Objeto `plan`
-
-Com o objeto `plan` você consegue definir um plano no qual assinaturas poderão estar atreladas a este plano. Informações como **valor do plano**, **nome**, **dias de teste**, entre outras informações, são armazenadas pelos planos.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `plan` |
-| `id` | `Number` | Número identificador do plano |
-| `amount` | `Number` | Preço do plano, em centavos |
-| `days` | `Number` | Dias para efetuação da próxima cobrança da assinatura atrelada ao plano. |
-| `name` | `String` | Nome do plano |
-| `trial_days` | `Number` | Dias que o usuário poderá testar o serviço gratuitamente |
-| `date_created` | `String` | Data da criação do plano (ISODate) |
-| `payment_methods` | `Array` | Array de Strings contendo os possíveis métodos de pagamento deste plano. <br> **Valores possíveis**: `credit_card`, `boleto` |
-| `color` | `String` | Propriedade opcional para atribuição de uma cor ao plano. <br> **Valor padrão**: `null` |
-| `charges` | `Number` | Número de cobranças que podem ser feitas em uma assinatura. <br> **Ex**: Plano anual com no máximo 3 cobranças, `days = 365` e `charges = 3` |
-| `installments` | `Number` | Informa em quantas vezes o pagamento será parcelado entre cada cobrança |
 
 > Objeto plan
 
@@ -928,6 +909,22 @@ Com o objeto `plan` você consegue definir um plano no qual assinaturas poderão
     "installments": 1
 }
 ```
+
+Com o objeto `plan` você consegue definir um plano no qual assinaturas poderão estar atreladas a este plano. Informações como **valor do plano**, **nome**, **dias de teste**, entre outras informações, são armazenadas pelos planos.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `plan` |
+| `id` | `Number` | Número identificador do plano |
+| `amount` | `Number` | Preço do plano, em centavos |
+| `days` | `Number` | Dias para efetuação da próxima cobrança da assinatura atrelada ao plano. |
+| `name` | `String` | Nome do plano |
+| `trial_days` | `Number` | Dias que o usuário poderá testar o serviço gratuitamente |
+| `date_created` | `String` | Data da criação do plano (ISODate) |
+| `payment_methods` | `Array` | Array de Strings contendo os possíveis métodos de pagamento deste plano. <br> **Valores possíveis**: `credit_card`, `boleto` |
+| `color` | `String` | Propriedade opcional para atribuição de uma cor ao plano. <br> **Valor padrão**: `null` |
+| `charges` | `Number` | Número de cobranças que podem ser feitas em uma assinatura. <br> **Ex**: Plano anual com no máximo 3 cobranças, `days = 365` e `charges = 3` |
+| `installments` | `Number` | Informa em quantas vezes o pagamento será parcelado entre cada cobrança |
 
 ## Criando Planos
 
@@ -953,20 +950,6 @@ curl -X POST https://api.pagar.me/1/plans \
 
 Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `amount` | Sim | - | Valor que será cobrado recorrentemente (em centavos). Ex: R$49,90 = `4990` |
-| `days` | Sim | - | Prazo, em dias, para cobrança das parcelas |
-| `name` | Sim | - | Nome do plano |
-| `trial_days` | Não | `0` | Dias para teste gratuito do produto. Valor começará a ser cobrado no dia `trial_days + 1` |
-| `payment_methods` | Não | `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
-| `color` | Não | `null` | Armazena o valor de uma cor para o plano |
-| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, charges = 3, installments = 1` <br> **OBS**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
-| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **OBS**: Boleto sempre terá `installments = 1` |
-
-Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -986,6 +969,20 @@ Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscript
     "installments": 1
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `amount` | Sim | - | Valor que será cobrado recorrentemente (em centavos). Ex: R$49,90 = `4990` |
+| `days` | Sim | - | Prazo, em dias, para cobrança das parcelas |
+| `name` | Sim | - | Nome do plano |
+| `trial_days` | Não | `0` | Dias para teste gratuito do produto. Valor começará a ser cobrado no dia `trial_days + 1` |
+| `payment_methods` | Não | `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
+| `color` | Não | `null` | Armazena o valor de uma cor para o plano |
+| `charges` | Não | `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, charges = 3, installments = 1` <br> **OBS**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
+| `installments` | Não | `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **OBS**: Boleto sempre terá `installments = 1` |
+
+Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
 
 ## Retornando Planos
 
@@ -1007,11 +1004,6 @@ curl -X GET https://api.pagar.me/1/plans/13580 \
 
 Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id`| Sim | - | id de identificação do plano previamente criado |
-
 > JSON Retornado (Exemplo)
 
 ```json
@@ -1031,6 +1023,11 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
     "installments": 1
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:id`| Sim | - | id de identificação do plano previamente criado |
 
 ## Atualizando Planos
 
