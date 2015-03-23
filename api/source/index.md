@@ -82,12 +82,12 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 |:--|:--:|:--|
 | `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
 | `status` | `String` | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
-| `status_reason` | `String` |  |
-| `acquirer_response_code` | `String` |  |
-| `authorization_code` | `String` |  |
+| `status_reason` | `String` | Motivo/agente responsável pela validação ou anulação da transação. <br> **Valores possíveis**: `acquirer`, `antifraud`, `internal_error`, `no_acquirer`, `acquirer_timeout` |
+| `acquirer_response_code` | `String` | Mensagem de resposta do adquirente referente ao status da transação.  |
+| `authorization_code` | `String` | Código de autorização retornado pela bandeira. |
 | `soft_descriptor` | `String` | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **OBS**: Limite de 13 caracteres. |
-| `tid` | `String` |  |
-| `nsu` | `String` |  |
+| `tid` | `String` | Código que identifica a transação no adquirente. |
+| `nsu` | `String` | Código que identifica a transação no adquirente. |
 | `date_created` | `String` | Data de criação da transação no formato ISODate |
 | `date_updated` | `String` | Data de atualização da transação no formato ISODate |
 | `amount` | `Number` | Valor, em centavos, da transação |
@@ -99,8 +99,8 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 | `boleto_url` | `String` | URL do boleto para impressão |
 | `boleto_barcode` | `String` | Código de barras do boleto gerado na transação |
 | `boleto_expiration_date` | `String` | Data de expiração do boleto (em ISODate) |
-| `referer` | `String` |  |
-| `ip` | `String` |  |
+| `referer` | `String` | Mostra se a transação foi criada utilizando a API Key ou Encryption Key. |
+| `ip` | `String` | IP de origem que criou a transção, podendo ser ou do seu cliente (quando criado via checkout ou utilizando card_hash) ou do servidor. |
 | `subscription_id` | `Number` | Caso essa transação tenha sido originada na cobrança de uma assinatura, o `id` desta será o valor dessa propriedade  |
 | `phone` | `Object` | Objeto com dados do telefone do cliente |
 | `address` | `Object` | Objeto com dados do endereço do cliente |
@@ -1225,8 +1225,8 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 | `current_transaction` | `Object` | Objeto com os dados da última transação realizada nessa assinatura |
 | `postback_url` | `String` | Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a cada atualização dos processos |
 | `payment_method` | `String` | Método de pagamento associado a essa assinatura |
-| `current_period_start` | `String` |  |
-| `current_period_end` | `String` |  |
+| `current_period_start` | `String` | Início da criação da assinatura |
+| `current_period_end` | `String` | Término do período da assinatura |
 | `charges` | `Number` | Número de cobranças a serem efetuadas |
 | `status` | `String` | Possíveis estados da transação/assinatura <br> **Valores possíveis**: `trialing`, `paid`, `pending_payment`, `unpaid`, `canceled`, `ended` |
 | `date_created` | `String` | Data da criação d assinatura |
@@ -2065,7 +2065,7 @@ Com essa rota `/balance` você poderá consultar o saldo das transações da sua
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
-# Operações
+# Operações de saldo
 
 ## Objeto `balance_operation`
 
@@ -2105,11 +2105,11 @@ Com este objeto você poderá acompanhar como estava/está seu saldo a cada movi
 | `status` | `String` | Estado do saldo da conta. <br> **Valores possíveis**: `waiting_funds`, `available` e `transferred` |
 | `balance_amount` | `Number` | Saldo atual da conta |
 | `balance_old_amount` | `Number` | Saldo antes da última movimentação |
-| `movement_type` | `String` |  |
+| `movement_type` | `String` | O que gerou a movimentação. <br> **Valores possíveis**: `payable`, `transaction` ou `antecipation` |
 | `amount` | `Number` | Valor transacionado para a conta |
 | `fee` | `Number` | Taxa cobrada pela transação |
 | `date_created` | `String` | Data da movimentação |
-| `movement_object` | `Object` |  |
+| `movement_object` | `Object` | Objeto da origem da movimentação |
 
 ## Histórico das operações
 
@@ -2419,7 +2419,6 @@ Através deste objeto você consegue visualizar vários dados da sua companhia, 
 | `status` | `String` | Estado da companhia atual. <br> **Valores possíveis**: `temporary`, `pending_confirmation`,  `pending_activation`, `paid` |
 | `id` | `String` | Identificador da companhia |
 | `date_created` | `String` | Data de criação da companhia |
-| `preferences` | `` |  |
 | `branding` | `Object` | Objeto com dados da sua marca |
 | `branding[primary_color]` | `String` | Valor hexadecimal da cor previamente configurada da sua marca. <br> **Ex**: `#ccff00` |
 | `branding[logo]` | `String` | URL do seu logo |
@@ -2453,9 +2452,9 @@ Através deste objeto você consegue visualizar vários dados da sua companhia, 
 ào de crédito |
 | `transaction_cost[credit_card]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando cartão de crédito |
 | `transaction_cost[boleto]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando boleto |
-| `transaction_spread` | `Object` |  |
-| `transaction_spread[credit_card]` | `Number` |  |
-| `transaction_spread[boleto]` | `Number` |  |
+| `transaction_spread` | `Object` | Objeto contendo o custo por transação em valores percentuais |
+| `transaction_spread[credit_card]` | `Number` | Custo por transação feita com cartão de crédito |
+| `transaction_spread[boleto]` | `Number` | Custo por transação feito com boleto bancário |
 
 ## Retornando dados da companhia
 
