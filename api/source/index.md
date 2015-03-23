@@ -26,38 +26,6 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
 
 ## Objeto `transaction`
 
-Ao criar ou atualizar uma transação, este será o objeto que você irá receber como resposta em cada etapa do processo de efetivação da transação.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
-| `status` | `String` | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
-| `status_reason` | `String` |  |
-| `acquirer_response_code` | `String` |  |
-| `authorization_code` | `String` |  |
-| `soft_descriptor` | `String` | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **OBS**: Limite de 13 caracteres. |
-| `tid` | `String` |  |
-| `nsu` | `String` |  |
-| `date_created` | `String` | Data de criação da transação no formato ISODate |
-| `date_updated` | `String` | Data de atualização da transação no formato ISODate |
-| `amount` | `Number` | Valor, em centavos, da transação |
-| `installments` | `Number` | Número de parcelas/prestações a serem cobradas |
-| `id` | `Number` | Número identificador da transação |
-| `cost` | `Number` | Custo da transação para o lojista |
-| `postback_url` | `String` | URL (endpoint) do sistema integrado a Pagar.me que receberá as respostas a cada atualização do processamento da transação |
-| `payment_method` | `String` | Método de pagamento possíveis: `credit_card` e `boleto`  |
-| `boleto_url` | `String` | URL do boleto para impressão |
-| `boleto_barcode` | `String` | Código de barras do boleto gerado na transação |
-| `boleto_expiration_date` | `String` | Data de expiração do boleto (em ISODate) |
-| `referer` | `String` |  |
-| `ip` | `String` |  |
-| `subscription_id` | `Number` | Caso essa transação tenha sido originada na cobrança de uma assinatura, o `id` desta será o valor dessa propriedade  |
-| `phone` | `Object` | Objeto com dados do telefone do cliente |
-| `address` | `Object` | Objeto com dados do endereço do cliente |
-| `customer` | `Object` | Objeto com dados do cliente |
-| `card` | `Object` | Objeto com dados do cartão do cliente |
-| `metadata` | `Object` | Objeto com dados adicionais do cliente/produto/serviço vendido |
-
 > Objeto transaction
 
 ```json
@@ -108,6 +76,37 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 }
 ```
 
+Ao criar ou atualizar uma transação, este será o objeto que você irá receber como resposta em cada etapa do processo de efetivação da transação.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
+| `status` | `String` | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
+| `status_reason` | `String` |  |
+| `acquirer_response_code` | `String` |  |
+| `authorization_code` | `String` |  |
+| `soft_descriptor` | `String` | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **OBS**: Limite de 13 caracteres. |
+| `tid` | `String` |  |
+| `nsu` | `String` |  |
+| `date_created` | `String` | Data de criação da transação no formato ISODate |
+| `date_updated` | `String` | Data de atualização da transação no formato ISODate |
+| `amount` | `Number` | Valor, em centavos, da transação |
+| `installments` | `Number` | Número de parcelas/prestações a serem cobradas |
+| `id` | `Number` | Número identificador da transação |
+| `cost` | `Number` | Custo da transação para o lojista |
+| `postback_url` | `String` | URL (endpoint) do sistema integrado a Pagar.me que receberá as respostas a cada atualização do processamento da transação |
+| `payment_method` | `String` | Método de pagamento possíveis: `credit_card` e `boleto`  |
+| `boleto_url` | `String` | URL do boleto para impressão |
+| `boleto_barcode` | `String` | Código de barras do boleto gerado na transação |
+| `boleto_expiration_date` | `String` | Data de expiração do boleto (em ISODate) |
+| `referer` | `String` |  |
+| `ip` | `String` |  |
+| `subscription_id` | `Number` | Caso essa transação tenha sido originada na cobrança de uma assinatura, o `id` desta será o valor dessa propriedade  |
+| `phone` | `Object` | Objeto com dados do telefone do cliente |
+| `address` | `Object` | Objeto com dados do endereço do cliente |
+| `customer` | `Object` | Objeto com dados do cliente |
+| `card` | `Object` | Objeto com dados do cartão do cliente |
+| `metadata` | `Object` | Objeto com dados adicionais do cliente/produto/serviço vendido |
 
 ## Criando uma transação
 
@@ -173,32 +172,6 @@ transaction.Save();
 
 Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua transação, que pode ser feita por cartão de crédito ou por boleto bancário.
 
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `amount` | Sim | - | Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = `1000` |
-| `card_hash` | Sim\* | - | Informações do cartão do cliente criptografadas no navegador. <br>**OBS**: Para os dados do cartão você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
-| `card_id` | Sim\* | - | Ao realizar uma transação, retornamos o `card_id` do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do `card_hash` |
-| `payment_method` | Não | `credit_card` | Aceita dois tipos de pagamentos/valores: `credit_card` e `boleto` |
-| `postback_url` | Não | - | Endpoint do seu sistema que receberá informações a cada atualização da transação |
-| `installments` | Não | Mínimo: 1 Máximo: 12 | Se o pagamento for boleto, o padrão é 1 |
-| `boleto_expiration_date` | Não | Data atual + 7 dias | Prazo limite para pagamento do boleto |
-| `soft_descriptor` | Não | - | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
-| `capture` | Não | `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
-| `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
-| `customer[name]` | Sim\* (com antifraude) | - | Nome completo ou razão social do cliente que está realizando a transação |
-| `customer[document_number]` | Sim\* (com antifraude) | - | CPF ou CNPJ do cliente, sem separadores |
-| `customer[email]` | Sim\* (com antifraude) | - | email do cliente |
-| `customer[address][street]` | Sim\* (com antifraude) | - | logradouro (rua, avenida, etc) do cliente |
-| `customer[address][street_number]` | Sim\* (com antifraude) | - | Número da residência/estabelecimento do cliente |
-| `customer[address][complementary]` | Sim\* (com antifraude) | - | completo do endereço do cliente |
-| `customer[address][neighborhood]` | Sim\* (com antifraude) | - | bairro de localização do cliente |
-| `customer[address][zipcode]` | Sim\* (com antifraude) | - | CEP do imóvel do cliente, sem separadores |
-| `customer[phone][ddd]` | Sim\* (com antifraude) | - | DDD do telefone do cliente |
-| `customer[phone][number]` | Sim\* (com antifraude) | - | número de telefone do cliente |
-| `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
-| `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
-
 > JSON retornado (exemplo):
 
 ```json
@@ -247,6 +220,34 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
   }
 }
 ```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `amount` | Sim | - | Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = `1000` |
+| `card_hash` | Sim\* | - | Informações do cartão do cliente criptografadas no navegador. <br>**OBS**: Para os dados do cartão você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
+| `card_id` | Sim\* | - | Ao realizar uma transação, retornamos o `card_id` do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do `card_hash` |
+| `payment_method` | Não | `credit_card` | Aceita dois tipos de pagamentos/valores: `credit_card` e `boleto` |
+| `postback_url` | Não | - | Endpoint do seu sistema que receberá informações a cada atualização da transação |
+| `installments` | Não | Mínimo: 1 Máximo: 12 | Se o pagamento for boleto, o padrão é 1 |
+| `boleto_expiration_date` | Não | Data atual + 7 dias | Prazo limite para pagamento do boleto |
+| `soft_descriptor` | Não | - | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
+| `capture` | Não | `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
+| `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
+| `customer[name]` | Sim\* (com antifraude) | - | Nome completo ou razão social do cliente que está realizando a transação |
+| `customer[document_number]` | Sim\* (com antifraude) | - | CPF ou CNPJ do cliente, sem separadores |
+| `customer[email]` | Sim\* (com antifraude) | - | email do cliente |
+| `customer[address][street]` | Sim\* (com antifraude) | - | logradouro (rua, avenida, etc) do cliente |
+| `customer[address][street_number]` | Sim\* (com antifraude) | - | Número da residência/estabelecimento do cliente |
+| `customer[address][complementary]` | Sim\* (com antifraude) | - | completo do endereço do cliente |
+| `customer[address][neighborhood]` | Sim\* (com antifraude) | - | bairro de localização do cliente |
+| `customer[address][zipcode]` | Sim\* (com antifraude) | - | CEP do imóvel do cliente, sem separadores |
+| `customer[phone][ddd]` | Sim\* (com antifraude) | - | DDD do telefone do cliente |
+| `customer[phone][number]` | Sim\* (com antifraude) | - | número de telefone do cliente |
+| `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
+| `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
+
+
 
 **OBS**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
 
