@@ -585,7 +585,7 @@ Retorna todas as análises antifraude realizadas em uma transação.
 
 ```shell
 curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'api_key=ak_live_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
 -d 'email=seu@email.com'
 ```
 
@@ -600,10 +600,12 @@ curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
 
 Envia o link de um boleto pendente para o cliente.
 
+**OBS**: Essa rota não funciona em ambiente de testes.
+
 > JSON Retornado (Exemplo)
 
 ```json
-
+{ }
 ```
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
