@@ -3455,6 +3455,117 @@ Através da rota `/search` você consegue fazer consultas usando o [ElasticSearc
 | `query` | Não | - | Filtros a serem utilizados para obtenção dos resultados esperados. Veja mais sobre as buscas no Elasticsearch [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search.html) |
 | `search_type` | Não | - | Informa o tipo de busca que deve ser feita na base de dados. Mais sobre tipos de pesquisa [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search-request-search-type.html) |
 
+# Recebedores
+
+## Objeto `recipient`
+
+> Objeto recipient
+
+```json
+{
+    "object": "recipient",
+    "id": "re_ci7ng63iv00bdp8164c05ggi9",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4841,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": "5",
+        "conta": "58054",
+        "conta_dv": "1",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "API BANK ACCOUNT",
+        "charge_transfer_fees": false,
+        "date_created": "2015-03-19T15:40:51.000Z"
+    },
+    "transfer_enabled": true,
+    "transfer_interval": "weekly",
+    "transfer_day": "5",
+    "date_created": "2015-03-24T15:18:30.000Z",
+    "date_updated": "2015-03-24T15:18:30.000Z"
+}
+```
+
+Objeto contendo os dados de um recebedor.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `recipient` |
+| `id` | `String` | Identificador do recebedor |
+| `bank_account` | `Object` | Objeto contendo os dados bancários do recebedor |
+| `transfer_enabled` | `Boolean` | Identifica se o recebedor está habilitado para receber ou não |
+| `last_transfer` | `String` | Data da última transferência (ISODate) |
+| `transfer_interval` | `String` | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `montlhy` |
+| `transfer_day` | `Number` | Dia no qual o recebedor vai ser pago. Para cada `transfer_day`, existe uma faixa de pagamento possíveis. <br> `weekly`: 1 a 5 <br> `monthly`: 1 a 31 |
+| `date_created` | `String` | Data de criação do recebedor (ISODate) |
+| `date_updated` | `String` | Data de atualização do recebedor |
+
+## Criando um recebedor
+
+> POST https://api.pagar.me/1/recipients
+
+```shell
+curl -X POST https://api.pagar.me/1/recipients \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'transfer_interval=weekly' \
+-d 'transfer_day=5' \
+-d 'transfer_enabled=true' \
+-d 'bank_account_id=4841'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "recipient",
+    "id": "re_ci7ng63iv00bdp8164c05ggi9",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4841,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": "5",
+        "conta": "58054",
+        "conta_dv": "1",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "API BANK ACCOUNT",
+        "charge_transfer_fees": false,
+        "date_created": "2015-03-19T15:40:51.000Z"
+    },
+    "transfer_enabled": true,
+    "transfer_interval": "weekly",
+    "transfer_day": "5",
+    "date_created": "2015-03-24T15:18:30.000Z",
+    "date_updated": "2015-03-24T15:18:30.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `transfer_interval` | Sim | - | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `montlhy` |
+| `transfer_day` | Sim | - | Dia no qual o recebedor vai ser pago. |
+| `transfer_enabled` | Sim | - | Variável que indica se o recebedor pode receber os pagamentos |
+| `bank_account_id` | Sim* | - | Identificador de uma conta bancária previamente criada. Caso você não tenha essa informação, você pode passar os parâmetros necessários para [criação de uma conta bancária](/#criando-uma-conta-bancria) | 
+| `bank_account` | Não* | - | Objeto contendo os dados bancários do recebedor. Este objeto, e as suas respectivas propriedades, serão obrigatórios caso não seja informado um `bank_account_id` |
+| `bank_account[bank_code]` | Não | - | Código do banco do recebedor |
+| `bank_account[agencia]` | Não | - | Agência da conta do recebedor |
+| `bank_account[conta]` | Não | - | Número da conta bancária do recebedor |
+| `bank_account[conta_dv]` | Não | - | Dígito verificador da conta do recebedor |
+| `bank_account[document_number]` | Não | - | CPF ou CNPJ do recebedor |
+| `bank_account[legal_name]` | Não | - | Nome completo ou razão social do recebedor |
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
