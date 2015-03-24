@@ -3523,6 +3523,8 @@ curl -X POST https://api.pagar.me/1/recipients \
 ```cs
 ```
 
+Com essa rota você consegue criar um recebedor, definindo o período que ele irá receber os pagamentos e qual a conta bancária que será utilizada para envio dos pagamentos.
+
 > JSON Retornado (Exemplo)
 
 ```json
@@ -3565,6 +3567,130 @@ curl -X POST https://api.pagar.me/1/recipients \
 | `bank_account[conta_dv]` | Não | - | Dígito verificador da conta do recebedor |
 | `bank_account[document_number]` | Não | - | CPF ou CNPJ do recebedor |
 | `bank_account[legal_name]` | Não | - | Nome completo ou razão social do recebedor |
+
+## Retornando todos os recebedores
+
+> GET https://api.pagar.me/1/recipients
+
+```shell
+curl -X GET https://api.pagar.me/1/recipients \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um `Array` de objetos com todos os recebedores criados pela sua companhia.
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "recipient",
+    "id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4901,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": null,
+        "conta": "58999",
+        "conta_dv": "3",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "RECIPIENT TEST",
+        "charge_transfer_fees": true,
+        "date_created": "2015-03-24T15:53:17.000Z"
+    },
+    "transfer_enabled": true,
+    "last_transfer": null,
+    "transfer_interval": "weekly",
+    "transfer_day": 5,
+    "date_created": "2015-03-24T15:53:27.000Z",
+    "date_updated": "2015-03-24T15:53:27.000Z"
+}, {
+    "object": "recipient",
+    "id": "re_ci7nheu0m0006n016o5sglg9t",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4901,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": null,
+        "conta": "58999",
+        "conta_dv": "3",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "RECIPIENT TEST",
+        "charge_transfer_fees": true,
+        "date_created": "2015-03-24T15:53:17.000Z"
+    },
+    "transfer_enabled": true,
+    "last_transfer": null,
+    "transfer_interval": "weekly",
+    "transfer_day": 5,
+    "date_created": "2015-03-24T15:53:17.000Z",
+    "date_updated": "2015-03-24T15:53:17.000Z"
+}, {
+    "object": "recipient",
+    "id": "re_ci7ng63iv00bdp8164c05ggi9",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4841,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": "5",
+        "conta": "58054",
+        "conta_dv": "1",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "API BANK ACCOUNT",
+        "charge_transfer_fees": false,
+        "date_created": "2015-03-19T15:40:51.000Z"
+    },
+    "transfer_enabled": true,
+    "last_transfer": null,
+    "transfer_interval": "weekly",
+    "transfer_day": 5,
+    "date_created": "2015-03-24T15:18:30.000Z",
+    "date_updated": "2015-03-24T15:18:30.000Z"
+}, {
+    "object": "recipient",
+    "id": "re_ci76hxnym00b8dw16y3hdxb21",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 1774,
+        "bank_code": "000",
+        "agencia": "0000",
+        "agencia_dv": null,
+        "conta": "00000",
+        "conta_dv": "0",
+        "document_type": "cnpj",
+        "document_number": "00000000000000",
+        "legal_name": "CONTA BANCARIA DE TESTES",
+        "charge_transfer_fees": true,
+        "date_created": "2015-03-12T18:35:51.000Z"
+    },
+    "transfer_enabled": false,
+    "last_transfer": null,
+    "transfer_interval": null,
+    "transfer_day": null,
+    "date_created": "2015-03-12T18:35:51.000Z",
+    "date_updated": "2015-03-12T18:35:51.000Z"
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos recebedores |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
 # Antifraude
 
