@@ -3692,6 +3692,100 @@ Retorna um `Array` de objetos com todos os recebedores criados pela sua companhi
 | `count` | Não | `10` | Retorna `n` objetos recebedores |
 | `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
+## Retornando um recebedor
+
+> GET https://api.pagar.me/1/recipients/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um objeto com os dados de um recebedor criado pela sua companhia.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "recipient",
+    "id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4901,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": null,
+        "conta": "58999",
+        "conta_dv": "3",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "RECIPIENT TEST",
+        "charge_transfer_fees": true,
+        "date_created": "2015-03-24T15:53:17.000Z"
+    },
+    "transfer_enabled": true,
+    "last_transfer": null,
+    "transfer_interval": "weekly",
+    "transfer_day": 5,
+    "date_created": "2015-03-24T15:53:27.000Z",
+    "date_updated": "2015-03-24T15:53:27.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+## Balanço de saldo de um recebedor
+
+> GET https://api.pagar.me/1/recipients/:id/balance
+
+```shell
+curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna o balanço de saldo de um determinado recebedor.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "balance",
+    "waiting_funds": {
+        "amount": 0
+    },
+    "available": {
+        "amount": 0
+    },
+    "transferred": {
+        "amount": 0
+    }
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
