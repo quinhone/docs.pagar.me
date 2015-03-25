@@ -3786,6 +3786,59 @@ Retorna o balanço de saldo de um determinado recebedor.
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
+## Operações de saldo de um recebedor
+
+> GET https://api.pagar.me/1/recipients/:recipient_id/balance/operations
+
+```shell
+curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance/operations \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um objeto com os dados de um recebedor criado pela sua companhia.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "recipient",
+    "id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 4901,
+        "bank_code": "341",
+        "agencia": "0932",
+        "agencia_dv": null,
+        "conta": "58999",
+        "conta_dv": "3",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "RECIPIENT TEST",
+        "charge_transfer_fees": true,
+        "date_created": "2015-03-24T15:53:17.000Z"
+    },
+    "transfer_enabled": true,
+    "last_transfer": null,
+    "transfer_interval": "weekly",
+    "transfer_day": 5,
+    "date_created": "2015-03-24T15:53:27.000Z",
+    "date_updated": "2015-03-24T15:53:27.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
@@ -3845,4 +3898,38 @@ Dados de um usuário registrado no nosso sistema.
 | `name` | `String` | Nome do usuário |
 | `permission` | `String` | Tipo de permissão do usuário. <br> **Tipos**: `admin`, `read_write`, `read_only` |
 | `date_created` | `String` | Data da criação do usuário (ISODate) |
+
+# Regras do split
+
+## Objeto `split_rule`
+
+> Objeto split_rule
+
+```json
+{
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001s2m164zrbp7tz",
+    "recipient_id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "charge_processing_fee": true,
+    "liable": true,
+    "percentage": 30,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}
+```
+
+Objeto que contém as informações das regras da divisão do valor gerado na transação.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `user` |
+| `id` | `String` | Identificador da regra de divisão |
+| `recipient_id` | `String` | Recebedor que irá receber os valores descritos nessa regra |
+| `charge_processing_fee` | `Boolean` | Define se o recebedor dessa regra irá ser cobrado pela taxa da Pagar.me |
+| `liable` | `Boolean` | Define se o recebedor vinculado a essa regra irá se responsabilizar pelo risco da transação (estorno/chargeback) |
+| `percentage` | `Number` | Porcentagem que o recebedor vai receber do valor da transação. <br> **OBS**: Caso `percentage` seja utilizada, não é necessário passar o parâmetro `amount` |
+| `amount` | `Number` | Valor que o recebedor vai receber da transação. <br> **OBS**: Caso `amount` seja utilizado, não é necessário passar o parâmetro `percentage` |
+| `date_created` | `String` | Data da criação da `split_rule` |
+| `date_updated` | `String` | Data de atualização da `split_rule` |
 
