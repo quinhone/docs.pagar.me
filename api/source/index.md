@@ -555,6 +555,48 @@ Retorna os dados das regras de divisão do valor transacionado.
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `:transaction_id` | Sim | - | id da transação previamente criada |
 
+## Retornando uma regra de divisão específica
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/split_rules/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/189164/split_rules/sr_ci7ntawl1001s2m164zrbp7tz \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna os dados de uma regra de divisão de uma determinada transaçào.
+
+> JSON Retornado (exemplo):
+
+```json
+{
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001s2m164zrbp7tz",
+    "recipient_id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "charge_processing_fee": true,
+    "liable": true,
+    "percentage": 30,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | Identificador da transação previamente criada |
+| `id` | Sim | - | Identificador da regra de divisão |
+
 ## Retorna uma análise antifraude
 
 > GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
