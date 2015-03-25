@@ -2304,6 +2304,8 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos de operação de saldo |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
 ## Histórico específico de uma operação 
 
@@ -3903,35 +3905,12 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balan
 ```cs
 ```
 
-Retorna um objeto com os dados de um recebedor criado pela sua companhia.
+Retorna as movimentações que aconteceram na conta do recebedor.
 
 > JSON Retornado (Exemplo)
 
 ```json
-{
-    "object": "recipient",
-    "id": "re_ci7nhf1ay0007n016wd5t22nl",
-    "bank_account": {
-        "object": "bank_account",
-        "id": 4901,
-        "bank_code": "341",
-        "agencia": "0932",
-        "agencia_dv": null,
-        "conta": "58999",
-        "conta_dv": "3",
-        "document_type": "cpf",
-        "document_number": "26268738888",
-        "legal_name": "RECIPIENT TEST",
-        "charge_transfer_fees": true,
-        "date_created": "2015-03-24T15:53:17.000Z"
-    },
-    "transfer_enabled": true,
-    "last_transfer": null,
-    "transfer_interval": "weekly",
-    "transfer_day": 5,
-    "date_created": "2015-03-24T15:53:27.000Z",
-    "date_updated": "2015-03-24T15:53:27.000Z"
-}
+
 ```
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
