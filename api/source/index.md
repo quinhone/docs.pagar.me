@@ -504,6 +504,57 @@ Saiba mais sobre como criar um `card_hash` [aqui]().
 |:--|:--:|:--:|:--|
 | `encryption_key` | Sim | - | Chave de encriptação (disponível no seu dashboard) |
 
+## Retornando as regras de divisão de uma transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/split_rules
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/189164/split_rules \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna os dados das regras de divisão do valor transacionado.
+
+> JSON Retornado (exemplo):
+
+```json
+[{
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001s2m164zrbp7tz",
+    "recipient_id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "charge_processing_fee": true,
+    "liable": true,
+    "percentage": 30,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}, {
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001t2m1606u3e0uw",
+    "recipient_id": "re_ci7nheu0m0006n016o5sglg9t",
+    "charge_processing_fee": true,
+    "liable": false,
+    "percentage": 70,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | id da transação previamente criada |
+
 ## Retorna uma análise antifraude
 
 > GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
