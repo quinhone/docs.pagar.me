@@ -247,11 +247,11 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | `customer[sex]` | Não | `M` ou `F` (letras maiúsculas) | sexo do cliente |
 | `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
 | `split_rules` | Não | - | Esse parâmetro é um `Array` que irá conter as regras da divisão do valor transacionado. <br> **OBS**: Caso você deseje incluir mais regras, passe os parâmetros abaixo alterando o índice em `+1` para cada nova regra/recebedor |
-| `split_rules[0][recipient_id]` | Não | - | Identificador do [recebedor](/#recebedores) |
-| `split_rules[0][charge_processing_fee]` | Não | `true` | Indica se o recebedor vinculado a essa regra de divisão será cobrado pelas taxas da transação |
-| `split_rules[0][liable]` | Não | `true` | Indica se o recebedor vinculado a essa regra de divisão assumirá o risco da transação, ou seja, possíveis estornos (*chargeback*) |
-| `split_rules[0][percentage]` | Não | - | Define a porcentagem a ser recebida pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `percentage`, a propriedade `amount` não será necessária |
-| `split_rules[0][amount]` | Não | - | Define o valor a ser recebido pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `amount`, a propriedade `percentage` não será necessária |
+| `split_rules[n][recipient_id]` | Não | - | Identificador do [recebedor](/#recebedores) |
+| `split_rules[n][charge_processing_fee]` | Não | `true` | Indica se o recebedor vinculado a essa regra de divisão será cobrado pelas taxas da transação |
+| `split_rules[n][liable]` | Não | `true` | Indica se o recebedor vinculado a essa regra de divisão assumirá o risco da transação, ou seja, possíveis estornos (*chargeback*) |
+| `split_rules[n][percentage]` | Não | - | Define a porcentagem a ser recebida pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `percentage`, a propriedade `amount` não será necessária |
+| `split_rules[n][amount]` | Não | - | Define o valor a ser recebido pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `amount`, a propriedade `percentage` não será necessária |
 
 **OBS**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
 
@@ -3595,7 +3595,7 @@ Objeto contendo os dados de um recebedor.
 | `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `recipient` |
 | `id` | `String` | Identificador do recebedor |
 | `bank_account` | `Object` | Objeto contendo os dados bancários do recebedor |
-| `transfer_enabled` | `Boolean` | Identifica se o recebedor está habilitado para receber ou não |
+| `transfer_enabled` | `Boolean` | Identifica se o recebedor está habilitado para receber automaticamente ou não |
 | `last_transfer` | `String` | Data da última transferência (ISODate) |
 | `transfer_interval` | `String` | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `montlhy` |
 | `transfer_day` | `Number` | Dia no qual o recebedor vai ser pago. Para cada `transfer_day`, existe uma faixa de pagamento possíveis. <br> `weekly`: 1 a 5 <br> `monthly`: 1 a 31 |
@@ -3659,7 +3659,7 @@ Com essa rota você consegue criar um recebedor, definindo o período que ele ir
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `transfer_interval` | Sim | - | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `montlhy` |
 | `transfer_day` | Sim | - | Dia no qual o recebedor vai ser pago. |
-| `transfer_enabled` | Sim | - | Variável que indica se o recebedor pode receber os pagamentos |
+| `transfer_enabled` | Sim | - | Variável que indica se o recebedor pode receber os pagamentos automaticamente |
 | `bank_account_id` | Sim* | - | Identificador de uma conta bancária previamente criada. Caso você não tenha essa informação, você pode passar os parâmetros necessários para [criação de uma conta bancária](/#criando-uma-conta-bancria) | 
 | `bank_account` | Não* | - | Objeto contendo os dados bancários do recebedor. Este objeto, e as suas respectivas propriedades, serão obrigatórios caso não seja informado um `bank_account_id` |
 | `bank_account[bank_code]` | Não | - | Código do banco do recebedor |
