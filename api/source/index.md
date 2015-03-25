@@ -3917,6 +3917,36 @@ Retorna as movimentações que aconteceram na conta do recebedor.
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
+## Operação de saldo específica de um recebedor
+
+> GET https://api.pagar.me/1/recipients/:recipient_id/balance/operations/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance/operations \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna uma movimentação de saldo que aconteceu na conta do recebedor.
+
+> JSON Retornado (Exemplo)
+
+```json
+
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Antifraude
 
 ## Objeto `antifraud_analysis`
