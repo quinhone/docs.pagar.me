@@ -270,6 +270,42 @@ old_status | Status da transação antes do evento | ---
 desired_status | Status desejado após o evento | Ao criar a transação: `paid`. Ao estornar a transação: `refunded` |
 fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba mais](/advanced#validando-a-origem-de-um-postback)) | ---
 
+## Dividindo uma transação {#split}
+
+Ao criar uma transação, você poderá definir quem irá receber e quanto do valor referente a esta transação será dividido. Essas regras são definidas através das `split_rules`, ou **regras de divisão**.
+
+Para criar uma regra de divisão, você precisa primeiro [criar um(ns) recebedor(es)](/recipients).
+
+Após criado seus recebedores, você deve adicionar os parâmetros `split_rules` na hora de criar a transação, como no exemplo seguinte:
+
+ ```shell
+curl -X POST 'https://api.pagar.me/1/transactions' \
+    -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+    -d 'amount=1000' \
+    -d 'card_hash={CARD_HASH}' \
+	-d 'postback_url=http://seusite.com/payments/2718' \
+    -d 'split_rules[0][recipient_id]=re_ci7nhf1ay0007n016wd5t22nl'
+    -d 'split_rules[0][charge_processing_fee]=true' \
+    -d 'split_rules[0][liable]=true' \
+    -d 'split_rules[0][percentage]=30' \
+    -d 'split_rules[1][recipient_id]=re_ci7nheu0m0006n016o5sglg9t' \
+    -d 'split_rules[1][charge_processing_fee]=true' \
+    -d 'split_rules[1][liable]=false' \
+    -d 'split_rules[1][percentage]0=70'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
+
 ## Enviando dados do cliente para o Pagar.me (antifraude) {#customer-data}
 
 Para ter um maior controle dos seus clientes, principalmente através do
