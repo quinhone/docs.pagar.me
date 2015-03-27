@@ -274,7 +274,7 @@ fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba 
 
 Ao criar uma transação, você poderá definir quem irá receber e quanto do valor referente a esta transação será recebido. Essas regras são definidas através das `split_rules`, ou **regras de divisão**.
 
-Para criar uma regra de divisão, você precisa primeiro [criar um(ns) recebedor(es)](/recipients).
+Para criar uma regra de divisão, você precisa primeiro [criar um recebedor](/recipients).
 
 Após criado seus recebedores, você deve adicionar os parâmetros `split_rules` na hora de criar a transação, como no exemplo seguinte:
 
