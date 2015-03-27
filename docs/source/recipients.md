@@ -73,5 +73,12 @@ curl -X POST https://api.pagar.me/1/recipients \
 
 ```
 
-
 ## Detalhes do recebimento
+
+Ao criar um recebedor, você pode definir com que frequência ele receberá os pagamentos.
+
+As possibilidades são:
+
+- `daily`: irá receber diariamente
+- `weekly`: irá receber semanalmente, onde os dias variam de segunda a sexta, com o parâmetro `transfer_day` variando de 1 a 5.
+- `montlhy`: irá receber mensalmente, com o parâmetro `transfer_day` variando de 1 a 31.
