@@ -44,3 +44,13 @@ curl -X POST https://api.pagar.me/1/recipients \
 
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
+
+## Detalhes do recebimento
+
+Ao criar um recebedor, você pode definir com que frequência ele receberá os pagamentos.
+
+-s possibilidades são:
+
+- `daily`: irá receber diariamente
+- `weekly`: irá receber semanalmente, onde os dias variam de segunda a sexta, com o parâmetro `transfer_day` variando de 1 a 5.
+- `montlhy`: irá receber mensalmente, com o parâmetro `transfer_day` variando de 1 a 31.
