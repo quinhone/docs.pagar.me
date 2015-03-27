@@ -291,7 +291,7 @@ curl -X POST 'https://api.pagar.me/1/transactions' \
     -d 'split_rules[1][recipient_id]=re_ci7nheu0m0006n016o5sglg9t' \
     -d 'split_rules[1][charge_processing_fee]=true' \
     -d 'split_rules[1][liable]=false' \
-    -d 'split_rules[1][percentage]0=70'
+    -d 'split_rules[1][percentage]=70'
 ```
 
 ```ruby
