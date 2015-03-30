@@ -3604,7 +3604,7 @@ Objeto contendo os dados de um recebedor.
 | `transfer_enabled` | `Boolean` | Identifica se o recebedor está habilitado para receber automaticamente ou não |
 | `last_transfer` | `String` | Data da última transferência (ISODate) |
 | `transfer_interval` | `String` | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `montlhy` |
-| `transfer_day` | `Number` | Dia no qual o recebedor vai ser pago. Para cada `transfer_day`, existe uma faixa de pagamento possíveis. <br> `weekly`: 1 a 5 <br> `monthly`: 1 a 31 |
+| `transfer_day` | `Number` | Dia no qual o recebedor vai ser pago. Para cada `transfer_day`, existe uma faixa de pagamento possível. <br> `weekly`: 1 a 5, onde 1 é segunda-feira e 5 é sexta-feira <br> `monthly`: 1 a 31 |
 | `date_created` | `String` | Data de criação do recebedor (ISODate) |
 | `date_updated` | `String` | Data de atualização do recebedor |
 
