@@ -3434,8 +3434,7 @@ Cancela uma transferência previamente realizada.
 > GET https://api.pagar.me/1/zipcodes/:id
 
 ```shell
-curl -X GET https://api.pagar.me/1/zipcodes/01452001 \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+curl -X GET https://api.pagar.me/1/zipcodes/01452001
 ```
 
 ```ruby
@@ -3462,8 +3461,8 @@ Com essa rota você pode verificar os dados de um determinado CEP.
 ```
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+|:--:|:--:|:--:|:--:|
+| - | - | - | - |
 
 # Buscas avançadas
 
