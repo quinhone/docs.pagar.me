@@ -2548,16 +2548,16 @@ Através deste objeto você consegue visualizar vários dados da sua companhia, 
 | `subscriptions[cancel_after_failed_charges]` | `Boolean` | Caso as cobranças não sejam bem sucedidas, você pode optar por cancelar essa assinatura automaticamente |
 | `subscriptions[customer_can_cancel_subscription]` | `Boolean` | Habilita a opção do seu cliente cancelar uma assinatura |
 | `antifraud` | `Object` | Dados de configuração do seu antifraude. Dentro deste objeto, existem mais dois objetos, `test` e `live`, que contém as mesmas propriedades |
-| `antifraud[test / live][providers]` | `Array` | Contém objetos literais com propriedades identificando os dados do(s) antifraude(s) |
-| `antifraud[test / live][providers][0][id]` | `String` | Identificador do antifraude |
-| `antifraud[test / live][providers][0][enabled]` | `Boolean` | Propriedade que identifica se o antifraude está ativo ou não |
-| `antifraud[test / live][providers][0][name]` | `String` | Nome do antifraude |
-| `antifraud[test / live][providers][0][date_created]` | `String` | Data de ativação do antifraude (ISODate) |
-| `antifraud[test / live][providers][0][date_updated]` | `String` | Data de atualização do antifraude (ISODate) |
-| `antifraud[test / live][providers][0][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
-| `antifraud[test / live][enabled]` | `Boolean` | Propriedade que sinaliza se o antifraude está habilitado ou não nas transações do cliente |
-| `antifraud[test / live][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
-| `antifraud[test / live][rule]` | `String` | Regra para validar se o cliente/transação é confiável ou não |
+| `antifraud[test][providers]` | `Array` | Contém objetos literais com propriedades identificando os dados do(s) antifraude(s). <br> **OBS**: Você pode utilizar `live` ao invés de `test` |
+| `antifraud[test][providers][0][id]` | `String` | Identificador do antifraude |
+| `antifraud[test][providers][0][enabled]` | `Boolean` | Propriedade que identifica se o antifraude está ativo ou não |
+| `antifraud[test][providers][0][name]` | `String` | Nome do antifraude |
+| `antifraud[test][providers][0][date_created]` | `String` | Data de ativação do antifraude (ISODate) |
+| `antifraud[test][providers][0][date_updated]` | `String` | Data de atualização do antifraude (ISODate) |
+| `antifraud[test][providers][0][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
+| `antifraud[test][enabled]` | `Boolean` | Propriedade que sinaliza se o antifraude está habilitado ou não nas transações do cliente |
+| `antifraud[test][last_enabled_change]` | `String` | Dia da última alteração de status do antifraude (ISODate - padrão: `null`) |
+| `antifraud[test][rule]` | `String` | Regra para validar se o cliente/transação é confiável ou não |
 | `transaction_cost` | `Object` | Objeto com dados dos custos das transações por boleto e por cart
 ào de crédito |
 | `transaction_cost[credit_card]` | `Number` | Valor, em centavos, cobrado das transações feitas utilizando cartão de crédito |

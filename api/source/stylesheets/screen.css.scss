@@ -468,6 +468,16 @@ html, body {
     tr:nth-child(even)>td {
       background-color: lighten($main-bg,2.4%);
     }
+
+	tr {
+      td:nth-child(1) {
+	    white-space: nowrap;
+	  }
+	  
+	  td:nth-child(2) {
+	    white-space: nowrap;
+	  }
+	}
   }
 
   dt {
@@ -645,3 +655,4 @@ html, body {
     margin-top: $main-padding;
   }
 }
+
