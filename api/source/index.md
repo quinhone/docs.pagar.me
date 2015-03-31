@@ -265,6 +265,11 @@ curl -X GET https://api.pagar.me/1/transactions/194351 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
 ```
 
 ```php
@@ -329,6 +334,11 @@ curl -X GET https://api.pagar.me/1/transactions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transactions = PagarMe::Transaction.find_by({'customer[document_number]' => 36433809847}, 2, 10)
 ```
 
 ```php
@@ -477,6 +487,11 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+key = PagarMe::Transaction.generate_card_hash()
 ```
 
 ```php
