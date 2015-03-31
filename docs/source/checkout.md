@@ -39,7 +39,7 @@ transação pelo seu servidor. Nós cuidaremos de todo o resto! :)
 > sua chave de encriptação disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
-O código ao lado irá inserir o botão de pagar na sua página. Você pode alterar
+O código acima irá inserir o botão de pagar na sua página. Você pode alterar
 o texto do botão pela tag `data-button-text` e o valor da transação pela tag
 `data-amount`.
 
