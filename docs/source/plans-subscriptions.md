@@ -172,7 +172,7 @@ assinatura não será criada e um erro será retornado.
 #### Boleto bancário
 
 Ao criar uma assinatura de boleto bancário, será emitido um boleto com 7 dias
-de validade. A assinatura terá status `unpaid` até que o boleto bancários seja
+de validade. A assinatura terá status `unpaid` até que o boleto bancário seja
 pago. Ao detectarmos o pagamento, o status mudará para `paid`.
 
 Se o plano tiver um período de trial, o boleto será emitido com data de
@@ -252,7 +252,7 @@ Uma assinatura cancelada não pode ser cobrada novamente.
 
 ## Recebendo notificações de mudança de status (POSTback)
 
-Ao fornecer uma `postback_url` ao criar a assinatura, iremos notificar su
+Ao fornecer uma `postback_url` ao criar a assinatura, iremos notificar sua
 aplicação sempre que o status da assinatura mudar. Dessa forma, você pode
 cortar e reativar o serviço de um cliente baseado nas mudanças de status da
 assinatura.
