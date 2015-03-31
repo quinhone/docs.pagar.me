@@ -63,6 +63,7 @@ data-payment-methods | `credit_card,boleto` | Meios de pagamento disponíveis no
 data-card-brands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceitas pelo Checkout.
 data-max-installments | `1` | Número máximo de parcelas aceitas.
 data-ui-color | `#1a6ee1` | Cor primária da interface de Checkout.
+data-create-token | `true` | Habilita a geração do token para autorização da transação. <br> **OBS**: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor `false`, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.
 
 ## Capturando a transação
 
@@ -117,3 +118,4 @@ variável `boleto_url`.
 <aside class="notice">Após a finalização da transação em sua página, você terá
 05 minutos para capturá-la no seu servidor. Após esse período, a transação será
 recusada pelo motivo `capture_timeout`.</aside>
+
