@@ -1533,7 +1533,6 @@ subscription = PagarMe::Subscription.new({
 subscription.plan = plan
 
 subscription.create
-
 ```
 
 ```php
