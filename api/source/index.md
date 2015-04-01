@@ -1099,7 +1099,6 @@ plan = PagarMe::Plan.new({
 }
 
 plan.create
-
 ```
 
 ```php
