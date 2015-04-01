@@ -3465,6 +3465,74 @@ Objeto contendo os dados de um pagamento.
 | `type` | `String` | Tipo do pagamento. <br> **Valores possíveis**: `credit`, `refund` e `chargeback` |
 | `date_created` | `String` | Data da criação do objeto (ISODate) |
 
+## Retornando pagamentos
+
+> GET https://api.pagar.me/1/payables
+
+```shell
+curl -X GET https://api.pagar.me/1/payables \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'count=3' \
+-d 'page=1'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os pagamentos recebidos pela empresa.
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "payable",
+    "id": 1465,
+    "status": "paid",
+    "amount": 700,
+    "fee": 80,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}, {
+    "object": "payable",
+    "id": 1464,
+    "status": "paid",
+    "amount": 300,
+    "fee": 35,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbn0009wq16h3ybjgif",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}, {
+    "object": "payable",
+    "id": 1462,
+    "status": "paid",
+    "amount": 91000,
+    "fee": 0,
+    "installment": null,
+    "transaction_id": 191508,
+    "split_rule_id": "sr_ci7xru0nx005ckx16zjnvft7x",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T20:43:05.000Z"
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Códigos postais
 
 ## Consulta de CEP
