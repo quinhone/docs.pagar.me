@@ -980,6 +980,23 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 -d 'amount=1300'
 ```
 
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+installments_result = PagarMe::Transaction.calculate_installments({
+    amount: 10000,
+    interest_rate: 0
+})
+```
+
+```php
+```
+
+```cs
+```
+
 Usada para calcular o valor de cada uma das parcelas de uma compra.
 
 > JSON retornado (exemplo):
