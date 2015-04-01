@@ -1087,6 +1087,19 @@ curl -X POST https://api.pagar.me/1/plans \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.new({
+    :name => "Plano gold",
+    :trial_days => 5,
+    :days => 30,
+    :amount => 3000,
+}
+
+plan.create
+
 ```
 
 ```php
