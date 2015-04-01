@@ -834,6 +834,13 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
+
+transaction.refund
 ```
 
 ```php
