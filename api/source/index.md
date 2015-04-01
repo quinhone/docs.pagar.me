@@ -1085,7 +1085,7 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 
 Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
 
-## Retornando Planos
+## Retornando um plano
 
 > GET https://api.pagar.me/1/plans/:id
 
@@ -1103,7 +1103,7 @@ curl -X GET https://api.pagar.me/1/plans/13580 \
 ```cs
 ```
 
-Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
+Retorna um plano previamente criado.
 
 > JSON Retornado (Exemplo)
 
@@ -1129,6 +1129,85 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `:id`| Sim | - | id de identificação do plano previamente criado |
+
+## Retornando planos
+
+> GET https://api.pagar.me/1/plans
+
+```shell
+curl -X GET https://api.pagar.me/1/plans \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'page=1' \
+-d 'count=3'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os planos previamente criados. 
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "plan",
+    "id": 15553,
+    "amount": 31000,
+    "days": 30,
+    "name": "Plano Ouro",
+    "trial_days": 0,
+    "date_created": "2015-03-27T00:37:36.000Z",
+    "payment_methods": [
+        "boleto",
+        "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}, {
+    "object": "plan",
+    "id": 15495,
+    "amount": 79000,
+    "days": 30,
+    "name": "Cacique",
+    "trial_days": 0,
+    "date_created": "2015-03-26T14:37:10.000Z",
+    "payment_methods": [
+        "boleto",
+        "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}, {
+    "object": "plan",
+    "id": 15487,
+    "amount": 300000,
+    "days": 30,
+    "name": "TOP MBA 360",
+    "trial_days": 0,
+    "date_created": "2015-03-25T21:28:32.000Z",
+    "payment_methods": [
+        "boleto",
+        "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos de plano |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
 ## Atualizando Planos
 
