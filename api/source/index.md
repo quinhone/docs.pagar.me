@@ -3533,6 +3533,48 @@ Retorna todos os pagamentos recebidos pela empresa.
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
+## Retornando um pagamento
+
+> GET https://api.pagar.me/1/payables/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/payables/1465 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um pagamento recebido pela empresa.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "payable",
+    "id": 1465,
+    "status": "paid",
+    "amount": 700,
+    "fee": 80,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
 # Códigos postais
 
 ## Consulta de CEP
