@@ -3427,6 +3427,44 @@ Cancela uma transferência previamente realizada.
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
+# Pagamentos
+
+## Objeto `payable`
+
+> Objeto payable
+
+```json
+{
+    "object": "payable",
+    "id": 1465,
+    "status": "paid",
+    "amount": 700,
+    "fee": 80,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}
+```
+
+Objeto contendo os dados de um pagamento.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `payable` |
+| `id` | `Number` | Identificador do pagamento |
+| `status` | `String` | Estado atual do pagamento. <br> **Valores possíveis**: `waiting_funds`, `paid` |
+| `amount` | `Number` | Valor em centavos que foi pago |
+| `fee` | `Number` | Valor em centavos que foi cobrado (taxa) |
+| `installment` | `Number` | Número da parcela |
+| `transaction_id` | `Number` | Identificador da transação que gerou o pagamento |
+| `split_rule_id` | `String` | Identificador da regra de split do pagamento |
+| `payment_date` | `String` | Dia e hora do pagamento (ISODate) |
+| `type` | `String` | Tipo do pagamento. <br> **Valores possíveis**: `credit`, `refund` e `chargeback` |
+| `date_created` | `String` | Data da criação do objeto (ISODate) |
+
 # Códigos postais
 
 ## Consulta de CEP
