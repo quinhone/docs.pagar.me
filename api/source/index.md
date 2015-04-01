@@ -1153,6 +1153,11 @@ curl -X GET https://api.pagar.me/1/plans/13580 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
 ```
 
 ```php
