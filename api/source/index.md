@@ -1209,7 +1209,7 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-plans = PagarMe::Plan.find_by({}, 1, 3)
+plans = PagarMe::Plan.all()
 ```
 
 ```php
@@ -1296,6 +1296,7 @@ PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 plan = PagarMe::Plan.find_by_id("1234")
 
 plan.name = "plano silver"
+
 plan.save
 ```
 
@@ -1347,6 +1348,13 @@ curl -X DELETE https://api.pagar.me/1/plans/12784 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
+
+
 ```
 
 ```php
@@ -1505,6 +1513,27 @@ curl -X POST https://api.pagar.me/1/subscriptions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
+
+subscription = PagarMe::Subscription.new({
+    :payment_method => 'credit_card',
+    :card_number => "4901720080344448",
+    :card_holder_name => "Jose da Silva",
+    :card_expiration_month => "10",
+    :card_expiration_year => "15",
+    :card_cvv => "314",
+    :postback_url => "http://test.com/postback",
+    :customer => {
+        email: 'customer@pagar.me'
+}
+subscription.plan = plan
+
+subscription.create
+
 ```
 
 ```php
