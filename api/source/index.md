@@ -1547,7 +1547,7 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 | `customer[born_at]` | Não | Formato: `MM-DD-AAAA` Ex: 11-02-1985 | Data de nascimento do cliente |
 | `metadata` | Não | - | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
 
-## Retornando Assinaturas
+## Retornando uma assinatura
 
 > GET https://api.pagar.me/1/subscriptions/:id
 
@@ -1651,6 +1651,199 @@ Essa rota é utilizada para retornar os dados de uma determinada assinatura.
     },
     "metadata": null
 }
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+## Retornando assinaturas
+
+> GET https://api.pagar.me/1/subscriptions
+
+```shell
+curl -X GET https://api.pagar.me/1/subscriptions \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'page=1' \
+-d 'count=2'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Essa rota é utilizada para retornar os dados de todas assinaturas.
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "subscription",
+    "plan": {
+        "object": "plan",
+        "id": 12830,
+        "amount": 1300,
+        "days": 15,
+        "name": "Plano Prata",
+        "trial_days": 0,
+        "date_created": "2015-03-06T17:25:25.000Z",
+        "payment_methods": [
+            "boleto",
+            "credit_card"
+        ],
+        "color": null,
+        "charges": null,
+        "installments": 1
+    },
+    "id": 15186,
+    "current_transaction": {
+        "object": "transaction",
+        "status": "paid",
+        "refuse_reason": null,
+        "status_reason": "acquirer",
+        "acquirer_response_code": "00",
+        "acquirer_name": "development",
+        "authorization_code": "934740",
+        "soft_descriptor": null,
+        "tid": "1427840452918",
+        "nsu": "1427840452918",
+        "date_created": "2015-03-31T22:20:52.000Z",
+        "date_updated": "2015-03-31T22:20:53.000Z",
+        "amount": 62000,
+        "installments": 1,
+        "id": 191522,
+        "cost": 980,
+        "card_holder_name": "API CUSTOMER",
+        "card_last_digits": "8048",
+        "card_first_digits": "401872",
+        "card_brand": "visa",
+        "postback_url": null,
+        "payment_method": "credit_card",
+        "antifraud_score": null,
+        "boleto_url": null,
+        "boleto_barcode": null,
+        "boleto_expiration_date": null,
+        "referer": "api_key",
+        "ip": "189.8.94.42",
+        "subscription_id": 15186,
+        "metadata": {}
+    },
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "card_brand": "visa",
+    "card_last_digits": "8048",
+    "current_period_start": "2015-03-31T22:20:53.320Z",
+    "current_period_end": "2015-04-15T22:20:53.320Z",
+    "charges": 2,
+    "status": "paid",
+    "date_created": "2015-03-13T20:56:31.000Z",
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": {
+        "object": "card",
+        "id": "card_ci6y37hc00030a416wrxsmzyi",
+        "date_created": "2015-03-06T21:21:25.000Z",
+        "date_updated": "2015-03-06T21:21:26.000Z",
+        "brand": "visa",
+        "holder_name": "API CUSTOMER",
+        "first_digits": "401872",
+        "last_digits": "8048",
+        "fingerprint": "Jl9oOIiDjAjR",
+        "valid": true
+    },
+    "metadata": null
+}, {
+    "object": "subscription",
+    "plan": {
+        "object": "plan",
+        "id": 14335,
+        "amount": 15590,
+        "days": 180,
+        "name": "Plano Semestral",
+        "trial_days": 0,
+        "date_created": "2015-03-13T21:04:18.000Z",
+        "payment_methods": [
+            "boleto",
+            "credit_card"
+        ],
+        "color": null,
+        "charges": null,
+        "installments": 1
+    },
+    "id": 15185,
+    "current_transaction": {
+        "object": "transaction",
+        "status": "waiting_payment",
+        "refuse_reason": null,
+        "status_reason": "acquirer",
+        "acquirer_response_code": null,
+        "acquirer_name": "development",
+        "authorization_code": null,
+        "soft_descriptor": null,
+        "tid": null,
+        "nsu": null,
+        "date_created": "2015-03-13T21:05:07.000Z",
+        "date_updated": "2015-03-13T21:05:07.000Z",
+        "amount": 3630,
+        "installments": 1,
+        "id": 186443,
+        "cost": 0,
+        "card_holder_name": null,
+        "card_last_digits": null,
+        "card_first_digits": null,
+        "card_brand": null,
+        "postback_url": null,
+        "payment_method": "boleto",
+        "antifraud_score": null,
+        "boleto_url": "https://pagar.me",
+        "boleto_barcode": "1234 5678",
+        "boleto_expiration_date": "2015-03-20T21:05:07.000Z",
+        "referer": null,
+        "ip": null,
+        "subscription_id": 15185,
+        "metadata": {}
+    },
+    "postback_url": null,
+    "payment_method": "boleto",
+    "card_brand": null,
+    "card_last_digits": null,
+    "current_period_start": null,
+    "current_period_end": null,
+    "charges": 4,
+    "status": "unpaid",
+    "date_created": "2015-03-13T20:54:30.000Z",
+    "phone": null,
+    "address": null,
+    "customer": {
+        "object": "customer",
+        "document_number": null,
+        "document_type": "cpf",
+        "name": null,
+        "email": "api@test.com",
+        "born_at": null,
+        "gender": null,
+        "date_created": "2015-03-04T18:40:03.000Z",
+        "id": 14437
+    },
+    "card": null,
+    "metadata": null
+}]
 ```
 
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
