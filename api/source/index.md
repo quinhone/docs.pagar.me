@@ -1143,7 +1143,7 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 
 Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
 
-## Retornando Planos
+## Retornando um plano
 
 > GET https://api.pagar.me/1/plans/:id
 
@@ -1161,7 +1161,7 @@ curl -X GET https://api.pagar.me/1/plans/13580 \
 ```cs
 ```
 
-Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
+Retorna um plano previamente criado.
 
 > JSON Retornado (Exemplo)
 
@@ -1187,6 +1187,85 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `:id`| Sim | - | id de identificação do plano previamente criado |
+
+## Retornando planos
+
+> GET https://api.pagar.me/1/plans
+
+```shell
+curl -X GET https://api.pagar.me/1/plans \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'page=1' \
+-d 'count=3'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os planos previamente criados. 
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "plan",
+    "id": 15553,
+    "amount": 31000,
+    "days": 30,
+    "name": "Plano Ouro",
+    "trial_days": 0,
+    "date_created": "2015-03-27T00:37:36.000Z",
+    "payment_methods": [
+        "boleto",
+        "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}, {
+    "object": "plan",
+    "id": 15495,
+    "amount": 79000,
+    "days": 30,
+    "name": "Cacique",
+    "trial_days": 0,
+    "date_created": "2015-03-26T14:37:10.000Z",
+    "payment_methods": [
+        "boleto",
+        "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}, {
+    "object": "plan",
+    "id": 15487,
+    "amount": 300000,
+    "days": 30,
+    "name": "TOP MBA 360",
+    "trial_days": 0,
+    "date_created": "2015-03-25T21:28:32.000Z",
+    "payment_methods": [
+        "boleto",
+        "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 1
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos de plano |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
 ## Atualizando Planos
 
@@ -3478,6 +3557,154 @@ Cancela uma transferência previamente realizada.
         "date_created": "2015-03-19T15:35:40.000Z"
     },
     "date_created": "2015-03-20T15:44:14.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+# Pagamentos
+
+## Objeto `payable`
+
+> Objeto payable
+
+```json
+{
+    "object": "payable",
+    "id": 1465,
+    "status": "paid",
+    "amount": 700,
+    "fee": 80,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}
+```
+
+Objeto contendo os dados de um pagamento.
+
+| Propriedade | Tipo | Descrição |
+|:--|:--:|:--|
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `payable` |
+| `id` | `Number` | Identificador do pagamento |
+| `status` | `String` | Estado atual do pagamento. <br> **Valores possíveis**: `waiting_funds`, `paid` |
+| `amount` | `Number` | Valor em centavos que foi pago |
+| `fee` | `Number` | Valor em centavos que foi cobrado (taxa) |
+| `installment` | `Number` | Número da parcela |
+| `transaction_id` | `Number` | Identificador da transação que gerou o pagamento |
+| `split_rule_id` | `String` | Identificador da regra de split do pagamento |
+| `payment_date` | `String` | Dia e hora do pagamento (ISODate) |
+| `type` | `String` | Tipo do pagamento. <br> **Valores possíveis**: `credit`, `refund` e `chargeback` |
+| `date_created` | `String` | Data da criação do objeto (ISODate) |
+
+## Retornando pagamentos
+
+> GET https://api.pagar.me/1/payables
+
+```shell
+curl -X GET https://api.pagar.me/1/payables \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'count=3' \
+-d 'page=1'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os pagamentos recebidos pela empresa.
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "payable",
+    "id": 1465,
+    "status": "paid",
+    "amount": 700,
+    "fee": 80,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}, {
+    "object": "payable",
+    "id": 1464,
+    "status": "paid",
+    "amount": 300,
+    "fee": 35,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbn0009wq16h3ybjgif",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
+}, {
+    "object": "payable",
+    "id": 1462,
+    "status": "paid",
+    "amount": 91000,
+    "fee": 0,
+    "installment": null,
+    "transaction_id": 191508,
+    "split_rule_id": "sr_ci7xru0nx005ckx16zjnvft7x",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T20:43:05.000Z"
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+
+## Retornando um pagamento
+
+> GET https://api.pagar.me/1/payables/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/payables/1465 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um pagamento recebido pela empresa.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "payable",
+    "id": 1465,
+    "status": "paid",
+    "amount": 700,
+    "fee": 80,
+    "installment": null,
+    "transaction_id": 191517,
+    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
+    "payment_date": "2015-03-31T03:00:00.000Z",
+    "type": null,
+    "date_created": "2015-03-31T22:16:21.000Z"
 }
 ```
 
