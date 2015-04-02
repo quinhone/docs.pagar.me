@@ -1209,7 +1209,7 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-plans = PagarMe::Plan.all()
+plans = PagarMe::Plan.all(1, 3)
 ```
 
 ```php
@@ -1778,6 +1778,11 @@ curl -X GET https://api.pagar.me/1/subscriptions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscriptions = PagarMe::Subscription.all(1, 2)
 ```
 
 ```php
@@ -1969,6 +1974,15 @@ curl -X PUT https://api.pagar.me/1/subscriptions/14858 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscription = PagarMe::Subscription.find_by_id("1234")
+
+subscription.payment_method = 'boleto'
+
+subscription.save
 ```
 
 ```php
