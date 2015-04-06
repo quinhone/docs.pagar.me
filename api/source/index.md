@@ -466,6 +466,10 @@ Retorna um `Array` contendo objetos de transações, ordenadas a partir da trans
 | `count` | Não | `10` | Retorna `n` objetos de transação |
 | `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
+**OBS**: Você pode passar qualquer propriedade e valor presentes nos objetos `transaction` como parâmetro de busca/filtro nesta rota.
+
+**Ex**: `card_last_digits=4242`
+
 ## Gerando uma nova chave para encriptação do `card_hash`
 
 > GET https://api.pagar.me/1/transactions/card_hash_key
