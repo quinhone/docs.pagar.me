@@ -19,6 +19,8 @@ Em um recebedor estará configurado as informações da sua conta bancária, se 
 
 Para criar um recebedor, você deve ter previamente o identificador de uma conta bancária salva no nosso sistema (`bank_account_id`), ou as informações da conta bancária do futuro recebedor.
 
+**ps**: Veja como criar uma conta bancária [aqui](https://pagar.me/docs/api/#criando-uma-conta-bancria).
+
 Usando um `bank_account_id`, a sua requisição para criar um recebedor fica da seguinte forma:
 
 ```shell
