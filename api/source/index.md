@@ -2286,7 +2286,7 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
 > POST https://api.pagar.me/1/cards
 
 ```shell
-curl -X  POST https://api.pagar.me/1/plans/13580 \
+curl -X  POST https://api.pagar.me/1/cards \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
 -d 'card_number=4018720572598048' \
 -d 'holder_name=API Customer' \
