@@ -2325,10 +2325,11 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `card_number` | Sim | - | Número do portador do cartão |
-| `card_expiration_date` ou `expiration_date` | Sim | - | Data de expiração do cartão |
-| `holder_name` | Sim | - | Nome no cartão do portador |
+| `card_number` | Não | - | Número do portador do cartão |
+| `card_expiration_date` ou `expiration_date` | Não | - | Data de expiração do cartão |
+| `holder_name` | Não | - | Nome no cartão do portador |
 | `customer_id` | Não | - | Você pode usar o `id` do objeto `customer` para associar mais informações do cliente ao `card` a ser gerado |
+| `card_hash` | Não | - | Você também pode criar um objeto `card` usando os dados do cartão criptografados no `card_hash` |
 
 ## Retornando um cartão salvo
 
