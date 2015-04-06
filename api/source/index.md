@@ -337,7 +337,7 @@ curl -X GET https://api.pagar.me/1/transactions \
 ```cs
 ```
 
-Retorna um `Array` contendo objetos de transações realizadas.
+Retorna um `Array` contendo objetos de transações, ordenadas a partir da transação realizada mais recentemente.
 
 > JSON Retornado (exemplo):
 
