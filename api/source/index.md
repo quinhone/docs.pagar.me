@@ -463,7 +463,6 @@ Retorna um `Array` contendo objetos de transações realizadas.
 | Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-| `:id` | Sim | - | id da transação previamente criada |
 | `count` | Não | `10` | Retorna `n` objetos de transação |
 | `page` | Não | `1` | Útil para implementação de uma paginação de resultados |
 
