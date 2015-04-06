@@ -2401,7 +2401,7 @@ Com este objeto, você pode obter informações gerais sobre o saldo da sua cont
 
 | Propriedade | Tipo | Descrição |
 |:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `balance` |
 | `waiting_funds` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem a ser pago pelo seu cliente |
 | `available` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível para receber |
 | `transferred` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta (quanto já recebeu efetivamente) |
