@@ -2101,6 +2101,13 @@ curl -X POST https://api.pagar.me/1/subscriptions/14858/cancel \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscription = PagarMe::Subscription.find_by_id("1234")
+
+subscription.cancel
 ```
 
 ```php
