@@ -2486,6 +2486,11 @@ curl -X  GET https://api.pagar.me/1/cards/card_ci6y37h16wrxsmzyi \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+card = PagarMe::Card.find_by_id("1234")
 ```
 
 ```php
