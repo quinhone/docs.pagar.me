@@ -265,6 +265,11 @@ curl -X GET https://api.pagar.me/1/transactions/194351 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
 ```
 
 ```php
@@ -329,6 +334,11 @@ curl -X GET https://api.pagar.me/1/transactions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transactions = PagarMe::Transaction.find_by({'customer[document_number]' => 36433809847}, 2, 10)
 ```
 
 ```php
@@ -480,6 +490,11 @@ curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+key = PagarMe::Transaction.generate_card_hash()
 ```
 
 ```php
@@ -828,6 +843,13 @@ curl -X POST https://api.pagar.me/1/transactions/314578/capture \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
+
+transaction.capture({:amount => 1000})
 ```
 
 ```php
@@ -917,6 +939,13 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
+
+transaction.refund
 ```
 
 ```php
@@ -1056,6 +1085,23 @@ curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
 -d 'amount=1300'
 ```
 
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+installments_result = PagarMe::Transaction.calculate_installments({
+    amount: 10000,
+    interest_rate: 0
+})
+```
+
+```php
+```
+
+```cs
+```
+
 Usada para calcular o valor de cada uma das parcelas de uma compra.
 
 > JSON retornado (exemplo):
@@ -1146,6 +1192,18 @@ curl -X POST https://api.pagar.me/1/plans \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.new({
+    :name => "Plano gold",
+    :trial_days => 5,
+    :days => 30,
+    :amount => 3000,
+}
+
+plan.create
 ```
 
 ```php
@@ -1200,6 +1258,11 @@ curl -X GET https://api.pagar.me/1/plans/13580 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
 ```
 
 ```php
@@ -1247,6 +1310,11 @@ curl -X GET https://api.pagar.me/1/plans \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plans = PagarMe::Plan.all(1, 3)
 ```
 
 ```php
@@ -1326,6 +1394,15 @@ curl -X  PUT https://api.pagar.me/1/plans/13580 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
+
+plan.name = "plano silver"
+
+plan.save
 ```
 
 ```php
@@ -1376,6 +1453,13 @@ curl -X DELETE https://api.pagar.me/1/plans/12784 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
+
+
 ```
 
 ```php
@@ -1534,6 +1618,26 @@ curl -X POST https://api.pagar.me/1/subscriptions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("1234")
+
+subscription = PagarMe::Subscription.new({
+    :payment_method => 'credit_card',
+    :card_number => "4901720080344448",
+    :card_holder_name => "Jose da Silva",
+    :card_expiration_month => "10",
+    :card_expiration_year => "15",
+    :card_cvv => "314",
+    :postback_url => "http://test.com/postback",
+    :customer => {
+        email: 'customer@pagar.me'
+}
+subscription.plan = plan
+
+subscription.create
 ```
 
 ```php
@@ -1662,6 +1766,11 @@ curl -X GET https://api.pagar.me/1/subscriptions/14858 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscription = PagarMe::Subscription.find_by_id("1234")
 ```
 
 ```php
@@ -1774,6 +1883,11 @@ curl -X GET https://api.pagar.me/1/subscriptions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscriptions = PagarMe::Subscription.all(1, 2)
 ```
 
 ```php
@@ -1965,6 +2079,15 @@ curl -X PUT https://api.pagar.me/1/subscriptions/14858 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscription = PagarMe::Subscription.find_by_id("1234")
+
+subscription.payment_method = 'boleto'
+
+subscription.save
 ```
 
 ```php
@@ -2083,6 +2206,13 @@ curl -X POST https://api.pagar.me/1/subscriptions/14858/cancel \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+subscription = PagarMe::Subscription.find_by_id("1234")
+
+subscription.cancel
 ```
 
 ```php
@@ -2193,6 +2323,9 @@ curl -X GET https://api.pagar.me/1/subscriptions/14858/transactions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 ```
 
 ```php
@@ -2399,6 +2532,19 @@ curl -X  POST https://api.pagar.me/1/cards \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+card = PagarMe::Card.new({
+	:card_number => '4111111111111111',
+	:card_holder_name => 'Jose da Silva',
+	:card_expiration_month => '10',
+	:card_expiration_year => '15',
+	:card_cvv => '314'
+}.merge(params))
+
+card.create
 ```
 
 ```php
@@ -2446,6 +2592,11 @@ curl -X  GET https://api.pagar.me/1/cards/card_ci6y37h16wrxsmzyi \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+card = PagarMe::Card.find_by_id("1234")
 ```
 
 ```php
@@ -2845,7 +2996,7 @@ Contém os dados de uma conta bancária para futuros pagamentos.
 
 ## Criando uma conta bancária
 
-> POST https://api.pagar.me/1/company/bank_accounts
+> POST https://api.pagar.me/1/bank_accounts
 
 ```shell
 curl -X POST https://api.pagar.me/1/bank_accounts \
@@ -2860,6 +3011,21 @@ curl -X POST https://api.pagar.me/1/bank_accounts \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+bank_account = PagarMe::BankAccount.new({
+    :bank_code => '237',
+    :agencia => '1935',
+    :agencia_dv => '9',
+    :conta => '23398',
+    :conta_dv => '9',
+    :legal_name => 'foo bar loem',
+    :document_number => '111.111.111-11'
+}.merge(params))
+
+bank_account.create
 ```
 
 ```php
@@ -2902,7 +3068,7 @@ Cria uma conta bancária para futuros pagamentos.
 
 ## Retornando uma conta bancária
 
-> GET https://api.pagar.me/1/company/bank_accounts/:id
+> GET https://api.pagar.me/1/bank_accounts/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
@@ -2910,6 +3076,11 @@ curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+bank_account = PagarMe::BankAccount.find_by_id("1234")
 ```
 
 ```php
@@ -2955,6 +3126,11 @@ curl -X GET https://api.pagar.me/1/bank_accounts \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+bank_accounts = PagarMe::BankAccount.find_by({ bank_code: '237' })
 ```
 
 ```php
