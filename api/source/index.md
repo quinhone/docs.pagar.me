@@ -2218,6 +2218,9 @@ curl -X GET https://api.pagar.me/1/subscriptions/14858/transactions \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 ```
 
 ```php
@@ -2424,6 +2427,19 @@ curl -X  POST https://api.pagar.me/1/plans/13580 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+card = PagarMe::Card.new({
+	:card_number => '4111111111111111',
+	:card_holder_name => 'Jose da Silva',
+	:card_expiration_month => '10',
+	:card_expiration_year => '15',
+	:card_cvv => '314'
+}.merge(params))
+
+card.create
 ```
 
 ```php
