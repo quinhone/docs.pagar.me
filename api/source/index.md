@@ -600,6 +600,108 @@ Retorna os dados de uma regra de divisão de uma determinada transaçào.
 | `:transaction_id` | Sim | - | Identificador da transação previamente criada |
 | `id` | Sim | - | Identificador da regra de divisão |
 
+## Retornando pagamentos da transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/payables
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/192669/payables \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um array com objetos `payable` informando os dados dos pagamentos referentes a uma transação.
+
+> JSON Retornado (exemplo):
+
+```json
+[{
+    "object": "payable",
+    "id": 1485,
+    "status": "paid",
+    "amount": 39000,
+    "fee": 115,
+    "installment": null,
+    "transaction_id": 192669,
+    "split_rule_id": "sr_ci87hce8o00083016bkniqems",
+    "payment_date": "2015-04-07T03:00:00.000Z",
+    "type": "credit",
+    "payment_method": "boleto",
+    "date_created": "2015-04-07T15:47:48.000Z"
+}, {
+    "object": "payable",
+    "id": 1486,
+    "status": "paid",
+    "amount": 91000,
+    "fee": 0,
+    "installment": null,
+    "transaction_id": 192669,
+    "split_rule_id": "sr_ci87hce8o00093016fin8p6ll",
+    "payment_date": "2015-04-07T03:00:00.000Z",
+    "type": "credit",
+    "payment_method": "boleto",
+    "date_created": "2015-04-07T15:47:48.000Z"
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | Identificador da transação previamente criada |
+
+## Retornando um pagamento da transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/payables/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/192669/payables/1485 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um objeto `payable` informando os dados de um pagamento referente a uma determinada transação.
+
+> JSON Retornado (exemplo):
+
+```json
+{
+    "object": "payable",
+    "id": 1485,
+    "status": "paid",
+    "amount": 39000,
+    "fee": 115,
+    "installment": null,
+    "transaction_id": 192669,
+    "split_rule_id": "sr_ci87hce8o00083016bkniqems",
+    "payment_date": "2015-04-07T03:00:00.000Z",
+    "type": "credit",
+    "payment_method": "boleto",
+    "date_created": "2015-04-07T15:47:48.000Z"
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `:transaction_id` | Sim | - | Identificador da transação previamente criada |
+| `:id` | Sim | - | Identificador do objeto `payable` |
+
 ## Retorna uma análise antifraude
 
 > GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
