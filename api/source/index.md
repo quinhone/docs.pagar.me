@@ -2890,7 +2890,7 @@ Contém os dados de uma conta bancária para futuros pagamentos.
 
 ## Criando uma conta bancária
 
-> POST https://api.pagar.me/1/company/bank_accounts
+> POST https://api.pagar.me/1/bank_accounts
 
 ```shell
 curl -X POST https://api.pagar.me/1/bank_accounts \
@@ -2962,7 +2962,7 @@ Cria uma conta bancária para futuros pagamentos.
 
 ## Retornando uma conta bancária
 
-> GET https://api.pagar.me/1/company/bank_accounts/:id
+> GET https://api.pagar.me/1/bank_accounts/:id
 
 ```shell
 curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
