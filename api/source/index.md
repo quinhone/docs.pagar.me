@@ -2201,7 +2201,7 @@ curl -X GET https://api.pagar.me/1/subscriptions/14858/transactions \
 ```cs
 ```
 
-Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/cancel`
+Retorna um array de objetos `transaction` contendo as transações feitas a partir de uma assinatura.
 
 > JSON Retornado (Exemplo)
 
