@@ -2970,6 +2970,11 @@ curl -X GET https://api.pagar.me/1/bank_accounts/4840 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+bank_account = PagarMe::BankAccount.find_by_id("1234")
 ```
 
 ```php
