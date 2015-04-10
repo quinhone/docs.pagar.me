@@ -3049,6 +3049,96 @@ Através da rota `/customers/:id` você recebe todos os dados do seu cliente, pr
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
+## Retornando dados de clientes
+
+> GET https://api.pagar.me/1/customers
+
+```shell
+curl -X GET https://api.pagar.me/1/customers \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'page=1' \
+-d 'count=2'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os clientes cadastrados em sua conta.
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+    "object": "customer",
+    "document_number": "18152564000105",
+    "document_type": "cnpj",
+    "name": "nome do cliente",
+    "born_at": "1970-01-01T03:38:41.988Z",
+    "gender": "M",
+    "date_created": "2015-04-10T22:04:18.000Z",
+    "id": 15132,
+    "phones": [{
+        "object": "phone",
+        "ddi": "55",
+        "ddd": "11",
+        "number": "999887766",
+        "id": 13746
+    }],
+    "addresses": [{
+        "object": "address",
+        "street": "rua qualquer",
+        "complementary": "apto",
+        "street_number": "13",
+        "neighborhood": "pinheiros",
+        "city": "sao paulo",
+        "state": "SP",
+        "zipcode": "05444040",
+        "country": "Brasil",
+        "id": 13958
+    }]
+}, {
+    "object": "customer",
+    "document_number": "18152564000105",
+    "document_type": "cnpj",
+    "email": "eee@email.com",
+    "born_at": "1970-01-01T03:38:41.988Z",
+    "gender": "M",
+    "date_created": "2015-04-10T22:03:49.000Z",
+    "id": 15131,
+    "phones": [{
+        "object": "phone",
+        "ddi": "55",
+        "ddd": "11",
+        "number": "999887766",
+        "id": 13745
+    }],
+    "addresses": [{
+        "object": "address",
+        "street": "rua qualquer",
+        "complementary": "apto",
+        "street_number": "13",
+        "neighborhood": "pinheiros",
+        "city": "sao paulo",
+        "state": "SP",
+        "zipcode": "05444040",
+        "country": "Brasil",
+        "id": 13957
+    }]
+}]
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `count` | Não | `10` | Retorna `n` objetos `customer` |
+| `page` | Não | `1` | Útil para implementação de uma paginação de resultados | 
+
 # Contas bancárias
 
 ## Objeto `bank_account`
