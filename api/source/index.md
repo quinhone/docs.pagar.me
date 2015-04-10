@@ -2899,12 +2899,103 @@ Com a rota `/balance/operations/:id` você poderá ver uma operação específic
 
 # Clientes
 
+## Criando um cliente
+
+> POST https://api.pagar.me/1/customers/:id
+
+```shell
+curl -X POST https://api.pagar.me/1/customers \
+-d "api_key=ak_test_T12378asdgyug234DoGKgN234897dsf98" \
+-d "document_number=18152564000105" \
+-d "name=nome do cliente" \
+-d "email=eee@email.com" \
+-d "born_at=13121988" \
+-d "gender=M" \
+-d "address[street]=rua qualquer" \
+-d "address[complementary]=apto" \
+-d "address[street_number]=13" \
+-d "address[neighborhood]=pinheiros" \
+-d "address[city]=sao paulo" \
+-d "address[state]=SP" \
+-d "address[zipcode]=05444040" \
+-d "address[country]=Brasil" \
+-d "phone[ddi]=55" \
+-d "phone[ddd]=11" \
+-d "phone[number]=999887766"
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Através dessa rota você pode salvar os dados de um cliente no nosso banco de dados.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "customer",
+    "document_number": "18152564000105",
+    "document_type": "cnpj",
+    "name": "nome do cliente",
+    "email": "eee@email.com",
+    "born_at": "1970-01-01T03:38:41.988Z",
+    "gender": "M",
+    "date_created": "2015-04-10T18:38:19.000Z",
+    "id": 253591,
+    "phones": [{
+        "object": "phone",
+        "ddi": "55",
+        "ddd": "11",
+        "number": "999887766",
+        "id": 148590
+    }],
+    "addresses": [{
+        "object": "address",
+        "street": "rua qualquer",
+        "complementary": "apto",
+        "street_number": "13",
+        "neighborhood": "pinheiros",
+        "city": "sao paulo",
+        "state": "SP",
+        "zipcode": "05444040",
+        "country": "Brasil",
+        "id": 153809
+    }]
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `document_number` | Não | - | Número do CPF ou CNPJ do cliente |
+| `name` | Sim | - | Nome ou razão social do comprador |
+| `email` | Sim | - | E-mail do comprador |
+| `born_at` | Não | - | Data de nascimento |
+| `gender` | Não | - | Gênero |
+| `address[street]` | Sim | - | Nome da rua |
+| `address[complementary]` | Não | - | Complemento do endereço |
+| `address[street_number]` | Sim | - | Número do imóvel |
+| `address[neighborhood]` | Sim | - | Bairro |
+| `address[city]` | Não | - | Cidade |
+| `address[state]` | Não | - | Estado |
+| `address[zipcode]` | Sim | - | Código postal (CEP) |
+| `address[country]` | Não | - | País |
+| `phone[ddi]` | Não | - | DDI (Discagem Direta Internacional) |
+| `phone[ddd]` | Sim | - | DDD (Discagem Direta à Distância) |
+| `phone[number]` | Sim | - | Número do telefone (máximo de 9 dígitos, apenas números) |
+
 ## Retornando dados do cliente
 
 > GET https://api.pagar.me/1/customers/:id
 
 ```shell
-curl -X  GET https://api.pagar.me/1/customers/11222 \
+curl -X GET https://api.pagar.me/1/customers/11222 \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
 ```
 
