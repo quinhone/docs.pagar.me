@@ -1611,10 +1611,12 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 
 ```shell
 curl -X POST https://api.pagar.me/1/subscriptions \
+-d 'api_key=ak_test_TSgC3nrsdidfHAas24shu43HUhurw9' \
 -d 'customer[email]=api@test.com' \
--d 'api_key=ak_test_KGXIjQ4GicOa2BLGZrDRTR5qNQxDWo' \
 -d 'plan_id=12783' \
--d 'card_id=card_ci234fx8rr649rt16rtb11132'
+-d 'card_id=card_ci234fx8rr649rt16rtb11132' \
+-d 'postback_url=http://requestb.in/zyn5obzy' \
+-d 'payment_method=boleto'
 ```
 
 ```ruby
@@ -1622,10 +1624,10 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-plan = PagarMe::Plan.find_by_id("1234")
+plan = PagarMe::Plan.find_by_id("12783")
 
 subscription = PagarMe::Subscription.new({
-    :payment_method => 'credit_card',
+    :payment_method => 'boleto',
     :card_number => "4901720080344448",
     :card_holder_name => "Jose da Silva",
     :card_expiration_month => "10",
@@ -1633,7 +1635,7 @@ subscription = PagarMe::Subscription.new({
     :card_cvv => "314",
     :postback_url => "http://test.com/postback",
     :customer => {
-        email: 'customer@pagar.me'
+        email: 'api@test.com'
 }
 subscription.plan = plan
 
@@ -1672,42 +1674,46 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
         "charges": null,
         "installments": 1
     },
-    "id": 14858,
+    "id": 16892,
     "current_transaction": {
         "object": "transaction",
-        "status": "paid",
+        "status": "waiting_payment",
         "refuse_reason": null,
         "status_reason": "acquirer",
-        "acquirer_response_code": "00",
+        "acquirer_response_code": null,
         "acquirer_name": "development",
-        "authorization_code": "11344",
+        "authorization_code": null,
         "soft_descriptor": null,
-        "tid": "1425494517057",
-        "nsu": "1425494517057",
-        "date_created": "2015-03-04T18:41:56.000Z",
-        "date_updated": "2015-03-04T18:41:57.000Z",
+        "tid": null,
+        "nsu": null,
+        "date_created": "2015-04-14T20:17:18.000Z",
+        "date_updated": "2015-04-14T20:17:19.000Z",
         "amount": 31000,
         "installments": 1,
-        "id": 185122,
-        "cost": 515,
+        "id": 194402,
+        "cost": 0,
+        "card_holder_name": null,
+        "card_last_digits": null,
+        "card_first_digits": null,
+        "card_brand": null,
         "postback_url": null,
-        "payment_method": "credit_card",
+        "payment_method": "boleto",
         "antifraud_score": null,
-        "boleto_url": null,
-        "boleto_barcode": null,
-        "boleto_expiration_date": null,
+        "boleto_url": "https://pagar.me",
+        "boleto_barcode": "1234 5678",
+        "boleto_expiration_date": "2015-04-21T20:17:18.000Z",
         "referer": "api_key",
-        "ip": "189.8.94.42",
-        "subscription_id": 14858,
+        "ip": "179.185.132.108",
+        "subscription_id": 16892,
         "metadata": {}
     },
-    "postback_url": null,
-    "payment_method": "credit_card",
-    "current_period_start": "2015-03-04T18:41:56.746Z",
-    "current_period_end": "2015-04-03T18:41:56.746Z",
+    "postback_url": "http://requestb.in/zyn5obzy",
+    "payment_method": "boleto",
+    "current_period_start": null,
+    "current_period_end": null,
     "charges": 0,
-    "status": "paid",
-    "date_created": "2015-03-04T18:41:57.000Z",
+    "status": "unpaid",
+    "date_created": "2015-04-14T20:17:19.000Z",
     "phone": null,
     "address": null,
     "customer": {
@@ -1721,18 +1727,7 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
         "date_created": "2015-03-04T18:40:03.000Z",
         "id": 14437
     },
-    "card": {
-        "object": "card",
-        "id": "card_ci6v2mom200br5616ln4vg10q",
-        "date_created": "2015-03-04T18:41:56.000Z",
-        "date_updated": "2015-03-04T18:41:57.000Z",
-        "brand": "mastercard",
-        "holder_name": "Api Customer",
-        "first_digits": "548045",
-        "last_digits": "3123",
-        "fingerprint": "HSiLJan2nqwn",
-        "valid": true
-    },
+    "card": null,
     "metadata": null
 }
 ```
@@ -1742,6 +1737,7 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `plan_id` | Sim | - | id do plano a ser associado a uma assinatura |
 | `card_hash` | Sim\* | - | Dados encriptados do cartão do cliente. Você também pode usar o `card_id` ao invés do `card_hash` |
+| `postback_url` | Não | - | URL onde nosso sistema irá enviar requisições informando a cada alteração de status da assinatura em questão |
 | `customer[email]` | Sim | - | Email do cliente |
 | `customer[name]` |  | - | Nome completo ou razão social do cliente que está realizando a transação |
 | `customer[document_number]` | Não | - | CPF ou CNPJ do cliente, sem separadores |
