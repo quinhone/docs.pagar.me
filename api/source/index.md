@@ -505,7 +505,7 @@ key = PagarMe::Transaction.generate_card_hash()
 
 Caso você queira/precise criar o `card_hash` manualmente, essa rota deverá ser utilizada para obtenção de uma chave pública de encriptação dos dados do cartão de seu cliente.
 
-Saiba mais sobre como criar um `card_hash` [aqui]().
+Saiba mais sobre como criar um `card_hash` [aqui](https://pagar.me/docs/capturing-card-data/#capturando-os-dados-em-uma-pgina-web).
 
 > JSON Retornado (Exemplo)
 
@@ -4536,3 +4536,7 @@ id: 16859
 ```
 
 <a href="http://puu.sh/hdPWZ/fe35cb7980.png" target="_blank">Exemplo de retorno via POSTBack</a>
+
+# Erros
+
+
