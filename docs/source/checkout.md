@@ -84,7 +84,7 @@ require 'pagarme'
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 
 transaction = PagarMe::Transaction.find_by_id("{TOKEN}")
-transaction.capture(1000)
+transaction.capture({:amount => 1000})
 ```
 
 ```php
