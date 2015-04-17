@@ -1636,7 +1636,7 @@ subscription = PagarMe::Subscription.new({
     :postback_url => "http://test.com/postback",
     :customer => {
         email: 'api@test.com'
-}
+})
 subscription.plan = plan
 
 subscription.create
@@ -2541,7 +2541,7 @@ card = PagarMe::Card.new({
 	:card_expiration_month => '10',
 	:card_expiration_year => '15',
 	:card_cvv => '314'
-}.merge(params))
+})
 
 card.create
 ```
@@ -3203,7 +3203,7 @@ bank_account = PagarMe::BankAccount.new({
     :conta_dv => '9',
     :legal_name => 'foo bar loem',
     :document_number => '111.111.111-11'
-}.merge(params))
+})
 
 bank_account.create
 ```
