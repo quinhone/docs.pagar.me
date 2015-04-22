@@ -269,10 +269,17 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-transaction = PagarMe::Transaction.find_by_id("1234")
+transaction = PagarMe::Transaction.find_by_id("184270")
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = PagarMe_Transaction::findById("184270");
+?>
 ```
 
 ```cs
