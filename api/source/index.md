@@ -345,10 +345,18 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-transactions = PagarMe::Transaction.find_by({'customer[document_number]' => 36433809847}, 2, 10)
+transactions = PagarMe::Transaction.all(3, 3)
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = PagarMe_Transaction::all(3, 3);
+?>
+```
 ```
 
 ```cs
