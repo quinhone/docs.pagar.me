@@ -518,7 +518,16 @@ key = PagarMe::Transaction.generate_card_hash()
 
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-    $key = PagarMe_Transaction::generateCardHash();
+    $t = new PagarMe_Transaction(array(
+      "amount" => 3100,
+      "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+  	  "postback_url" => "http://requestb.in/1ahq78t1",
+  	  "metadata" => array(
+        "idProduto" => 13933139
+       )
+    ));
+
+    $key = $t->generateCardHash();
 ?>
 ```
 
