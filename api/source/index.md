@@ -2019,7 +2019,13 @@ subscriptions = PagarMe::Subscription.all(1, 2)
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
 
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$subscription = PagarMe_Subscription::all(1, 2);
+?>
 ```
 
 ```cs
