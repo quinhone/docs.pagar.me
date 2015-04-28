@@ -1345,10 +1345,19 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-plan = PagarMe::Plan.find_by_id("1234")
+plan = PagarMe::Plan.find_by_id("13580")
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$plan = PagarMe_Plan::findById("13850");
+    echo $plan;
+
+?>
 ```
 
 ```cs
@@ -1401,6 +1410,14 @@ plans = PagarMe::Plan.all(1, 3)
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$plan = PagarMe_Plan::findById("13850");
+
+?>
 ```
 
 ```cs
