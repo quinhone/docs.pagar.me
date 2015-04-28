@@ -1505,6 +1505,15 @@ plan.save
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$plan = PagarMe_Plan::findById("12785");
+
+	$plan->setName("plano silver");
+?>
 ```
 
 ```cs
