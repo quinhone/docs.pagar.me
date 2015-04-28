@@ -999,6 +999,25 @@ transaction.refund
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$t = new PagarMe_Transaction(array(
+	  "amount" => 3100,
+	  "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+	  "postback_url" => "http://requestb.in/1ahq78t1",
+	  "capture" => "false",
+	  "metadata" => array(
+		"idProduto" => 13933139
+	  )
+	));
+
+	$t->charge();
+
+	$t->refund();
+?>
 ```
 
 ```cs
@@ -1257,6 +1276,20 @@ plan.create
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$plan = new PagarMe_Plan(array(
+		"amount" => 3000,
+		"trial_days" => 5,
+		"days" => 30,
+		"name" => "Plano gold"
+	));
+
+	$plan->create();
+?>
 ```
 
 ```cs
