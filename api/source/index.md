@@ -1567,7 +1567,6 @@ PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
 plan = PagarMe::Plan.find_by_id("1234")
 
-
 ```
 
 ```php
@@ -1751,6 +1750,24 @@ subscription.create
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$subscription = new PagarMe_Subscription(array(
+		"card_number" => "4901720080344448",
+		"card_holder_name" => "Jose da Silva",
+		"card_expiration_month" => 12,
+		"card_expiration_year" => 15,
+		"card_cvv" => "123",
+		'customer' => array(
+			'email' => 'api@test.com'
+		)));
+
+	$subscription->create();
+
+?>
 ```
 
 ```cs
