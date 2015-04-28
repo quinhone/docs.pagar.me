@@ -1355,7 +1355,6 @@ plan = PagarMe::Plan.find_by_id("13580")
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$plan = PagarMe_Plan::findById("13850");
-    echo $plan;
 
 ?>
 ```
@@ -1415,7 +1414,7 @@ plans = PagarMe::Plan.all(1, 3)
 
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-	$plan = PagarMe_Plan::findById("13850");
+	$plans = PagarMe_Plan::all(1, 3);
 
 ?>
 ```
