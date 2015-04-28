@@ -2221,7 +2221,7 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
-subscription = PagarMe::Subscription.find_by_id("1234")
+subscription = PagarMe::Subscription.find_by_id(14858)
 
 subscription.payment_method = 'boleto'
 
@@ -2229,6 +2229,16 @@ subscription.save
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$subscription = PagarMe_Subscription::findById(14858);
+	$subscription->setPaymentMethod("boleto");
+
+	$subscription->save();
+?>
 ```
 
 ```cs
