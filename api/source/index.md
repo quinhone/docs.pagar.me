@@ -2706,7 +2706,7 @@ card.create
 
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-	$cards = new PagarMe_Card(array(
+	$card = new PagarMe_Card(array(
 		"card_number" => "4111111111111111",
 		"card_holder_name" => "Jose da Silva",
 		"card_expiration_month" => 10,
@@ -2766,6 +2766,13 @@ card = PagarMe::Card.find_by_id("1234")
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$card = PagarMe_Card::findById("card_ci6y37hc00030a416wrxsmzyi");
+?>
 ```
 
 ```cs
