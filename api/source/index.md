@@ -3098,6 +3098,36 @@ curl -X POST https://api.pagar.me/1/customers \
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$customer = new Pagarme_Customer(array(
+	  "document_number" => "18152564000105",
+	  "name" => "nome do cliente",
+	  "email" => "eee@email.com",
+	  "born_at" => 13121988,
+	  "gender" => "M",
+	  "address" => array(
+		"street" => "rua qualquer",
+		"complementary" => "apto",
+		"street_number" => 13,
+		"neighborhood" => "pinheiros",
+		"city" => "sao paulo",
+		"state" => "SP",
+		"zipcode" => "05444040",
+		"country" => "Brasil"
+	  ),
+	  "phone" => array(
+		"ddi" => 55,
+		"ddd" => 11,
+		"number" => 999887766
+	  )
+	));
+
+	$customer->create();
+?>
 ```
 
 ```cs
