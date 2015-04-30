@@ -3203,6 +3203,13 @@ curl -X GET https://api.pagar.me/1/customers/11222 \
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$customer = PagarMe_Customer::findById(11222);
+?>
 ```
 
 ```cs
@@ -3264,6 +3271,13 @@ curl -X GET https://api.pagar.me/1/customers \
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$customers = PagarMe_Customer::all(1, 2);
+?>
 ```
 
 ```cs
