@@ -3095,6 +3095,34 @@ curl -X POST https://api.pagar.me/1/customers \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+customer = PagarMe::Card.new({
+	:document_number => "18152564000105",
+	:name => "nome do cliente",
+	:email => "eee@email.com",
+	:born_at => 13121988,
+	:gender => "M",
+	:address => {
+		:street => "rua qualquer",
+		:complementary => "apto",
+		:street_number => 13,
+		:neighborhood => "pinheiros",
+		:city => "sao paulo",
+		:state => "SP",
+		:zipcode => "05444040",
+		:country => "Brasil"
+	},
+	:phone => {
+		:ddi => 55,
+		:ddd => 11,
+		:number => 999887766
+	}
+})
+
+customer.create
 ```
 
 ```php
@@ -3200,6 +3228,11 @@ curl -X GET https://api.pagar.me/1/customers/11222 \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+customer = PagarMe::Customer.find_by_id(11222)
 ```
 
 ```php
@@ -3268,6 +3301,11 @@ curl -X GET https://api.pagar.me/1/customers \
 ```
 
 ```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+card = PagarMe::Card.all(1, 2)
 ```
 
 ```php
