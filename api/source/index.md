@@ -3732,7 +3732,8 @@ Realiza uma transferência para uma conta bancária previamente criada.
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `amount` | Sim | - | Valor, em centavos, a ser transferido para uma determinada conta bancária |
-| `bank_account_id` | Sim | - | Número identificador da conta bancária que irá receber a transferência |
+| `bank_account_id` | Não* | - | Número identificador da conta bancária que irá receber a transferência. <br> **OBS**: Caso tenha sido passado um `recipient_id`, se o parâmetro `bank_account_id` for omitido, o valor será depositado na conta bancária definida no recebedor informado |
+| `recipient_id` | Não* | - | Indica que o valor da transferência sairá da conta do recebedor identificado por este parâmetro |
 
 ## Vendo dados de uma transferência
 
