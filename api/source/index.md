@@ -1141,6 +1141,19 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 | `document_number` | Sim\* | - | CPF ou CNPJ do favorecido |
 | `legal_name` | Sim\* | - | Nome/razão social do favorecido |
 
+## Estados das transações
+
+Quando uma transação é criada, ela inicialmente é retornada com o status `processing`. Após ser processada, ela pode ter os seguintes status:
+
+- `processing`: transação sendo processada.
+- `authorized`: transação autorizada. Cliente possui saldo na conta e este valor foi reservado para futura captura, que deve acontecer em no máximo 5 dias. Caso a transação não seja **capturada**, a autorização é cancelada automaticamente.
+- `paid`: transação paga (autorizada e capturada).
+- `refunded`: transação estornada.
+- `waiting-payment`: transação aguardando pagamento (status para transações criadas com boleto bancário).
+- `pending-refund`: transação paga com boleto aguardando para ser estornada.
+- `refused`: transação não autorizada.
+
+
 ## Calculando Pagamentos Parcelados
 
 > GET https://api.pagar.me/1/transactions/calculate_installments_amount
