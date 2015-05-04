@@ -2225,7 +2225,7 @@ Essa rota é utilizada para retornar os dados de todas assinaturas.
 curl -X PUT https://api.pagar.me/1/subscriptions/14858 \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
 -d 'plan_id=12830' \
--d 'payment_method=boleto' \
+-d 'payment_method=credit_card' \
 -d 'card_id=card_ci6y37hc00030a416wrxsmzyi'
 ```
 
