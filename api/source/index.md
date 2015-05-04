@@ -1714,11 +1714,11 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 | `current_transaction` | `Object` | Objeto com os dados da última transação realizada nessa assinatura |
 | `postback_url` | `String` | Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a cada atualização dos processos |
 | `payment_method` | `String` | Método de pagamento associado a essa assinatura |
-| `current_period_start` | `String` | Início da criação da assinatura |
-| `current_period_end` | `String` | Término do período da assinatura |
+| `current_period_start` | `String` | Início do período de cobrança da assinatura |
+| `current_period_end` | `String` | Término do período de cobrança da assinatura |
 | `charges` | `Number` | Número de cobranças a serem efetuadas |
 | `status` | `String` | Possíveis estados da transação/assinatura <br> **Valores possíveis**: `trialing`, `paid`, `pending_payment`, `unpaid`, `canceled`, `ended` |
-| `date_created` | `String` | Data da criação d assinatura |
+| `date_created` | `String` | Data da criação da assinatura |
 | `phone` | `Object` | Objeto com dados do telefone do cliente |
 | `address` | `Object` | Objeto com dados do endereço do cliente |
 | `customer` | `Object` | Objeto com dados do cliente |
