@@ -4203,7 +4203,7 @@ Através da rota `/search` você consegue fazer consultas usando o [ElasticSearc
 ```json
 {
     "object": "recipient",
-    "id": "re_ci7ng63iv00bdp8164c05ggi9",
+    "id": "re_ci9bucss300h1zt6dvywufeqc",
     "bank_account": {
         "object": "bank_account",
         "id": 4841,
@@ -4219,10 +4219,13 @@ Através da rota `/search` você consegue fazer consultas usando o [ElasticSearc
         "date_created": "2015-03-19T15:40:51.000Z"
     },
     "transfer_enabled": true,
+    "last_transfer": null,
     "transfer_interval": "weekly",
-    "transfer_day": "5",
-    "date_created": "2015-03-24T15:18:30.000Z",
-    "date_updated": "2015-03-24T15:18:30.000Z"
+    "transfer_day": 5,
+    "automatic_anticipation_enabled": true,
+    "anticipatable_volume_percentage": 85,
+    "date_created": "2015-05-05T21:41:48.000Z",
+    "date_updated": "2015-05-05T21:41:48.000Z"
 }
 ```
 
@@ -4237,6 +4240,8 @@ Objeto contendo os dados de um recebedor.
 | `last_transfer` | `String` | Data da última transferência (ISODate) |
 | `transfer_interval` | `String` | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `montlhy` |
 | `transfer_day` | `Number` | Dia no qual o recebedor vai ser pago. Para cada `transfer_day`, existe uma faixa de pagamento possível. <br> `weekly`: 1 a 5, onde 1 é segunda-feira e 5 é sexta-feira <br> `monthly`: 1 a 31 |
+| `automatic_anticipation_enabled` | `Boolean` | Identifica se o recebedor está habilitado para receber automaticamente ou não o valor disponível para antecipação |
+| `anticipatable_volume_percentage` | `Number` | Porcentagem do valor passível de antecipação que será antecipado automaticamente |
 | `date_created` | `String` | Data de criação do recebedor (ISODate) |
 | `date_updated` | `String` | Data de atualização do recebedor |
 
@@ -4250,6 +4255,8 @@ curl -X POST https://api.pagar.me/1/recipients \
 -d 'transfer_interval=weekly' \
 -d 'transfer_day=5' \
 -d 'transfer_enabled=true' \
+-d 'automatic_anticipation_enabled=true' \
+-d 'anticipatable_volume_percentage=85'
 -d 'bank_account_id=4841'
 ```
 
@@ -4269,7 +4276,7 @@ Com essa rota você consegue criar um recebedor, definindo o período que ele ir
 ```json
 {
     "object": "recipient",
-    "id": "re_ci7ng63iv00bdp8164c05ggi9",
+    "id": "re_ci9bucss300h1zt6dvywufeqc",
     "bank_account": {
         "object": "bank_account",
         "id": 4841,
@@ -4285,10 +4292,13 @@ Com essa rota você consegue criar um recebedor, definindo o período que ele ir
         "date_created": "2015-03-19T15:40:51.000Z"
     },
     "transfer_enabled": true,
+    "last_transfer": null,
     "transfer_interval": "weekly",
-    "transfer_day": "5",
-    "date_created": "2015-03-24T15:18:30.000Z",
-    "date_updated": "2015-03-24T15:18:30.000Z"
+    "transfer_day": 5,
+    "automatic_anticipation_enabled": true,
+    "anticipatable_volume_percentage": 85,
+    "date_created": "2015-05-05T21:41:48.000Z",
+    "date_updated": "2015-05-05T21:41:48.000Z"
 }
 ```
 
