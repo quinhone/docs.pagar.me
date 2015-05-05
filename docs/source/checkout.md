@@ -65,6 +65,19 @@ data-max-installments | `1` | Número máximo de parcelas aceitas.
 data-ui-color | `#1a6ee1` | Cor primária da interface de Checkout.
 data-postback-url | --- | Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações |
 data-create-token | `true` | Habilita a geração do token para autorização da transação. <br> **OBS**: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor `false`, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.
+| data-customer-name | - | Nome do cliente |
+| data-customer-document-number | - | CPF ou CNPJ do cliente |
+| data-customer-email | - | E-mail do cliente |
+| data-customer-address-street | - | Nome do logradouro do cliente |
+| data-customer-address-street-number | - | Número do imóvel do cliente |
+| data-customer-address-complementary | - | Complemente do endereço do cliente |
+| data-customer-address-neighborhood | - | Bairro do cliente |
+| data-customer-address-city | - | Cidade do cliente |
+| data-customer-address-state | - | Estado (unidade federativa) do cliente |
+| data-customer-address-zipcode | - | Código de endereçmento postal (CEP) da cidade do cliente |
+| data-customer-phone-ddd | - | DDD do telefone do cliente |
+| data-customer-phone-number | - | Número do telefone do cliente |
+| data-interest-rate | - | Taxa de juros a ser cobrada na transação |
 
 ## Capturando a transação
 
