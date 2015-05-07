@@ -123,7 +123,7 @@ transaction.Capture(1000);
 > [Dashboard](https://dashboard.pagar.me/).
 
 Após realizar a captura de uma transação de cartão de crédito, a transação
-terá status `paid`, indicando que o cartão do usuário foi debitado com sucesso.
+terá status `paid`, indicando que o cartão do usuário foi cobrado com sucesso.
 
 Caso a transação seja um boleto bancário, a transação terá status
 `waiting_payment` e a URL do boleto bancário para pagamento estará disponível na
