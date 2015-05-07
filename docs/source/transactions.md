@@ -11,7 +11,7 @@ search: true
 
 # Realizando uma transação
 
-Após [capturar os dados de cartão, gerar o `card_hash` e enviá-lo para o seu
+Após [capturar os dados do cartão, gerar o `card_hash` e enviá-lo para o seu
 servidor](/capturing-card-data), você deve realizar a transação junto ao
 Pagar.me, que efetuará a transação no cartão do cliente.
 
@@ -21,7 +21,7 @@ portanto o `card_hash` não é utilizado.
 
 ## Realizando uma transação de cartão de crédito {#credit-card-transaction}
 
-Com o `card_hash` em mãos no seu servidor, agora basta realizar a transação:
+Com o `card_hash` no seu servidor, agora basta realizar a transação:
 
 ```shell
 curl -X POST 'https://api.pagar.me/1/transactions' \
