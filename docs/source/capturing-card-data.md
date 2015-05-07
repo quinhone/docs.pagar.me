@@ -21,7 +21,7 @@ segura dos dados de cartão e o único dado de cartão que deverá ser enviado p
 o seu servidor.
 
 Para boletos bancários, não é necessário utilizar o `card_hash`, já que não há
-a transmissão de dados sensíveis entre o o cliente, o seu servidor e o
+a transmissão de dados sensíveis entre o cliente, o seu servidor e o
 Pagar.me.
 
 ## Capturando os dados em uma página web
@@ -160,9 +160,9 @@ if([errors count] != 0) {
 > sua chave de encriptação disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
-## Capturando os dados em um aplicativo para Windows ou Windows Phone(.NET)
+## Capturando os dados em um aplicativo para Windows ou Windows Phone (.NET)
 
-Para realizar a geração do `card_hash` dentro de um aplicativo para Windows ou Windows Phone(plataforma .NET)
+Para realizar a geração do `card_hash` dentro de um aplicativo para Windows ou Windows Phone (plataforma .NET)
 você precisará incluir nossa biblioteca dentro dele. Para isso, instale a [biblioteca .NET](https://www.nuget.org/packages/Pagar.me/) ou a [biblioteca portável para .NET](https://www.nuget.org/packages/Portable.Pagar.me/).
 
 Para utilizar a biblitoeca, primeiro importe o namespace:
@@ -178,7 +178,7 @@ PagarMeService.DefaultEncryptionKey = "ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk";
 
 CardHash card = new CardHash();
 
-card.CardNumber = "4111111111111111"c;
+card.CardNumber = "4111111111111111";
 card.CardHolderName = "Test User";
 card.CardExpirationDate = "1017";
 card.CardCvv = "123";
