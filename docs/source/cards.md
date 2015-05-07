@@ -11,7 +11,7 @@ search: true
 
 # Cobrando um cartão posteriormente
 
-Com o Pagar.me, você pode armazenar os dados de cartão de um usuário em nosso
+Com o Pagar.me, você pode armazenar os dados do cartão de um usuário em nosso
 ambiente seguro e decidir quando, quanto e como deseja cobrá-lo.
 
 Dessa forma, você pode implementar funcionalidades como o one-click-buy (compra
