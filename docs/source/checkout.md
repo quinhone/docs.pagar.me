@@ -27,7 +27,7 @@ transação pelo seu servidor. Nós cuidaremos de todo o resto! :)
 ```html
 <form method="POST" action="/comprar">
 	<script type="text/javascript"
-		src="https://pagar.me/assets/checkout/checkout.js"
+		src="https://assets.pagar.me/checkout/checkout.js"
 		data-button-text="Pagar"
 		data-encryption-key="ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk"
 		data-amount="1000">

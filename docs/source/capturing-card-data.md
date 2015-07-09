@@ -31,7 +31,7 @@ incluir o `Pagarme.js`, nosso JavaScript, na sua página. Para isso, insira o
 seguinte código antes do final da seção `head` da sua página HTML:
 
 ```html
-<script src="https://pagar.me/assets/pagarme-v2.min.js"></script>
+<script src="https://assets.pagar.me/js/pagarme.min.js"></script>
 ```
 
 Depois, insira um formulário para digitar os dados de cartão.
