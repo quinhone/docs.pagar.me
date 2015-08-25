@@ -5,6 +5,7 @@ language_tabs:
   - shell
   - ruby
   - php
+  - csharp
 
 search: true
 ---
@@ -132,4 +133,102 @@ variável `boleto_url`.
 <aside class="notice">Após a finalização da transação em sua página, você terá
 05 minutos para capturá-la no seu servidor. Após esse período, a transação será
 recusada pelo motivo `capture_timeout`.</aside>
+
+## Checkout em Assinaturas
+
+Para usar o Checkout Pagar.me com nosso sistema de assinaturas você precisa passar uma opção para o formulário.
+
+Veja o exemplo abaixo:
+
+```html
+<form method="POST" action="/comprar">
+	<script type="text/javascript"
+		src="https://assets.pagar.me/checkout/checkout.js"
+		data-button-text="Pagar"
+		data-encryption-key="ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk"
+		data-amount="1000"
+		data-create-token="false">
+	</script>
+</form>
+```
+
+Usando essa configuração o Checkout passa a não gerar um `token` para ser usado para capturar a transação, em vez disso ele gera o `card_hash` dos dados do cartão e faz uma requisição POST para a url informada no formulário junto com os outros campos do formulário.
+
+## Acessando os dados do Checkout
+
+Após o Checkout enviar os dados para o seu servidor, você vai receber vários parâmetros da requisição enviada pelo Checkout, todas as chaves para acessar os valores começam com `pagarme`.
+
+Exemplo de uso com PHP:
+
+```php
+$card_hash = $_POST['pagarme']['card_hash'];
+```
+
+## Criando assinaturas
+
+Você só precisar pegar os dados da requisição POST e passar eles para a lib que você usar.
+
+Abaixo temos exemplos da implementação:
+
+```shell
+Não é possível fazer essa implementação em Shell script 
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+subscription = PagarMe::Subscription.new({
+    :payment_method => 'credit_card',
+	:plan_id: 'ID_DO_PLANO_AQUI',
+    :card_hash => "CARD_HASH_AQUI",
+    :postback_url => "POSTBACK_URL_AQUI",
+    :customer => {
+        email: 'EMAIL_DO_CLIENTE_AQUI'
+})
+
+subscription.create
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $subscription = new PagarMe_Subscription(array(
+		"payment_method" => "credit_card",
+        "plan_id" => "ID_DO_PLANO_AQUI",
+        "card_hash" => "CARD_HASH_AQUI",
+		"postback_url" => "POSTBACK_URL_AQUI",
+        'customer' => array(
+            'email' => 'EMAIL_DO_CLIENTE_AQUI'
+        )));
+
+    $subscription->create();
+?>
+```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Plan plan = PagarMeService.GetDefaultInstance().Plans.Find("ID_DO_PLANO_AQUI");
+
+Subscription subscription = new Subscription {
+	PaymentMethod = PaymentMethod.CreditCard,
+	Plan = plan,
+	CardHash = "CARD_HASH_AQUI",
+	Customer = new Customer {
+		Email = "EMAIL_DO_CLIENTE_AQUI"
+	}
+};
+
+subscription.Save();
+```
+
+> Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
+> sua chave de API disponível no seu
+> [Dashboard](https://dashboard.pagar.me/).
+
 
