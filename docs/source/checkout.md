@@ -136,7 +136,7 @@ recusada pelo motivo `capture_timeout`.</aside>
 
 ## Checkout em Assinaturas
 
-Para usar o Checkout Pagar.me com nosso sistema de assinaturas você precisa passar uma opção para o formulário.
+Para usar o Checkout Pagar.me com nosso sistema de assinaturas você precisa passar uma opção adicional para o formulário.
 
 Veja o exemplo abaixo:
 
