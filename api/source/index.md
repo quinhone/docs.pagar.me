@@ -2349,7 +2349,7 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `plan_id` | Não | - | id do novo plano atrelado a assinatura |
-| `payment_method` | Não | - | método de pagamento utilizado na assinatura. <br> **Valores possíveis**: `credit_card`, `boleto`  |
+| `payment_method` | Sim | - | método de pagamento utilizado na assinatura. <br> **Valores possíveis**: `credit_card`, `boleto`  |
 | `card_id` | Não | - | Identificador dos dados de um cartão previamente salvo na nossa base de dados |
 | `card_hash` | Não | - | Dados encriptados de um cartão de crédito |
 | `card_number` | Não | - | Número de um cartão de crédito. Usado quando o cartão a ser configurado na assinatura ainda não está salvo no nosso banco de dados |
