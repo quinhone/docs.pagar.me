@@ -1218,6 +1218,77 @@ Usada para calcular o valor de cada uma das parcelas de uma compra.
 | `interest_rate` | Sim | - | Valor da taxa de juros |
 | `amount` | Sim | - | Valor do produto/serviço vendido |
 
+## Testando pagamento de Boletos
+
+> PUT https://api.pagar.me/1/transactions/:id
+
+```shell
+curl -X PUT https://api.pagar.me/1/transactions/260582 \
+-d 'api_key=ak_test_3343DSY7DWVzOXSz3xjvzIpBME4afc' \
+-d 'status=paid'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.
+
+> JSON retornado (exemplo):
+
+```json
+{
+    "object":"transaction",
+    "status":"paid",
+    "refuse_reason":null,
+    "status_reason":"acquirer",
+    "acquirer_response_code":null,
+    "acquirer_name":"development",
+    "authorization_code":null,
+    "soft_descriptor":null,
+    "tid":null,
+    "nsu":null,
+    "date_created":"2015-08-27T17:53:56.000Z",
+    "date_updated":"2015-08-27T18:01:24.000Z",
+    "amount":25000,
+    "installments":1,
+    "id":260582,
+    "cost":380,
+    "card_holder_name":null,
+    "card_last_digits":null,
+    "card_first_digits":null,
+    "card_brand":null,
+    "postback_url":"",
+    "payment_method":"boleto",
+    "antifraud_score":null,
+    "boleto_url":"https://pagar.me",
+    "boleto_barcode":"1234 5678",
+    "boleto_expiration_date":"2015-09-03T03:00:00.000Z",
+    "referer":"api_key",
+    "ip":"180.185.133.109",
+    "subscription_id":null,
+    "phone":null,
+    "address":null,
+    "customer":null,
+    "card":null,
+    "metadata":{
+    },
+    "antifraud_metadata":{
+    }
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `status` | Sim | - | Utilize o valor **paid** para simular o pagamento |
+
+
 # Planos
 
 Através dessas rotas você pode gerenciar todos os planos do seu negócio, para posteriormente criar cobranças recorrentes, que serão as assinaturas.
