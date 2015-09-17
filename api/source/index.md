@@ -1635,56 +1635,6 @@ Atualiza um plano previamente criado. As propriedades que podem ser alteradas s�
 | `name` | Não | - | Nome do plano |
 | `trial_days` | Não | - | Dias para testar o produto/serviço gratuitamente |
 
-## Deletando Planos
-
-> DELETE https://api.pagar.me/1/plans/:id
-
-```shell
-curl -X DELETE https://api.pagar.me/1/plans/12784 \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
-```
-
-```ruby
-require 'pagarme'
-
-PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
-
-plan = PagarMe::Plan.find_by_id("1234")
-
-```
-
-```php
-```
-
-```cs
-```
-
-Remove um plano previamente criado. Caso o plano exista, é retornado um objeto vazio, caso não exista, é retornado um objeto com as informações do erro ao tentar excluir o plano.
-
-> JSON Retornado (Exemplo)
-
-```json
-{ }
-```
-
-> JSON Retornado caso o plano não exista (exemplo)
-
-```json
-{
-    "errors": [{
-        "type": "not_found",
-        "parameter_name": null,
-        "message": "Plan not found."
-    }],
-    "url": "/plans/12784?api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0",
-    "method": "delete"
-}
-```
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 # Assinaturas
 
 ## Objeto `subscription`
