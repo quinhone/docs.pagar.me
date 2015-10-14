@@ -1218,6 +1218,77 @@ Usada para calcular o valor de cada uma das parcelas de uma compra.
 | `interest_rate` | Sim | - | Valor da taxa de juros |
 | `amount` | Sim | - | Valor do produto/serviço vendido |
 
+## Testando pagamento de Boletos
+
+> PUT https://api.pagar.me/1/transactions/:id
+
+```shell
+curl -X PUT https://api.pagar.me/1/transactions/260582 \
+-d 'api_key=ak_test_3343DSY7DWVzOXSz3xjvzIpBME4afc' \
+-d 'status=paid'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.
+
+> JSON retornado (exemplo):
+
+```json
+{
+    "object":"transaction",
+    "status":"paid",
+    "refuse_reason":null,
+    "status_reason":"acquirer",
+    "acquirer_response_code":null,
+    "acquirer_name":"development",
+    "authorization_code":null,
+    "soft_descriptor":null,
+    "tid":null,
+    "nsu":null,
+    "date_created":"2015-08-27T17:53:56.000Z",
+    "date_updated":"2015-08-27T18:01:24.000Z",
+    "amount":25000,
+    "installments":1,
+    "id":260582,
+    "cost":380,
+    "card_holder_name":null,
+    "card_last_digits":null,
+    "card_first_digits":null,
+    "card_brand":null,
+    "postback_url":"",
+    "payment_method":"boleto",
+    "antifraud_score":null,
+    "boleto_url":"https://pagar.me",
+    "boleto_barcode":"1234 5678",
+    "boleto_expiration_date":"2015-09-03T03:00:00.000Z",
+    "referer":"api_key",
+    "ip":"180.185.133.109",
+    "subscription_id":null,
+    "phone":null,
+    "address":null,
+    "customer":null,
+    "card":null,
+    "metadata":{
+    },
+    "antifraud_metadata":{
+    }
+}
+```
+
+| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
+|:--|:--:|:--:|:--|
+| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
+| `status` | Sim | - | Utilize o valor **paid** para simular o pagamento |
+
+
 # Planos
 
 Através dessas rotas você pode gerenciar todos os planos do seu negócio, para posteriormente criar cobranças recorrentes, que serão as assinaturas.
@@ -1563,56 +1634,6 @@ Atualiza um plano previamente criado. As propriedades que podem ser alteradas s�
 | `:id`| Sim | - | id de identificação do plano previamente criado |
 | `name` | Não | - | Nome do plano |
 | `trial_days` | Não | - | Dias para testar o produto/serviço gratuitamente |
-
-## Deletando Planos
-
-> DELETE https://api.pagar.me/1/plans/:id
-
-```shell
-curl -X DELETE https://api.pagar.me/1/plans/12784 \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
-```
-
-```ruby
-require 'pagarme'
-
-PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
-
-plan = PagarMe::Plan.find_by_id("1234")
-
-```
-
-```php
-```
-
-```cs
-```
-
-Remove um plano previamente criado. Caso o plano exista, é retornado um objeto vazio, caso não exista, é retornado um objeto com as informações do erro ao tentar excluir o plano.
-
-> JSON Retornado (Exemplo)
-
-```json
-{ }
-```
-
-> JSON Retornado caso o plano não exista (exemplo)
-
-```json
-{
-    "errors": [{
-        "type": "not_found",
-        "parameter_name": null,
-        "message": "Plan not found."
-    }],
-    "url": "/plans/12784?api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0",
-    "method": "delete"
-}
-```
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
 # Assinaturas
 
@@ -2349,7 +2370,7 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 | `plan_id` | Não | - | id do novo plano atrelado a assinatura |
-| `payment_method` | Não | - | método de pagamento utilizado na assinatura. <br> **Valores possíveis**: `credit_card`, `boleto`  |
+| `payment_method` | Sim | - | método de pagamento utilizado na assinatura. <br> **Valores possíveis**: `credit_card`, `boleto`  |
 | `card_id` | Não | - | Identificador dos dados de um cartão previamente salvo na nossa base de dados |
 | `card_hash` | Não | - | Dados encriptados de um cartão de crédito |
 | `card_number` | Não | - | Número de um cartão de crédito. Usado quando o cartão a ser configurado na assinatura ainda não está salvo no nosso banco de dados |
