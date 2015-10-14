@@ -298,6 +298,36 @@ curl -X POST 'https://api.pagar.me/1/transactions' \
 ```
 
 ```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = new PagarMe_Transaction(array(
+        'amount' => 1000,
+        'card_hash' => "{CARD_HASH}",
+        'split_rules' => array(
+		array(
+			'recipient_id' => 're_ci7nheu0m0006n016o5sglg9t',
+			'charge_processing_fee' => true,
+			'liable' => true,
+			'percentage' => '60',
+        
+		),
+
+		array(
+			'recipient_id' => 're_ci7nhf1ay0007n016wd5t22nl',
+			'charge_processing_fee' => true,
+			'liable' => false,
+			'percentage' => '40',
+		)
+        )
+    ));
+
+    $transaction->charge();
+
+    $status = $transaction->status; // status da transação
+?>
 ```
 
 ```cs
