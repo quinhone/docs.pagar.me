@@ -11,6 +11,7 @@ includes:
   - transactions
   - cards
   - plans
+  - subscriptions
   - errors
 
 search: true
