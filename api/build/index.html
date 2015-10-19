@@ -107,116 +107,116 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Atributo</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">object</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>object</strong><br> String</td>
 <td style="text-align: left">Nome do tipo do objeto criado/modificado. <br> <strong>Valor retornado</strong>: <code class="prettyprint">transaction</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">status</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>status</strong><br> String</td>
 <td style="text-align: left">Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto <code class="prettyprint">transaction</code> retornado como resposta através da sua URL de <em>postback</em> ou após o término do processamento da ação atual. <br> <strong>Valores possíveis</strong>: <code class="prettyprint">processing</code>, <code class="prettyprint">authorized</code>, <code class="prettyprint">paid</code>, <code class="prettyprint">refunded</code>, <code class="prettyprint">waiting_payment</code>, <code class="prettyprint">pending_refund</code>, <code class="prettyprint">refused</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">status_reason</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>status_reason</strong><br> String</td>
 <td style="text-align: left">Motivo/agente responsável pela validação ou anulação da transação. <br> <strong>Valores possíveis</strong>: <code class="prettyprint">acquirer</code>, <code class="prettyprint">antifraud</code>, <code class="prettyprint">internal_error</code>, <code class="prettyprint">no_acquirer</code>, <code class="prettyprint">acquirer_timeout</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">acquirer_response_code</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>acquirer_response_code</strong><br> String</td>
 <td style="text-align: left">Mensagem de resposta do adquirente referente ao status da transação.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">authorization_code</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>authorization_code</strong><br> String</td>
 <td style="text-align: left">Código de autorização retornado pela bandeira.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">soft_descriptor</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>soft_descriptor</strong><br> String</td>
 <td style="text-align: left">Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> <strong>OBS</strong>: Limite de 13 caracteres.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">tid</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>tid</strong><br> String</td>
 <td style="text-align: left">Código que identifica a transação no adquirente.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">nsu</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>nsu</strong><br> String</td>
 <td style="text-align: left">Código que identifica a transação no adquirente.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">date_created</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>date_created</strong><br> String</td>
 <td style="text-align: left">Data de criação da transação no formato ISODate</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">date_updated</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>date_updated</strong><br> String</td>
 <td style="text-align: left">Data de atualização da transação no formato ISODate</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">amount</code> <br> <code class="prettyprint">Number</code></td>
+<td style="text-align: right"><strong>amount</strong><br> Number</td>
 <td style="text-align: left">Valor, em centavos, da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">installments</code> <br> <code class="prettyprint">Number</code></td>
+<td style="text-align: right"><strong>installments</strong><br> Number</td>
 <td style="text-align: left">Número de parcelas/prestações a serem cobradas</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">id</code> <br> <code class="prettyprint">Number</code></td>
+<td style="text-align: right"><strong>id</strong><br> Number</td>
 <td style="text-align: left">Número identificador da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">cost</code> <br> <code class="prettyprint">Number</code></td>
+<td style="text-align: right"><strong>cost</strong><br> Number</td>
 <td style="text-align: left">Custo da transação para o lojista</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">postback_url</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>postback_url</strong><br> String</td>
 <td style="text-align: left">URL (endpoint) do sistema integrado a Pagar.me que receberá as respostas a cada atualização do processamento da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">payment_method</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>payment_method</strong><br> String</td>
 <td style="text-align: left">Método de pagamento possíveis: <code class="prettyprint">credit_card</code> e <code class="prettyprint">boleto</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">boleto_url</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>boleto_url</strong><br> String</td>
 <td style="text-align: left">URL do boleto para impressão</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">boleto_barcode</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>boleto_barcode</strong><br> String</td>
 <td style="text-align: left">Código de barras do boleto gerado na transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">boleto_expiration_date</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>boleto_expiration_date</strong><br> String</td>
 <td style="text-align: left">Data de expiração do boleto (em ISODate)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">referer</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>referer</strong><br> String</td>
 <td style="text-align: left">Mostra se a transação foi criada utilizando a API Key ou Encryption Key.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">ip</code> <br> <code class="prettyprint">String</code></td>
+<td style="text-align: right"><strong>ip</strong><br> String</td>
 <td style="text-align: left">IP de origem que criou a transção, podendo ser ou do seu cliente (quando criado via checkout ou utilizando card_hash) ou do servidor.</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">subscription_id</code> <br> <code class="prettyprint">Number</code></td>
+<td style="text-align: right"><strong>subscription_id</strong><br> Number</td>
 <td style="text-align: left">Caso essa transação tenha sido originada na cobrança de uma assinatura, o <code class="prettyprint">id</code> desta será o valor dessa propriedade</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">phone</code> <br> <code class="prettyprint">Object</code></td>
+<td style="text-align: right"><strong>phone</strong><br> Object</td>
 <td style="text-align: left">Objeto com dados do telefone do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">address</code> <br> <code class="prettyprint">Object</code></td>
+<td style="text-align: right"><strong>address</strong><br> Object</td>
 <td style="text-align: left">Objeto com dados do endereço do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer</code> <br> <code class="prettyprint">Object</code></td>
+<td style="text-align: right"><strong>customer</strong><br> Object</td>
 <td style="text-align: left">Objeto com dados do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">card</code> <br> <code class="prettyprint">Object</code></td>
+<td style="text-align: right"><strong>card</strong><br> Object</td>
 <td style="text-align: left">Objeto com dados do cartão do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">metadata</code> <br> <code class="prettyprint">Object</code></td>
+<td style="text-align: right"><strong>metadata</strong><br> Object</td>
 <td style="text-align: left">Objeto com dados adicionais do cliente/produto/serviço vendido</td>
 </tr>
 </tbody></table>
@@ -328,184 +328,124 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">amount</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>amount</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = <code class="prettyprint">1000</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">card_hash</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
-<td style="text-align: left">Informações do cartão do cliente criptografadas no navegador. <br><strong>OBS</strong>: Para os dados do cartão você deve passar <strong>ou</strong> o  <code class="prettyprint">card_hash</code> <strong>ou</strong> o  <code class="prettyprint">card_id</code></td>
+<td style="text-align: right"><strong>card_hash</strong><br> <span class="required">obrigatório*</span></td>
+<td style="text-align: left">Informações do cartão do cliente criptografadas no navegador. <br><strong>OBS</strong>: Apenas para transações de <strong>cartão de crédito</strong> você deve passar <strong>ou</strong> o  <code class="prettyprint">card_hash</code> <strong>ou</strong> o  <code class="prettyprint">card_id</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">card_id</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>card_id</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Ao realizar uma transação, retornamos o <code class="prettyprint">card_id</code> do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do <code class="prettyprint">card_hash</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">payment_method</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">credit_card</code></td>
+<td style="text-align: right"><strong>payment_method</strong><br> default: <code class="prettyprint">credit_card</code></td>
 <td style="text-align: left">Aceita dois tipos de pagamentos/valores: <code class="prettyprint">credit_card</code> e <code class="prettyprint">boleto</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">postback_url</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>postback_url</strong></td>
 <td style="text-align: left">Endpoint do seu sistema que receberá informações a cada atualização da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">installments</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">Mínimo: 1 Máximo: 12</td>
+<td style="text-align: right"><strong>installments</strong><br> mínimo: 1, máximo: 12</td>
 <td style="text-align: left">Se o pagamento for boleto, o padrão é 1</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">boleto_expiration_date</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">Data atual + 7 dias</td>
+<td style="text-align: right"><strong>boleto_expiration_date</strong><br> default: data atual + 7 dias</td>
 <td style="text-align: left">Prazo limite para pagamento do boleto</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">soft_descriptor</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>soft_descriptor</strong></td>
 <td style="text-align: left">Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">capture</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">true</code></td>
+<td style="text-align: right"><strong>capture</strong><br> default: <code class="prettyprint">true</code></td>
 <td style="text-align: left">Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor <code class="prettyprint">false</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">metadata</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>metadata</strong></td>
 <td style="text-align: left">Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: <code class="prettyprint">metadata[ idProduto ]=13933139</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[name]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[name]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">Nome completo ou razão social do cliente que está realizando a transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[document_number]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[document_number]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">CPF ou CNPJ do cliente, sem separadores</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[email]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[email]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">email do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[address][street]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[address][street]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">logradouro (rua, avenida, etc) do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[address][street_number]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[address][street_number]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">Número da residência/estabelecimento do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[address][complementary]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
-<td style="text-align: left">completo do endereço do cliente</td>
+<td style="text-align: right"><strong>customer[address][complementary]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
+<td style="text-align: left">complemento do endereço do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[address][neighborhood]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[address][neighborhood]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">bairro de localização do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[address][zipcode]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[address][zipcode]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">CEP do imóvel do cliente, sem separadores</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[phone][ddd]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[phone][ddd]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">DDD do telefone do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[phone][number]</code></td>
-<td style="text-align: center">Sim* (com antifraude)</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>customer[phone][number]</strong><br> <span class="required">obrigatório* (com antifraude)</span></td>
 <td style="text-align: left">número de telefone do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[sex]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">M</code> ou <code class="prettyprint">F</code> (letras maiúsculas)</td>
+<td style="text-align: right"><strong>customer[sex]</strong><br> <code class="prettyprint">M</code> ou <code class="prettyprint">F</code> (letras maiúsculas)</td>
 <td style="text-align: left">sexo do cliente</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">customer[born_at]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">Formato: <code class="prettyprint">MM-DD-AAAA</code> Ex: 11-02-1985</td>
-<td style="text-align: left">Data de nascimento do cliente</td>
+<td style="text-align: right"><strong>customer[born_at]</strong><br> Formato: <code class="prettyprint">MM-DD-AAAA</code></td>
+<td style="text-align: left">Data de nascimento do cliente. Ex: 11-02-1985</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">split_rules</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>split_rules</strong></td>
 <td style="text-align: left">Esse parâmetro é um <code class="prettyprint">Array</code> que irá conter as regras da divisão do valor transacionado. <br> <strong>OBS</strong>: Caso você deseje incluir mais regras, passe os parâmetros abaixo alterando o índice em <code class="prettyprint">+1</code> para cada nova regra/recebedor</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">split_rules[n][recipient_id]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>split_rules[n][recipient_id]</strong></td>
 <td style="text-align: left">Identificador do <a href="/#recebedores">recebedor</a></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">split_rules[n][charge_processing_fee]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">true</code></td>
+<td style="text-align: right"><strong>split_rules[n][charge_processing_fee]</strong><br> default: <code class="prettyprint">true</code></td>
 <td style="text-align: left">Indica se o recebedor vinculado a essa regra de divisão será cobrado pelas taxas da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">split_rules[n][liable]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">true</code></td>
+<td style="text-align: right"><strong>split_rules[n][liable]</strong><br> default: <code class="prettyprint">true</code></td>
 <td style="text-align: left">Indica se o recebedor vinculado a essa regra de divisão assumirá o risco da transação, ou seja, possíveis estornos (<em>chargeback</em>)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">split_rules[n][percentage]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>split_rules[n][percentage]</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Define a porcentagem a ser recebida pelo recebedor configurado na regra. <br> <strong>OBS</strong>: se for utilizado a propriedade <code class="prettyprint">percentage</code>, a propriedade <code class="prettyprint">amount</code> não será necessária</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">split_rules[n][amount]</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>split_rules[n][amount]</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Define o valor a ser recebido pelo recebedor configurado na regra. <br> <strong>OBS</strong>: se for utilizado a propriedade <code class="prettyprint">amount</code>, a propriedade <code class="prettyprint">percentage</code> não será necessária</td>
 </tr>
 </tbody></table>
@@ -575,22 +515,16 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da transação previamente criada</td>
 </tr>
 </tbody></table>
@@ -744,28 +678,20 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">count</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">10</code></td>
+<td style="text-align: right"><strong>count</strong><br> default: <code class="prettyprint">10</code></td>
 <td style="text-align: left">Retorna <code class="prettyprint">n</code> objetos de transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">page</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">1</code></td>
+<td style="text-align: right"><strong>page</strong><br> default: <code class="prettyprint">1</code></td>
 <td style="text-align: left">Útil para implementação de uma paginação de resultados</td>
 </tr>
 </tbody></table>
@@ -823,16 +749,12 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">encryption_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>encryption_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave de encriptação (disponível no seu dashboard)</td>
 </tr>
 </tbody></table>
@@ -877,22 +799,16 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:transaction_id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:transaction_id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da transação previamente criada</td>
 </tr>
 </tbody></table>
@@ -927,28 +843,20 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:transaction_id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:transaction_id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Identificador da transação previamente criada</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Identificador da regra de divisão</td>
 </tr>
 </tbody></table>
@@ -999,22 +907,16 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:transaction_id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:transaction_id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Identificador da transação previamente criada</td>
 </tr>
 </tbody></table>
@@ -1052,32 +954,24 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:transaction_id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:transaction_id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Identificador da transação previamente criada</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Identificador do objeto <code class="prettyprint">payable</code></td>
 </tr>
 </tbody></table>
-<h2 id='retorna-uma-analise-antifraude'>Retorna uma análise antifraude</h1>
+<h2 id='retornando-uma-analise-antifraude'>Retornando uma análise antifraude</h1>
 <blockquote>
 <p>GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id</p>
 </blockquote>
@@ -1107,28 +1001,20 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:transaction_id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:transaction_id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da análise previamente feita</td>
 </tr>
 </tbody></table>
@@ -1162,22 +1048,16 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:transaction_id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:transaction_id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da transação</td>
 </tr>
 </tbody></table>
@@ -1205,28 +1085,20 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">email</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>email</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">email a ser enviado o link do boleto</td>
 </tr>
 </tbody></table>
@@ -1322,22 +1194,16 @@
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Id da transação a ser capturada</td>
 </tr>
 </tbody></table>
@@ -1496,70 +1362,48 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">:id</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">id da transação</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">bank_account_id</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>bank_account_id</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode <a href="#">criar uma conta</a> ou passar os dados da conta via parâmetros</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">bank_code</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>bank_code</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Dígitos que identificam cada banco. Confira a lista dos bancos <a href="http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp">aqui</a></td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">agencia</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>agencia</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Número da agência bancária</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">agencia_dv</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>agencia_dv</strong></td>
 <td style="text-align: left">Digito verificador da agência. Obrigatório caso o banco o utilize</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">conta</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>conta</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Número da conta</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">conta_dv</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>conta_dv</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Dígito verificador da conta. Obrigatório caso o banco o utilize</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">document_number</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>document_number</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">CPF ou CNPJ do favorecido</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">legal_name</code></td>
-<td style="text-align: center">Sim*</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>legal_name</strong><br> <span class="required">obrigatório*</span></td>
 <td style="text-align: left">Nome/razão social do favorecido</td>
 </tr>
 </tbody></table>
@@ -1626,40 +1470,28 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">max_installments</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">12</td>
+<td style="text-align: right"><strong>max_installments</strong><br> <span class="required">obrigatório</span><br> default: <code class="prettyprint">12</code></td>
 <td style="text-align: left">Valor máximo de parcelas</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">free_installments</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center">1</td>
+<td style="text-align: right"><strong>free_installments</strong><br> default: <code class="prettyprint">1</code></td>
 <td style="text-align: left">Número de parcelas isentas de juros</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">interest_rate</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>interest_rate</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Valor da taxa de juros</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">amount</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>amount</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Valor do produto/serviço vendido</td>
 </tr>
 </tbody></table>
@@ -1723,22 +1555,16 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">status</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>status</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Utilize o valor <strong>paid</strong> para simular o pagamento</td>
 </tr>
 </tbody></table>

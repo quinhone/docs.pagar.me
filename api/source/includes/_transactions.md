@@ -56,7 +56,7 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
 
 Ao criar ou atualizar uma transação, este será o objeto que você irá receber como resposta em cada etapa do processo de efetivação da transação.
 
-| Parâmetro | Descrição |
+| Propriedade | Descrição |
 |--:|:--|
 | **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
 | **status**<br> String | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
@@ -231,7 +231,7 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | **split_rules[n][percentage]**<br> <span class="required">obrigatório\*</span> | Define a porcentagem a ser recebida pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `percentage`, a propriedade `amount` não será necessária |
 | **split_rules[n][amount]**<br> <span class="required">obrigatório\*</span> | Define o valor a ser recebido pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `amount`, a propriedade `percentage` não será necessária |
 
-**OBS**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
+<aside class="notice"> OBS: Caso você vá usar o recurso antifraude, é obrigatório passar os dados do cliente na hora da criação da transação, como explicado nesse link: https://pagar.me/docs/transactions/#customer-data.</aside>
 
 ## Retornando uma Transação
 
@@ -468,9 +468,7 @@ Retorna um `Array` contendo objetos de transações, ordenadas a partir da trans
 | **count**<br> default: `10` | Retorna `n` objetos de transação |
 | **page**<br> default: `1` | Útil para implementação de uma paginação de resultados |
 
-**OBS**: Você pode passar qualquer propriedade e valor presentes nos objetos `transaction` como parâmetro de busca/filtro nesta rota.
-
-**Ex**: `card_last_digits=4242`
+<aside class="notice">OBS: Você pode passar qualquer propriedade e valor presentes nos objetos `transaction` como parâmetro de busca/filtro nesta rota. Ex: `card_last_digits=4242`</aside>
 
 ## Gerando uma nova chave para encriptação do `card_hash`
 
@@ -1191,7 +1189,7 @@ Usada para calcular o valor de cada uma das parcelas de uma compra.
 | Parâmetro | Descrição |
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
-| **max_installments**<br> <span class="required">obrigatório</span><br> default: `12` | Valor máximo de parcelas |
+| **max_installments**<br> default: `12` | Valor máximo de parcelas |
 | **free_installments**<br> default: `1` | Número de parcelas isentas de juros |
 | **interest_rate**<br> <span class="required">obrigatório</span> | Valor da taxa de juros |
 | **amount**<br> <span class="required">obrigatório</span> | Valor do produto/serviço vendido |

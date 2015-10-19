@@ -9,6 +9,8 @@ language_tabs:
 
 includes:
   - transactions
+  - cards
+  - plans
   - errors
 
 search: true
