@@ -1,0 +1,1269 @@
+# Transações 
+
+Através da rota `/transactions` e suas derivadas, você pode criar transações, estornar, capturar, dentre outras atividades relacionadas a estas.
+
+## Objeto `transaction`
+
+> Objeto transaction
+
+```json
+{
+  "object": "transaction",
+  "status": "processing",
+  "refuse_reason": null,
+  "status_reason": "acquirer",
+  "acquirer_response_code": null,
+  "authorization_code": null,
+  "soft_descriptor": "testeDeAPI",
+  "tid": null,
+  "nsu": null,
+  "date_created": "2015-02-25T21:54:56.000Z",
+  "date_updated": "2015-02-25T21:54:56.000Z",
+  "amount": 310000,
+  "installments": 5,
+  "id": 184220,
+  "cost": 0,
+  "postback_url": "http://requestb.in/pkt7pgpk",
+  "payment_method": "credit_card",
+  "antifraud_score": null,
+  "boleto_url": null,
+  "boleto_barcode": null,
+  "boleto_expiration_date": null,
+  "referer": "api_key",
+  "ip": "189.8.94.42",
+  "subscription_id": null,
+  "phone": null,
+  "address": null,
+  "customer": null,
+  "card": {
+    "object": "card",
+    "id": "card_ci6l9fx8f0042rt16rtb477gj",
+    "date_created": "2015-02-25T21:54:56.000Z",
+    "date_updated": "2015-02-25T21:54:56.000Z",
+    "brand": "mastercard",
+    "holder_name": "Api Customer",
+    "first_digits": "548045",
+    "last_digits": "3123",
+    "fingerprint": "HSiLJan2nqwn",
+    "valid": null
+  },
+  "metadata": {
+    "nomeData": "API Doc Test",
+    "idData": 13
+  }
+}
+```
+
+Ao criar ou atualizar uma transação, este será o objeto que você irá receber como resposta em cada etapa do processo de efetivação da transação.
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
+| **status**<br> String | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
+| **status_reason**<br> String | Motivo/agente responsável pela validação ou anulação da transação. <br> **Valores possíveis**: `acquirer`, `antifraud`, `internal_error`, `no_acquirer`, `acquirer_timeout` |
+| **acquirer_response_code**<br> String | Mensagem de resposta do adquirente referente ao status da transação.  |
+| **authorization_code**<br> String | Código de autorização retornado pela bandeira. |
+| **soft_descriptor**<br> String | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **OBS**: Limite de 13 caracteres. |
+| **tid**<br> String | Código que identifica a transação no adquirente. |
+| **nsu**<br> String | Código que identifica a transação no adquirente. |
+| **date_created**<br> String | Data de criação da transação no formato ISODate |
+| **date_updated**<br> String | Data de atualização da transação no formato ISODate |
+| **amount**<br> Number | Valor, em centavos, da transação |
+| **installments**<br> Number | Número de parcelas/prestações a serem cobradas |
+| **id**<br> Number | Número identificador da transação |
+| **cost**<br> Number | Custo da transação para o lojista |
+| **postback_url**<br> String | URL (endpoint) do sistema integrado a Pagar.me que receberá as respostas a cada atualização do processamento da transação |
+| **payment_method**<br> String | Método de pagamento possíveis: `credit_card` e `boleto`  |
+| **boleto_url**<br> String | URL do boleto para impressão |
+| **boleto_barcode**<br> String | Código de barras do boleto gerado na transação |
+| **boleto_expiration_date**<br> String | Data de expiração do boleto (em ISODate) |
+| **referer**<br> String | Mostra se a transação foi criada utilizando a API Key ou Encryption Key. |
+| **ip**<br> String | IP de origem que criou a transção, podendo ser ou do seu cliente (quando criado via checkout ou utilizando card_hash) ou do servidor. |
+| **subscription_id**<br> Number | Caso essa transação tenha sido originada na cobrança de uma assinatura, o `id` desta será o valor dessa propriedade  |
+| **phone**<br> Object | Objeto com dados do telefone do cliente |
+| **address**<br> Object | Objeto com dados do endereço do cliente |
+| **customer**<br> Object | Objeto com dados do cliente |
+| **card**<br> Object | Objeto com dados do cartão do cliente |
+| **metadata**<br> Object | Objeto com dados adicionais do cliente/produto/serviço vendido |
+
+## Criando uma transação
+
+> POST https://api.pagar.me/1/transactions
+
+```shell
+curl -X POST https://api.pagar.me/1/transactions \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'amount=3100' \
+-d 'card_id=card_ci6l9fx8f0042rt16rtb477gj' \
+-d 'postback_url=http://requestb.in/pkt7pgpk' \
+-d 'metadata[idProduto]=13933139'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+transaction = PagarMe::Transaction.new({
+    :amount => 3100,
+    :card_id => "card_ci6l9fx8f0042rt16rtb477gj",
+    :postback_url => "http://requestb.in/pkt7pgpk",
+    :metadata[idProduto] => 13933139
+})
+
+transaction.charge
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = new PagarMe_Transaction(array(
+        "amount" => 3100,
+        "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+        "postback_url" => "http://requestb.in/pkt7pgpk",
+        "metadata" => array(
+            "idProduto" => 13933139
+        )
+    ));
+
+    $transaction->charge();
+?>
+```
+
+```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 3100;
+transaction.CardId = "card_ci6l9fx8f0042rt16rtb477gj";
+transaction.PostbackUrl = "http://requestb.in/pkt7pgpk";
+transaction.Metadata = new Metadata() {
+    IdProduto = 13933139
+};
+
+transaction.Save();
+```
+
+Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua transação, que pode ser feita por cartão de crédito ou por boleto bancário.
+
+> JSON retornado (exemplo):
+
+```json
+{
+  "object": "transaction",
+  "status": "processing",
+  "refuse_reason": null,
+  "status_reason": "acquirer",
+  "acquirer_response_code": null,
+  "authorization_code": null,
+  "soft_descriptor": "testeDeAPI",
+  "tid": null,
+  "nsu": null,
+  "date_created": "2015-02-25T21:54:56.000Z",
+  "date_updated": "2015-02-25T21:54:56.000Z",
+  "amount": 310000,
+  "installments": 5,
+  "id": 184220,
+  "cost": 0,
+  "postback_url": "http://requestb.in/pkt7pgpk",
+  "payment_method": "credit_card",
+  "antifraud_score": null,
+  "boleto_url": null,
+  "boleto_barcode": null,
+  "boleto_expiration_date": null,
+  "referer": "api_key",
+  "ip": "189.8.94.42",
+  "subscription_id": null,
+  "phone": null,
+  "address": null,
+  "customer": null,
+  "card": {
+    "object": "card",
+    "id": "card_ci6l9fx8f0042rt16rtb477gj",
+    "date_created": "2015-02-25T21:54:56.000Z",
+    "date_updated": "2015-02-25T21:54:56.000Z",
+    "brand": "mastercard",
+    "holder_name": "Api Customer",
+    "first_digits": "548045",
+    "last_digits": "3123",
+    "fingerprint": "HSiLJan2nqwn",
+    "valid": null
+  },
+  "metadata": {
+    "idProduto": "13933139"
+  }
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span>| Chave da API (disponível no seu dashboard) |
+| **amount**<br> <span class="required">obrigatório</span> | Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = `1000` |
+| **card_hash**<br> <span class="required">obrigatório\*</span> | Informações do cartão do cliente criptografadas no navegador. <br>**OBS**: Apenas para transações de **cartão de crédito** você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
+| **card_id**<br> <span class="required">obrigatório\*</span> | Ao realizar uma transação, retornamos o `card_id` do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do `card_hash` |
+| **payment_method**<br> default: `credit_card` | Aceita dois tipos de pagamentos/valores: `credit_card` e `boleto` |
+| **postback_url** | Endpoint do seu sistema que receberá informações a cada atualização da transação |
+| **installments**<br> mínimo: 1, máximo: 12 | Se o pagamento for boleto, o padrão é 1 |
+| **boleto_expiration_date**<br> default: data atual + 7 dias | Prazo limite para pagamento do boleto |
+| **soft_descriptor** | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
+| **capture**<br> default: `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
+| **metadata** | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
+| **customer[name]**<br> <span class="required">obrigatório\* (com antifraude)</span> | Nome completo ou razão social do cliente que está realizando a transação |
+| **customer[document_number]**<br> <span class="required">obrigatório\* (com antifraude)</span> | CPF ou CNPJ do cliente, sem separadores |
+| **customer[email]**<br> <span class="required">obrigatório\* (com antifraude)</span> | email do cliente |
+| **customer[address][street]**<br> <span class="required">obrigatório\* (com antifraude)</span> | logradouro (rua, avenida, etc) do cliente |
+| **customer[address][street_number]**<br> <span class="required">obrigatório\* (com antifraude)</span> | Número da residência/estabelecimento do cliente |
+| **customer[address][complementary]**<br> <span class="required">obrigatório\* (com antifraude)</span>| complemento do endereço do cliente |
+| **customer[address][neighborhood]**<br> <span class="required">obrigatório\* (com antifraude)</span> | bairro de localização do cliente |
+| **customer[address][zipcode]**<br> <span class="required">obrigatório\* (com antifraude)</span> | CEP do imóvel do cliente, sem separadores |
+| **customer[phone][ddd]**<br> <span class="required">obrigatório\* (com antifraude)</span> | DDD do telefone do cliente |
+| **customer[phone][number]**<br> <span class="required">obrigatório\* (com antifraude)</span> | número de telefone do cliente |
+| **customer[sex]**<br> `M` ou `F` (letras maiúsculas) | sexo do cliente |
+| **customer[born_at]**<br> Formato: `MM-DD-AAAA` | Data de nascimento do cliente. Ex: 11-02-1985 |
+| **split_rules** | Esse parâmetro é um `Array` que irá conter as regras da divisão do valor transacionado. <br> **OBS**: Caso você deseje incluir mais regras, passe os parâmetros abaixo alterando o índice em `+1` para cada nova regra/recebedor |
+| **split_rules[n][recipient_id]** | Identificador do [recebedor](/#recebedores) |
+| **split_rules[n][charge_processing_fee]**<br> default: `true` | Indica se o recebedor vinculado a essa regra de divisão será cobrado pelas taxas da transação |
+| **split_rules[n][liable]**<br> default: `true` | Indica se o recebedor vinculado a essa regra de divisão assumirá o risco da transação, ou seja, possíveis estornos (*chargeback*) |
+| **split_rules[n][percentage]**<br> <span class="required">obrigatório\*</span> | Define a porcentagem a ser recebida pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `percentage`, a propriedade `amount` não será necessária |
+| **split_rules[n][amount]**<br> <span class="required">obrigatório\*</span> | Define o valor a ser recebido pelo recebedor configurado na regra. <br> **OBS**: se for utilizado a propriedade `amount`, a propriedade `percentage` não será necessária |
+
+**OBS**: Caso você vá usar o recurso antifraude, é **obrigatório** passar os dados do cliente na hora da criação da transação, como explicado [aqui](https://pagar.me/docs/transactions/#customer-data).
+
+## Retornando uma Transação
+
+> GET https://api.pagar.me/1/transactions/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/194351 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("184270")
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = PagarMe_Transaction::findById("184270");
+?>
+```
+
+```cs
+```
+
+Retorna os dados de uma transação realizada.
+
+> JSON Retornado (exemplo):
+
+```json
+{
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-02-26T15:35:32.000Z",
+    "date_updated": "2015-02-26T15:35:47.000Z",
+    "amount": 25000,
+    "installments": 1,
+    "id": 184270,
+    "cost": 115,
+    "postback_url": null,
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": "https://pagar.me",
+    "boleto_barcode": "1234 5678",
+    "boleto_expiration_date": "2015-03-02T03:00:00.000Z",
+    "referer": "session_id",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": null,
+    "metadata": {}
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:id**<br> <span class="required">obrigatório</span> | id da transação previamente criada |
+
+## Retornando transações
+
+> GET https://api.pagar.me/1/transactions
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'count=3' \
+-d 'page=3'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transactions = PagarMe::Transaction.all(3, 3)
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $transaction = PagarMe_Transaction::all(3, 3);
+?>
+```
+
+```cs
+```
+
+Retorna um `Array` contendo objetos de transações, ordenadas a partir da transação realizada mais recentemente.
+
+> JSON Retornado (exemplo):
+
+```json
+[{
+    "object": "transaction",
+    "status": "refused",
+    "refuse_reason": "acquirer",
+    "status_reason": "acquirer",
+    "acquirer_response_code": "51",
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": 1425933798340,
+    "nsu": 1425933798340,
+    "date_created": "2015-03-09T20:43:17.000Z",
+    "date_updated": "2015-03-09T20:43:18.000Z",
+    "amount": 54496,
+    "installments": "10",
+    "id": 185679,
+    "cost": 0,
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "encryption_key",
+    "ip": "179.185.132.108",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci1u3yidd00036t16wkzev8s8",
+        "date_created": "2014-10-29T03:12:50.000Z",
+        "date_updated": "2015-03-07T19:43:08.000Z",
+        "brand": "visa",
+        "holder_name": "murilo junqueira",
+        "first_digits": "411111",
+        "last_digits": "1111",
+        "fingerprint": "HEiFgPIQJqXG",
+        "valid": true
+    },
+    "metadata": {}
+}, {
+    "object": "transaction",
+    "status": "authorized",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-03-09T20:41:20.000Z",
+    "date_updated": "2015-03-09T20:41:20.000Z",
+    "amount": 50000,
+    "installments": 1,
+    "id": 185676,
+    "cost": 0,
+    "postback_url": null,
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": "2015-03-16T03:00:00.126Z",
+    "referer": "encryption_key",
+    "ip": "177.157.206.15",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": null,
+    "metadata": {}
+}, {
+    "object": "transaction",
+    "status": "authorized",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "854653",
+    "soft_descriptor": null,
+    "tid": 1425933651790,
+    "nsu": 1425933651790,
+    "date_created": "2015-03-09T20:40:51.000Z",
+    "date_updated": "2015-03-09T20:40:51.000Z",
+    "amount": 50000,
+    "installments": 1,
+    "id": 185675,
+    "cost": 0,
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "encryption_key",
+    "ip": "177.157.206.15",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6ttnn2y007n5616jhotcfof",
+        "date_created": "2015-03-03T21:42:58.000Z",
+        "date_updated": "2015-03-09T20:06:15.000Z",
+        "brand": "mastercard",
+        "holder_name": "John Appleseed",
+        "first_digits": "590072",
+        "last_digits": "4446",
+        "fingerprint": "XHLU9UYzU3+x",
+        "valid": true
+    },
+    "metadata": {}
+}]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **count**<br> default: `10` | Retorna `n` objetos de transação |
+| **page**<br> default: `1` | Útil para implementação de uma paginação de resultados |
+
+**OBS**: Você pode passar qualquer propriedade e valor presentes nos objetos `transaction` como parâmetro de busca/filtro nesta rota.
+
+**Ex**: `card_last_digits=4242`
+
+## Gerando uma nova chave para encriptação do `card_hash`
+
+> GET https://api.pagar.me/1/transactions/card_hash_key
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
+-d 'encryption_key=ek_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+key = PagarMe::Transaction.generate_card_hash()
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+    $t = new PagarMe_Transaction(array(
+      "amount" => 3100,
+      "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+  	  "postback_url" => "http://requestb.in/1ahq78t1",
+  	  "metadata" => array(
+        "idProduto" => 13933139
+       )
+    ));
+
+    $key = $t->generateCardHash();
+?>
+```
+
+```cs
+
+```
+
+Caso você queira/precise criar o `card_hash` manualmente, essa rota deverá ser utilizada para obtenção de uma chave pública de encriptação dos dados do cartão de seu cliente.
+
+Saiba mais sobre como criar um `card_hash` [aqui](https://pagar.me/docs/capturing-card-data/#capturando-os-dados-em-uma-pgina-web).
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "date_created": "2015-02-27T15:44:26.000Z",
+    "id": 111111,
+    "ip": "000.0.00.00",
+    "public_key": "-----BEGIN PUBLIC KEY-----\ -----END PUBLIC KEY-----\ "
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **encryption_key**<br> <span class="required">obrigatório</span> | Chave de encriptação (disponível no seu dashboard) |
+
+## Retornando as regras de divisão de uma transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/split_rules
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/189164/split_rules \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna os dados das regras de divisão do valor transacionado.
+
+> JSON Retornado (exemplo):
+
+```json
+[{
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001s2m164zrbp7tz",
+    "recipient_id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "charge_processing_fee": true,
+    "liable": true,
+    "percentage": 30,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}, {
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001t2m1606u3e0uw",
+    "recipient_id": "re_ci7nheu0m0006n016o5sglg9t",
+    "charge_processing_fee": true,
+    "liable": false,
+    "percentage": 70,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação previamente criada |
+
+## Retornando uma regra de divisão específica
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/split_rules/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/189164/split_rules/sr_ci7ntawl1001s2m164zrbp7tz \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna os dados de uma regra de divisão de uma determinada transaçào.
+
+> JSON Retornado (exemplo):
+
+```json
+{
+    "object": "split_rule",
+    "id": "sr_ci7ntawl1001s2m164zrbp7tz",
+    "recipient_id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "charge_processing_fee": true,
+    "liable": true,
+    "percentage": 30,
+    "amount": null,
+    "date_created": "2015-03-24T21:26:09.000Z",
+    "date_updated": "2015-03-24T21:26:09.000Z"
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | Identificador da transação previamente criada |
+| **:id**<br> <span class="required">obrigatório</span> | Identificador da regra de divisão |
+
+## Retornando pagamentos da transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/payables
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/192669/payables \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um array com objetos `payable` informando os dados dos pagamentos referentes a uma transação.
+
+> JSON Retornado (exemplo):
+
+```json
+[{
+    "object": "payable",
+    "id": 1485,
+    "status": "paid",
+    "amount": 39000,
+    "fee": 115,
+    "installment": null,
+    "transaction_id": 192669,
+    "split_rule_id": "sr_ci87hce8o00083016bkniqems",
+    "payment_date": "2015-04-07T03:00:00.000Z",
+    "type": "credit",
+    "payment_method": "boleto",
+    "date_created": "2015-04-07T15:47:48.000Z"
+}, {
+    "object": "payable",
+    "id": 1486,
+    "status": "paid",
+    "amount": 91000,
+    "fee": 0,
+    "installment": null,
+    "transaction_id": 192669,
+    "split_rule_id": "sr_ci87hce8o00093016fin8p6ll",
+    "payment_date": "2015-04-07T03:00:00.000Z",
+    "type": "credit",
+    "payment_method": "boleto",
+    "date_created": "2015-04-07T15:47:48.000Z"
+}]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | Identificador da transação previamente criada |
+
+## Retornando um pagamento da transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/payables/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/192669/payables/1485 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um objeto `payable` informando os dados de um pagamento referente a uma determinada transação.
+
+> JSON Retornado (exemplo):
+
+```json
+{
+    "object": "payable",
+    "id": 1485,
+    "status": "paid",
+    "amount": 39000,
+    "fee": 115,
+    "installment": null,
+    "transaction_id": 192669,
+    "split_rule_id": "sr_ci87hce8o00083016bkniqems",
+    "payment_date": "2015-04-07T03:00:00.000Z",
+    "type": "credit",
+    "payment_method": "boleto",
+    "date_created": "2015-04-07T15:47:48.000Z"
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | Identificador da transação previamente criada |
+| **:id**<br> <span class="required">obrigatório</span> | Identificador do objeto `payable` |
+
+## Retornando uma análise antifraude
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456 \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna uma análise antifraude específica realizada em uma transação.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+	"object": "antifraud_analysis",
+	"name": "name",
+	"score": "score",
+	"cost": "cost",
+	"status": "status",
+	"date_created": "date_created",
+	"date_updated": "date_updated",
+	"id": "id"
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+| **:id**<br> <span class="required">obrigatório</span> | id da análise previamente feita |
+
+## Retorna todas as análises antifraude
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todas as análises antifraude realizadas em uma transação.
+
+> JSON Retornado (Exemplo)
+
+```json
+[{
+	"object": "antifraud_analysis",
+	"name": "name",
+	"score": "score",
+	"cost": "cost",
+	"status": "status",
+	"date_created": "date_created",
+	"date_updated": "date_updated",
+	"id": "id"
+}]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+
+## Notificando cliente sobre boleto a ser pago
+
+> POST https://api.pagar.me/1/transactions/:id/collect_payment
+
+```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/collect_payment \
+-d 'api_key=ak_live_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'email=seu@email.com'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Envia o link de um boleto pendente para o cliente.
+
+**OBS**: Essa rota não funciona em ambiente de testes.
+
+> JSON Retornado (Exemplo)
+
+```json
+{ }
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:id**<br> <span class="required">obrigatório</span> | id da transação |
+| **email**<br> <span class="required">obrigatório</span> | email a ser enviado o link do boleto |
+
+## Capturando uma transação posteriormente
+
+> POST https://api.pagar.me/1/transactions/:id/capture
+
+```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/capture \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
+
+transaction.capture({:amount => 1000})
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$t = new PagarMe_Transaction(array(
+	  "amount" => 3100,
+	  "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+	  "postback_url" => "http://requestb.in/1ahq78t1",
+	  "capture" => "false",
+	  "metadata" => array(
+		"idProduto" => 13933139
+	  )
+	));
+
+	$t->charge();
+
+	$t->capture(3100);
+?>
+```
+
+```cs
+```
+
+Você pode capturar o valor de uma transação após a autorização desta, no prazo máximo de 5 dias após a autorização.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "transaction",
+    "status": "authorized",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "132534",
+    "soft_descriptor": "testeDeApi",
+    "tid": "1425302906112",
+    "nsu": "1425302906112",
+    "date_created": "2015-03-02T13:28:25.000Z",
+    "date_updated": "2015-03-02T13:28:26.000Z",
+    "amount": 130000,
+    "installments": 1,
+    "id": 184622,
+    "cost": 0,
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6l9fx8f0042rt16rtb477gj",
+        "date_created": "2015-02-25T21:54:56.000Z",
+        "date_updated": "2015-02-25T21:54:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {
+        "nomeData": "API Doc test",
+        "idData": "13"
+    }
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:id**<br> <span class="required">obrigatório</span> | Id da transação a ser capturada |
+
+## Estorno de transação
+
+> POST https://api.pagar.me/1/transactions/:id/refund
+
+```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/refund \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```shell
+# Estorno de transação paga com boleto bancário
+
+curl -X POST https://api.pagar.me/1/transactions/314578/refund \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'bank_account[bank_code]=111' \
+-d 'bank_account[agencia]=1234' \
+-d 'bank_account[conta]=09876' \
+-d 'bank_account[conta_dv]=1' \
+-d 'bank_account[document_number]=12312312312' \
+-d 'bank_account[legal_name]=joao miranda'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+transaction = PagarMe::Transaction.find_by_id("1234")
+
+transaction.refund
+```
+
+```php
+<?php
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$t = new PagarMe_Transaction(array(
+	  "amount" => 3100,
+	  "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+	  "postback_url" => "http://requestb.in/1ahq78t1",
+	  "capture" => "false",
+	  "metadata" => array(
+		"idProduto" => 13933139
+	  )
+	));
+
+	$t->charge();
+
+	$t->refund();
+?>
+```
+
+```cs
+```
+
+Essa rota é utilizada quando se deseja estornar uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.
+
+Em caso de estorno de uma transação realizada com cartão de crédito, apenas o `id` da transação é necessário para efetivação do estorno.
+
+Caso a compra tenha sido feita por boleto bancário, você precisará passar os dados da conta bancária que irá receber o valor estornado, ou o id desta conta, que pode ser gerada através da rota `/bank_accounts`.  
+
+> JSON Retornado - Estorno de Cartão de Crédito (Exemplo)
+
+```json
+{
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "00",
+    "acquirer_name": "development",
+    "authorization_code": "634306",
+    "soft_descriptor": "testeDeApi",
+    "tid": "1425302928963",
+    "nsu": "1425302928963",
+    "date_created": "2015-03-02T13:28:48.000Z",
+    "date_updated": "2015-03-02T13:37:56.000Z",
+    "amount": 130000,
+    "installments": 1,
+    "id": 184623,
+    "cost": 2000,
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "credit_card",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6l9fx8f0042rt16rtb477gj",
+        "date_created": "2015-02-25T21:54:56.000Z",
+        "date_updated": "2015-02-25T21:54:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {
+        "nomeData": "API Doc test",
+        "idData": "13"
+    }
+}
+```
+
+> JSON Retornado - Estorno de Boleto Bancário (Exemplo)
+
+```json
+{
+    "object": "transaction",
+    "status": "pending_refund",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": null,
+    "acquirer_name": "development",
+    "authorization_code": null,
+    "soft_descriptor": null,
+    "tid": null,
+    "nsu": null,
+    "date_created": "2015-02-26T19:50:38.000Z",
+    "date_updated": "2015-03-02T17:38:10.000Z",
+    "amount": 3100000,
+    "installments": 1,
+    "id": 184306,
+    "cost": 115,
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "boleto",
+    "antifraud_score": null,
+    "boleto_url": "https://pagar.me",
+    "boleto_barcode": "1234 5678",
+    "boleto_expiration_date": "2015-03-13T03:00:00.000Z",
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": null,
+    "address": null,
+    "customer": null,
+    "card": {
+        "object": "card",
+        "id": "card_ci6l9fx8f0042rt16rtb477gj",
+        "date_created": "2015-02-25T21:54:56.000Z",
+        "date_updated": "2015-02-25T21:54:57.000Z",
+        "brand": "mastercard",
+        "holder_name": "Api Customer",
+        "first_digits": "548045",
+        "last_digits": "3123",
+        "fingerprint": "HSiLJan2nqwn",
+        "valid": true
+    },
+    "metadata": {}
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:id**<br> <span class="required">obrigatório</span> | id da transação |
+| **bank_account_id**<br> <span class="required">obrigatório\*</span> | Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode [criar uma conta]() ou passar os dados da conta via parâmetros |
+| **bank_code**<br> <span class="required">obrigatório\*</span> | Dígitos que identificam cada banco. Confira a lista dos bancos [aqui](http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp) |
+| **agencia**<br> <span class="required">obrigatório\*</span> | Número da agência bancária |
+| **agencia_dv** | Digito verificador da agência. Obrigatório caso o banco o utilize |
+| **conta**<br> <span class="required">obrigatório\*</span> | Número da conta |
+| **conta_dv**<br> <span class="required">obrigatório\*</span> | Dígito verificador da conta. Obrigatório caso o banco o utilize |
+| **document_number**<br> <span class="required">obrigatório\*</span> | CPF ou CNPJ do favorecido |
+| **legal_name**<br> <span class="required">obrigatório\*</span> | Nome/razão social do favorecido |
+
+## Estados das transações
+
+Quando uma transação é criada, ela inicialmente é retornada com o status `processing`. Após ser processada, ela pode ter os seguintes status:
+
+- `processing`: transação sendo processada.
+- `authorized`: transação autorizada. Cliente possui saldo na conta e este valor foi reservado para futura captura, que deve acontecer em no máximo 5 dias. Caso a transação não seja **capturada**, a autorização é cancelada automaticamente.
+- `paid`: transação paga (autorizada e capturada).
+- `refunded`: transação estornada.
+- `waiting-payment`: transação aguardando pagamento (status para transações criadas com boleto bancário).
+- `pending-refund`: transação paga com boleto aguardando para ser estornada.
+- `refused`: transação não autorizada.
+
+
+## Calculando Pagamentos Parcelados
+
+> GET https://api.pagar.me/1/transactions/calculate_installments_amount
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/calculate_installments_amount \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0 \
+-d 'max_installments=3' \
+-d 'free_installments=1' \
+-d 'interest_rate=13' \
+-d 'amount=1300'
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+installments_result = PagarMe::Transaction.calculate_installments({
+    amount: 10000,
+    interest_rate: 0
+})
+```
+
+```php
+```
+
+```cs
+```
+
+Usada para calcular o valor de cada uma das parcelas de uma compra.
+
+> JSON retornado (exemplo):
+
+```json
+{
+    "installments": {
+        "1": {
+            "installment": 1,
+            "amount": 1300,
+            "installment_amount": 1300
+        },
+        "2": {
+            "installment": 2,
+            "amount": 1615,
+            "installment_amount": 807
+        },
+        "3": {
+            "installment": 3,
+            "amount": 1757,
+            "installment_amount": 586
+        }
+    }
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **max_installments**<br> <span class="required">obrigatório</span><br> default: `12` | Valor máximo de parcelas |
+| **free_installments**<br> default: `1` | Número de parcelas isentas de juros |
+| **interest_rate**<br> <span class="required">obrigatório</span> | Valor da taxa de juros |
+| **amount**<br> <span class="required">obrigatório</span> | Valor do produto/serviço vendido |
+
+## Testando pagamento de Boletos
+
+> PUT https://api.pagar.me/1/transactions/:id
+
+```shell
+curl -X PUT https://api.pagar.me/1/transactions/260582 \
+-d 'api_key=ak_test_3343DSY7DWVzOXSz3xjvzIpBME4afc' \
+-d 'status=paid'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.
+
+> JSON retornado (exemplo):
+
+```json
+{
+    "object":"transaction",
+    "status":"paid",
+    "refuse_reason":null,
+    "status_reason":"acquirer",
+    "acquirer_response_code":null,
+    "acquirer_name":"development",
+    "authorization_code":null,
+    "soft_descriptor":null,
+    "tid":null,
+    "nsu":null,
+    "date_created":"2015-08-27T17:53:56.000Z",
+    "date_updated":"2015-08-27T18:01:24.000Z",
+    "amount":25000,
+    "installments":1,
+    "id":260582,
+    "cost":380,
+    "card_holder_name":null,
+    "card_last_digits":null,
+    "card_first_digits":null,
+    "card_brand":null,
+    "postback_url":"",
+    "payment_method":"boleto",
+    "antifraud_score":null,
+    "boleto_url":"https://pagar.me",
+    "boleto_barcode":"1234 5678",
+    "boleto_expiration_date":"2015-09-03T03:00:00.000Z",
+    "referer":"api_key",
+    "ip":"180.185.133.109",
+    "subscription_id":null,
+    "phone":null,
+    "address":null,
+    "customer":null,
+    "card":null,
+    "metadata":{
+    },
+    "antifraud_metadata":{
+    }
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **status**<br> <span class="required">obrigatório</span> | Utilize o valor **paid** para simular o pagamento |
+
+
