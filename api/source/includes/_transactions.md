@@ -1108,7 +1108,7 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **:id**<br> <span class="required">obrigatório</span> | id da transação |
-| **bank_account_id**<br> <span class="required">obrigatório\*</span> | Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode [criar uma conta]() ou passar os dados da conta via parâmetros |
+| **bank_account_id**<br> <span class="required">obrigatório\*</span> | Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode [criar uma conta](/#criando-uma-conta-bancaria) ou passar os dados da conta via parâmetros |
 | **bank_code**<br> <span class="required">obrigatório\*</span> | Dígitos que identificam cada banco. Confira a lista dos bancos [aqui](http://www.febraban.org.br/arquivo/bancos/sitebancos2-0.asp) |
 | **agencia**<br> <span class="required">obrigatório\*</span> | Número da agência bancária |
 | **agencia_dv** | Digito verificador da agência. Obrigatório caso o banco o utilize |
