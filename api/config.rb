@@ -1,3 +1,5 @@
+require './lib/redcarpet_header_fix'
+
 # Markdown
 set :markdown_engine, :redcarpet
 set :markdown,
@@ -36,6 +38,3 @@ configure :build do
   # activate :asset_hash
   # activate :gzip
 end
-
-require_relative 'lib/redcarpet_header_fix'
-
