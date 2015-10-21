@@ -739,7 +739,7 @@ Após criar uma assinatura, você pode atualizar os dados do **método do pagame
 | **card_hash** | Dados encriptados de um cartão de crédito |
 | **card_number** | Número de um cartão de crédito. Usado quando o cartão a ser configurado na assinatura ainda não está salvo no nosso banco de dados |
 | **card_holder_name** | Nome do portador do cartão. Usado quando o cartão a ser configurado na assinatura ainda não está salvo no nosso banco de dados |
-| **card_expiration_date** | Data de expiração do cartão. <br> **Ex**: `0518` |
+| **card_expiration_date**<br> Formato: `MMYY` | Data de expiração do cartão. <br> **Ex**: `0518` (Maio de 2018) |
 
 
 ## Cancelando uma assinatura

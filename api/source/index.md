@@ -12,7 +12,20 @@ includes:
   - cards
   - plans
   - subscriptions
+  - postbacks
+  - payables
+  - balance
+  - balance_operations
+  - bank_accounts
+  - recipients
+  - split_rules
+  - transfers
+  - customers
+  - search
+  - zipcodes
   - errors
+  - antifraud_analysis
+  - user
 
 search: true
 ---
