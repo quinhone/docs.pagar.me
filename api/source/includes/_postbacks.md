@@ -4,8 +4,6 @@ Ao criar uma transação ou uma assinatura, você tem a opção de passar o par�
 
 ## POSTback de transações
 
-Sempre que uma **transação** tiver seu estado alterado, uma notificação será enviada caso tenha sido atribuída uma URL de POSTback na criação desta transação.
-
 > Dados enviados via POSTback de uma transação
 
 ```json
@@ -20,11 +18,11 @@ Sempre que uma **transação** tiver seu estado alterado, uma notificação ser�
 }
 ```
 
+Sempre que uma **transação** tiver seu estado alterado, uma notificação será enviada caso tenha sido atribuída uma URL de POSTback na criação desta transação.
+
 <a href="http://puu.sh/hdMYO/9a740bd556.png" target="_blank">Exemplo de retorno via POSTback</a>
 
 ## POSTback de assinaturas
-
-Sempre que uma **assinatura** tiver seu estado alterado, uma notificação será enviada caso tenha sido atribuída uma URL de POSTback na criação desta assinatura.
 
 > Dados enviados via POSTback de uma assinatura
 
@@ -39,6 +37,8 @@ Sempre que uma **assinatura** tiver seu estado alterado, uma notificação será
   "id": 16859
 }
 ```
+
+Sempre que uma **assinatura** tiver seu estado alterado, uma notificação será enviada caso tenha sido atribuída uma URL de POSTback na criação desta assinatura.
 
 <a href="http://puu.sh/hdPWZ/fe35cb7980.png" target="_blank">Exemplo de retorno via POSTback</a>
 

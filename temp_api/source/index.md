@@ -1043,43 +1043,6 @@ Cancela uma transferência previamente realizada.
 |:--|:--:|:--:|:--|
 | `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
 
-# Códigos postais
-
-## Consulta de CEP
-
-> GET https://api.pagar.me/1/zipcodes/:id
-
-```shell
-curl -X GET https://api.pagar.me/1/zipcodes/01452001
-```
-
-```ruby
-```
-
-```php
-```
-
-```cs
-```
-
-Com essa rota você pode verificar os dados de um determinado CEP.
-
-> JSON Retornado (Exemplo)
-
-```json
-{
-    "neighborhood": "Jardim Paulistano",
-    "street": "Avenida Brigadeiro Faria Lima",
-    "city": "São Paulo",
-    "state": "SP",
-    "zipcode": "01452001"
-}
-```
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--:|:--:|:--:|:--:|
-| - | - | - | - |
-
 # Buscas avançadas
 
 ## ElasticSearch
