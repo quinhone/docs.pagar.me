@@ -1374,7 +1374,7 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 </tr>
 <tr>
 <td style="text-align: right"><strong>bank_account_id</strong><br> <span class="required">obrigatório*</span></td>
-<td style="text-align: left">Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode <a href="#">criar uma conta</a> ou passar os dados da conta via parâmetros</td>
+<td style="text-align: left">Se você tiver o id de uma conta previamente criada, você pode passar apenas seu id. Caso a conta ainda não exista, você pode <a href="/#criando-uma-conta-bancaria">criar uma conta</a> ou passar os dados da conta via parâmetros</td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>bank_code</strong><br> <span class="required">obrigatório*</span></td>
@@ -4083,7 +4083,7 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 </tr>
 <tr>
 <td style="text-align: right"><strong>document_number</strong><br> <span class="required">obrigatório</span></td>
-<td style="text-align: left">Documento identificador do titular da conta (cpf ou cnpj)</td>
+<td style="text-align: left">Documento identificador do titular da conta (cpf ou cnpj)<br> <strong>Ex</strong>: <code class="prettyprint">35146484252</code></td>
 </tr>
 <tr>
 <td style="text-align: right"><strong>legal_name</strong><br> <span class="required">obrigatório</span></td>
@@ -4129,17 +4129,17 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id da conta bancária desejada</td>
 </tr>
 </tbody></table>
 <h2 id='retornando-varias-contas-bancarias'>Retornando várias contas bancárias</h1>
@@ -4209,33 +4209,609 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 
 <table><thead>
 <tr>
-<th style="text-align: left">Parâmetro</th>
-<th style="text-align: center">Obrigatório</th>
-<th style="text-align: center">Default (valor padrão)</th>
+<th style="text-align: right">Parâmetro</th>
 <th style="text-align: left">Descrição</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><code class="prettyprint">api_key</code></td>
-<td style="text-align: center">Sim</td>
-<td style="text-align: center">-</td>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
 <td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">count</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">10</code></td>
+<td style="text-align: right"><strong>count</strong><br> default: <code class="prettyprint">10</code></td>
 <td style="text-align: left">Retorna <code class="prettyprint">n</code> objetos de conta bancária</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="prettyprint">page</code></td>
-<td style="text-align: center">Não</td>
-<td style="text-align: center"><code class="prettyprint">1</code></td>
+<td style="text-align: right"><strong>page</strong><br> default: <code class="prettyprint">1</code></td>
 <td style="text-align: left">Útil para implementação de uma paginação de resultados</td>
 </tr>
 </tbody></table>
 
-          
+          <h1 id='recebedores'>Recebedores</h1><h2 id='objeto-recipient'>Objeto <code class="prettyprint">recipient</code></h1>
+<blockquote>
+<p>Objeto recipient</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci9bucss300h1zt6dvywufeqc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4841</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:40:51.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"automatic_anticipation_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"anticipatable_volume_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-05T21:41:48.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-05T21:41:48.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Objeto contendo os dados de um recebedor.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Propriedade</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>object</strong><br> String</td>
+<td style="text-align: left">Nome do tipo do objeto criado/modificado. <br> <strong>Valor retornado</strong>: <code class="prettyprint">recipient</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>id</strong><br> String</td>
+<td style="text-align: left">Identificador do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account</strong><br> Object</td>
+<td style="text-align: left">Objeto contendo os dados bancários do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transfer_enabled</strong><br> Boolean</td>
+<td style="text-align: left">Identifica se o recebedor está habilitado para receber automaticamente ou não</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>last_transfer</strong><br> String</td>
+<td style="text-align: left">Data da última transferência (ISODate)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transfer_interval</strong><br> String</td>
+<td style="text-align: left">Frequência na qual o recebedor irá ser pago. <br> <strong>Valores possíveis</strong>: <code class="prettyprint">daily</code>, <code class="prettyprint">weekly</code>, <code class="prettyprint">montlhy</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transfer_day</strong><br> Number</td>
+<td style="text-align: left">Dia no qual o recebedor vai ser pago. Para cada <code class="prettyprint">transfer_day</code>, existe uma faixa de pagamento possível. <br> <code class="prettyprint">weekly</code>: 1 a 5, onde 1 é segunda-feira e 5 é sexta-feira <br> <code class="prettyprint">monthly</code>: 1 a 31</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>automatic_anticipation_enabled</strong><br> Boolean</td>
+<td style="text-align: left">Identifica se o recebedor está habilitado para receber automaticamente ou não o valor disponível para antecipação</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>anticipatable_volume_percentage</strong><br> Number</td>
+<td style="text-align: left">Porcentagem do valor passível de antecipação que será antecipado automaticamente</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>date_created</strong><br> String</td>
+<td style="text-align: left">Data de criação do recebedor (ISODate)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>date_updated</strong><br> String</td>
+<td style="text-align: left">Data de atualização do recebedor</td>
+</tr>
+</tbody></table>
+<h2 id='criando-um-recebedor'>Criando um recebedor</h1>
+<blockquote>
+<p>POST https://api.pagar.me/1/recipients</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.pagar.me/1/recipients <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+-d <span class="s1">'transfer_interval=weekly'</span> <span class="se">\</span>
+-d <span class="s1">'transfer_day=5'</span> <span class="se">\</span>
+-d <span class="s1">'transfer_enabled=true'</span> <span class="se">\</span>
+-d <span class="s1">'automatic_anticipation_enabled=true'</span> <span class="se">\</span>
+-d <span class="s1">'anticipatable_volume_percentage=85'</span>
+-d <span class="s1">'bank_account_id=4841'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Com essa rota você consegue criar um recebedor, definindo o período que ele irá receber os pagamentos e qual a conta bancária que será utilizada para envio dos pagamentos.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci9bucss300h1zt6dvywufeqc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4841</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:40:51.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"automatic_anticipation_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"anticipatable_volume_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-05T21:41:48.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-05T21:41:48.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transfer_interval</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Frequência na qual o recebedor irá ser pago. <br> <strong>Valores possíveis</strong>: <code class="prettyprint">daily</code>, <code class="prettyprint">weekly</code>, <code class="prettyprint">monthly</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transfer_day</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Dia no qual o recebedor vai ser pago.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transfer_enabled</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Variável que indica se o recebedor pode receber os pagamentos automaticamente</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account_id</strong><br> <span class="required">obrigatório*</span></td>
+<td style="text-align: left">Identificador de uma conta bancária previamente criada. Caso você não tenha essa informação, você pode passar os parâmetros necessários para <a href="/#criando-uma-conta-bancaria">criação de uma conta bancária</a></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account</strong><br> <span class="required">obrigatório*</span></td>
+<td style="text-align: left">Objeto contendo os dados bancários do recebedor. Este objeto, e as suas respectivas propriedades, serão obrigatórios caso não seja informado um <code class="prettyprint">bank_account_id</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account[bank_code]</strong></td>
+<td style="text-align: left">Código do banco do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account[agencia]</strong></td>
+<td style="text-align: left">Agência da conta do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account[conta]</strong></td>
+<td style="text-align: left">Número da conta bancária do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account[conta_dv]</strong></td>
+<td style="text-align: left">Dígito verificador da conta do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account[document_number]</strong></td>
+<td style="text-align: left">CPF ou CNPJ do recebedor</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account[legal_name]</strong></td>
+<td style="text-align: left">Nome completo ou razão social do recebedor</td>
+</tr>
+</tbody></table>
+<h2 id='retornando-todos-os-recebedores'>Retornando todos os recebedores</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/recipients</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/recipients <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna um <code class="prettyprint">Array</code> de objetos com todos os recebedores criados pela sua companhia.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci7nhf1ay0007n016wd5t22nl"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4901</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58999"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECIPIENT TEST"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:17.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:27.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:27.000Z"</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci7nheu0m0006n016o5sglg9t"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4901</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58999"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECIPIENT TEST"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:17.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:17.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:17.000Z"</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci7ng63iv00bdp8164c05ggi9"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4841</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:40:51.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:18:30.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:18:30.000Z"</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci76hxnym00b8dw16y3hdxb21"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1774</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cnpj"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONTA BANCARIA DE TESTES"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-12T18:35:51.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-12T18:35:51.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-12T18:35:51.000Z"</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>count</strong><br> default: <code class="prettyprint">10</code></td>
+<td style="text-align: left">Retorna <code class="prettyprint">n</code> objetos recebedores</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>page</strong><br> default: <code class="prettyprint">1</code></td>
+<td style="text-align: left">Útil para implementação de uma paginação de resultados</td>
+</tr>
+</tbody></table>
+<h2 id='retornando-um-recebedor'>Retornando um recebedor</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/recipients/:id</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna um objeto com os dados de um recebedor criado pela sua companhia.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipient"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"re_ci7nhf1ay0007n016wd5t22nl"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4901</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58999"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECIPIENT TEST"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:17.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transfer_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_transfer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"weekly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transfer_day"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:27.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:53:27.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id de recebedor desejado</td>
+</tr>
+</tbody></table>
+<h2 id='saldo-de-um-recebedor'>Saldo de um recebedor</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/recipients/:id/balance</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna o balanço de saldo de um determinado recebedor.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"waiting_funds"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transferred"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id de recebedor desejado</td>
+</tr>
+</tbody></table>
+<h2 id='operacoes-de-saldo-de-um-recebedor'>Operações de saldo de um recebedor</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/recipients/:recipient_id/balance/operations</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance/operations <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+-d <span class="s1">'count=3'</span> <span class="se">\</span>
+-d <span class="s1">'page=1'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna as movimentações que aconteceram na conta do recebedor.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance_operation"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4861</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3019898</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_old_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2920013</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T21:00:31.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1297</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"installment"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">185537</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"payment_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T21:00:31.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance_operation"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4852</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2920013</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_old_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2910128</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T18:44:42.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1294</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"installment"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">185507</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"payment_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T18:44:42.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance_operation"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2910128</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_old_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2880243</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-05T19:32:36.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1290</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"installment"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">185273</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"payment_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-05T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-05T19:32:35.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>count</strong><br> default: <code class="prettyprint">10</code></td>
+<td style="text-align: left">Retorna <code class="prettyprint">n</code> objetos de operações de saldo</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>page</strong><br> default: <code class="prettyprint">1</code></td>
+<td style="text-align: left">Útil para implementação de uma paginação de resultados</td>
+</tr>
+</tbody></table>
+<h2 id='operacao-de-saldo-especifica-de-um-recebedor'>Operação de saldo específica de um recebedor</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/recipients/:recipient_id/balance/operations/:id</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance/operations <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna uma movimentação de saldo que aconteceu na conta do recebedor.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance_operation"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4861</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"available"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3019898</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"balance_old_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2920013</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T21:00:31.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"movement_object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payable"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1297</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"installment"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">185537</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"payment_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-06T21:00:31.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:recipient_id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id de recebedor desejado</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id da operação de saldo desejada</td>
+</tr>
+</tbody></table>
+
           <h1 id='regras-do-split'>Regras do split</h1><h2 id='objeto-split_rule'>Objeto <code class="prettyprint">split_rule</code></h1>
 <blockquote>
 <p>Objeto split_rule</p>
@@ -4299,8 +4875,715 @@ curl -X POST https://api.pagar.me/1/transactions/314578/refund <span class="se">
 </tr>
 </tbody></table>
 
-          
-          
+          <h1 id='transferencias'>Transferências</h1><h2 id='objeto-transfer'>Objeto <code class="prettyprint">transfer</code></h1>
+<blockquote>
+<p>Objeto transfer</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funding_estimated_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-21T15:44:14.417Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:35:40.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-20T15:44:14.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Objeto retornado ao se criar uma transferência bancária.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Propriedade</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>object</strong><br> String</td>
+<td style="text-align: left">Nome do tipo do objeto criado/modificado. <br> <strong>Valor retornado</strong>: <code class="prettyprint">transfer</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>id</strong><br> Number</td>
+<td style="text-align: left">Número identificador da transação</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>amount</strong><br> Number</td>
+<td style="text-align: left">Valor, em centavos, do valor transferido</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>type</strong><br> String</td>
+<td style="text-align: left">Tipo da transação. <br> <strong>Valores possíveis</strong>: <code class="prettyprint">ted</code>, <code class="prettyprint">doc</code> ou <code class="prettyprint">credito_em_conta</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>status</strong><br> String</td>
+<td style="text-align: left">Estado no qual a transação se encontra. <br> <strong>Valores possíveis</strong>: <code class="prettyprint">pending_transfer</code>, <code class="prettyprint">transferred</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">processing</code> ou <code class="prettyprint">canceled</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>fee</strong><br> Number</td>
+<td style="text-align: left">Taxa cobrada pela transferência, em centavos.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>funding_date</strong><br> String</td>
+<td style="text-align: left">Data da ocorrência da transferência</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>funding_estimated_date</strong><br> String</td>
+<td style="text-align: left">Data estimada para efetivação da transferência (ISODate)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>transaction_id</strong><br> Number</td>
+<td style="text-align: left">Identificador da transação estornada</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account</strong><br> Object</td>
+<td style="text-align: left">Objeto contendo os dados da <a href="/?shell#objeto-bank_account">conta bancária</a> que irá receber a transferência</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>date_created</strong><br> String</td>
+<td style="text-align: left">Data da criação da transferência (ISODate)</td>
+</tr>
+</tbody></table>
+<h2 id='criando-uma-transferencia'>Criando uma transferência</h1>
+<blockquote>
+<p>POST https://api.pagar.me/1/transfers</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.pagar.me/1/transfers <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+-d <span class="s1">'amount=13000'</span> <span class="se">\</span>
+-d <span class="s1">'bank_account_id=4840'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Realiza uma transferência para uma conta bancária previamente criada.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funding_estimated_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-21T15:44:14.417Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:35:40.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-20T15:44:14.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>amount</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Valor, em centavos, a ser transferido para uma determinada conta bancária</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>bank_account_id</strong><br> <span class="required">obrigatório*</span></td>
+<td style="text-align: left">Número identificador da conta bancária que irá receber a transferência. <br> <strong>OBS</strong>: Caso tenha sido passado um <code class="prettyprint">recipient_id</code>, se o parâmetro <code class="prettyprint">bank_account_id</code> for omitido, o valor será depositado na conta bancária definida no recebedor informado</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>recipient_id</strong><br> <span class="required">obrigatório*</span></td>
+<td style="text-align: left">Indica que o valor da transferência sairá da conta do recebedor identificado por este parâmetro. <br> <strong>OBS</strong>: Caso o <code class="prettyprint">recipient_id</code> seja passado, não é necessário passar <code class="prettyprint">bank_account_id</code></td>
+</tr>
+</tbody></table>
+<h2 id='vendo-dados-de-uma-transferencia'>Vendo dados de uma transferência</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/transfers/:id</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/transfers/484 <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna os dados de uma transferência previamente realizada.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funding_estimated_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-21T15:44:14.417Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:35:40.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-20T15:44:14.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id da transferência desejada</td>
+</tr>
+</tbody></table>
+<h2 id='vendo-dados-de-varias-transferencias'>Vendo dados de várias transferências</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/transfers</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/transfers <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna os dados de todas as transferências previamente realizadas.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending_transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funding_estimated_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-21T15:44:14.417Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:35:40.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-20T15:44:14.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>count</strong><br> default: <code class="prettyprint">10</code></td>
+<td style="text-align: left">Retorna <code class="prettyprint">n</code> objetos de transferência</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>page</strong><br> default: <code class="prettyprint">1</code></td>
+<td style="text-align: left">Útil para implementação de uma paginação de resultados</td>
+</tr>
+</tbody></table>
+<h2 id='cancelando-uma-transferencia'>Cancelando uma transferência</h1>
+<blockquote>
+<p>POST https://api.pagar.me/1/transfers/:id/cancel</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.pagar.me/1/transfers/480/cancel <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code></code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Cancela uma transferência previamente realizada.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">367</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funding_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funding_estimated_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-21T15:44:14.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bank_account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank_account"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bank_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"341"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0932"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agencia_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58054"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"conta_dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26268738888"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"legal_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API BANK ACCOUNT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"charge_transfer_fees"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-19T15:35:40.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-20T15:44:14.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id da transferência a ser cancelada</td>
+</tr>
+</tbody></table>
+
+          <h1 id='clientes'>Clientes</h1><h2 id='criando-um-cliente'>Criando um cliente</h1>
+<blockquote>
+<p>POST https://api.pagar.me/1/customers/:id</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.pagar.me/1/customers <span class="se">\</span>
+-d <span class="s2">"api_key=ak_test_T12378asdgyug234DoGKgN234897dsf98"</span> <span class="se">\</span>
+-d <span class="s2">"document_number=18152564000105"</span> <span class="se">\</span>
+-d <span class="s2">"name=nome do cliente"</span> <span class="se">\</span>
+-d <span class="s2">"email=eee@email.com"</span> <span class="se">\</span>
+-d <span class="s2">"born_at=13121988"</span> <span class="se">\</span>
+-d <span class="s2">"gender=M"</span> <span class="se">\</span>
+-d <span class="s2">"address[street]=rua qualquer"</span> <span class="se">\</span>
+-d <span class="s2">"address[complementary]=apto"</span> <span class="se">\</span>
+-d <span class="s2">"address[street_number]=13"</span> <span class="se">\</span>
+-d <span class="s2">"address[neighborhood]=pinheiros"</span> <span class="se">\</span>
+-d <span class="s2">"address[city]=sao paulo"</span> <span class="se">\</span>
+-d <span class="s2">"address[state]=SP"</span> <span class="se">\</span>
+-d <span class="s2">"address[zipcode]=05444040"</span> <span class="se">\</span>
+-d <span class="s2">"address[country]=Brasil"</span> <span class="se">\</span>
+-d <span class="s2">"phone[ddi]=55"</span> <span class="se">\</span>
+-d <span class="s2">"phone[ddd]=11"</span> <span class="se">\</span>
+-d <span class="s2">"phone[number]=999887766"</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span>
+
+<span class="n">customer</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Card</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:document_number</span> <span class="o">=&gt;</span> <span class="s2">"18152564000105"</span><span class="p">,</span>
+    <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"nome do cliente"</span><span class="p">,</span>
+    <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">"eee@email.com"</span><span class="p">,</span>
+    <span class="ss">:born_at</span> <span class="o">=&gt;</span> <span class="mi">13121988</span><span class="p">,</span>
+    <span class="ss">:gender</span> <span class="o">=&gt;</span> <span class="s2">"M"</span><span class="p">,</span>
+    <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">:street</span> <span class="o">=&gt;</span> <span class="s2">"rua qualquer"</span><span class="p">,</span>
+        <span class="ss">:complementary</span> <span class="o">=&gt;</span> <span class="s2">"apto"</span><span class="p">,</span>
+        <span class="ss">:street_number</span> <span class="o">=&gt;</span> <span class="mi">13</span><span class="p">,</span>
+        <span class="ss">:neighborhood</span> <span class="o">=&gt;</span> <span class="s2">"pinheiros"</span><span class="p">,</span>
+        <span class="ss">:city</span> <span class="o">=&gt;</span> <span class="s2">"sao paulo"</span><span class="p">,</span>
+        <span class="ss">:state</span> <span class="o">=&gt;</span> <span class="s2">"SP"</span><span class="p">,</span>
+        <span class="ss">:zipcode</span> <span class="o">=&gt;</span> <span class="s2">"05444040"</span><span class="p">,</span>
+        <span class="ss">:country</span> <span class="o">=&gt;</span> <span class="s2">"Brasil"</span>
+    <span class="p">},</span>
+    <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">:ddi</span> <span class="o">=&gt;</span> <span class="mi">55</span><span class="p">,</span>
+        <span class="ss">:ddd</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span>
+        <span class="ss">:number</span> <span class="o">=&gt;</span> <span class="mi">999887766</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="n">customer</span><span class="p">.</span><span class="nf">create</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$customer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pagarme_Customer</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+      <span class="s2">"document_number"</span> <span class="o">=&gt;</span> <span class="s2">"18152564000105"</span><span class="p">,</span>
+      <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"nome do cliente"</span><span class="p">,</span>
+      <span class="s2">"email"</span> <span class="o">=&gt;</span> <span class="s2">"eee@email.com"</span><span class="p">,</span>
+      <span class="s2">"born_at"</span> <span class="o">=&gt;</span> <span class="mi">13121988</span><span class="p">,</span>
+      <span class="s2">"gender"</span> <span class="o">=&gt;</span> <span class="s2">"M"</span><span class="p">,</span>
+      <span class="s2">"address"</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">"street"</span> <span class="o">=&gt;</span> <span class="s2">"rua qualquer"</span><span class="p">,</span>
+        <span class="s2">"complementary"</span> <span class="o">=&gt;</span> <span class="s2">"apto"</span><span class="p">,</span>
+        <span class="s2">"street_number"</span> <span class="o">=&gt;</span> <span class="mi">13</span><span class="p">,</span>
+        <span class="s2">"neighborhood"</span> <span class="o">=&gt;</span> <span class="s2">"pinheiros"</span><span class="p">,</span>
+        <span class="s2">"city"</span> <span class="o">=&gt;</span> <span class="s2">"sao paulo"</span><span class="p">,</span>
+        <span class="s2">"state"</span> <span class="o">=&gt;</span> <span class="s2">"SP"</span><span class="p">,</span>
+        <span class="s2">"zipcode"</span> <span class="o">=&gt;</span> <span class="s2">"05444040"</span><span class="p">,</span>
+        <span class="s2">"country"</span> <span class="o">=&gt;</span> <span class="s2">"Brasil"</span>
+      <span class="p">),</span>
+      <span class="s2">"phone"</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">"ddi"</span> <span class="o">=&gt;</span> <span class="mi">55</span><span class="p">,</span>
+        <span class="s2">"ddd"</span> <span class="o">=&gt;</span> <span class="mi">11</span><span class="p">,</span>
+        <span class="s2">"number"</span> <span class="o">=&gt;</span> <span class="mi">999887766</span>
+      <span class="p">)</span>
+    <span class="p">));</span>
+
+    <span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Através dessa rota você pode salvar os dados de um cliente no nosso banco de dados.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18152564000105"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cnpj"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nome do cliente"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eee@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"born_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-01T03:38:41.988Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-10T18:38:19.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">253591</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999887766"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">148590</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rua qualquer"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"complementary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"apto"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pinheiros"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sao paulo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05444040"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">153809</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>document_number</strong></td>
+<td style="text-align: left">Número do CPF ou CNPJ do cliente</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>name</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Nome ou razão social do comprador</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>email</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">E-mail do comprador</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>born_at</strong></td>
+<td style="text-align: left">Data de nascimento</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>gender</strong></td>
+<td style="text-align: left">Gênero</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[street]</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Nome da rua</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[complementary]</strong></td>
+<td style="text-align: left">Complemento do endereço</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[street_number]</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Número do imóvel</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[neighborhood]</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Bairro</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[city]</strong></td>
+<td style="text-align: left">Cidade</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[state]</strong></td>
+<td style="text-align: left">Estado</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[zipcode]</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Código postal (CEP)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>address[country]</strong></td>
+<td style="text-align: left">País</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>phone[ddi]</strong></td>
+<td style="text-align: left">DDI (Discagem Direta Internacional)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>phone[ddd]</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">DDD (Discagem Direta à Distância)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>phone[number]</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Número do telefone (máximo de 9 dígitos, apenas números)</td>
+</tr>
+</tbody></table>
+<h2 id='retornando-dados-do-cliente'>Retornando dados do cliente</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/customers/:id</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/customers/11222 <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> 
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span>
+
+<span class="n">customer</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="mi">11222</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$customer</span> <span class="o">=</span> <span class="nx">PagarMe_Customer</span><span class="o">::</span><span class="na">findById</span><span class="p">(</span><span class="mi">11222</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Através da rota <code class="prettyprint">/customers/:id</code> você recebe todos os dados do seu cliente, previamente cadastrado na realização de uma transação, quando os dados deste é passado pelos parâmetros <code class="prettyprint">customer[nomeDaPropriedade]</code>.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31442053332"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpf"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api customer fullname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api@customer.com.br"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"born_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-10-13T10:51:38.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11222</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99887766"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Veneza"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"complementary"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Av API"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15078731"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13743</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>:id</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Id do cliente desejado</td>
+</tr>
+</tbody></table>
+<h2 id='retornando-dados-de-clientes'>Retornando dados de clientes</h1>
+<blockquote>
+<p>GET https://api.pagar.me/1/customers</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET https://api.pagar.me/1/customers <span class="se">\</span>
+-d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+-d <span class="s1">'page=1'</span> <span class="se">\</span>
+-d <span class="s1">'count=2'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span>
+
+<span class="n">card</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Card</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$customers</span> <span class="o">=</span> <span class="nx">PagarMe_Customer</span><span class="o">::</span><span class="na">all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code></code></pre>
+
+<p>Retorna todos os clientes cadastrados em sua conta.</p>
+
+<blockquote>
+<p>JSON Retornado (Exemplo)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18152564000105"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cnpj"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nome do cliente"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"born_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-01T03:38:41.988Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-10T22:04:18.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15132</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999887766"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13746</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rua qualquer"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"complementary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"apto"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pinheiros"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sao paulo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05444040"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13958</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18152564000105"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cnpj"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eee@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"born_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-01T03:38:41.988Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date_created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-10T22:03:49.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15131</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ddd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999887766"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13745</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rua qualquer"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"complementary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"apto"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pinheiros"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sao paulo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05444040"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13957</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: right">Parâmetro</th>
+<th style="text-align: left">Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>api_key</strong><br> <span class="required">obrigatório</span></td>
+<td style="text-align: left">Chave da API (disponível no seu dashboard)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>count</strong><br> default: <code class="prettyprint">10</code></td>
+<td style="text-align: left">Retorna <code class="prettyprint">n</code> objetos <code class="prettyprint">customer</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>page</strong><br> default: <code class="prettyprint">1</code></td>
+<td style="text-align: left">Útil para implementação de uma paginação de resultados</td>
+</tr>
+</tbody></table>
+
           <h1 id='buscas-avancadas'>Buscas avançadas</h1><h2 id='elasticsearch'>ElasticSearch</h1>
 <blockquote>
 <p>GET https://api.pagar.me/1/search</p>
