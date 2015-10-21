@@ -20,36 +20,6 @@ A primeira coisa que você deve saber é o endpoint que usamos:
 https://api.pagar.me/1/
 `
 
-# Saldo
-
-## Objeto `balance`
-
-> Objeto balance
-
-```json
-{
-    "object": "balance",
-    "waiting_funds": {
-        "amount": 0
-    },
-    "available": {
-        "amount": 3169323
-    },
-    "transferred": {
-        "amount": 3163500
-    }
-}
-```
-
-Com este objeto, você pode obter informações gerais sobre o saldo da sua conta.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `balance` |
-| `waiting_funds` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem a ser pago pelo seu cliente |
-| `available` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível para receber |
-| `transferred` | `Object` | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta (quanto já recebeu efetivamente) |
-
 ## Saldo geral das operações
 
 > GET https://api.pagar.me/1/balance
@@ -1947,80 +1917,6 @@ Dados de um usuário registrado no nosso sistema.
 | `name` | `String` | Nome do usuário |
 | `permission` | `String` | Tipo de permissão do usuário. <br> **Tipos**: `admin`, `read_write`, `read_only` |
 | `date_created` | `String` | Data da criação do usuário (ISODate) |
-
-# Regras do split
-
-## Objeto `split_rule`
-
-> Objeto split_rule
-
-```json
-{
-    "object": "split_rule",
-    "id": "sr_ci7ntawl1001s2m164zrbp7tz",
-    "recipient_id": "re_ci7nhf1ay0007n016wd5t22nl",
-    "charge_processing_fee": true,
-    "liable": true,
-    "percentage": 30,
-    "amount": null,
-    "date_created": "2015-03-24T21:26:09.000Z",
-    "date_updated": "2015-03-24T21:26:09.000Z"
-}
-```
-
-Objeto que contém as informações das regras da divisão do valor gerado na transação.
-
-| Propriedade | Tipo | Descrição |
-|:--|:--:|:--|
-| `object` | `String` | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `user` |
-| `id` | `String` | Identificador da regra de divisão |
-| `recipient_id` | `String` | Recebedor que irá receber os valores descritos nessa regra |
-| `charge_processing_fee` | `Boolean` | Define se o recebedor dessa regra irá ser cobrado pela taxa da Pagar.me |
-| `liable` | `Boolean` | Define se o recebedor vinculado a essa regra irá se responsabilizar pelo risco da transação (estorno/chargeback) |
-| `percentage` | `Number` | Porcentagem que o recebedor vai receber do valor da transação. <br> **OBS**: Caso `percentage` seja utilizada, não é necessário passar o parâmetro `amount` |
-| `amount` | `Number` | Valor que o recebedor vai receber da transação. <br> **OBS**: Caso `amount` seja utilizado, não é necessário passar o parâmetro `percentage` |
-| `date_created` | `String` | Data da criação da `split_rule` |
-| `date_updated` | `String` | Data de atualização da `split_rule` |
-
-# POSTBack
-
-Ao criar uma transação ou uma assinatura, você tem a opção de passar o parâmetro `postback_url` na requisição com a informação da URL do seu sistema que irá receber as notificações a cada alteração de status dessas transações/assinaturas.
-
-## POSTBack de transações
-
-Sempre que uma **transação** tiver seu estado alterado, uma notificação será enviada caso tenha sido atribuída uma URL de POSTBack na criação desta transação.
-
-> Dados enviados via POSTBack de uma transação
-
-```
-old_status: processing
-object: transaction
-current_status: paid
-desired_status: paid
-fingerprint: c4cdb23478fdsddf3276c732846ffd6w8e734
-event: transaction_status_changed
-id: 194330
-```
-
-<a href="http://puu.sh/hdMYO/9a740bd556.png" target="_blank">Exemplo de retorno via POSTBack</a>
-
-## POSTBack de assinaturas
-
-Sempre que uma **assinatura** tiver seu estado alterado, uma notificação será enviada caso tenha sido atribuída uma URL de POSTBack na criação desta assinatura.
-
-> Dados enviados via POSTBack de uma assinatura
-
-```
-old_status: unpaid
-object: transaction
-current_status: paid
-desired_status: paid
-fingerprint: c4cdb23478fdsddf3276c73sweyt346ffd6w8e734
-event: subscription_status_changed
-id: 16859
-```
-
-<a href="http://puu.sh/hdPWZ/fe35cb7980.png" target="_blank">Exemplo de retorno via POSTBack</a>
 
 # Erros
 
