@@ -20,49 +20,6 @@ A primeira coisa que você deve saber é o endpoint que usamos:
 https://api.pagar.me/1/
 `
 
-## Saldo geral das operações
-
-> GET https://api.pagar.me/1/balance
-
-```shell
-curl -X  GET https://api.pagar.me/1/balance \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' 
-```
-
-```ruby
-```
-
-```php
-```
-
-```cs
-```
-
-Com essa rota `/balance` você poderá consultar o saldo das transações da sua companhia.
-
-**OBS**: os valores retornados estão em **centavos**.
-
-> JSON Retornado (Exemplo)
-
-```json
-{
-    "object": "balance",
-    "waiting_funds": {
-        "amount": 0
-    },
-    "available": {
-        "amount": 3019898
-    },
-    "transferred": {
-        "amount": 3163500
-    }
-}
-```
-
-| Parâmetro | Obrigatório | Default (valor padrão) | Descrição |
-|:--|:--:|:--:|:--|
-| `api_key` | Sim | - | Chave da API (disponível no seu dashboard) |
-
 # Operações de saldo
 
 ## Objeto `balance_operation`
