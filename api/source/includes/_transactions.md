@@ -765,7 +765,7 @@ Retorna uma análise antifraude específica realizada em uma transação.
 | **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
 | **:id**<br> <span class="required">obrigatório</span> | id da análise previamente feita |
 
-## Retorna todas as análises antifraude
+## Retornando todas as análises antifraude
 
 > GET https://api.pagar.me/1/transactions/:transaction_id/antifraud_analyses
 
@@ -798,6 +798,353 @@ Retorna todas as análises antifraude realizadas em uma transação.
 	"date_updated": "date_updated",
 	"id": "id"
 }]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+
+## Retornando um POSTback
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/postbacks/:id
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/postbacks/po_ciat6ssga0022k06ng8vxg \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna um POSTback específico relacionado a transação.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+        "date_created": "2015-06-12T05:41:57.000Z", 
+        "date_updated": "2015-06-12T05:42:07.000Z", 
+        "deliveries": [
+            {
+                "date_created": "2015-06-12T05:42:06.000Z", 
+                "date_updated": "2015-06-12T05:42:07.000Z", 
+                "id": "pd_ciat6szv2002yk06nyhacqmr4", 
+                "object": "postback_delivery", 
+                "response_body": "", 
+                "response_headers": "{\"cache-control\":\"no-cache\",\"pragma\":\"no-cache\",\"content-length\":\"0\",\"expires\":\"-1\",\"server\":\"Microsoft-IIS/8.0\",\"x-aspnet-version\":\"4.0.30319\",\"x-powered-by\":\"ASP.NET\",\"set-cookie\":[\"ARRAffinity=663d85223525d21e72aebd941082ca482841f5719c27124196939b3de6204504;Path=/;Domain=requestb.in\"],\"date\":\"Fri, 12 Jun 2015 05:42:06 GMT\",\"connection\":\"close\"}", 
+                "response_time": 516, 
+                "status": "success", 
+                "status_code": "200", 
+                "status_reason": "http_status_code"
+            }
+        ], 
+        "headers": "{\"Content-Type\":\"application/x-www-form-urlencoded\",\"X-PagarMe-Event\":\"transaction_status_changed\",\"X-Hub-Signature\":\"sha1=d825b60eee7f3034484be584ccca20d3f7bb8c5b\",\"User-Agent\":\"PagarMe-Hookshot/1.0\"}", 
+        "id": "po_ciat6ssga0022k06ng8vxg", 
+        "model": "transaction", 
+        "model_id": "674579", 
+        "next_retry": null, 
+        "object": "postback", 
+        "payload": "id=674579&fingerprint=05112b2b5d756a1501d994027c95d3202c7b&event=transaction_status_changed&old_status=authorized&desired_status=paid&current_status=refused&object=transaction", 
+        "request_url": "http://requestb.in/1azqnq81?inspect", 
+        "retries": 0, 
+        "signature": "d825b60eee7f3034484be584d3f7bb8c5b", 
+        "status": "success"
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+| **:id**<br> <span class="required">obrigatório</span> | id do POSTback |
+
+## Retornando todos os POSTbacks
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/postbacks
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/postbacks \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os POSTbacks enviados relacionados a transação.
+
+> JSON Retornado (Exemplo)
+
+```json
+[
+    {
+        "date_created": "2015-06-12T05:41:57.000Z", 
+        "date_updated": "2015-06-12T05:42:07.000Z", 
+        "deliveries": [
+            {
+                "date_created": "2015-06-12T05:42:06.000Z", 
+                "date_updated": "2015-06-12T05:42:07.000Z", 
+                "id": "pd_ciat6szv2002yk06nyhacqmr4", 
+                "object": "postback_delivery", 
+                "response_body": "", 
+                "response_headers": "{\"cache-control\":\"no-cache\",\"pragma\":\"no-cache\",\"content-length\":\"0\",\"expires\":\"-1\",\"server\":\"Microsoft-IIS/8.0\",\"x-aspnet-version\":\"4.0.30319\",\"x-powered-by\":\"ASP.NET\",\"set-cookie\":[\"ARRAffinity=663d85223525d21e72aebd941082ca482841f5719c27124196939b3de6204504;Path=/;Domain=requestb.in\"],\"date\":\"Fri, 12 Jun 2015 05:42:06 GMT\",\"connection\":\"close\"}", 
+                "response_time": 516, 
+                "status": "success", 
+                "status_code": "200", 
+                "status_reason": "http_status_code"
+            }
+        ], 
+        "headers": "{\"Content-Type\":\"application/x-www-form-urlencoded\",\"X-PagarMe-Event\":\"transaction_status_changed\",\"X-Hub-Signature\":\"sha1=d825b60eee7f3034484be584ccca20d3f7bb8c5b\",\"User-Agent\":\"PagarMe-Hookshot/1.0\"}", 
+        "id": "po_ciat6ssga0022k06ng8vxg", 
+        "model": "transaction", 
+        "model_id": "674579", 
+        "next_retry": null, 
+        "object": "postback", 
+        "payload": "id=674579&fingerprint=05112b2b5d756a1501d994027c95d3202c7b&event=transaction_status_changed&old_status=authorized&desired_status=paid&current_status=refused&object=transaction", 
+        "request_url": "http://requestb.in/1azqnq81?inspect", 
+        "retries": 0, 
+        "signature": "d825b60eee7f3034484be584d3f7bb8c5b", 
+        "status": "success"
+}]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+
+## Reenviando um POSTback
+
+> POST https://api.pagar.me/1/transactions/:transaction_id/postbacks/:id/redeliver
+
+```shell
+curl -X POST https://api.pagar.me/1/transactions/314578/postbacks/po_ciat6ssga0022k06ng8vxg/redeliver \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Com essa rota você pode reenviar qualquer POSTback que já foi enviado de uma transação. Lembrando que caso o envio de um POSTback falhe ou seu servidor não o receba, nós o retentamos diversas vezes (com um total de 31 vezes). 
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+        "date_created": "2015-06-12T05:41:57.000Z", 
+        "date_updated": "2015-06-12T05:42:07.000Z", 
+        "deliveries": [
+            {
+                "date_created": "2015-06-12T05:42:06.000Z", 
+                "date_updated": "2015-06-12T05:42:07.000Z", 
+                "id": "pd_ciat6szv2002yk06nyhacqmr4", 
+                "object": "postback_delivery", 
+                "response_body": "", 
+                "response_headers": "{\"cache-control\":\"no-cache\",\"pragma\":\"no-cache\",\"content-length\":\"0\",\"expires\":\"-1\",\"server\":\"Microsoft-IIS/8.0\",\"x-aspnet-version\":\"4.0.30319\",\"x-powered-by\":\"ASP.NET\",\"set-cookie\":[\"ARRAffinity=663d85223525d21e72aebd941082ca482841f5719c27124196939b3de6204504;Path=/;Domain=requestb.in\"],\"date\":\"Fri, 12 Jun 2015 05:42:06 GMT\",\"connection\":\"close\"}", 
+                "response_time": 516, 
+                "status": "success", 
+                "status_code": "200", 
+                "status_reason": "http_status_code"
+            },
+			{
+                "date_created": "2015-06-18T05:42:06.000Z", 
+                "date_updated": "2015-06-18T05:42:07.000Z", 
+                "id": "pd_ciat6szv2002yk06nyhasdasd5", 
+                "object": "postback_delivery", 
+                "response_body": "", 
+                "response_headers": "{\"cache-control\":\"no-cache\",\"pragma\":\"no-cache\",\"content-length\":\"0\",\"expires\":\"-1\",\"server\":\"Microsoft-IIS/8.0\",\"x-aspnet-version\":\"4.0.30319\",\"x-powered-by\":\"ASP.NET\",\"set-cookie\":[\"ARRAffinity=663d85223525d21e72aebd941082ca482841f5719c27124196939b3de6204504;Path=/;Domain=requestb.in\"],\"date\":\"Fri, 18 Jun 2015 05:42:06 GMT\",\"connection\":\"close\"}", 
+                "response_time": 510, 
+                "status": "success", 
+                "status_code": "200", 
+                "status_reason": "http_status_code"
+            }
+        ], 
+        "headers": "{\"Content-Type\":\"application/x-www-form-urlencoded\",\"X-PagarMe-Event\":\"transaction_status_changed\",\"X-Hub-Signature\":\"sha1=d825b60eee7f3034484be584ccca20d3f7bb8c5b\",\"User-Agent\":\"PagarMe-Hookshot/1.0\"}", 
+        "id": "po_ciat6ssga0022k06ng8vxg", 
+        "model": "transaction", 
+        "model_id": "674579", 
+        "next_retry": null, 
+        "object": "postback", 
+        "payload": "id=674579&fingerprint=05112b2b5d756a1501d994027c95d3202c7b&event=transaction_status_changed&old_status=authorized&desired_status=paid&current_status=refused&object=transaction", 
+        "request_url": "http://requestb.in/1azqnq81?inspect", 
+        "retries": 0, 
+        "signature": "d825b60eee7f3034484be584d3f7bb8c5b", 
+        "status": "success"
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+| **:id**<br> <span class="required">obrigatório</span> | id do POSTback |
+
+## Retornando todos os eventos de uma transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/events
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/events \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todos os eventos já criados dentro de uma transação. <br>**Ex**: mudanças de status.
+
+> JSON Retornado (Exemplo)
+
+```json
+[
+    {
+        "id": "ev_cift4mmt800t7z55z343v6xto", 
+        "model": "transaction", 
+        "model_id": "314578", 
+        "name": "transaction_status_changed", 
+        "object": "event", 
+        "payload": {
+            "current_status": "paid", 
+            "desired_status": "paid", 
+            "old_status": "processing"
+        }
+    }, 
+    {
+        "id": "ev_cift4nz1200t8zda33zh7zilzkt", 
+        "model": "transaction", 
+        "model_id": "314578", 
+        "name": "transaction_status_changed", 
+        "object": "event", 
+        "payload": {
+            "current_status": "refunded", 
+            "desired_status": "refunded", 
+            "old_status": "paid"
+        }
+    }
+]
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **:transaction_id**<br> <span class="required">obrigatório</span> | id da transação |
+
+## Retornando todo histórico de uma transação
+
+> GET https://api.pagar.me/1/transactions/:transaction_id/operations
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/314578/operations \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna todo o histórico de uma transaçnao, ou seja, toda e qualquer operação que já aconteceu com ela. <br><br>**Ex**: autorização, análise antifraude, captura, estorno, chargeback, emissão de boleto, conciliação, etc.
+
+> JSON Retornado (Exemplo)
+
+```json
+[
+    {
+        "date_created": "2015-10-16T03:59:40.000Z", 
+        "date_updated": "2015-10-16T03:59:42.000Z", 
+        "ended_at": 1444967982134, 
+        "fail_reason": null, 
+        "group_id": "gog_cift4ml505xsfce3ff9o8xgyv", 
+        "id": "go_cift4ml505xsece3fqltn2ok0", 
+        "metadata": {
+            "environment": {}
+        }, 
+        "model": "transaction", 
+        "model_id": "314578", 
+        "next_group_id": "gog_cift4nxyp5mj9on3ehfthtxiy", 
+        "processor": "pagarme", 
+        "processor_response_code": null, 
+        "request_id": "gr_cift4ml3c5xsdce3fistg0u6q", 
+        "rollbacked": false, 
+        "started_at": 1444967981743, 
+        "status": "success", 
+        "type": "capture"
+    }, 
+    {
+        "date_created": "2015-10-16T03:59:40.000Z", 
+        "date_updated": "2015-10-16T03:59:41.000Z", 
+        "ended_at": 1444967981722, 
+        "fail_reason": null, 
+        "group_id": "gog_cift4ml5k5xshce3fqqjaeijr", 
+        "id": "go_cift4ml5k5xsgce3fjelkr3c6", 
+        "metadata": {
+            "environment": {
+                "authorization_code": "07482", 
+                "nsu": "314578", 
+                "response_code": "0000", 
+                "tid": "314578"
+            }
+        }, 
+        "model": "transaction", 
+        "model_id": "314578", 
+        "next_group_id": "gog_cift4ml505xsfce3ff9o8xgyv", 
+        "processor": "pagarme", 
+        "processor_response_code": "0000", 
+        "request_id": "gr_cift4ml3c5xsdce3fistg0u6q", 
+        "rollbacked": false, 
+        "started_at": 1444967980241, 
+        "status": "success", 
+        "type": "authorize"
+    }, 
+    {
+        "date_created": "2015-10-16T04:00:43.000Z", 
+        "date_updated": "2015-10-16T04:00:44.000Z", 
+        "ended_at": 1444968044662, 
+        "fail_reason": null, 
+        "group_id": "gog_cift4nxyp5mj9on3ehfthtxiy", 
+        "id": "go_cift4nxyp5mj8on3e6e2k1d6t", 
+        "metadata": {
+            "environment": {}
+        }, 
+        "model": "transaction", 
+        "model_id": "314578", 
+        "next_group_id": null, 
+        "processor": "pagarme", 
+        "processor_response_code": null, 
+        "request_id": "gr_cift4nxy15mj7on3edu9sf4fj", 
+        "rollbacked": false, 
+        "started_at": 1444968043510, 
+        "status": "success", 
+        "type": "refund"
+    }]
 ```
 
 | Parâmetro | Descrição |
@@ -1117,7 +1464,7 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 | **document_number**<br> <span class="required">obrigatório\*</span> | CPF ou CNPJ do favorecido |
 | **legal_name**<br> <span class="required">obrigatório\*</span> | Nome/razão social do favorecido |
 
-## Estados das transações
+## Status das transações
 
 Quando uma transação é criada, ela inicialmente é retornada com o status `processing`. Após ser processada, ela pode ter os seguintes status:
 
@@ -1128,6 +1475,7 @@ Quando uma transação é criada, ela inicialmente é retornada com o status `pr
 - `waiting-payment`: transação aguardando pagamento (status para transações criadas com boleto bancário).
 - `pending-refund`: transação paga com boleto aguardando para ser estornada.
 - `refused`: transação não autorizada.
+- `chargedback`: transação sofreu chargeback.
 
 
 ## Calculando Pagamentos Parcelados
