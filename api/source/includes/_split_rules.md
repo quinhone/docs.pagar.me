@@ -22,7 +22,7 @@ Objeto que contém as informações das regras da divisão do valor gerado na tr
 
 | Propriedade | Descrição |
 |--:|:--|
-| **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `user` |
+| **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `split_rule` |
 | **id**<br>String | Identificador da regra de divisão |
 | **recipient_id**<br><span class="required">obrigatório</span><br>String | Recebedor que irá receber os valores descritos nessa regra |
 | **charge_processing_fee**<br>Boolean | Define se o recebedor dessa regra irá ser cobrado pela taxa da Pagar.me |
