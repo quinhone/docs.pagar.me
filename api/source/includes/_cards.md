@@ -24,7 +24,7 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
 
 | Propriedade | Descrição |
 |--:|:--|
-| **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `subscription` |
+| **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `card` |
 | **id**<br> String | Identificador do cartão |
 | **date_created**<br> String | Data de criação do objeto `card` |
 | **date_updated**<br> String | Data de atualização do objeto `card` |
