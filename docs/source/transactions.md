@@ -19,7 +19,9 @@ Para transações de boleto bancário, a transação pode ser realizada totalmen
 dentro do seu servidor, já que não há a transmissão de dados sensíveis e
 portanto o `card_hash` não é utilizado.
 
-## Realizando uma transação de cartão de crédito {#credit-card-transaction}
+**Atenção**: após ser gerado, o `card_hash` tem validade de 5 minutos e só pode ser utilizado uma única vez. Caso você deseje fazer diversas cobranças, cobranças posteriores, ou utilizar mais de uma feature (ex: transações + assinaturas), você deve primeiramente [criar um `card`](https://docs.pagar.me/cards/#storing-a-card).
+
+## Realizando uma transação de cartão de crédito
 
 Com o `card_hash` no seu servidor, agora basta realizar a transação:
 
@@ -100,7 +102,7 @@ postback_url | --- | URL para receber notificações sobre alterações da trans
 soft_descriptor | --- | Texto (de até 13 caracteres) que será aparecerá na fatura do cartão do cliente ao lado do nome da sua loja
 capture | `true` | Passar `false` para apenas autorizar a transação e realizar a captura posteriormente
 
-## Realizando uma transação de boleto bancário {#boleto-transaction}
+## Realizando uma transação de boleto bancário
 
 Uma transação de boleto bancária deve ser realizada diretamente do seu
 servidor, sem a necessidade de utilizar o `card_hash`, já que não há
@@ -180,7 +182,7 @@ payment_method | `boleto` | Meio de pagamento a ser utilizado
 postback_url | --- | URL para receber notificações sobre alterações da transação ([saiba mais](#postback))
 boleto_expiration_date | data atual + 7 dias | Data de vencimento do boleto bancário
 
-## Recebendo notificações de mudança de status da transação (POSTback) {#postback}
+## Recebendo notificações de mudança de status da transação (POSTback) 
 
 Ao realizar uma transação, diversos serviços externos (como empresas de
 antifraude, operadoras de cartão e bancos) são consultados. Por isso, esse
@@ -270,7 +272,7 @@ old_status | Status da transação antes do evento | ---
 desired_status | Status desejado após o evento | Ao criar a transação: `paid`. Ao estornar a transação: `refunded` |
 fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba mais](/advanced#validando-a-origem-de-um-postback)) | ---
 
-## Dividindo uma transação {#split}
+## Dividindo uma transação 
 
 Ao criar uma transação, você poderá definir quem irá receber e quanto do valor referente a esta transação será recebido. Essas regras são definidas através das `split_rules`, ou **regras de split**.
 
@@ -336,7 +338,7 @@ curl -X POST 'https://api.pagar.me/1/transactions' \
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Enviando dados do cliente para o Pagar.me (antifraude) {#customer-data}
+## Enviando dados do cliente para o Pagar.me (antifraude) 
 
 Para ter um maior controle dos seus clientes, principalmente através do
 Dashboard do Pagar.me, recomendamos que você também envie os dados do cliente
@@ -456,7 +458,7 @@ transaction.Save();
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Cancelando uma Transação {#refund}
+## Cancelando uma Transação 
 
 Para cancelar uma transação, ou seja, fazer um estorno, você deve enviar uma requisição `POST` para a rota `/transactions/:id/refund`, onde `:id` é o `id` da transação.
 

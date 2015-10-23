@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagar.me - Cobrando um cartão posteriormente</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all.js"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","ruby","php"]);
+        });
+      </script>
+  </head>
+
+  <body class="cards cards_index">
+    <div class="container header">
+		<a href="https://pagar.me" style="float: left;"><img src="../images/logo.png" /></a>
+
+	  <ul class="top-nav hidden-xs">
+		  <li><a href="http://pagarme.zendesk.com/">Ajuda e Suporte</a></li>
+		  <li class="button"><a href="https://dashboard.pagar.me">Entrar</a></li>
+	  </ul>
+    </div>
+    <div class="container">
+
+     
+
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="php">php</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="main-links-wrapper">
+		  <a href="/">Início</a>
+		  <a href="/capturing-card-data">Capturando os dados de cartão</a>
+		  <a href="/transactions">Realizando uma transação</a>
+		  <a href="/recipients">Gerenciando recebedores</a>
+		  <a href="/checkout">Integração via checkout</a>
+		  <a href="/cards">Cobrando um cartão posteriormente</a>
+		  <a href="/plans-subscriptions">Planos e assinaturas</a>
+		  <a href="/advanced">Opções avançadas</a>
+		  <a href="https://pagar.me/docs/api" target="_blank">Referência completa da API</a>
+      </div>
+	  <div id="sidebar-footer">
+		  <p>Não está encontrando o que procura? Envie um email para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a>.
+	  </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <h1 id='cobrando-um-cartao-posteriormente'>Cobrando um cartão posteriormente</h1>
+<p>Com o Pagar.me, você pode armazenar os dados do cartão de um usuário em nosso
+ambiente seguro e decidir quando, quanto e como deseja cobrá-lo.</p>
+
+<p>Dessa forma, você pode implementar funcionalidades como o one-click-buy (compra
+por um clique) e realizar transações sem que o usuário precise reentrar ou
+lembrar seus dados de cartão.</p>
+<h2 id='armazenando-um-cartao-storing-a-card'>Armazenando um cartão {#storing-a-card}</h1>
+<p>Para armazenar um cartão, basta passar um <code class="prettyprint">card_hash</code> contendo os dados do
+cartão. Para mais informações sobre a geração do <code class="prettyprint">card_hash</code>, veja como
+<a href="/capturing-card-data">realizar a captura dos dados de cartão</a>.</p>
+
+<p>Você deve armazenar o <code class="prettyprint">id</code> do objeto <code class="prettyprint">card</code> para realizar as cobranças futuras
+(veja abaixo).</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/cards'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+    -d <span class="s1">'card_hash={CARD_HASH}'</span> &gt; card.json
+
+<span class="nv">CARD_ID</span><span class="o">=</span>parse<span class="o">(</span><span class="s1">'card.json'</span><span class="o">)[</span><span class="s1">'id'</span><span class="o">]</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">card</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Card</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:card_hash</span> <span class="o">=&gt;</span> <span class="s2">"{CARD_HASH}"</span>
+<span class="p">})</span>
+
+<span class="n">card</span><span class="p">.</span><span class="nf">create</span>
+
+<span class="n">card_id</span> <span class="o">=</span> <span class="n">card</span><span class="p">.</span><span class="nf">id</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$card</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Card</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'card_hash'</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">{</span><span class="nv">CARD_HASH</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">));</span>
+
+    <span class="nv">$card</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+
+    <span class="nv">$card_id</span> <span class="o">=</span> <span class="nv">$card</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultApiKey</span> <span class="p">=</span> <span class="s">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">Card</span> <span class="n">card</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Card</span><span class="p">();</span>
+
+<span class="n">card</span><span class="p">.</span><span class="n">CardHash</span> <span class="p">=</span> <span class="s">"{CARD_HASH}"</span><span class="p">;</span>
+
+<span class="n">card</span><span class="p">.</span><span class="nf">Save</span><span class="p">();</span>
+
+<span class="kt">string</span> <span class="n">cardId</span> <span class="p">=</span> <span class="n">card</span><span class="p">.</span><span class="n">Id</span><span class="p">;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='recuperando-o-cartao-de-uma-transacao-anterior-card-from-transaction'>Recuperando o cartão de uma transação anterior {#card-from-transaction}</h1>
+<p>Você pode também recuperar um cartão de uma transação feita anteriormente e
+utilizá-lo para realizar novas cobranças. Para isso, basta armazenar o <code class="prettyprint">id</code> do
+objeto <code class="prettyprint">card</code> retornado na transação.</p>
+<pre class="highlight shell"><code>curl -X GET <span class="s1">'https://api.pagar.me/1/transactions/{ID DA TRANSAÇÃO}'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> &gt; transaction.json
+
+<span class="nv">CARD_ID</span><span class="o">=</span>parse<span class="o">(</span><span class="s1">'transaction.json'</span><span class="o">)[</span><span class="s1">'card'</span><span class="o">][</span><span class="s1">'id'</span><span class="o">]</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">transaction</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Transaction</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="s2">"{ID DA TRANSAÇÃO"</span><span class="p">)</span>
+<span class="n">card_id</span> <span class="o">=</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">card</span><span class="p">.</span><span class="nf">id</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$transaction</span> <span class="o">=</span> <span class="nx">PagarMe_Transaction</span><span class="o">::</span><span class="na">findById</span><span class="p">(</span><span class="s2">"{ID DA TRANSAÇÃO}"</span><span class="p">),</span>
+    <span class="nv">$card_id</span> <span class="o">=</span> <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">card</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultApiKey</span> <span class="p">=</span> <span class="s">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">Transaction</span> <span class="n">transaction</span> <span class="p">=</span> <span class="n">PagarMeService</span><span class="p">.</span><span class="nf">GetDefaultService</span><span class="p">().</span><span class="n">Cards</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"{ID DA TRANSAÇÃO}"</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">cardId</span> <span class="p">=</span> <span class="n">transaction</span><span class="p">.</span><span class="n">Card</span><span class="p">.</span><span class="n">Id</span><span class="p">;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='realizando-uma-transacao-usando-um-cartao-charging-a-card'>Realizando uma transação usando um cartão {#charging-a-card}</h1>
+<p>Agora que você tem o <code class="prettyprint">id</code> do <code class="prettyprint">card</code> em mãos, basta <a href="/transactions">criar uma
+transação</a> passando o <code class="prettyprint">card_id</code>. Os demais parâmetros da
+transação (valor, número de parcelas, etc.) também podem ser passados
+normalmente.</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/transactions'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+    -d <span class="s1">'amount=1000'</span> <span class="se">\</span>
+    -d <span class="s1">'card_id={ID DO CARTÃO}'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">transaction</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Transaction</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="ss">:card</span> <span class="o">=&gt;</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Card</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="s2">"{ID DO CARTÃO}"</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="n">transaction</span><span class="p">.</span><span class="nf">charge</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$transaction</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Transaction</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'amount'</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="s1">'card'</span> <span class="o">=&gt;</span> <span class="nx">PagarMe_Card</span><span class="o">::</span><span class="na">findById</span><span class="p">(</span><span class="s2">"{ID DO CARTÃO}"</span><span class="p">),</span>
+    <span class="p">));</span>
+
+    <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">charge</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultApiKey</span> <span class="p">=</span> <span class="s">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">Transaction</span> <span class="n">transaction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Transaction</span><span class="p">();</span>
+
+<span class="n">transaction</span><span class="p">.</span><span class="n">Amount</span> <span class="p">=</span> <span class="m">1000</span><span class="p">;</span>
+<span class="n">transaction</span><span class="p">.</span><span class="n">Card</span> <span class="p">=</span> <span class="n">PagarMeService</span><span class="p">.</span><span class="nf">GetDefaultService</span><span class="p">().</span><span class="n">Cards</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"{ID DO CARTÃO}"</span><span class="p">);</span>
+
+<span class="n">transaction</span><span class="p">.</span><span class="nf">Save</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+  </body>
+</html>

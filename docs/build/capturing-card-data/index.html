@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagar.me - Capturando os dados de cartão</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all.js"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","ruby","php"]);
+        });
+      </script>
+  </head>
+
+  <body class="capturing-card-data capturing-card-data_index">
+    <div class="container header">
+		<a href="https://pagar.me" style="float: left;"><img src="../images/logo.png" /></a>
+
+	  <ul class="top-nav hidden-xs">
+		  <li><a href="http://pagarme.zendesk.com/">Ajuda e Suporte</a></li>
+		  <li class="button"><a href="https://dashboard.pagar.me">Entrar</a></li>
+	  </ul>
+    </div>
+    <div class="container">
+
+     
+
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="php">php</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="main-links-wrapper">
+		  <a href="/">Início</a>
+		  <a href="/capturing-card-data">Capturando os dados de cartão</a>
+		  <a href="/transactions">Realizando uma transação</a>
+		  <a href="/recipients">Gerenciando recebedores</a>
+		  <a href="/checkout">Integração via checkout</a>
+		  <a href="/cards">Cobrando um cartão posteriormente</a>
+		  <a href="/plans-subscriptions">Planos e assinaturas</a>
+		  <a href="/advanced">Opções avançadas</a>
+		  <a href="https://pagar.me/docs/api" target="_blank">Referência completa da API</a>
+      </div>
+	  <div id="sidebar-footer">
+		  <p>Não está encontrando o que procura? Envie um email para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a>.
+	  </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <h1 id='capturando-os-dados-de-cartao'>Capturando os dados de cartão</h1>
+<p>Com o Pagar.me, você pode realizar a captura dos dados de cartão sem que o seu
+cliente precise sair da sua página/aplicativo. Para que o processo aconteça de
+forma segura, você precisará incluir nossa biblioteca em sua página/aplicativo
+para realizar a captura desses dados.</p>
+
+<p>Nossa biblioteca irá realizar a geração do <code class="prettyprint">card_hash</code>, que é uma representação
+segura dos dados de cartão e o único dado de cartão que deverá ser enviado para
+o seu servidor.</p>
+
+<p>Para boletos bancários, não é necessário utilizar o <code class="prettyprint">card_hash</code>, já que não há
+a transmissão de dados sensíveis entre o cliente, o seu servidor e o
+Pagar.me.</p>
+<h2 id='capturando-os-dados-em-uma-pagina-web'>Capturando os dados em uma página web</h1>
+<p>Para realizar a geração do <code class="prettyprint">card_hash</code> dentro de uma página web, você precisará
+incluir o <code class="prettyprint">Pagarme.js</code>, nosso JavaScript, na sua página. Para isso, insira o
+seguinte código antes do final da seção <code class="prettyprint">head</code> da sua página HTML:</p>
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://assets.pagar.me/js/pagarme.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+<p>Depois, insira um formulário para digitar os dados de cartão.</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"payment_form"</span> <span class="na">action=</span><span class="s">"https://seusite.com.br/transactions/new"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+    Número do cartão: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"card_number"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;br/&gt;</span>
+    Nome (como escrito no cartão): <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"card_holder_name"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;br/&gt;</span>
+    Mês de expiração: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"card_expiration_month"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;br/&gt;</span>
+    Ano de expiração: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"card_expiration_year"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;br/&gt;</span>
+    Código de segurança: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"card_cvv"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;br/&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"field_errors"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;br/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;&lt;/input&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>Nesse exemplo, usaremos o jQuery para gerar e inserir o <code class="prettyprint">card_hash</code> no seu formulário, 
+então incluiremos esse script antes do final da seção <code class="prettyprint">head</code> da sua página HTML:</p>
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+<p>Agora, no seu JavaScript, você precisará detectar quando o botão do formulário
+for pressionado e, a partir daí, chamar o <code class="prettyprint">Pagarme.js</code> para gerar o <code class="prettyprint">card_hash</code>
+e substituir os outros campos dos dados de cartão por ele:</p>
+<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// quando o jQuery estiver carregado...</span>
+    <span class="nx">PagarMe</span><span class="p">.</span><span class="nx">encryption_key</span> <span class="o">=</span> <span class="s2">"ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk"</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#payment_form"</span><span class="p">);</span>
+
+    <span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// quando o form for enviado...</span>
+        <span class="c1">// inicializa um objeto de cartão de crédito e completa</span>
+        <span class="c1">// com os dados do form</span>
+        <span class="kd">var</span> <span class="nx">creditCard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe</span><span class="p">.</span><span class="nx">creditCard</span><span class="p">();</span>
+        <span class="nx">creditCard</span><span class="p">.</span><span class="nx">cardHolderName</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#payment_form #card_holder_name"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+        <span class="nx">creditCard</span><span class="p">.</span><span class="nx">cardExpirationMonth</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#payment_form #card_expiration_month"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+        <span class="nx">creditCard</span><span class="p">.</span><span class="nx">cardExpirationYear</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#payment_form #card_expiration_year"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+        <span class="nx">creditCard</span><span class="p">.</span><span class="nx">cardNumber</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#payment_form #card_number"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+        <span class="nx">creditCard</span><span class="p">.</span><span class="nx">cardCVV</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#payment_form #card_cvv"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+
+        <span class="c1">// pega os erros de validação nos campos do form</span>
+        <span class="kd">var</span> <span class="nx">fieldErrors</span> <span class="o">=</span> <span class="nx">creditCard</span><span class="p">.</span><span class="nx">fieldErrors</span><span class="p">();</span>
+
+        <span class="c1">//Verifica se há erros</span>
+        <span class="kd">var</span> <span class="nx">hasErrors</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">field</span> <span class="k">in</span> <span class="nx">fieldErrors</span><span class="p">)</span> <span class="p">{</span> <span class="nx">hasErrors</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">hasErrors</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// realiza o tratamento de errors</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">fieldErrors</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// se não há erros, gera o card_hash...</span>
+            <span class="nx">creditCard</span><span class="p">.</span><span class="nx">generateHash</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cardHash</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// ...coloca-o no form...</span>
+                <span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;input type="hidden" name="card_hash"&gt;'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">cardHash</span><span class="p">));</span>
+                <span class="c1">// e envia o form</span>
+                <span class="nx">form</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk</code> pela
+sua chave de encriptação disponível no seu
+<a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='capturando-os-dados-em-um-aplicativo-para-ios'>Capturando os dados em um aplicativo para iOS</h1>
+<p>Para realizar a geração do <code class="prettyprint">card_hash</code> dentro de um aplicativo para iOS, você
+precisará incluir nossa biblioteca dentro dele. Para isso, <a href="https://github.com/PagarMe/pagarme-ios/archive/master.zip">baixe a biblioca
+para iOS no GitHub do
+Pagar.me</a> e adicione
+a pasta <code class="prettyprint">PagarMeAPI</code> e o framework <code class="prettyprint">Security.framework</code> ao seu projeto.</p>
+
+<p>Para utilizar a biblitoca, primeiro importe os headers:</p>
+<pre class="highlight objective_c"><code><span class="cp">#import "PagarMe.h"
+</span></code></pre>
+
+<p>E para gerar o <code class="prettyprint">card_hash</code> a partir dos dados de cartão:</p>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">PagarMe</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="n">encryptionKey</span> <span class="o">=</span> <span class="s">@"ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk"</span><span class="p">;</span>
+
+<span class="n">PagarMeCreditCard</span> <span class="o">*</span><span class="n">creditCard</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PagarMeCreditCard</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+<span class="n">creditCard</span><span class="p">.</span><span class="n">cardNumber</span> <span class="o">=</span> <span class="s">@"4111111111111111"</span><span class="p">;</span>
+<span class="n">creditCard</span><span class="p">.</span><span class="n">cardHolderName</span> <span class="o">=</span> <span class="s">@"Test User"</span><span class="p">;</span>
+<span class="n">creditCard</span><span class="p">.</span><span class="n">cardExpiracyMonth</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="n">creditCard</span><span class="p">.</span><span class="n">cardExpiracyYear</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="n">creditCard</span><span class="p">.</span><span class="n">cardCvv</span> <span class="o">=</span> <span class="s">@"123"</span><span class="p">;</span>
+
+<span class="c1">// Valida os dados do cartão de crédito antes de gerar o card_hash...
+</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[</span><span class="n">creditCard</span> <span class="nf">fieldErrors</span><span class="p">];</span>
+
+<span class="k">if</span><span class="p">([</span><span class="n">errors</span> <span class="nf">count</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Foram encontrados erros nos dados do cartão de crédito: "</span><span class="p">);</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"%@"</span><span class="p">,</span> <span class="n">errors</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">creditCard</span> <span class="nf">generateHash</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">cardHash</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Erro gerando o card_hash: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span><span class="err">;</span>
+            <span class="k">return</span><span class="err">;</span>
+        <span class="p">}</span>
+
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"card_hash gerado: %@"</span><span class="p">,</span> <span class="n">cardHash</span><span class="p">)</span><span class="err">;</span>
+        <span class="c1">// Agora envie a string cardHash para o seu servidor.
+</span>    <span class="p">}];</span>
+<span class="p">}</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk</code> pela
+sua chave de encriptação disponível no seu
+<a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='capturando-os-dados-em-um-aplicativo-para-windows-ou-windows-phone-net'>Capturando os dados em um aplicativo para Windows ou Windows Phone (.NET)</h1>
+<p>Para realizar a geração do <code class="prettyprint">card_hash</code> dentro de um aplicativo para Windows ou Windows Phone (plataforma .NET)
+você precisará incluir nossa biblioteca dentro dele. Para isso, instale a <a href="https://www.nuget.org/packages/Pagar.me/">biblioteca .NET</a> ou a <a href="https://www.nuget.org/packages/Portable.Pagar.me/">biblioteca portável para .NET</a>.</p>
+
+<p>Para utilizar a biblitoeca, primeiro importe o namespace:</p>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="nn">PagarMe</span><span class="p">;</span>
+</code></pre>
+
+<p>E para gerar o <code class="prettyprint">card_hash</code> a partir dos dados de cartão:</p>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultEncryptionKey</span> <span class="p">=</span> <span class="s">"ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk"</span><span class="p">;</span>
+
+<span class="n">CardHash</span> <span class="n">card</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">CardHash</span><span class="p">();</span>
+
+<span class="n">card</span><span class="p">.</span><span class="n">CardNumber</span> <span class="p">=</span> <span class="s">"4111111111111111"</span><span class="p">;</span>
+<span class="n">card</span><span class="p">.</span><span class="n">CardHolderName</span> <span class="p">=</span> <span class="s">"Test User"</span><span class="p">;</span>
+<span class="n">card</span><span class="p">.</span><span class="n">CardExpirationDate</span> <span class="p">=</span> <span class="s">"1017"</span><span class="p">;</span>
+<span class="n">card</span><span class="p">.</span><span class="n">CardCvv</span> <span class="p">=</span> <span class="s">"123"</span><span class="p">;</span>
+
+<span class="kt">string</span> <span class="n">cardhash</span> <span class="p">=</span> <span class="n">card</span><span class="p">.</span><span class="nf">Generate</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk</code> pela
+sua chave de encriptação disponível no seu
+<a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='proximos-passos'>Próximos passos</h1>
+<p>Com o <code class="prettyprint">card_hash</code> em mãos no seu servidor, você pode <a href="/transactions">realizar uma
+transação</a>, <a href="/plans-subscriptions">criar uma assinatura</a> ou
+<a href="/cards">armazenar esse cartão e cobrá-lo posteriormente</a>.</p>
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+  </body>
+</html>

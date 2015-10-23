@@ -1,0 +1,1 @@
+!function(t){t(document).ready(function(){if(console.log(t(window).width()),!(t(window).width()<992)){var e=t(".tocify-wrapper"),i=e.offset().top;t(window).on("scroll",function(n){var o=t(this).scrollTop();o>i?e.css({position:"fixed",top:0}):e.css({position:"static"})})}})}(jQuery);

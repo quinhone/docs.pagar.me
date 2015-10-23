@@ -299,6 +299,74 @@ Retorna um objeto com os dados de um recebedor criado pela sua companhia.
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **:id**<br> <span class="required">obrigatório</span> | Id de recebedor desejado |
 
+## Atualizando um recebedor
+
+> PUT https://api.pagar.me/1/recipients/:id
+
+```shell
+curl -X PUT https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl \
+-d 'anticipatable_volume_percentage=80' \
+-d 'bank_account_id=5233'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Após criar um recebedor, você pode atualizar todas as configurações do mesmo.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "recipient",
+    "id": "re_ci7nhf1ay0007n016wd5t22nl",
+    "bank_account": {
+        "object": "bank_account",
+        "id": 5233,
+        "bank_code": "341",
+        "agencia": "0721",
+        "agencia_dv": null,
+        "conta": "02733",
+        "conta_dv": "3",
+        "document_type": "cpf",
+        "document_number": "26268738888",
+        "legal_name": "RECIPIENT TEST",
+        "charge_transfer_fees": true,
+        "date_created": "2015-03-24T15:53:17.000Z"
+    },
+    "transfer_enabled": true,
+    "last_transfer": null,
+    "transfer_interval": "weekly",
+    "transfer_day": 5,
+	"anticipatable_volume_percentage": 80,
+	"automatic_anticipation_enabled": true,
+    "date_created": "2015-03-24T15:53:27.000Z",
+    "date_updated": "2015-03-29T15:53:27.000Z"
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **transfer_interval**<br> <span class="required">obrigatório</span> | Frequência na qual o recebedor irá ser pago. <br> **Valores possíveis**: `daily`, `weekly`, `monthly` |
+| **transfer_day**<br> <span class="required">obrigatório</span> | Dia no qual o recebedor vai ser pago. |
+| **transfer_enabled**<br> <span class="required">obrigatório</span> | Variável que indica se o recebedor pode receber os pagamentos automaticamente |
+| **anticipatable_volume_percentage** | Limite de volume que pode ser antecipado pelo recebedor |
+| **bank_account_id**<br> <span class="required">obrigatório\*</span> | Identificador de uma conta bancária previamente criada. Caso você não tenha essa informação, você pode passar os parâmetros necessários para [criação de uma conta bancária](/#criando-uma-conta-bancaria). <br>**OBS:** Para atualizar a conta bancária, ela deve **obrigatóriamente** possuir o mesmo CPF ou CNPJ da conta bancária anterior | 
+| **bank_account**<br> <span class="required">obrigatório\*</span> | Objeto contendo os dados bancários do recebedor. Este objeto, e as suas respectivas propriedades, serão obrigatórios caso não seja informado um `bank_account_id` <br>**OBS:** Para atualizar a conta bancária, ela deve **obrigatóriamente** possuir o mesmo CPF ou CNPJ da conta bancária anterior |
+| **bank_account[bank_code]** | Código do banco do recebedor |
+| **bank_account[agencia]** | Agência da conta do recebedor |
+| **bank_account[conta]** | Número da conta bancária do recebedor |
+| **bank_account[conta_dv]** | Dígito verificador da conta do recebedor |
+| **bank_account[document_number]** | CPF ou CNPJ do recebedor |
+| **bank_account[legal_name]** | Nome completo ou razão social do recebedor |
+
 ## Saldo de um recebedor
 
 > GET https://api.pagar.me/1/recipients/:id/balance

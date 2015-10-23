@@ -79,6 +79,62 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 | data-customer-phone-ddd | - | DDD do telefone do cliente |
 | data-customer-phone-number | - | Número do telefone do cliente |
 | data-interest-rate | - | Taxa de juros a ser cobrada na transação |
+| data-free-installments | - | Número de parcelas que não terão juros cobrados |
+| data-default-installment | `1` | Define a parcela padrão selecionada ao abrir o checkout | 
+
+## Inserindo o Checkout via API
+
+Caso você deseje ter um controle maior sobre a inicialização checkout, ou se você possui um `single-page app`, você pode gerar o formulário e abrir o checkout diretamente via API. 
+
+```javascript
+$(document).ready(function() {
+	var button = $('#pay-button');
+
+	// inicializa o checkout
+	var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_Akwmf1evsllS5aPfdVZr3rk4It6xWR", success: function(data) {
+		console.log(data);
+		// callback após o checkout ter sido finalizado
+	}});
+
+	button.click(function() {
+		// abre o checkout passando os parâmetros desejados
+		var params = {"customerData":false, "amount":"100000", "createToken": "true", "interestRate": 10 };
+		checkout.open(params);		
+	});
+});
+```
+
+### Parâmetros para abertura do Checkout
+
+Tag | Padrão | Descrição
+--- | ------ | ---------
+amount | --- | Valor da transação (em centavos) a ser capturada pelo Checkout. Ex: R$14,79 = `1479`
+buttonText | `Pagar` | Texto do botão de pagamento.
+buttonClass | --- | Classe CSS a ser adicionada no botão de pagamento.
+customerData | `true` | Caso não deseje capturar dados do cliente pelo Checkout, setar como `false`.
+paymentMethods | `credit_card,boleto` | Meios de pagamento disponíveis no Checkout.
+cardBrands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceitas pelo Checkout.
+maxInstallments | `1` | Número máximo de parcelas aceitas.
+uiColor | `#1a6ee1` | Cor primária da interface de Checkout.
+postbackUrl | --- | Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações |
+createToken | `true` | Habilita a geração do token para autorização da transação. <br> **OBS**: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor `false`, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.
+customerName | - | Nome do cliente 
+customerDocumentNumber | - | CPF ou CNPJ do cliente 
+customerEmail | - | E-mail do cliente 
+customerAddressStreet | - | Nome do logradouro do cliente 
+customerAddressStreetNumber | - | Número do imóvel do cliente 
+customerAddressComplementary | - | Complemente do endereço do cliente 
+customerAddressNeighborhood | - | Bairro do cliente 
+customerAddressCity | - | Cidade do cliente 
+customerAddress-State | - | Estado (unidade federativa) do cliente 
+customerAddressZipcode | - | Código de endereçmento postal (CEP) da cidade do cliente 
+customerPhoneDdd | - | DDD do telefone do cliente 
+customerPhoneNumber | - | Número do telefone do cliente 
+interestRate | - | Taxa de juros a ser cobrada na transação 
+freeInstallments | - | Número de parcelas que não terão juros cobrados 
+defaultInstallment | `1` | Define a parcela padrão selecionada ao abrir o checkout 
+
+
 
 ## Capturando a transação
 
@@ -133,6 +189,39 @@ variável `boleto_url`.
 <aside class="notice">Após a finalização da transação em sua página, você terá
 05 minutos para capturá-la no seu servidor. Após esse período, a transação será
 recusada pelo motivo `capture_timeout`.</aside>
+
+## Enviando metadata com Checkout
+
+Com o checkout Pagar.me também é possível enviar metadata em uma transação. Para o caso do checkout, o envio de metadata é feito no momento de captura da transação. Basta passar a metada como parâmetros do request de captura.
+
+Qualquer dúvida sobre metadata, basta checar a sessão de metada na [documentação para metadata](https://docs.pagar.me/advanced/#enviando-dados-adicionais-metadata).
+
+```shell
+curl -X POST "https://api.pagar.me/1/transactions/{TOKEN}/capture"
+  -d 'amount=1000' \
+  -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+  -d 'metadata[id_pedido]=12345' \
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+transaction = PagarMe::Transaction.find_by_id("{TOKEN}")
+transaction.capture({
+	:amount => 1000,
+	:metadata => {
+		:id_pedido => 12345
+	}
+})
+```
+
+```php
+```
+
+```cs
+```
 
 ## Checkout em Assinaturas
 

@@ -106,7 +106,7 @@ Retorna todos os recebíveis da sua empresa.
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 
-<aside class="notice">OBS: Você pode passar qualquer propriedade e valor presentes nos objetos `payable` como parâmetro de busca/filtro nesta rota. Ex: `status="waiting_funds"` ou `recipient_id="re_ci7nhf1ay0007n016wd5t22nl"`</aside>
+<aside class="notice">OBS: Você pode passar qualquer propriedade e valor presentes nos objetos `payable` como parâmetro de busca/filtro nesta rota. Ex: `status="waiting_funds"` ou `recipient_id="re_ci7nhf1ay0007n016wd5t22nl"` <br> <br>Também é possível filtrar por intervalo de tempo, definindo um intervalo para o parâmetro `payment_date`. </aside>
 
 ## Retornando um recebível
 

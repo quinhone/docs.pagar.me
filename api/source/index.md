@@ -18,6 +18,7 @@ includes:
   - balance_operations
   - bank_accounts
   - recipients
+  - bulk_anticipation
   - split_rules
   - transfers
   - customers

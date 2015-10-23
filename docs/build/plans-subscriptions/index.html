@@ -1,0 +1,451 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagar.me - Planos e assinaturas</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all.js"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","ruby","php"]);
+        });
+      </script>
+  </head>
+
+  <body class="plans-subscriptions plans-subscriptions_index">
+    <div class="container header">
+		<a href="https://pagar.me" style="float: left;"><img src="../images/logo.png" /></a>
+
+	  <ul class="top-nav hidden-xs">
+		  <li><a href="http://pagarme.zendesk.com/">Ajuda e Suporte</a></li>
+		  <li class="button"><a href="https://dashboard.pagar.me">Entrar</a></li>
+	  </ul>
+    </div>
+    <div class="container">
+
+     
+
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="php">php</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="main-links-wrapper">
+		  <a href="/">Início</a>
+		  <a href="/capturing-card-data">Capturando os dados de cartão</a>
+		  <a href="/transactions">Realizando uma transação</a>
+		  <a href="/recipients">Gerenciando recebedores</a>
+		  <a href="/checkout">Integração via checkout</a>
+		  <a href="/cards">Cobrando um cartão posteriormente</a>
+		  <a href="/plans-subscriptions">Planos e assinaturas</a>
+		  <a href="/advanced">Opções avançadas</a>
+		  <a href="https://pagar.me/docs/api" target="_blank">Referência completa da API</a>
+      </div>
+	  <div id="sidebar-footer">
+		  <p>Não está encontrando o que procura? Envie um email para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a>.
+	  </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <h1 id='planos-e-assinaturas'>Planos e assinaturas</h1>
+<p>Com o Pagar.me, você pode cobrar seus clientes de forma recorrente através de
+planos e assinaturas.</p>
+
+<p>Ao criar um plano, você define como, quando e quanto devemos cobrar seu
+cliente. E para cobrar seu cliente, basta criar uma assinatura atrelada a um
+plano.</p>
+
+<p>O Pagar.me então se encarregará de todo o fluxo de cobrança e gestão da
+inadimplência para você.</p>
+<h2 id='criando-um-plano'>Criando um plano</h1>
+<p>O primeiro passo é criar um plano.</p>
+
+<p>Nesse exemplo, criaremos um plano de R$49,90 e 30 dias:</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/plans'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+    -d <span class="s1">'amount=4990'</span> <span class="se">\</span>
+    -d <span class="s1">'days=30'</span> <span class="se">\</span>
+    -d <span class="s1">'name=Plano Mensal'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">plan</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Plan</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="mi">4990</span><span class="p">,</span>
+    <span class="ss">:days</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Plano Mensal"</span>
+<span class="p">})</span>
+
+<span class="n">plan</span><span class="p">.</span><span class="nf">create</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$plan</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Plan</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'amount'</span> <span class="o">=&gt;</span> <span class="mi">4990</span><span class="p">,</span>
+        <span class="s1">'days'</span> <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s2">"Plano Mensal"</span>
+    <span class="p">));</span>
+
+    <span class="nv">$plan</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h3 id='configuracoes-do-plano'>Configurações do plano</h1>
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Padrão</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>&mdash;</td>
+<td>Nome do plano. Ex: <code class="prettyprint">Plano Gold</code></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>&mdash;</td>
+<td>Valor a ser cobrado (em centavos). Ex: R$14,99 = <code class="prettyprint">1499</code></td>
+</tr>
+<tr>
+<td>days</td>
+<td>&mdash;</td>
+<td>Dias de duração do plano</td>
+</tr>
+<tr>
+<td>trial_days</td>
+<td><code class="prettyprint">0</code></td>
+<td>Dias de duração do período de trial</td>
+</tr>
+<tr>
+<td>payment_methods</td>
+<td><code class="prettyprint">credit_card,boleto</code></td>
+<td>Meios de pagamento aceitos para o plano</td>
+</tr>
+<tr>
+<td>charges</td>
+<td><code class="prettyprint">null</code></td>
+<td>Número de vezes que o usuário deverá ser cobrado. <code class="prettyprint">null</code> irá cobrar o usuário indefinidamente, ou até que o plano seja cancelado.</td>
+</tr>
+<tr>
+<td>installments</td>
+<td><code class="prettyprint">1</code></td>
+<td>Número de parcelas a ser cobrado no cartão de crédito. Útil para planos anuais em que o usuário irá parcelar o valor ao longo dos <code class="prettyprint">12</code> meses.</td>
+</tr>
+</tbody></table>
+<h2 id='criando-uma-assinatura'>Criando uma assinatura</h1>
+<p>Para criar uma assinatura de cartão de crédito atrelada ao plano criado
+anteriormente, basta fornecer o ID do plano criado, o <code class="prettyprint">card_hash</code> contendo os
+dados de cartão e o e-mail do cliente.</p>
+
+<p>Para mais informações sobre a geração do <code class="prettyprint">card_hash</code>, veja como <a href="/capturing-card-data">realizar a
+captura dos dados de cartão</a>.</p>
+
+<p>Para criar uma assinatura com boleto bancário, basta passar <code class="prettyprint">boleto</code> como o
+<code class="prettyprint">payment_method</code>.</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/subscriptions'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+    -d <span class="s1">'plan_id=1234'</span> <span class="se">\</span>
+    -d <span class="s1">'card_hash={CARD_HASH}'</span> <span class="se">\</span>
+    -d <span class="s1">'customer[email]=email.do.cliente@gmail.com'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">subscription</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Subscription</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:plan</span> <span class="o">=&gt;</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Plan</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="s2">"1234"</span><span class="p">),</span>
+    <span class="ss">:card_hash</span> <span class="o">=&gt;</span> <span class="s2">"{CARD_HASH}"</span><span class="p">,</span>
+    <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">"email.do.cliente@gmail.com"</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="n">subscription</span><span class="p">.</span><span class="nf">create</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$subscription</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Subscription</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'plan'</span> <span class="o">=&gt;</span> <span class="nx">PagarMe_Plan</span><span class="o">::</span><span class="na">findById</span><span class="p">(</span><span class="s2">"1234"</span><span class="p">),</span>
+        <span class="s1">'card_hash'</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">{</span><span class="nv">CARD_HASH</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s1">'customer'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s2">"email.do.cliente@gmail.com"</span>
+        <span class="p">)</span>
+    <span class="p">));</span>
+
+    <span class="nv">$subscription</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir:<br/>
+- <code class="prettyprint">1234</code> pelo ID do plano,<br/>
+- <code class="prettyprint">{CARD_HASH}</code> pelo <code class="prettyprint">card_hash</code> gerado no browser do cliente,<br/>
+- <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela sua chave de API disponível
+  no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='fluxo-de-cobranca'>Fluxo de cobrança</h1>
+<p>Toda assinatura tem um <code class="prettyprint">current_period_start</code> e um <code class="prettyprint">current_period_end</code>,
+indicando, respectivamente, o início e o fim do período de cobrança atual.</p>
+
+<p>Dessa forma, uma assinatura com um plano de 30 dias criada hoje, terá
+hoje como <code class="prettyprint">current_period_start</code>, e daqui a 30 dias como <code class="prettyprint">current_period_end</code>.</p>
+
+<p>As cobranças serão sempre realizadas na data do <code class="prettyprint">current_period_end</code>.</p>
+
+<p>A última transação realizada dentro de uma assinatura está disponível na
+variável <code class="prettyprint">current_transaction</code>. Dessa forma, você pode acessar, por exemplo, os
+dados do boleto bancário da assinatura sem precisar realizar outra requisição.</p>
+<h3 id='na-criacao-da-assinatura'>Na criação da assinatura</h1><h4 id='cartao-de-credito'>Cartão de crédito</h1>
+<p>Ao criar uma assinatura de cartão de crédito, tentaremos na mesma hora realizar
+a primeira cobrança no cartão do usuário. A assinatura passará a ter o status
+<code class="prettyprint">paid</code> caso a cobrança ocorra com sucesso.</p>
+
+<p>Se o plano tiver um período de trial, iremos validar o cartão antes de
+armazená-lo, e a primeira cobrança só será realizada ao fim do trial. Até lá, a
+assinatura terá o status <code class="prettyprint">trialing</code>.</p>
+
+<p>Caso a primeira cobrança ou a validação do cartão de crédito falhe, a
+assinatura não será criada e um erro será retornado.</p>
+<h4 id='boleto-bancario'>Boleto bancário</h1>
+<p>Ao criar uma assinatura de boleto bancário, será emitido um boleto com 7 dias
+de validade. A assinatura terá status <code class="prettyprint">unpaid</code> até que o boleto bancário seja
+pago. Ao detectarmos o pagamento, o status mudará para <code class="prettyprint">paid</code>.</p>
+
+<p>Se o plano tiver um período de trial, o boleto será emitido com data de
+validade para o fim do período de trial e a assinatura terá status <code class="prettyprint">trialing</code>.
+Ao fim do trial, se o boleto for pago, a assinatura irá para o status <code class="prettyprint">paid</code>.</p>
+
+<p>Caso o boleto não tenha sido pago até o fim do trial, a assinatura passará para
+<code class="prettyprint">unpaid</code>.</p>
+<h3 id='ao-fim-do-periodo-de-cobranca-atual'>Ao fim do período de cobrança atual</h1><h4 id='cartao-de-credito'>Cartão de crédito</h1>
+<p>Ao fim do período atual (<code class="prettyprint">current_period_end</code>), iremos realizar a próxima
+cobrança na assinatura. Se a cobrança ocorrer com sucesso, a assinatura
+permanecerá no status <code class="prettyprint">paid</code>, e o <code class="prettyprint">current_period_start</code> e <code class="prettyprint">current_period_end</code>
+serão atualizados.</p>
+
+<p>Caso a cobrança falhe por algum motivo (falta de saldo, transação negada pelo
+banco, etc), a assinatura entrará no status <code class="prettyprint">pending_payment</code> e o usuário será
+notificado por e-mail.</p>
+<h4 id='boleto-bancario'>Boleto bancário</h1>
+<p>Sempre que um boleto de uma assinatura é pago, o próximo boleto é emitido e já
+está disponível para pagamento. Dessa forma, após o último pagamento, o boleto
+correspondente ao período atual já poderá ser pago pelo cliente.</p>
+
+<p>Ao detectarmos o pagamento do boleto do período atual, a assinatura continuará
+com o status <code class="prettyprint">paid</code> e o <code class="prettyprint">current_period_start</code> e <code class="prettyprint">current_period_end</code> serão
+atualizados respeitando a data de pagamento do boleto. Dessa forma, se o
+usuário efetuar o pagamento 5 dias antes do fim do período atual, o
+<code class="prettyprint">current_period_end</code> terá um acréscimo de 5 dias.</p>
+
+<p>Caso o boleto não seja pago até o fim do período, a assinatura entrará no
+status <code class="prettyprint">pending_payment</code> e o usuário será notificado por e-mail.</p>
+<h3 id='durante-o-status-pending_payment'>Durante o status <code class="prettyprint">pending_payment</code></h1>
+<p>Quando a assinatura atinge o fim do período atual sem ser paga, a mesma muda
+para o status <code class="prettyprint">pending_payment</code>. Durante esse status, tentaremos cobrar o
+usuário todos os dias e iremos notificá-lo por e-mail caso o pagamento falhe ou
+não seja detectado novamente.</p>
+
+<p>Sempre que o usuário é notificado por e-mail, mandamos um link para uma página
+onde ele poderá alterar a forma de pagamento ou o cartão de crédito utilizado
+na assinatura.</p>
+
+<p>O tempo que a assinatura ficará <code class="prettyprint">pending_payment</code> caso o pagamento não seja
+detectado é, por padrão, de 5 dias. Esse valor (<code class="prettyprint">payment_deadline</code>) pode ser
+configurado pelo seu Dashboard e é único para sua conta.</p>
+
+<p>Caso após todas as 5 tentativas de cobrança a assinatura continue não paga, a
+mesma passará para o status <code class="prettyprint">unpaid</code>.</p>
+<h3 id='durante-o-status-unpaid'>Durante o status <code class="prettyprint">unpaid</code></h1>
+<p>Quando a assinatura atinge o status <code class="prettyprint">unpaid</code>, você deve cortar o acesso do
+usuário ao seu serviço/sistema, pois o mesmo encontra-se inadimplente há 5
+dias.</p>
+
+<p>Durante o status <code class="prettyprint">unpaid</code>, faremos mais <code class="prettyprint">4</code> tentativas de cobrança com um
+intervalo de <code class="prettyprint">3</code> dias entre elas. Tanto o número de tentativas quanto o
+intervalo entre elas pode ser configurada pelo seu Dashboard, e são únicos para
+a sua conta.</p>
+
+<p>Você pode, opcionalmente, optar por automaticamente cancelar a assinatura caso
+após todas as tentativas de cobrança (do status <code class="prettyprint">pending_payment</code> e <code class="prettyprint">unpaid</code>)
+ela continue não paga. Essa opção pode ser configurada pelo seu Dashboard e por
+padrão está desabilitada.</p>
+<h3 id='durante-o-status-canceled'>Durante o status <code class="prettyprint">canceled</code></h1>
+<p>Após a assinatura ser cancelada, nenhuma tentativa de cobrança será mais feita.</p>
+
+<p>Uma assinatura cancelada não pode ser cobrada novamente.</p>
+<h2 id='recebendo-notificacoes-de-mudanca-de-status-postback'>Recebendo notificações de mudança de status (POSTback)</h1>
+<p>Ao fornecer uma <code class="prettyprint">postback_url</code> ao criar a assinatura, iremos notificar sua
+aplicação sempre que o status da assinatura mudar. Dessa forma, você pode
+cortar e reativar o serviço de um cliente baseado nas mudanças de status da
+assinatura.</p>
+
+<p><aside class="notice">Quando a assinatura passa para o status <code class="prettyprint">unpaid</code>, você
+deve cortar o serviço do cliente, já que a mesma está inadimplente.</aside></p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/subscriptions'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+    -d <span class="s1">'plan_id=1234'</span> <span class="se">\</span>
+    -d <span class="s1">'card_hash={CARD_HASH}'</span> <span class="se">\</span>
+    -d <span class="s1">'customer[email]=email.do.cliente@gmail.com'</span> <span class="se">\</span>
+    -d <span class="s1">'postback_url=http://seusite.com/subscriptions/2718'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">subscription</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Subscription</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:plan</span> <span class="o">=&gt;</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Plan</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="s2">"1234"</span><span class="p">),</span>
+    <span class="ss">:card_hash</span> <span class="o">=&gt;</span> <span class="s2">"{CARD_HASH}"</span><span class="p">,</span>
+    <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="s2">"email.do.cliente@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="ss">:postback_url</span> <span class="o">=&gt;</span> <span class="s2">"http://seusite.com/subscriptions/2718"</span>
+<span class="p">})</span>
+
+<span class="n">subscription</span><span class="p">.</span><span class="nf">create</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$subscription</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Subscription</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'plan'</span> <span class="o">=&gt;</span> <span class="nx">PagarMe_Plan</span><span class="o">::</span><span class="na">findById</span><span class="p">(</span><span class="s2">"1234"</span><span class="p">),</span>
+        <span class="s1">'card_hash'</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">{</span><span class="nv">CARD_HASH</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s1">'customer'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s2">"email.do.cliente@gmail.com"</span>
+        <span class="p">),</span>
+        <span class="s1">'postback_url'</span> <span class="o">=&gt;</span> <span class="s2">"http://seusite.com/subscriptions/2718"</span>
+    <span class="p">));</span>
+
+    <span class="nv">$subscription</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+<p><aside class="notice">Você pode utilizar o serviço
+<a href="http://requestb.in">RequestBin</a> para gerar URLs de POSTback de teste e
+visualizar as requisições enviadas pelo Pagar.me.</aside></p>
+
+<p>Quando a <code class="prettyprint">postback_url</code> é passada, as mudanças de status da transação serão
+enviadas para o seu servidor na URL de POSTback através de um request <code class="prettyprint">HTTP
+POST</code> com os seguintes parâmetros:</p>
+
+<table><thead>
+<tr>
+<th>Parâmetro</th>
+<th>Descrição</th>
+<th>Valor padrão</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>object</td>
+<td>Objeto que originou a notificação de POSTback</td>
+<td><code class="prettyprint">subscription</code></td>
+</tr>
+<tr>
+<td>id</td>
+<td>ID do objeto (assinatura) que originou a notificação de POSTback</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>event</td>
+<td>Evento que originou a notificação de POSTback</td>
+<td><code class="prettyprint">subscription_status_changed</code></td>
+</tr>
+<tr>
+<td>current_status</td>
+<td>Status da assinatura após o evento</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>old_status</td>
+<td>Status da assinatura antes do evento</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>desired_status</td>
+<td>Status desejado após o evento</td>
+<td><code class="prettyprint">paid</code></td>
+</tr>
+<tr>
+<td>fingerprint</td>
+<td>Parâmetro usado para validar a notificação de POSTback (<a href="/advanced#validando-a-origem-de-um-postback">saiba mais</a>)</td>
+<td>&mdash;</td>
+</tr>
+</tbody></table>
+<h2 id='cancelando-uma-assinatura'>Cancelando uma assinatura</h1>
+<p>Para cancelar uma assinatura basta fazer o seguinte:</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/subscriptions/{ID da Assinatura}/cancel'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">subscription</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Subscription</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">({</span><span class="no">ID</span> <span class="n">da</span> <span class="no">Assinatura</span><span class="p">})</span>
+
+<span class="n">subscription</span><span class="p">.</span><span class="nf">cancel</span> <span class="c1"># Subscription cancelada</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$subscription</span> <span class="o">=</span> <span class="nx">PagarMe_Subscription</span><span class="o">::</span><span class="na">findById</span><span class="p">({</span><span class="nx">ID</span> <span class="nx">da</span> <span class="nx">Assinatura</span><span class="p">});</span>
+    <span class="nv">$subscription</span><span class="o">-&gt;</span><span class="na">cancel</span><span class="p">();</span> <span class="c1">// Cancel
+</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$subscription</span><span class="o">-&gt;</span><span class="na">getStatus</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'canceled'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// cancelado
+</span>    <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir:<br/>
+- <code class="prettyprint">{ID da Assinatura}</code> pelo ID da assinatura,<br/>
+- <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela sua chave de API disponível
+  no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+  </body>
+</html>
