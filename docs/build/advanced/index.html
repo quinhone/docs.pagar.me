@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagar.me - Opções avançadas</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all.js"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","ruby","php"]);
+        });
+      </script>
+  </head>
+
+  <body class="advanced advanced_index">
+    <div class="container header">
+		<a href="https://pagar.me" style="float: left;"><img src="../images/logo.png" /></a>
+
+	  <ul class="top-nav hidden-xs">
+		  <li><a href="http://pagarme.zendesk.com/">Ajuda e Suporte</a></li>
+		  <li class="button"><a href="https://dashboard.pagar.me">Entrar</a></li>
+	  </ul>
+    </div>
+    <div class="container">
+
+     
+
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="php">php</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="main-links-wrapper">
+		  <a href="/">Início</a>
+		  <a href="/capturing-card-data">Capturando os dados de cartão</a>
+		  <a href="/transactions">Realizando uma transação</a>
+		  <a href="/recipients">Gerenciando recebedores</a>
+		  <a href="/checkout">Integração via checkout</a>
+		  <a href="/cards">Cobrando um cartão posteriormente</a>
+		  <a href="/plans-subscriptions">Planos e assinaturas</a>
+		  <a href="/advanced">Opções avançadas</a>
+		  <a href="https://pagar.me/docs/api" target="_blank">Referência completa da API</a>
+      </div>
+	  <div id="sidebar-footer">
+		  <p>Não está encontrando o que procura? Envie um email para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a>.
+	  </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <h1 id='opcoes-avancadas'>Opções avançadas</h1><h2 id='validando-a-origem-de-um-postback'>Validando a origem de um POSTback</h1>
+<p>Você pode validar a origem do POSTback, isto é, se ele foi realmente enviado
+pelo Pagar.me, pelo parâmetro <code class="prettyprint">fingerprint</code>. O <code class="prettyprint">fingerprint</code> é enviada pelo
+Pagar.me ao notificar a sua <code class="prettyprint">postback_url</code>.</p>
+
+<p><aside class="notice">O <code class="prettyprint">fingerprint</code> é o hash <code class="prettyprint">SHA1</code> calculado a partir da string:<br/>
+<code class="prettyprint">id_do_objeto#sua_chave_de_api</code>.</aside></p>
+<pre class="highlight shell"><code><span class="nv">EXPECTED_FINGERPRINT</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="s2">"149784#ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span> | openssl sha1<span class="sb">`</span>
+<span class="nv">FINGERPRINT</span><span class="o">=</span>1213e67a3b34c2848f8317d29bcb8cbc9e0979b8
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$FINGERPRINT</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$EXPECTED_FINGERPRINT</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Fingerprint válido"</span>
+<span class="k">fi</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="no">PagarMe</span><span class="o">::</span><span class="n">validate_fingerprint</span><span class="p">(</span><span class="s2">"149784"</span><span class="p">,</span> <span class="s2">"1213e67a3b34c2848f8317d29bcb8cbc9e0979b8"</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"Fingerprint válido"</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">PagarMe</span><span class="o">::</span><span class="na">validateFingerprint</span><span class="p">(</span><span class="s2">"149784"</span><span class="p">,</span> <span class="s2">"1213e67a3b34c2848f8317d29bcb8cbc9e0979b8"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">"Fingerprint válido"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir:<br/>
+- <code class="prettyprint">149784</code> pelo ID do objeto (transação, assinatura, etc.),<br/>
+- <code class="prettyprint">1213e67a3b34c2848f8317d29bcb8cbc9e0979b8</code> pelo <code class="prettyprint">fingerprint</code> recebido,<br/>
+- <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela sua chave de API disponível<br/>
+  no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+<h2 id='enviando-dados-adicionais-metadata'>Enviando dados adicionais (metadata)</h1>
+<p>Você pode também enviar dados adicionais para o Pagar.me (ID do pedido em seu
+sistema, carrinho de compras, características do produto/serviço, etc.) através
+do campo <code class="prettyprint">metadata</code>.</p>
+
+<p>Dessa forma, você poderá visualizar, exportar e efetuar buscas pelos dados do
+seu negócio através do seu <a href="https://dashboard.pagar.me">Dashboard</a>.</p>
+
+<p>Para enviar esses dados para o Pagar.me, basta configurar as chaves/valores das
+variáveis que você deseja enviar dentro do campo <code class="prettyprint">metadata</code>.</p>
+
+<p>O <code class="prettyprint">metadata</code> pode ser enviado em transações e assinaturas.</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'https://api.pagar.me/1/transactions'</span> <span class="se">\</span>
+    -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+    -d <span class="s1">'amount=1000'</span> <span class="se">\</span>
+    -d <span class="s1">'card_hash={CARD_HASH}'</span> <span class="se">\</span>
+    -d <span class="s1">'metadata[id_pedido]=12345'</span> <span class="se">\</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">transaction</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Transaction</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="ss">:card_hash</span> <span class="o">=&gt;</span> <span class="s2">"{CARD_HASH}"</span><span class="p">,</span>
+    <span class="ss">:metadata</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">:id_pedido</span> <span class="o">=&gt;</span> <span class="mi">12345</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="n">transaction</span><span class="p">.</span><span class="nf">charge</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$transaction</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Transaction</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'amount'</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="s1">'card_hash'</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">{</span><span class="nv">CARD_HASH</span><span class="si">}</span><span class="s2">"</span>
+        <span class="s1">'metadata'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'id_pedido'</span> <span class="o">=&gt;</span> <span class="mi">12345</span>
+        <span class="p">)</span>
+    <span class="p">));</span>
+
+    <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">charge</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultApiKey</span> <span class="p">=</span> <span class="s">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">AbstractModel</span> <span class="n">metadata</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AbstractModel</span><span class="p">();</span>
+
+<span class="n">metadata</span><span class="p">[</span><span class="s">"id_pedido"</span><span class="p">]</span> <span class="p">=</span> <span class="m">12345</span><span class="p">;</span>
+
+<span class="n">Transaction</span> <span class="n">transaction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Transaction</span><span class="p">();</span>
+
+<span class="n">transaction</span><span class="p">.</span><span class="n">Amount</span> <span class="p">=</span> <span class="m">1000</span><span class="p">;</span>
+<span class="n">transaction</span><span class="p">.</span><span class="n">CardHash</span> <span class="p">=</span> <span class="s">"{CARD HASH}"</span><span class="p">;</span>
+<span class="n">transaction</span><span class="p">.</span><span class="n">Metadata</span> <span class="p">=</span> <span class="n">metadata</span><span class="p">;</span>
+
+<span class="n">transaction</span><span class="p">.</span><span class="nf">Save</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu <a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+  </body>
+</html>

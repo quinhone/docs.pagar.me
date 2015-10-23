@@ -18,7 +18,7 @@ Dessa forma, você pode implementar funcionalidades como o one-click-buy (compra
 por um clique) e realizar transações sem que o usuário precise reentrar ou
 lembrar seus dados de cartão.
 
-## Armazenando um cartão {#storing-a-card}
+## Armazenando um cartão
 
 Para armazenar um cartão, basta passar um `card_hash` contendo os dados do
 cartão. Para mais informações sobre a geração do `card_hash`, veja como
@@ -80,7 +80,7 @@ string cardId = card.Id;
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Recuperando o cartão de uma transação anterior {#card-from-transaction}
+## Recuperando o cartão de uma transação anterior
 
 Você pode também recuperar um cartão de uma transação feita anteriormente e
 utilizá-lo para realizar novas cobranças. Para isso, basta armazenar o `id` do
@@ -124,7 +124,7 @@ string cardId = transaction.Card.Id;
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua chave de API disponível no seu [Dashboard](https://dashboard.pagar.me/).
 
-## Realizando uma transação usando um cartão {#charging-a-card}
+## Realizando uma transação usando um cartão 
 
 Agora que você tem o `id` do `card` em mãos, basta [criar uma
 transação](/transactions) passando o `card_id`. Os demais parâmetros da

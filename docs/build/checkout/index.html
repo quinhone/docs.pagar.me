@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagar.me - Integração via Checkout</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="../javascripts/all.js"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","ruby","php","csharp"]);
+        });
+      </script>
+  </head>
+
+  <body class="checkout checkout_index">
+    <div class="container header">
+		<a href="https://pagar.me" style="float: left;"><img src="../images/logo.png" /></a>
+
+	  <ul class="top-nav hidden-xs">
+		  <li><a href="http://pagarme.zendesk.com/">Ajuda e Suporte</a></li>
+		  <li class="button"><a href="https://dashboard.pagar.me">Entrar</a></li>
+	  </ul>
+    </div>
+    <div class="container">
+
+     
+
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="php">php</a>
+              <a href="#" data-language-name="csharp">csharp</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="main-links-wrapper">
+		  <a href="/">Início</a>
+		  <a href="/capturing-card-data">Capturando os dados de cartão</a>
+		  <a href="/transactions">Realizando uma transação</a>
+		  <a href="/recipients">Gerenciando recebedores</a>
+		  <a href="/checkout">Integração via checkout</a>
+		  <a href="/cards">Cobrando um cartão posteriormente</a>
+		  <a href="/plans-subscriptions">Planos e assinaturas</a>
+		  <a href="/advanced">Opções avançadas</a>
+		  <a href="https://pagar.me/docs/api" target="_blank">Referência completa da API</a>
+      </div>
+	  <div id="sidebar-footer">
+		  <p>Não está encontrando o que procura? Envie um email para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a>.
+	  </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <h1 id='integracao-via-checkout'>Integração via Checkout</h1>
+<p>O Checkout é a forma mais simples de realizar a integração com o Pagar.me.</p>
+
+<p>Com ele, você não precisa se preocupar com validações, segurança no envio dos
+dados, tratamento de erros das operadoras de cartão, otimização da conversão,
+etc.</p>
+
+<p>Basta inserir nosso JavaScript na sua página e depois realizar a captura da
+transação pelo seu servidor. Nós cuidaremos de todo o resto! :)</p>
+
+<p><a href="https://pagar.me/checkout">Clique aqui</a> para testar o Checkout.</p>
+<h2 id='inserindo-o-formulario'>Inserindo o formulário</h1><pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">action=</span><span class="s">"/comprar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+        <span class="na">src=</span><span class="s">"https://assets.pagar.me/checkout/checkout.js"</span>
+        <span class="na">data-button-text=</span><span class="s">"Pagar"</span>
+        <span class="na">data-encryption-key=</span><span class="s">"ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk"</span>
+        <span class="na">data-amount=</span><span class="s">"1000"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk</code> pela
+sua chave de encriptação disponível no seu
+<a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+<p>O código acima irá inserir o botão de pagar na sua página. Você pode alterar
+o texto do botão pela tag <code class="prettyprint">data-button-text</code> e o valor da transação pela tag
+<code class="prettyprint">data-amount</code>.</p>
+
+<p>Ao clicar no botão, o Checkout do Pagar.me abrirá dentro do seu site e
+o usuário digitará os dados necessários para realizar a transação. </p>
+
+<p>Quando a transação for concluída, um <code class="prettyprint">token</code> referente a transação realizada
+será adicionado ao <code class="prettyprint">form</code>. O <code class="prettyprint">form</code>, então, será submetido para o seu servidor,
+onde a transação será capturada.</p>
+<h3 id='configuracoes-do-checkout'>Configurações do Checkout</h1>
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Padrão</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data-encryption-key</td>
+<td>&mdash;</td>
+<td>Chave de encriptação disponível no seu dashboard.</td>
+</tr>
+<tr>
+<td>data-amount</td>
+<td>&mdash;</td>
+<td>Valor da transação (em centavos) a ser capturada pelo Checkout. Ex: R$14,79 = <code class="prettyprint">1479</code></td>
+</tr>
+<tr>
+<td>data-button-text</td>
+<td><code class="prettyprint">Pagar</code></td>
+<td>Texto do botão de pagamento.</td>
+</tr>
+<tr>
+<td>data-button-class</td>
+<td>&mdash;</td>
+<td>Classe CSS a ser adicionada no botão de pagamento.</td>
+</tr>
+<tr>
+<td>data-customer-data</td>
+<td><code class="prettyprint">true</code></td>
+<td>Caso não deseje capturar dados do cliente pelo Checkout, setar como <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td>data-payment-methods</td>
+<td><code class="prettyprint">credit_card,boleto</code></td>
+<td>Meios de pagamento disponíveis no Checkout.</td>
+</tr>
+<tr>
+<td>data-card-brands</td>
+<td><code class="prettyprint">visa,mastercard,amex,aura,jcb,diners,elo</code></td>
+<td>Bandeiras aceitas pelo Checkout.</td>
+</tr>
+<tr>
+<td>data-max-installments</td>
+<td><code class="prettyprint">1</code></td>
+<td>Número máximo de parcelas aceitas.</td>
+</tr>
+<tr>
+<td>data-ui-color</td>
+<td><code class="prettyprint">#1a6ee1</code></td>
+<td>Cor primária da interface de Checkout.</td>
+</tr>
+<tr>
+<td>data-postback-url</td>
+<td>&mdash;</td>
+<td>Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações</td>
+</tr>
+<tr>
+<td>data-create-token</td>
+<td><code class="prettyprint">true</code></td>
+<td>Habilita a geração do token para autorização da transação. <br> <strong>OBS</strong>: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor <code class="prettyprint">false</code>, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.</td>
+</tr>
+<tr>
+<td>data-customer-name</td>
+<td>-</td>
+<td>Nome do cliente</td>
+</tr>
+<tr>
+<td>data-customer-document-number</td>
+<td>-</td>
+<td>CPF ou CNPJ do cliente</td>
+</tr>
+<tr>
+<td>data-customer-email</td>
+<td>-</td>
+<td>E-mail do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-street</td>
+<td>-</td>
+<td>Nome do logradouro do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-street-number</td>
+<td>-</td>
+<td>Número do imóvel do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-complementary</td>
+<td>-</td>
+<td>Complemente do endereço do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-neighborhood</td>
+<td>-</td>
+<td>Bairro do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-city</td>
+<td>-</td>
+<td>Cidade do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-state</td>
+<td>-</td>
+<td>Estado (unidade federativa) do cliente</td>
+</tr>
+<tr>
+<td>data-customer-address-zipcode</td>
+<td>-</td>
+<td>Código de endereçmento postal (CEP) da cidade do cliente</td>
+</tr>
+<tr>
+<td>data-customer-phone-ddd</td>
+<td>-</td>
+<td>DDD do telefone do cliente</td>
+</tr>
+<tr>
+<td>data-customer-phone-number</td>
+<td>-</td>
+<td>Número do telefone do cliente</td>
+</tr>
+<tr>
+<td>data-interest-rate</td>
+<td>-</td>
+<td>Taxa de juros a ser cobrada na transação</td>
+</tr>
+<tr>
+<td>data-free-installments</td>
+<td>-</td>
+<td>Número de parcelas que não terão juros cobrados</td>
+</tr>
+<tr>
+<td>data-default-installment</td>
+<td><code class="prettyprint">1</code></td>
+<td>Define a parcela padrão selecionada ao abrir o checkout</td>
+</tr>
+</tbody></table>
+<h2 id='inserindo-o-checkout-via-api'>Inserindo o Checkout via API</h1>
+<p>Caso você deseje ter um controle maior sobre a inicialização checkout, ou se você possui um <code class="prettyprint">single-page app</code>, você pode gerar o formulário e abrir o checkout diretamente via API. </p>
+<pre class="highlight javascript"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="err">#</span><span class="nx">pay</span><span class="o">-</span><span class="nx">button</span><span class="p">);</span>
+
+    <span class="c1">// inicializa o checkout</span>
+    <span class="kd">var</span> <span class="nx">checkout</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMeCheckout</span><span class="p">.</span><span class="nx">Checkout</span><span class="p">({</span><span class="s2">"encryption_key"</span><span class="p">:</span><span class="s2">"ek_test_Akwmf1evsllS5aPfdVZr3rk4It6xWR"</span><span class="p">,</span> <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="c1">// callback após o checkout ter sido finalizado</span>
+    <span class="p">}});</span>
+
+    <span class="nx">button</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// abre o checkout passando os parâmetros desejados</span>
+        <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"customerData"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span> <span class="s2">"amount"</span><span class="p">:</span><span class="s2">"100000"</span><span class="p">,</span> <span class="s2">"createToken"</span><span class="p">:</span> <span class="s2">"true"</span><span class="p">,</span> <span class="s2">"interestRate"</span><span class="p">:</span> <span class="mi">10</span> <span class="p">};</span>
+        <span class="nx">checkout</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>      
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+<h3 id='parametros-para-abertura-do-checkout'>Parâmetros para abertura do Checkout</h1>
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Padrão</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>encryptionKey</td>
+<td>&mdash;</td>
+<td>Chave de encriptação disponível no seu dashboard.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>&mdash;</td>
+<td>Valor da transação (em centavos) a ser capturada pelo Checkout. Ex: R$14,79 = <code class="prettyprint">1479</code></td>
+</tr>
+<tr>
+<td>buttonText</td>
+<td><code class="prettyprint">Pagar</code></td>
+<td>Texto do botão de pagamento.</td>
+</tr>
+<tr>
+<td>buttonClass</td>
+<td>&mdash;</td>
+<td>Classe CSS a ser adicionada no botão de pagamento.</td>
+</tr>
+<tr>
+<td>customerData</td>
+<td><code class="prettyprint">true</code></td>
+<td>Caso não deseje capturar dados do cliente pelo Checkout, setar como <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td>paymentMethods</td>
+<td><code class="prettyprint">credit_card,boleto</code></td>
+<td>Meios de pagamento disponíveis no Checkout.</td>
+</tr>
+<tr>
+<td>cardBrands</td>
+<td><code class="prettyprint">visa,mastercard,amex,aura,jcb,diners,elo</code></td>
+<td>Bandeiras aceitas pelo Checkout.</td>
+</tr>
+<tr>
+<td>maxInstallments</td>
+<td><code class="prettyprint">1</code></td>
+<td>Número máximo de parcelas aceitas.</td>
+</tr>
+<tr>
+<td>uiColor</td>
+<td><code class="prettyprint">#1a6ee1</code></td>
+<td>Cor primária da interface de Checkout.</td>
+</tr>
+<tr>
+<td>postbackUrl</td>
+<td>&mdash;</td>
+<td>Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações</td>
+</tr>
+<tr>
+<td>createToken</td>
+<td><code class="prettyprint">true</code></td>
+<td>Habilita a geração do token para autorização da transação. <br> <strong>OBS</strong>: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor <code class="prettyprint">false</code>, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.</td>
+</tr>
+<tr>
+<td>customerName</td>
+<td>-</td>
+<td>Nome do cliente</td>
+</tr>
+<tr>
+<td>customerDocumentNumber</td>
+<td>-</td>
+<td>CPF ou CNPJ do cliente</td>
+</tr>
+<tr>
+<td>customerEmail</td>
+<td>-</td>
+<td>E-mail do cliente</td>
+</tr>
+<tr>
+<td>customerAddressStreet</td>
+<td>-</td>
+<td>Nome do logradouro do cliente</td>
+</tr>
+<tr>
+<td>customerAddressStreetNumber</td>
+<td>-</td>
+<td>Número do imóvel do cliente</td>
+</tr>
+<tr>
+<td>customerAddressComplementary</td>
+<td>-</td>
+<td>Complemente do endereço do cliente</td>
+</tr>
+<tr>
+<td>customerAddressNeighborhood</td>
+<td>-</td>
+<td>Bairro do cliente</td>
+</tr>
+<tr>
+<td>customerAddressCity</td>
+<td>-</td>
+<td>Cidade do cliente</td>
+</tr>
+<tr>
+<td>customerAddress-State</td>
+<td>-</td>
+<td>Estado (unidade federativa) do cliente</td>
+</tr>
+<tr>
+<td>customerAddressZipcode</td>
+<td>-</td>
+<td>Código de endereçmento postal (CEP) da cidade do cliente</td>
+</tr>
+<tr>
+<td>customerPhoneDdd</td>
+<td>-</td>
+<td>DDD do telefone do cliente</td>
+</tr>
+<tr>
+<td>customerPhoneNumber</td>
+<td>-</td>
+<td>Número do telefone do cliente</td>
+</tr>
+<tr>
+<td>interestRate</td>
+<td>-</td>
+<td>Taxa de juros a ser cobrada na transação</td>
+</tr>
+<tr>
+<td>freeInstallments</td>
+<td>-</td>
+<td>Número de parcelas que não terão juros cobrados</td>
+</tr>
+<tr>
+<td>defaultInstallment</td>
+<td><code class="prettyprint">1</code></td>
+<td>Define a parcela padrão selecionada ao abrir o checkout</td>
+</tr>
+</tbody></table>
+<h2 id='capturando-a-transacao'>Capturando a transação</h1>
+<p>Com o <code class="prettyprint">token</code> em mãos, agora basta realizar a captura da transação no seu
+servidor. Por motivos de segurança, você precisará fornecer novamente o valor a
+ser capturado.</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.pagar.me/1/transactions/{TOKEN}/capture"</span>
+  -d <span class="s1">'amount=1000'</span>
+  -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">transaction</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Transaction</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="s2">"{TOKEN}"</span><span class="p">)</span>
+<span class="n">transaction</span><span class="p">.</span><span class="nf">capture</span><span class="p">({</span><span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">})</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$transaction</span> <span class="o">=</span> <span class="nx">PagarMe_Transaction</span><span class="o">::</span><span class="na">findById</span><span class="p">(</span><span class="s2">"</span><span class="si">{</span><span class="nv">TOKEN</span><span class="si">}</span><span class="s2">"</span><span class="p">);</span>
+    <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">capture</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultApiKey</span> <span class="p">=</span> <span class="s">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">Transaction</span> <span class="n">transaction</span> <span class="p">=</span> <span class="n">PagarMeService</span><span class="p">.</span><span class="nf">GetDefaultService</span><span class="p">().</span><span class="n">Transactions</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"{TOKEN}"</span><span class="p">);</span>
+<span class="n">transaction</span><span class="p">.</span><span class="nf">Capture</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu
+<a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+<p>Após realizar a captura de uma transação de cartão de crédito, a transação
+terá status <code class="prettyprint">paid</code>, indicando que o cartão do usuário foi cobrado com sucesso.</p>
+
+<p>Caso a transação seja um boleto bancário, a transação terá status
+<code class="prettyprint">waiting_payment</code> e a URL do boleto bancário para pagamento estará disponível na
+variável <code class="prettyprint">boleto_url</code>.</p>
+
+<p><aside class="notice">Após a finalização da transação em sua página, você terá
+05 minutos para capturá-la no seu servidor. Após esse período, a transação será
+recusada pelo motivo <code class="prettyprint">capture_timeout</code>.</aside></p>
+<h2 id='enviando-metadata-com-checkout'>Enviando metadata com Checkout</h1>
+<p>Com o checkout Pagar.me também é possível enviar metadata em uma transação. Para o caso do checkout, o envio de metadata é feito no momento de captura da transação. Basta passar a metada como parâmetros do request de captura.</p>
+
+<p>Qualquer dúvida sobre metadata, basta checar a sessão de metada na <a href="https://docs.pagar.me/advanced/#enviando-dados-adicionais-metadata">documentação para metadata</a>.</p>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.pagar.me/1/transactions/{TOKEN}/capture"</span>
+  -d <span class="s1">'amount=1000'</span> <span class="se">\</span>
+  -d <span class="s1">'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'</span> <span class="se">\</span>
+  -d <span class="s1">'metadata[id_pedido]=12345'</span> <span class="se">\</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">transaction</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Transaction</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="s2">"{TOKEN}"</span><span class="p">)</span>
+<span class="n">transaction</span><span class="p">.</span><span class="nf">capture</span><span class="p">({</span>
+    <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="ss">:metadata</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">:id_pedido</span> <span class="o">=&gt;</span> <span class="mi">12345</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+<pre class="highlight php"><code></code></pre>
+<pre class="highlight csharp"><code></code></pre>
+<h2 id='checkout-em-assinaturas'>Checkout em Assinaturas</h1>
+<p>Para usar o Checkout Pagar.me com nosso sistema de assinaturas você precisa passar uma opção adicional para o formulário.</p>
+
+<p>Veja o exemplo abaixo:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">action=</span><span class="s">"/comprar"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+        <span class="na">src=</span><span class="s">"https://assets.pagar.me/checkout/checkout.js"</span>
+        <span class="na">data-button-text=</span><span class="s">"Pagar"</span>
+        <span class="na">data-encryption-key=</span><span class="s">"ek_test_Ec8KhxISQ1tug1b8bCGxC2nXfxqRmk"</span>
+        <span class="na">data-amount=</span><span class="s">"1000"</span>
+        <span class="na">data-create-token=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>Usando essa configuração o Checkout passa a não gerar um <code class="prettyprint">token</code> para ser usado para capturar a transação, em vez disso ele gera o <code class="prettyprint">card_hash</code> dos dados do cartão e faz uma requisição POST para a url informada no formulário junto com os outros campos do formulário.</p>
+<h2 id='acessando-os-dados-do-checkout'>Acessando os dados do Checkout</h1>
+<p>Após o Checkout enviar os dados para o seu servidor, você vai receber vários parâmetros da requisição enviada pelo Checkout, todas as chaves para acessar os valores começam com <code class="prettyprint">pagarme</code>.</p>
+
+<p>Exemplo de uso com PHP:</p>
+<pre class="highlight php"><code>$card_hash = $_POST['pagarme']['card_hash'];
+</code></pre>
+<h2 id='criando-assinaturas'>Criando assinaturas</h1>
+<p>Você só precisar pegar os dados da requisição POST e passar eles para a lib que você usar.</p>
+
+<p>Abaixo temos exemplos da implementação:</p>
+<pre class="highlight shell"><code>Não é possível fazer essa implementação em Shell script 
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pagarme'</span>
+
+<span class="no">PagarMe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">subscription</span> <span class="o">=</span> <span class="no">PagarMe</span><span class="o">::</span><span class="no">Subscription</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="ss">:payment_method</span> <span class="o">=&gt;</span> <span class="s1">'credit_card'</span><span class="p">,</span>
+    <span class="ss">:plan_id</span><span class="p">:</span> <span class="s1">'ID_DO_PLANO_AQUI'</span><span class="p">,</span>
+    <span class="ss">:card_hash</span> <span class="o">=&gt;</span> <span class="s2">"CARD_HASH_AQUI"</span><span class="p">,</span>
+    <span class="ss">:postback_url</span> <span class="o">=&gt;</span> <span class="s2">"POSTBACK_URL_AQUI"</span><span class="p">,</span>
+    <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="ss">email: </span><span class="s1">'EMAIL_DO_CLIENTE_AQUI'</span>
+<span class="p">})</span>
+
+<span class="n">subscription</span><span class="p">.</span><span class="nf">create</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="k">require</span><span class="p">(</span><span class="s2">"pagarme-php/Pagarme.php"</span><span class="p">);</span>
+
+    <span class="nx">Pagarme</span><span class="o">::</span><span class="na">setApiKey</span><span class="p">(</span><span class="s2">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">);</span>
+
+    <span class="nv">$subscription</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagarMe_Subscription</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s2">"payment_method"</span> <span class="o">=&gt;</span> <span class="s2">"credit_card"</span><span class="p">,</span>
+        <span class="s2">"plan_id"</span> <span class="o">=&gt;</span> <span class="s2">"ID_DO_PLANO_AQUI"</span><span class="p">,</span>
+        <span class="s2">"card_hash"</span> <span class="o">=&gt;</span> <span class="s2">"CARD_HASH_AQUI"</span><span class="p">,</span>
+        <span class="s2">"postback_url"</span> <span class="o">=&gt;</span> <span class="s2">"POSTBACK_URL_AQUI"</span><span class="p">,</span>
+        <span class="s1">'customer'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'EMAIL_DO_CLIENTE_AQUI'</span>
+        <span class="p">)));</span>
+
+    <span class="nv">$subscription</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<pre class="highlight csharp"><code><span class="n">PagarMeService</span><span class="p">.</span><span class="n">DefaultApiKey</span> <span class="p">=</span> <span class="s">"ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"</span><span class="p">;</span>
+
+<span class="n">Plan</span> <span class="n">plan</span> <span class="p">=</span> <span class="n">PagarMeService</span><span class="p">.</span><span class="nf">GetDefaultInstance</span><span class="p">().</span><span class="n">Plans</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"ID_DO_PLANO_AQUI"</span><span class="p">);</span>
+
+<span class="n">Subscription</span> <span class="n">subscription</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Subscription</span> <span class="p">{</span>
+    <span class="n">PaymentMethod</span> <span class="p">=</span> <span class="n">PaymentMethod</span><span class="p">.</span><span class="n">CreditCard</span><span class="p">,</span>
+    <span class="n">Plan</span> <span class="p">=</span> <span class="n">plan</span><span class="p">,</span>
+    <span class="n">CardHash</span> <span class="p">=</span> <span class="s">"CARD_HASH_AQUI"</span><span class="p">,</span>
+    <span class="n">Customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span> <span class="p">{</span>
+        <span class="n">Email</span> <span class="p">=</span> <span class="s">"EMAIL_DO_CLIENTE_AQUI"</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">subscription</span><span class="p">.</span><span class="nf">Save</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Não se esqueça de substituir <code class="prettyprint">ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0</code> pela
+sua chave de API disponível no seu
+<a href="https://dashboard.pagar.me/">Dashboard</a>.</p>
+</blockquote>
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+  </body>
+</html>

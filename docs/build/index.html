@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagar.me - Início</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="javascripts/all.js"></script>
+
+  </head>
+
+  <body class="index">
+    <div class="container header">
+		<a href="https://pagar.me" style="float: left;"><img src="images/logo.png" /></a>
+
+	  <ul class="top-nav hidden-xs">
+		  <li><a href="http://pagarme.zendesk.com/">Ajuda e Suporte</a></li>
+		  <li class="button"><a href="https://dashboard.pagar.me">Entrar</a></li>
+	  </ul>
+    </div>
+    <div class="container">
+
+     
+
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="main-links-wrapper">
+		  <a href="/">Início</a>
+		  <a href="/capturing-card-data">Capturando os dados de cartão</a>
+		  <a href="/transactions">Realizando uma transação</a>
+		  <a href="/recipients">Gerenciando recebedores</a>
+		  <a href="/checkout">Integração via checkout</a>
+		  <a href="/cards">Cobrando um cartão posteriormente</a>
+		  <a href="/plans-subscriptions">Planos e assinaturas</a>
+		  <a href="/advanced">Opções avançadas</a>
+		  <a href="https://pagar.me/docs/api" target="_blank">Referência completa da API</a>
+      </div>
+	  <div id="sidebar-footer">
+		  <p>Não está encontrando o que procura? Envie um email para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a>.
+	  </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <h1 id='inicio'>Início</h1>
+<p>Seja bem-vindo a documentação do Pagar.me! Aqui você encontrará guias e
+referências sobre como usar nossa infraestrutura de pagamentos.</p>
+<h3 id='endpoints-e-bibliotecas'>Endpoints e bibliotecas</h1>
+<p>Nossa API é
+<a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a> e todas
+as respostas são em <a href="http://www.json.org">JSON</a>. Todas as requisições são
+feitas no endpoint:</p>
+<pre class="highlight plaintext"><code>https://api.pagar.me/1
+</code></pre>
+
+<p>Nos exemplos que você encontrará pela documentação, usaremos o
+<a href="http://curl.haxx.se">cURL</a> e as nossas bibliotecas em
+<a href="https://github.com/pagarme/pagarme-ruby">Ruby</a>,
+<a href="https://github.com/pagarme/pagarme-php">PHP</a> e <a href="https://github.com/pagarme/pagarme-net">C#</a>. </p>
+<h3 id='integracao-ruby'>Integração Ruby</h1>
+<p>Para instalar a biblioteca em Ruby:</p>
+<pre class="highlight plaintext"><code>gem install pagarme
+</code></pre>
+
+<p>Você pode conferir o código-fonte <a href="https://github.com/pagarme/pagarme-ruby">aqui</a>.</p>
+<h3 id='integracao-php'>Integração PHP</h1>
+<p>Para instalar a biblioteca PHP, basta <a href="https://github.com/pagarme/pagarme-php">baixá-la do nosso
+Github</a> e copiá-la para a pasta do seu
+projeto. Você também pode instalá-la usando o <a href="https://getcomposer.org">Composer</a>.</p>
+<h3 id='para-comecar'>Para começar&hellip;</h1>
+<p>Inicie lendo o <a href="/capturing-card-data">guia sobre como capturar os dados de
+cartão</a>, que explica como realizar a captura desses dados
+sem sair da sua página/aplicativo. </p>
+
+<p>Esse guia também mostra como gerar o
+<code class="prettyprint">card_hash</code>, que é a forma do Pagar.me de transmitir os dados de cartão com
+segurança entre o seu cliente e nosso servidor.</p>
+<h3 id='realizando-uma-transacao'>Realizando uma transação</h1>
+<p>A forma mais simples de usar o Pagar.me é simplesmente <a href="/transactions">realizando uma
+transação</a> pelo seu servidor. No caso de transações de cartão de
+crédito, você deverá utilizar o <code class="prettyprint">card_hash</code> gerado no browser/aplicativo do
+cliente para isso. Para transações de boletos bancários, o uso do <code class="prettyprint">card_hash</code>
+não é necessário.</p>
+<h3 id='cobrancas-recorrentes'>Cobranças recorrentes</h1>
+<p>Se você precisa cobrar seus clientes de maneira recorrente, o Pagar.me suporta
+<a href="/plans-subscriptions">planos e assinaturas</a>. Com eles, basta nos dizer quanto,
+como e quando devemos cobrar seus clientes, e nós cuidaremos de todo o resto para
+você :-)</p>
+<h3 id='one-click-buy'>One click buy</h1>
+<p>Você também pode armazenar os dados de cartão dos seus clientes no Pagar.me e
+realizar cobranças quando desejar. Dessa forma, você pode implementar
+funcionalidades como o one-click-buy em sua aplicação. Leia mais sobre
+<a href="/cards">cobrando um cartão posteriormente</a>.</p>
+<h3 id='duvidas'>Dúvidas?</h1>
+<p>Surgiu alguma dúvida ou sugestão para tornar nossa documentação melhor? Mande
+um e-mail para <a href="mailto:suporte@pagar.me">suporte@pagar.me</a> e iremos te ajudar!
+:-)</p>
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+  </body>
+</html>

@@ -1,21 +1,10 @@
+require "i18n"
+
 module RedcarpetHeaderFix
-  def header(text, level, id)
-    clean_id = id.gsub(/[\.]/, '-').gsub(/[^a-zA-Z0-9\-_]/, '')
+  def header(text, level)
+		re = /<("[^"]*"|'[^']*'|[^'">])*>/
 
-	/{#(.*)}/.match text do |m|
-	  text.gsub! m[0], ''
-	  clean_id = m[1]
-	end
-
-    "<h#{level} id='#{clean_id}'>#{text}</h1>"
-  end
-
-  def self.included base
-	base.class_eval do
-	  def link(link, title, content)
-		middleman_app.relative_link_to(content, link)
-	  end
-	end
+    "<h#{level} id='#{I18n.transliterate(text.gsub(re, "")).downcase.parameterize}'>#{text}</h1>"
   end
 end
 
