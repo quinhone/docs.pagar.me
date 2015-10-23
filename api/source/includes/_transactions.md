@@ -1612,4 +1612,75 @@ Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **status**<br> <span class="required">obrigatório</span> | Utilize o valor **paid** para simular o pagamento |
 
+## Gerando card_hash manualmente
+
+O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Essa string é encriptada por RSA usando uma chave pública que deve ser requisitada ao servidor a cada novo `card_hash` gerado. Essa chave é invalidada assim que o servidor lê as informações contidas no `card_hash`, e por isso só pode ser utilizada uma única vez. Ela também é temporária, expirando 5 minutos após ter sido gerada.
+
+As bibliotecas do Pagar.me sempre utilizam o `card_has`h para enviar os dados para o servidor, o que aumenta consideravelmente a segurança da transação.
+
+### Requisitando ao servidor uma chave para encriptar o `card_hash`
+
+> GET https://api.pagar.me/1/transactions/card_hash_key
+
+```shell
+curl -X GET https://api.pagar.me/1/transactions/card_hash_key \
+-d 'encryption_key=ek_test_9741a03ea3a4f15f6fa8d9fe9d2c47c8' \
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Para gerarmos o `card_hash`, primeiramente devemos requisitar do servidr a chave pública para criptografarmos nossos dados.
+
+> JSON retornado (exemplo):
+
+```json
+{
+  "date_created": "2015-02-27T15:44:26.000Z",
+  "id": 111111,
+  "ip": "000.0.00.00",
+  "public_key": "-----BEGIN PUBLIC KEY-----\ -----END PUBLIC KEY-----\ " 
+}
+```
+
+| Propriedade | Descrição |
+|--:|:--|
+| **id**<br> Number | id retornado que será utilizado posterirormente para compor o `card_hash`, por isso é importante que você o salve |
+| **public_key**<br> String | Chave pública utilizada para criptografar os dados do cartão de crédito |
+| **ip**<br> String | IP de onde o request foi originado |
+
+### Encriptando os dados do cartão de crédito
+
+Agora você vai ter que criar uma querystring com urlenconded com os parâmetros do cartão de crédito, vamos pegar os seguintes dados abaixo como exemplo:
+
+- card_number = `4901720080344448`
+- card_holder_name = `"Usuario de Teste"`
+- card_expiration_date = `1213`
+- card_cvv = `314`
+
+A querystring será da seguinte forma:
+
+`
+card_number=4901720080344448&card_holder_name=Usuario de Teste&card_expiration_date=1213&card_cvv=314
+`
+
+Agora você vai fazer uma criptografia publica com `RSA` e o padding `PKCS1Padding` usando a public_key que você recebeu na request passando essa querystring que você montou.
+
+Após criptografar esses dados você deve converter o resultado dessa encriptação para base64. Como resultado você terá:
+
+`
+FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==
+`
+
+Agora que você possui o id vindo do request e o os dados criptografados convertidos para base64, seu `card_hash` será o seguinte:
+
+**`
+card_hash = id + "_" + encrypted_string_base64
+`**
 
