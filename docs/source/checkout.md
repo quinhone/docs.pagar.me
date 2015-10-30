@@ -60,6 +60,8 @@ data-amount | --- | Valor da transação (em centavos) a ser capturada pelo Chec
 data-button-text | `Pagar` | Texto do botão de pagamento.
 data-button-class | --- | Classe CSS a ser adicionada no botão de pagamento.
 data-customer-data | `true` | Caso não deseje capturar dados do cliente pelo Checkout, setar como `false`.
+data-boleto-discount-amount | --- | Valor, em centavos, do desconto caso o meio de pagamento seja boleto. Ex: desconto de R$10,00 = `1000`. OBS: você não pode adicionar essa tag caso a tag de desconto percentual já esteja presente.
+data-boleto-discount-percentage | --- | Percentual de desconto caso o meio de pagamento seja boleto. Ex: desconto de 25% = `25`. OBS: você não pode adicionar essa tag caso a tag de desconto por valor já esteja presente.
 data-payment-methods | `credit_card,boleto` | Meios de pagamento disponíveis no Checkout.
 data-card-brands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceitas pelo Checkout.
 data-max-installments | `1` | Número máximo de parcelas aceitas.
