@@ -88,22 +88,37 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 
 Caso você deseje ter um controle maior sobre a inicialização checkout, ou se você possui um `single-page app`, você pode gerar o formulário e abrir o checkout diretamente via API. 
 
-```javascript
-$(document).ready(function() {
-	var button = $('#pay-button');
+```html
+<html>
+	<head>
+		<!-- SCRIPT PAGAR.ME -->
+	    <script src="https://assets.pagar.me/checkout/checkout.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<button id="pay-button">Abrir modal de pagamento</button>
 
-	// inicializa o checkout
-	var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_Akwmf1evsllS5aPfdVZr3rk4It6xWR", success: function(data) {
-		console.log(data);
-		// callback após o checkout ter sido finalizado
-	}});
+		<script>
+			$(document).ready(function() {
+				var button = $('#pay-button');
 
-	button.click(function() {
-		// abre o checkout passando os parâmetros desejados
-		var params = {"customerData":false, "amount":"100000", "createToken": "true", "interestRate": 10 };
-		checkout.open(params);		
-	});
-});
+				button.click(function() {
+
+					// INICIAR A INSTÂNCIA DO CHECKOUT
+					// declarando um callback de sucesso
+					var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_Akwmf1evsllS5aPfdVZr3rk4It6xWR", success: function(data) {
+						console.log(data);
+					}});
+
+					// DEFINIR AS OPÇÕES
+					// e abrir o modal
+					var params = {"customerData":false, "amount":"100000", "createToken": "true", "interestRate": 10 };
+					checkout.open(params);
+				});
+			});
+		</script>
+	</body>
+</html>
 ```
 
 ### Parâmetros para abertura do Checkout
