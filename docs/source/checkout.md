@@ -86,7 +86,9 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 
 ## Inserindo o Checkout via API
 
-Caso você deseje ter um controle maior sobre a inicialização checkout, ou se você possui um `single-page app`, você pode gerar o formulário e abrir o checkout diretamente via API. 
+Caso você deseje ter um controle maior sobre a inicialização checkout, ou se você possui um `single-page app`, você pode gerar o formulário e abrir o checkout diretamente via API.
+
+**Atenção:** não esqueça de substituir a string `{{ ENCRYPTION KEY }}` pela `encryption_key` de sua conta.
 
 ```html
 <html>
@@ -106,7 +108,7 @@ Caso você deseje ter um controle maior sobre a inicialização checkout, ou se 
 
 					// INICIAR A INSTÂNCIA DO CHECKOUT
 					// declarando um callback de sucesso
-					var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_Akwmf1evsllS5aPfdVZr3rk4It6xWR", success: function(data) {
+					var checkout = new PagarMeCheckout.Checkout({"encryption_key":"{{ ENCRYPTION KEY }}", success: function(data) {
 						console.log(data);
 					}});
 
