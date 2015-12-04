@@ -22,6 +22,17 @@ Sempre que uma **transação** tiver seu estado alterado, uma notificação ser�
 
 <a href="http://puu.sh/hdMYO/9a740bd556.png" target="_blank">Exemplo de retorno via POSTback</a>
 
+
+| Propriedade | Descrição |
+|--:|:--|
+| **old_status**<br> String | Status anterior desta transação. <br> **Valores possíveis**: `processing`, `authorized`, `waiting_payment`, `pending_refund` |
+| **object**<br> String | Nome do tipo do objeto <br> **Valores possíveis**: `transaction` |
+| **current_status**<br> String | Status atual da transação. <br> **Valores possíveis**: `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
+| **desired_status**<br> String | Status desejado desta transação se todo o fluxo for respeitado.<br> **Valores possíveis**: `paid` |
+| **fingerprint**<br> String | Hash utilizada para validar a origem deste postback. [Mais informações](https://docs.pagar.me/advanced/#validando-a-origem-de-um-postback) |
+| **event**<br> String | Nome do evento <br> **Valores possíveis**: `transaction_status_changed` |
+| **id**<br> Number | Id da transação |
+
 ## POSTback de assinaturas
 
 > Dados enviados via POSTback de uma assinatura
