@@ -1469,11 +1469,11 @@ Caso a compra tenha sido feita por boleto bancário, você precisará passar os 
 Quando uma transação é criada, ela inicialmente é retornada com o status `processing`. Após ser processada, ela pode ter os seguintes status:
 
 - `processing`: transação sendo processada.
-- `authorized`: transação autorizada. Cliente possui saldo na conta e este valor foi reservado para futura captura, que deve acontecer em no máximo 5 dias. Caso a transação não seja **capturada**, a autorização é cancelada automaticamente.
+- `authorized`: transação autorizada. Cliente possui saldo na conta e este valor foi reservado para futura captura, que deve acontecer em no máximo 5 dias. Caso a transação **não seja capturada**, a autorização é cancelada automaticamente.
 - `paid`: transação paga (autorizada e capturada).
 - `refunded`: transação estornada.
-- `waiting-payment`: transação aguardando pagamento (status para transações criadas com boleto bancário).
-- `pending-refund`: transação paga com boleto aguardando para ser estornada.
+- `waiting_payment`: transação aguardando pagamento (status para transações criadas com boleto bancário).
+- `pending_refund`: transação paga com boleto aguardando para ser estornada.
 - `refused`: transação não autorizada.
 - `chargedback`: transação sofreu chargeback.
 
