@@ -237,6 +237,17 @@ transaction.capture({
 ```
 
 ```php
+<?php
+
+    require("pagarme-php/Pagarme.php");
+
+    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$transaction = PagarMe_Transaction::findById($transaction_token);
+
+	$transaction->capture( array('amount' => 1000, 'metadata' => array('id_pedido' => 1234 )));
+
+?>
 ```
 
 ```cs
