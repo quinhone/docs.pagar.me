@@ -72,6 +72,20 @@ bank_account.create
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$account = new Pagarme_Bank_Account(array(
+		"bank_code" => "341",
+		"agencia" => "0932",
+		"agencia_dv" => "5",
+		"conta" => "58054",
+		"conta_dv" => "1",
+		"document_number" => "26268738888",
+		"legal_name" => "API BANK ACCOUNT"
+	));
+	$account->create();
 ```
 
 ```cs
@@ -123,10 +137,15 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 
-bank_account = PagarMe::BankAccount.find_by_id("1234")
+bank_account = PagarMe::BankAccount.find_by_id("4840")
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$bank_account = PagarMe_Bank_Account::findById("4840");
 ```
 
 ```cs
@@ -178,6 +197,11 @@ bank_accounts = PagarMe::BankAccount.find_by({ bank_code: '237' })
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	
+	$accounts = PagarMe_Bank_Account::all(2, 3);
 ```
 
 ```cs

@@ -68,6 +68,19 @@ curl -X POST https://api.pagar.me/1/recipients \
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	
+	$recipient = new PagarMe_Recipient(array(
+		"transfer_interval" => "weekly",
+		"transfer_day" => 5,
+		"transfer_enabled" => true,
+		"automatic_anticipation_enabled" => true,
+		"anticipatable_volume_percentage" => 85,
+		"bank_account_id" => 4841
+	));
+	$recipient->create();
 ```
 
 ```cs
@@ -134,6 +147,11 @@ curl -X GET https://api.pagar.me/1/recipients \
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$recipients = PagarMe_Recipient::all(1, 10);
 ```
 
 ```cs
@@ -258,6 +276,11 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl \
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	
+	$recipient = PagarMe_Recipient::findById("re_ci7nhf1ay0007n016wd5t22nl");
 ```
 
 ```cs
