@@ -23,6 +23,10 @@ under the License.
 				return;
 			}
 
+			if ($('.code-selector [data-lang="' + lang + '"]').length == 0) {
+				lang = 'objective_c';
+			}	
+			
 			$.each(scriptBlockObj.codeBlocks, function(i, codeBlock) {
 				if (!codeBlock.hasClass(lang)) {
 					codeBlock.hide();
