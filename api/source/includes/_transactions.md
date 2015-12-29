@@ -130,7 +130,6 @@ transaction.charge
     ));
 
     $transaction->charge();
-?>
 ```
 
 ```cs
@@ -257,7 +256,6 @@ transaction = PagarMe::Transaction.find_by_id("184270")
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
     $transaction = PagarMe_Transaction::findById("184270");
-?>
 ```
 
 ```cs
@@ -333,7 +331,6 @@ transactions = PagarMe::Transaction.all(3, 3)
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
     $transaction = PagarMe_Transaction::all(3, 3);
-?>
 ```
 
 ```cs
@@ -503,7 +500,6 @@ key = PagarMe::Transaction.generate_card_hash()
     ));
 
     $key = $t->generateCardHash();
-?>
 ```
 
 ```cs
@@ -1225,7 +1221,6 @@ transaction.capture({:amount => 1000})
 	$t->charge();
 
 	$t->capture(3100);
-?>
 ```
 
 ```cs
@@ -1340,7 +1335,6 @@ transaction.refund
 	$t->charge();
 
 	$t->refund();
-?>
 ```
 
 ```cs

@@ -77,7 +77,6 @@ card.create
 		"card_expiration_year" => 22,
 		"card_cvv" => "123",
 	));
-?>
 ```
 
 ```cs
@@ -136,7 +135,6 @@ card = PagarMe::Card.find_by_id("1234")
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$card = PagarMe_Card::findById("card_ci6y37hc00030a416wrxsmzyi");
-?>
 ```
 
 ```cs

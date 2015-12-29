@@ -164,7 +164,6 @@ subscription.create
 
 	$subscription->create();
 
-?>
 ```
 
 ```cs
@@ -298,7 +297,6 @@ subscription = PagarMe::Subscription.find_by_id("14858")
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$subscription = PagarMe_Subscription::findById(14858);
-?>
 ```
 
 ```cs
@@ -423,7 +421,6 @@ subscriptions = PagarMe::Subscription.all(1, 2)
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$subscription = PagarMe_Subscription::all(1, 2);
-?>
 ```
 
 ```cs
@@ -636,7 +633,6 @@ subscription.save
 	$subscription->setPaymentMethod("boleto");
 
 	$subscription->save();
-?>
 ```
 
 ```cs
@@ -769,7 +765,6 @@ subscription.cancel
 
 	$subscription = PagarMe_Subscription::findById(14858);
 	$subscription->cancel();
-?>
 ```
 
 ```cs

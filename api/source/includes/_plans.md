@@ -82,7 +82,6 @@ plan.create
 	));
 
 	$plan->create();
-?>
 ```
 
 ```cs
@@ -149,7 +148,6 @@ plan = PagarMe::Plan.find_by_id("13580")
 
 	$plan = PagarMe_Plan::findById("13850");
 
-?>
 ```
 
 ```cs
@@ -209,7 +207,6 @@ plans = PagarMe::Plan.all(1, 3)
 
 	$plans = PagarMe_Plan::all(1, 3);
 
-?>
 ```
 
 ```cs
@@ -306,7 +303,6 @@ plan.save
 	$plan = PagarMe_Plan::findById("12785");
 
 	$plan->setName("plano silver");
-?>
 ```
 
 ```cs
