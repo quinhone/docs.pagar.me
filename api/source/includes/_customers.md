@@ -62,7 +62,7 @@ customer.create
 
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-	$customer = new Pagarme_Customer(array(
+	$customer = new PagarMe_Customer(array(
 	  "document_number" => "18152564000105",
 	  "name" => "nome do cliente",
 	  "email" => "eee@email.com",
