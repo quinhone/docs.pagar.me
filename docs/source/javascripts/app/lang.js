@@ -24,7 +24,7 @@ under the License.
 			}
 
 			if ($('.code-selector [data-lang="' + lang + '"]').length == 0) {
-				lang = 'objective_c';
+				lang = 'java';
 			}	
 			
 			$.each(scriptBlockObj.codeBlocks, function(i, codeBlock) {
