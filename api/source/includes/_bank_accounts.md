@@ -72,9 +72,34 @@ bank_account.create
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$account = new Pagarme_Bank_Account(array(
+		"bank_code" => "341",
+		"agencia" => "0932",
+		"agencia_dv" => "5",
+		"conta" => "58054",
+		"conta_dv" => "1",
+		"document_number" => "26268738888",
+		"legal_name" => "API BANK ACCOUNT"
+	));
+	$account->create();
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+BankAccount b = new BankAccount();
+b.Agencia = "0192";
+b.AgenciaDv = "0";
+b.Conta = "03245";
+b.ContaDv = "0";
+b.BankCode = "0341";
+b.DocumentNumber = "26268738888";
+b.LegalName = "API BANK ACCOUNT";
+b.Save();
 ```
 
 Cria uma conta bancária para futuros pagamentos.
@@ -123,13 +148,21 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 
-bank_account = PagarMe::BankAccount.find_by_id("1234")
+bank_account = PagarMe::BankAccount.find_by_id("4840")
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$bank_account = PagarMe_Bank_Account::findById("4840");
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var account = PagarMeService.GetDefaultService().BankAccounts.Find("4840");
 ```
 
 Através dessa rota você consegue retornar os dados de uma conta bancária específica.
@@ -178,9 +211,17 @@ bank_accounts = PagarMe::BankAccount.find_by({ bank_code: '237' })
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	
+	$accounts = PagarMe_Bank_Account::all(2, 3);
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var accounts = PagarMeService.GetDefaultService().BankAccounts.FindAll(new BankAccount());
 ```
 
 Através dessa rota você consegue retornar os dados de várias contas bancárias.

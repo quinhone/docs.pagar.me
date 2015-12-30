@@ -86,7 +86,6 @@ customer.create
 	));
 
 	$customer->create();
-?>
 ```
 
 ```cs
@@ -173,7 +172,6 @@ customer = PagarMe::Customer.find_by_id(11222)
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$customer = PagarMe_Customer::findById(11222);
-?>
 ```
 
 ```cs
@@ -247,7 +245,6 @@ card = PagarMe::Card.all(1, 2)
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$customers = PagarMe_Customer::all(1, 2);
-?>
 ```
 
 ```cs

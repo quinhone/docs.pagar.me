@@ -68,9 +68,29 @@ curl -X POST https://api.pagar.me/1/recipients \
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	
+	$recipient = new PagarMe_Recipient(array(
+		"transfer_interval" => "weekly",
+		"transfer_day" => 5,
+		"transfer_enabled" => true,
+		"automatic_anticipation_enabled" => true,
+		"anticipatable_volume_percentage" => 85,
+		"bank_account_id" => 4841
+	));
+	$recipient->create();
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Recipient recipient = new Recipient();
+recipient.TransferInterval = TransferInterval.Weekly;
+recipient.TransferDay = 5;
+recipient.TransferEnabled = true;
+recipient.BankAccount = PagarMeService.GetDefaultService().BankAccounts.Find("4840");
 ```
 
 Com essa rota você consegue criar um recebedor, definindo o período que ele irá receber os pagamentos e qual a conta bancária que será utilizada para envio dos pagamentos.
@@ -134,9 +154,17 @@ curl -X GET https://api.pagar.me/1/recipients \
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+
+	$recipients = PagarMe_Recipient::all(1, 10);
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var recipients = PagarMeService.GetDefaultService().Recipients.FindAll(new Recipient());
 ```
 
 Retorna um `Array` de objetos com todos os recebedores criados pela sua companhia.
@@ -255,12 +283,22 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl \
 ```
 
 ```ruby
+
+
 ```
 
 ```php
+<?php
+	require("pagarme-php/Pagarme.php");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	
+	$recipient = PagarMe_Recipient::findById("re_ci7nhf1ay0007n016wd5t22nl");
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl");
 ```
 
 Retorna um objeto com os dados de um recebedor criado pela sua companhia.

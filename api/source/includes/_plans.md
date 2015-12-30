@@ -82,10 +82,18 @@ plan.create
 	));
 
 	$plan->create();
-?>
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Plan plan = new Plan();
+plan.Amount = 3000;
+plan.TrialDays = 5;
+plan.Days = 30;
+plan.Name = "Plano gold";
+
+plan.Save();
 ```
 
 Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorrência, métodos de pagamento, dentre outras opções.
@@ -149,10 +157,12 @@ plan = PagarMe::Plan.find_by_id("13580")
 
 	$plan = PagarMe_Plan::findById("13850");
 
-?>
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var plan = PagarMeService.GetDefaultService().Plans.Find("13850");
 ```
 
 Retorna um plano previamente criado.
@@ -209,10 +219,12 @@ plans = PagarMe::Plan.all(1, 3)
 
 	$plans = PagarMe_Plan::all(1, 3);
 
-?>
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var plans = PagarMeService.GetDefaultService().Plans.FindAll(new Plan());
 ```
 
 Retorna todos os planos previamente criados. 
@@ -306,7 +318,6 @@ plan.save
 	$plan = PagarMe_Plan::findById("12785");
 
 	$plan->setName("plano silver");
-?>
 ```
 
 ```cs
