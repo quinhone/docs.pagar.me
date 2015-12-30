@@ -163,10 +163,22 @@ subscription.create
 		)));
 
 	$subscription->create();
-
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Subscription subscription = new Subscription();
+subscription.CardNumber = "4901720080344448";
+subscription.CardHolderName = "Jose da Silva";
+subscription.CardExpirationDate = "1215";
+subscription.CardCvv = "123";
+
+Customer customer = new Customer();
+customer.Email = "api@test.com";
+subscription.Customer = customer;
+
+subscription.Save();
 ```
 
 Para efetivamente cobrar seu cliente de forma recorrente, você deve criar uma **assinatura**, que atrelada a um **plano**, conterá os dados de cobrança.
@@ -300,6 +312,9 @@ subscription = PagarMe::Subscription.find_by_id("14858")
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var subscription = PagarMeService.GetDefaultService().Subscriptions.Find("14858");
 ```
 
 Essa rota é utilizada para retornar os dados de uma determinada assinatura.
@@ -424,6 +439,9 @@ subscriptions = PagarMe::Subscription.all(1, 2)
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var subscriptions = PagarMeService.GetDefaultService().Subscriptions.FindAll(new Subscription());
 ```
 
 Essa rota é utilizada para retornar os dados de todas assinaturas.

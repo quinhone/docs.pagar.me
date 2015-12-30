@@ -255,10 +255,13 @@ transaction = PagarMe::Transaction.find_by_id("184270")
 
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-    $transaction = PagarMe_Transaction::findById("184270");
+    $transaction = PagarMe_Transaction::findById("194351");
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var transaction = PagarMeService.GetDefaultService().Transactions.Find("194351");
 ```
 
 Retorna os dados de uma transação realizada.
@@ -334,6 +337,9 @@ transactions = PagarMe::Transaction.all(3, 3)
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var transaction = PagarMeService.GetDefaultService().Transactions.FindAll(new Transaction());
 ```
 
 Retorna um `Array` contendo objetos de transações, ordenadas a partir da transação realizada mais recentemente.
@@ -503,7 +509,6 @@ key = PagarMe::Transaction.generate_card_hash()
 ```
 
 ```cs
-
 ```
 
 Caso você queira/precise criar o `card_hash` manualmente, essa rota deverá ser utilizada para obtenção de uma chave pública de encriptação dos dados do cartão de seu cliente.
@@ -1224,6 +1229,19 @@ transaction.capture({:amount => 1000})
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 3100;
+transaction.CardId = "card_ci6l9fx8f0042rt16rtb477gj";
+transaction.PostbackUrl = "http://requestb.in/pkt7pgpk";
+transaction.Metadata = new Metadata() {
+    IdProduto = 13933139
+};
+transaction.Save();
+
+transaction.Capture(3100);
 ```
 
 Você pode capturar o valor de uma transação após a autorização desta, no prazo máximo de 5 dias após a autorização.
@@ -1338,6 +1356,19 @@ transaction.refund
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Transaction transaction = new Transaction();
+
+transaction.Amount = 3100;
+transaction.CardId = "card_ci6l9fx8f0042rt16rtb477gj";
+transaction.PostbackUrl = "http://requestb.in/pkt7pgpk";
+transaction.Metadata = new Metadata() {
+    IdProduto = 13933139
+};
+transaction.Save();
+
+transaction.Refund();
 ```
 
 Essa rota é utilizada quando se deseja estornar uma transação, realizada por uma cobrança via cartão de crédito ou boleto bancário.

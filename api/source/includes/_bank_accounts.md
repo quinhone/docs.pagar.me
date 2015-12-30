@@ -89,6 +89,17 @@ bank_account.create
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+BankAccount b = new BankAccount();
+b.Agencia = "0192";
+b.AgenciaDv = "0";
+b.Conta = "03245";
+b.ContaDv = "0";
+b.BankCode = "0341";
+b.DocumentNumber = "26268738888";
+b.LegalName = "API BANK ACCOUNT";
+b.Save();
 ```
 
 Cria uma conta bancária para futuros pagamentos.
@@ -149,6 +160,9 @@ bank_account = PagarMe::BankAccount.find_by_id("4840")
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var account = PagarMeService.GetDefaultService().BankAccounts.Find("4840");
 ```
 
 Através dessa rota você consegue retornar os dados de uma conta bancária específica.
@@ -205,6 +219,9 @@ bank_accounts = PagarMe::BankAccount.find_by({ bank_code: '237' })
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var accounts = PagarMeService.GetDefaultService().BankAccounts.FindAll(new BankAccount());
 ```
 
 Através dessa rota você consegue retornar os dados de várias contas bancárias.

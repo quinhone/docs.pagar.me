@@ -80,6 +80,15 @@ card.create
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+Card card = new Card();
+card.Number = "4111111111111111";
+card.HolderName = "Jose da Silva";
+card.ExpirationDate = "1022";
+card.Cvv = "123";
+
+card.Save();
 ```
 
 Você pode armazenar os dados do cartão do seu cliente através da rota `/cards`, assim você poderá usar o `id` do objeto gerado para realizar futuras transações, no lugar do `card_hash`.
@@ -138,6 +147,9 @@ card = PagarMe::Card.find_by_id("1234")
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+
+var card = PagarMeService.GetDefaultService().Cards.Find("card_ci6y37hc00030a416wrxsmzyi");
 ```
 
 Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
