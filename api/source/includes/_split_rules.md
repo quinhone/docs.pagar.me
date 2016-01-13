@@ -26,7 +26,7 @@ Objeto que contém as informações das regras da divisão do valor gerado na tr
 | **id**<br>String | Identificador da regra de divisão |
 | **recipient_id**<br><span class="required">obrigatório</span><br>String | Recebedor que irá receber os valores descritos nessa regra |
 | **charge_processing_fee**<br>Boolean | Define se o recebedor dessa regra irá ser cobrado pela taxa da Pagar.me |
-| **liable**<br>Boolean | Define se o recebedor vinculado a essa regra irá se responsabilizar pelo risco da transação (estorno/chargeback) |
+| **liable**<br>Boolean | Define se o recebedor vinculado a essa regra irá se responsabilizar pelo risco da transação (chargeback) |
 | **percentage**<br><span class="required">obrigatório\*</span><br>Number | Porcentagem que o recebedor vai receber do valor da transação. <br> **OBS**: Caso `percentage` seja utilizada, não é necessário passar o parâmetro `amount` |
 | **amount**<br><span class="required">obrigatório\*</span><br>Number | Valor que o recebedor vai receber da transação. <br> **OBS**: Caso `amount` seja utilizado, não é necessário passar o parâmetro `percentage` |
 | **date_created**<br>String | Data da criação da `split_rule` |
