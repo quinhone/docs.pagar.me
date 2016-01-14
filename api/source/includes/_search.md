@@ -6,7 +6,7 @@
 
 ```shell
 curl -X GET https://api.pagar.me/1/search \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'\
 -d 'type=transaction' \
 -d 'query={
   "query" : {
@@ -96,4 +96,256 @@ Através da rota `/search` você consegue fazer consultas usando o [ElasticSearc
 | **query** | Filtros a serem utilizados para obtenção dos resultados esperados. Veja mais sobre as buscas no Elasticsearch [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search.html) |
 | **search_type** | Informa o tipo de busca que deve ser feita na base de dados. Mais sobre tipos de pesquisa [aqui](http://www.elastic.co/guide/en/elasticsearch/reference/current//search-request-search-type.html) |
 
+
+## Busca Avançada com o ElasticSearch
+
+> GET https://api.pagar.me/1/search
+
+```shell
+curl -X GET https://api.pagar.me/1/search \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
+-d 'type=transaction' \
+-d 'query={
+      "query": {
+        "filtered": {
+          "query": {
+            "match_all": {}
+          },
+          "filter": {
+            "and": [
+              {
+                "range": {
+                  "date_created": {
+                    "lte": "2016-01-31",
+                    "gte": "2016-01-01"
+                  }
+                }
+              },
+              {
+                "or": [
+                  {
+                    "term": {
+                      "status": "waiting_payment"
+                    }
+                  },
+                  {
+                    "term": {
+                      "status": "paid"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Você pode utilizar a [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) do ElasticSearch para fazer buscas avançadas. No exemplo ao lado, realizamos uma query em que filtramos `transactions` com `date_created` no mês de Janeiro de 2016, ao mesmo tempo que filtramos apenas transações que contenham `status` como `paid` ou como `waiting `
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+  "took": 2,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 4,
+    "max_score": 14.429372,
+    "hits": [
+      {
+        "_index": "pagarme",
+        "_type": "transaction",
+        "_id": "352251",
+        "_score": 14.429372,
+        "_source": {
+          "object": "transaction",
+          "status": "waiting_payment",
+          "refuse_reason": null,
+          "status_reason": "acquirer",
+          "acquirer_response_code": null,
+          "acquirer_name": "development",
+          "authorization_code": null,
+          "soft_descriptor": null,
+          "tid": null,
+          "nsu": null,
+          "date_created": "2016-01-13T15:52:52.000Z",
+          "date_updated": "2016-01-13T15:52:53.000Z",
+          "amount": 10000,
+          "installments": 1,
+          "id": 352251,
+          "cost": 0,
+          "card_holder_name": null,
+          "card_last_digits": null,
+          "card_first_digits": null,
+          "card_brand": null,
+          "postback_url": null,
+          "payment_method": "boleto",
+          "capture_method": "ecommerce",
+          "antifraud_score": null,
+          "boleto_url": "https://pagar.me",
+          "boleto_barcode": "1234 5678",
+          "boleto_expiration_date": "2016-01-20T02:00:00.744Z",
+          "referer": "api_key",
+          "ip": "179.191.82.50",
+          "subscription_id": null,
+          "phone": null,
+          "address": null,
+          "customer": null,
+          "card": null,
+          "antifraud_metadata": {},
+          "metadata": {}
+        }
+      },
+      {
+        "_index": "pagarme",
+        "_type": "transaction",
+        "_id": "352247",
+        "_score": 14.425906,
+        "_source": {
+          "object": "transaction",
+          "status": "waiting_payment",
+          "refuse_reason": null,
+          "status_reason": "acquirer",
+          "acquirer_response_code": null,
+          "acquirer_name": "development",
+          "authorization_code": null,
+          "soft_descriptor": null,
+          "tid": null,
+          "nsu": null,
+          "date_created": "2016-01-13T15:51:56.000Z",
+          "date_updated": "2016-01-13T15:51:57.000Z",
+          "amount": 10000,
+          "installments": 1,
+          "id": 352247,
+          "cost": 0,
+          "card_holder_name": null,
+          "card_last_digits": null,
+          "card_first_digits": null,
+          "card_brand": null,
+          "postback_url": null,
+          "payment_method": "boleto",
+          "capture_method": "ecommerce",
+          "antifraud_score": null,
+          "boleto_url": "https://pagar.me",
+          "boleto_barcode": "1234 5678",
+          "boleto_expiration_date": "2016-01-20T02:00:00.664Z",
+          "referer": "api_key",
+          "ip": "179.191.82.50",
+          "subscription_id": null,
+          "phone": null,
+          "address": null,
+          "customer": null,
+          "card": null,
+          "antifraud_metadata": {},
+          "metadata": {}
+        }
+      },
+      {
+        "_index": "pagarme",
+        "_type": "transaction",
+        "_id": "348547",
+        "_score": 14.025334,
+        "_source": {
+          "object": "transaction",
+          "status": "waiting_payment",
+          "refuse_reason": null,
+          "status_reason": "acquirer",
+          "acquirer_response_code": null,
+          "acquirer_name": "development",
+          "authorization_code": null,
+          "soft_descriptor": null,
+          "tid": null,
+          "nsu": null,
+          "date_created": "2016-01-07T21:19:53.000Z",
+          "date_updated": "2016-01-07T21:19:53.000Z",
+          "amount": 1000,
+          "installments": 1,
+          "id": 348547,
+          "cost": 0,
+          "card_holder_name": null,
+          "card_last_digits": null,
+          "card_first_digits": null,
+          "card_brand": null,
+          "postback_url": null,
+          "payment_method": "boleto",
+          "capture_method": "ecommerce",
+          "antifraud_score": null,
+          "boleto_url": "https://pagar.me",
+          "boleto_barcode": "1234 5678",
+          "boleto_expiration_date": "2016-01-14T02:00:00.474Z",
+          "referer": "api_key",
+          "ip": "179.185.132.108",
+          "subscription_id": null,
+          "phone": null,
+          "address": null,
+          "customer": null,
+          "card": null,
+          "antifraud_metadata": {},
+          "metadata": {}
+        }
+      },
+      {
+        "_index": "pagarme",
+        "_type": "transaction",
+        "_id": "352252",
+        "_score": 14.025334,
+        "_source": {
+          "object": "transaction",
+          "status": "waiting_payment",
+          "refuse_reason": null,
+          "status_reason": "acquirer",
+          "acquirer_response_code": null,
+          "acquirer_name": "development",
+          "authorization_code": null,
+          "soft_descriptor": null,
+          "tid": null,
+          "nsu": null,
+          "date_created": "2016-01-13T15:53:07.000Z",
+          "date_updated": "2016-01-13T15:53:07.000Z",
+          "amount": 10000,
+          "installments": 1,
+          "id": 352252,
+          "cost": 0,
+          "card_holder_name": null,
+          "card_last_digits": null,
+          "card_first_digits": null,
+          "card_brand": null,
+          "postback_url": null,
+          "payment_method": "boleto",
+          "capture_method": "ecommerce",
+          "antifraud_score": null,
+          "boleto_url": "https://pagar.me",
+          "boleto_barcode": "1234 5678",
+          "boleto_expiration_date": "2016-01-20T02:00:00.502Z",
+          "referer": "api_key",
+          "ip": "179.191.82.50",
+          "subscription_id": null,
+          "phone": null,
+          "address": null,
+          "customer": null,
+          "card": null,
+          "antifraud_metadata": {},
+          "metadata": {}
+        }
+      }
+    ]
+  }
+}
+```
 
