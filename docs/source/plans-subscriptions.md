@@ -77,7 +77,7 @@ amount | --- | Valor a ser cobrado (em centavos). Ex: R$14,99 = `1499`
 days| --- | Dias de duração do plano
 trial_days | `0` | Dias de duração do período de trial
 payment_methods | `credit_card,boleto` | Meios de pagamento aceitos para o plano
-charges | `null` | Número de vezes que o usuário deverá ser cobrado. `null` irá cobrar o usuário indefinidamente, ou até que o plano seja cancelado.
+charges | `null` | Número de vezes que o usuário deverá ser cobrado, **sem contar a cobrança inicial da assinatura no caso de pagamento com cartão de crédito** (caso deva haver 3 cobranças, o valor passado deve ser `2` no caso de cartão). `null` irá cobrar o usuário indefinidamente, ou até que o plano seja cancelado.
 installments | `1` | Número de parcelas a ser cobrado no cartão de crédito. Útil para planos anuais em que o usuário irá parcelar o valor ao longo dos `12` meses.
 
 ## Criando uma assinatura
@@ -225,7 +225,7 @@ O tempo que a assinatura ficará `pending_payment` caso o pagamento não seja
 detectado é, por padrão, de 5 dias. Esse valor (`payment_deadline`) pode ser
 configurado pelo seu Dashboard e é único para sua conta.
 
-Caso após todas as 5 tentativas de cobrança a assinatura continue não paga, a
+Caso após todos as 5 dias de tentativa de cobrança a assinatura continue não paga, a
 mesma passará para o status `unpaid`.
 
 ### Durante o status `unpaid`

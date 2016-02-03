@@ -1642,7 +1642,7 @@ Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.
 
 O `card_hash` consiste em uma string gerada a partir dos dados do cartão de crédito. Essa string é encriptada por RSA usando uma chave pública que deve ser requisitada ao servidor a cada novo `card_hash` gerado. Essa chave é invalidada assim que o servidor lê as informações contidas no `card_hash`, e por isso só pode ser utilizada uma única vez. Ela também é temporária, expirando 5 minutos após ter sido gerada.
 
-As bibliotecas do Pagar.me sempre utilizam o `card_has`h para enviar os dados para o servidor, o que aumenta consideravelmente a segurança da transação.
+As bibliotecas do Pagar.me sempre utilizam o `card_hash` para enviar os dados para o servidor, o que aumenta consideravelmente a segurança da transação.
 
 ### Requisitando ao servidor uma chave para encriptar o `card_hash`
 
@@ -1683,7 +1683,7 @@ Para gerarmos o `card_hash`, primeiramente devemos requisitar do servidr a chave
 
 ### Encriptando os dados do cartão de crédito
 
-Agora você vai ter que criar uma querystring com urlenconded com os parâmetros do cartão de crédito, vamos pegar os seguintes dados abaixo como exemplo:
+Agora você vai ter que criar uma QueryString com valores URLEncoded para os parâmetros do cartão de crédito. Vamos pegar os seguintes dados abaixo como exemplo:
 
 - card_number = `4901720080344448`
 - card_holder_name = `"Usuario de Teste"`
@@ -1693,18 +1693,18 @@ Agora você vai ter que criar uma querystring com urlenconded com os parâmetros
 A querystring será da seguinte forma:
 
 `
-card_number=4901720080344448&card_holder_name=Usuario de Teste&card_expiration_date=1213&card_cvv=314
+card_number=4901720080344448&card_holder_name=Usuario%20de%20Teste&card_expiration_date=1213&card_cvv=314
 `
 
-Agora você vai fazer uma criptografia publica com `RSA` e o padding `PKCS1Padding` usando a public_key que você recebeu na request passando essa querystring que você montou.
+Agora você vai fazer uma criptografia publica com `RSA` e o padding `PKCS1Padding` usando a public_key que você recebeu na request passando essa QueryString que você montou.
 
-Após criptografar esses dados você deve converter o resultado dessa encriptação para base64. Como resultado você terá:
+Após criptografar esses dados você deve converter o resultado para base64. Como resultado você terá:
 
 `
 FFtwikzg/FC1mH7XLFU5fjPAzDsP0ogeAQh3qXRpHzkIrgDz64lITBUGwio67zm2CQXwbKRjGdRi5J1xFNpQLWnxQsUJAQELcTSGaGtF6RGSu6sq1stp8OLRSNG7wp+xGe8poqxw4S1gOL5JYO7XZp/Uz7rTpKXh3IcRshmX36hh66J6+7l5j0803cGIfMZu3T7nbMjQYIf+yLi8r0O6vL9DQPmqSZ9FBerqFGxWHrxScneaaMVzMpNX/5eneqveVBt88RccytyJG5+HYRHcRyKIbLfmX48L/C22HJeAm3PyzehGHdOmDcsxPtVB+Fgq7SDuB4tHWBT8j6wihOO7ww==
 `
 
-Agora que você possui o id vindo do request e o os dados criptografados convertidos para base64, seu `card_hash` será o seguinte:
+Agora que você possui o id vindo do request e o os dados criptografados convertidos para base64, seu `card_hash` deverá ser formatado da seguinte maneira:
 
 **`
 card_hash = id + "_" + encrypted_string_base64

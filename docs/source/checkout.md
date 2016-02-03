@@ -215,7 +215,7 @@ recusada pelo motivo `capture_timeout`.</aside>
 
 Com o checkout Pagar.me também é possível enviar metadata em uma transação. Para o caso do checkout, o envio de metadata é feito no momento de captura da transação. Basta passar a metada como parâmetros do request de captura.
 
-Qualquer dúvida sobre metadata, basta checar a sessão de metada na [documentação para metadata](https://docs.pagar.me/advanced/#enviando-dados-adicionais-metadata).
+Qualquer dúvida sobre metadata, basta checar a seção _metadata_ na [documentação para metadata](https://docs.pagar.me/advanced/#enviando-dados-adicionais-metadata).
 
 ```shell
 curl -X POST "https://api.pagar.me/1/transactions/{TOKEN}/capture"
