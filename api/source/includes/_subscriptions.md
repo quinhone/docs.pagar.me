@@ -100,7 +100,7 @@ Esse objeto contém os dados das assinaturas geradas pelo seu sistema, que são 
 | **payment_method**<br> String | Método de pagamento associado a essa assinatura |
 | **current_period_start**<br> String | Início do período de cobrança da assinatura |
 | **current_period_end**<br> String | Término do período de cobrança da assinatura |
-| **charges**<br> Number | Número de cobranças a serem efetuadas |
+| **charges**<br> Number | Número de cobranças que foram efetuadas na assinatura, **sem contar a cobrança inicial da assinatura no caso de cartão de crédito**. |
 | **status**<br> String | Possíveis estados da transação/assinatura <br> **Valores possíveis**: `trialing`, `paid`, `pending_payment`, `unpaid`, `canceled`, `ended` |
 | **date_created**<br> String | Data da criação da assinatura |
 | **phone**<br> Object | Objeto com dados do telefone do cliente |

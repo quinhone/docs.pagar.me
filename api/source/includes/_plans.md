@@ -37,7 +37,7 @@ Com o objeto `plan` você consegue definir um plano no qual assinaturas poderão
 | **date_created**<br> String | Data da criação do plano (ISODate) |
 | **payment_methods**<br> Array | Array de Strings contendo os possíveis métodos de pagamento deste plano. <br> **Valores possíveis**: `credit_card`, `boleto` |
 | **color**<br> String | Propriedade opcional para atribuição de uma cor ao plano. <br> **Valor padrão**: `null` |
-| **charges**<br> Number | Número de cobranças que podem ser feitas em uma assinatura. <br> **Ex**: Plano anual com no máximo 3 cobranças, `days = 365` e `charges = 3` |
+| **charges**<br> Number | Número de cobranças que podem ser feitas em uma assinatura.<br> **OBS**: No caso de pagamento com cartão de crédito, esse valor **não inclui a cobrança feita na criação da assinatura**. <br> **Ex**: Plano anual com no máximo 3 cobranças, `days = 365` e `charges = 2` (cartão de crédito) ou `charges = 3` (boleto) |
 | **installments**<br> Number | Informa em quantas vezes o pagamento será parcelado entre cada cobrança |
 
 ## Criando Planos
@@ -127,8 +127,8 @@ Cria um plano, onde poderão ser definidos o nome deste, preço, tempo de recorr
 | **trial_days**<br> default: `0` | Dias para teste gratuito do produto. Valor começará a ser cobrado no dia `trial_days + 1` |
 | **payment_methods**<br> Array, default: `[boleto, credit_card]` | Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos |
 | **color**<br> default: `null` | Armazena o valor de uma cor para o plano |
-| **charges**<br> default: `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, charges = 3, installments = 1` <br> **OBS**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
-| **installments**<br> default: `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, charges = 2, installments = 12` <br> **OBS**: Boleto sempre terá `installments = 1` |
+| **charges**<br> default: `null` | Número de cobranças que poderão ser feitas nesse plano. <br> **Ex**: Plano cobrado 1x por ano, válido por no máximo 3 anos. Nesse caso, nossos parâmetros serão: `days = 365, installments = 1`, `charges=2` (cartão de crédito) ou `charges=3` (boleto). <br> **OBS**: No caso de cartão de crédito, a cobrança feita na ativação da assinatura **não é considerada**. <br> **OBS**: `null` irá cobrar o usuário indefinidamente, ou até o plano ser cancelado |
+| **installments**<br> default: `1` | Número de parcelas entre cada *charge*. <br> **Ex**: Plano anual, válido por 2 anos, podendo ser divido em até 12 vezes. Nesse caso, nossos parâmetros serão: `days = 30, installments = 12`, `charges=2` (cartão de crédito) ou `charges=3` (boleto). <br> **OBS**: Boleto sempre terá `installments = 1` |
 
 Veja mais sobre como criar um plano [aqui](https://pagar.me/docs/plans-subscriptions/#criando-um-plano).
 
