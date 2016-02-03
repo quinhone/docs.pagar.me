@@ -61,6 +61,7 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 | **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `transaction` |
 | **status**<br> String | Para cada atualização no processamento da transação, esta propriedade será alterada, e o objeto `transaction` retornado como resposta através da sua URL de *postback* ou após o término do processamento da ação atual. <br> **Valores possíveis**: `processing`, `authorized`, `paid`, `refunded`, `waiting_payment`, `pending_refund`, `refused` |
 | **status_reason**<br> String | Motivo/agente responsável pela validação ou anulação da transação. <br> **Valores possíveis**: `acquirer`, `antifraud`, `internal_error`, `no_acquirer`, `acquirer_timeout` |
+| **acquirer_name**<br> String | Adquirente responsável pelo processamento da transação. <br> **Valores possíveis**: `development` (em ambiente de testes), `pagarme` (adquirente Pagar.me), `stone`, `cielo`, `rede`, `mundipagg` |
 | **acquirer_response_code**<br> String | Mensagem de resposta do adquirente referente ao status da transação.  |
 | **authorization_code**<br> String | Código de autorização retornado pela bandeira. |
 | **soft_descriptor**<br> String | Texto que irá aparecer na fatura do cliente depois do nome da loja. <br> **OBS**: Limite de 13 caracteres. |
