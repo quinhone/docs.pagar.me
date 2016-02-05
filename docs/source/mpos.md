@@ -307,6 +307,22 @@ O booleano `force` dos exemplos especifica o comportamento de atualização de t
 
 O parâmetro `loaded` nos eventos lançados por ocasião do término de atualização de tabelas indica, se `true`, que foram instaladas tabelas no pinpad; se `false`, que essa instalação não foi necessária.
 
+## Erros
+
+O callback de erros reporta, com um número, um erro que ocorreu na comunicação com o pinpad. Entre as possibilidades estão os seguintes:
+
+Erro | Significado
+----- | -----------
+10 | O fluxo correto de execução de operações não está sendo seguido (ex. tentativa de processar pagamento sem inicialização)
+11 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
+12 | Houve um timeout para a execução da operação requisitada.
+13 | A operação foi cancelada (por meio de uma função na biblioteca de cancelamento ou por meio do botão de cancelamento do pinpad).
+15 | Houve um erro na inicialização da sessão com o pinpad.
+20 | Tabelas EMV não foram baixadas corretamente.
+42 | As chaves do pinpad não foram carregadas corretamente.
+60 | O cartão passado no pinpad não está funcionando propriamente.
+70 | Não há aplicação disponível no pinpad para processamento do cartão (por conta de tabelas EMV inconsistentes, bandeira não suportada pela Pagar.me ou cartão que não obedece aos filtros das opções de cartão ao processar um pagamento).
+
 ## Próximos passos
 
 Com o `card_hash` em mãos no seu servidor, você pode [realizar uma transação](/transactions), [criar uma assinatura](/plans-subscriptions) ou [armazenar esse cartão e cobrá-lo posteriormente](/cards).
