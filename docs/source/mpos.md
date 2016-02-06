@@ -40,6 +40,11 @@ mpos.addListener(new MposListener() {
 	}
 	public void receiveCardHash(String cardHash) {
 		Log.d("ExemploMpos", "card_hash gerado = " + cardHash);
+		
+		/* Gerar transação com a API Pagar.me... */
+		mpos.finishTransaction(...);
+	}
+	public void receiveFinishTransaction() {
 		mpos.close();
 	}
 	public void receiveError(int error) {
@@ -61,11 +66,13 @@ PMMposController *controller = [[PMMposController alloc] initWithAccessory:acces
 	if (error != nil) { /* Lidar com Erro */ return; }
 	[controller payAmount:100 withCardOptions:MPF_DEFAULT withCallback:^(NSString *cardHash, NSError *error){
 		if (error != nil) { /* Lidar com Erro */ return; }
-		
 		NSLog(@"card_hash gerado = %@", cardHash);
-		// agora envie esse card_hash à API Pagar.me
-
-		[controller closeConnection];
+		
+		/* Gerar transação com a API Pagar.me... */
+		[controller finishTransactionWithSuccess:... withCallback:^(NSError *error){
+			if (error != nil) { /* Lidar com Erro */ return; }
+			[controller closeConnection];
+		}];
 	}];
 }];
 ```
@@ -87,9 +94,17 @@ controller.openConnectionWithCallback({ (error: NSError!) -> Void in
 			/* Lidar com Erro */
 			return
 		}
-		
 		NSLog("card_hash gerado = %@", cardHash);
-		controller.closeConnection()
+		
+		/* Gerar transação com a API Pagar.me... */		
+		controller.finishTransactionWithSuccess(..., withCallback: { error: NSError! -> Void in
+			if error != nil {
+				/* Lidar com Erro */
+				return
+			}
+			
+			controller.closeConnection()
+		})
 	})
 });
 ```
@@ -109,7 +124,11 @@ mpos.Errored += (sender, e) => { /* Lidar com Erro */ };
 
 await mpos.Initialize();
 var result = await mpos.ProcessPayment(100, PaymentFlags.Default);
+
 Console.WriteLine("card_hash gerado = " + result.CardHash);
+
+/* Gerar transação com a API Pagar.me... */
+await mpos.FinishTransaction(...);
 
 await mpos.Close();
 ```
@@ -123,6 +142,12 @@ static void Initialized(pagarme::mpos &mpos) {
 
 static void ProcessedPayment(pagarme::mpos &mpos, pagarme::mpos_payment_result &result) {
 	std::cout << "card_hash gerado = " << result.card_hash << std::endl;
+	
+	/* Gerar transação com a API Pagar.me... */	
+	mpos.finish_transaction(...);
+}
+
+static void FinishedTransaction(pagarme::mpos &mpos) {
 	mpos.close();
 }
 
@@ -130,14 +155,16 @@ static void Errored(pagarme::mpos &mpos, abecs_stat_t error) {
 	/* Lidar com Erro */
 }
 
-// Obtenha o serial port TTY (Unix) ou COM (Windows) que representa uma conexão serial
-// ao aparelho Bluetooth pareado
-const char *device = ...;
+// Obtenha uma classe derivada de std::streambuf
+// que se comunique com o pinpad dependendo da plataforma
+// utilizada pelo SDK
+std::streambuf streambuffer;
 
-pagarme::mpos mpos(device, "{ENCRYPTION_KEY}");
+pagarme::mpos mpos(streambuffer, "{ENCRYPTION_KEY}");
 mpos.initialized.connect(boost::bind(&Initialized, _1));
 mpos.errored.connect(boost::bind(&Errored, _1, _2));
 mpos.processed_payment.connect(boost::bind(&ProcessedPayment, _1, _2));
+mpos.finished_transaction.connected(boost::bind(&FinishedTransaction, _1));
 
 mpos.open_connection();
 mpos.wait();
@@ -165,6 +192,10 @@ MPF\_ALL\_DEBIT | Aceita todas as bandeiras com método de pagamento débito.
 MPF\_DEFAULT | Aceita todas as bandeiras e métodos de pagamento.
 
 Deve ser notado que opções que não especificam bandeiras ou modalidade de pagamento não podem ser usadas sozinhas. `MPF_CREDIT_CARD`, por exemplo, não deve ser usado por si só. Já `MPF_CREDIT_CARD | MPF_VISA_CARD` especifica que somente cartões Visa Crédito serão aceitos.
+
+<aside class="notice">É **imprescindível** que uma transação seja *finalizada* ao ser realizada. Para mais informações, leia mais abaixo.</aside>
+
+Transações com maquininha de cartão de crédito não precisam de dados de antifraude.
 
 ## Atualizando tabelas EMV
 
@@ -286,11 +317,12 @@ static void Errored(pagarme::mpos &mpos, abecs_stat_t error) {
 	/* Lidar com Erro */
 }
 
-// Obtenha o serial port TTY (Unix) ou COM (Windows) que representa uma conexão serial
-// ao aparelho Bluetooth pareado
-const char *device = ...;
+// Obtenha uma classe derivada de std::streambuf
+// que se comunique com o pinpad dependendo da plataforma
+// utilizada pelo SDK
+std::streambuf streambuffer;
 
-pagarme::mpos mpos(device, "{ENCRYPTION_KEY}");
+pagarme::mpos mpos(streambuffer, "{ENCRYPTION_KEY}");
 mpos.initialized.connect(boost::bind(&Initialized, _1));
 mpos.errored.connect(boost::bind(&Errored, _1, _2));
 mpos.updated_tables.connect(boost::bind(&UpdatedTables, _1, _2));
@@ -307,12 +339,61 @@ O booleano `force` dos exemplos especifica o comportamento de atualização de t
 
 O parâmetro `loaded` nos eventos lançados por ocasião do término de atualização de tabelas indica, se `true`, que foram instaladas tabelas no pinpad; se `false`, que essa instalação não foi necessária.
 
+## Finalizando uma Transação
+
+Após a obtenção da `card_hash` por meio do processamento de transação e seu envio à API Pagar.me para criação de uma transação, faz-se necessário finalizar o processamento da transação. Para tal, o seguinte código deve ser usado:
+
+```java
+import me.pagar.mposandroid.Mpos;
+boolean connected = true; /* Define se foi possível se conectar à API Pagar.me para processar a transação */
+ 
+mpos.finishTransaction(connected, Integer.parse(responseCode), emvData);
+```
+
+```objective_c
+#import "mpos-ios.h"
+
+BOOL connected = YES; /* Define se foi possível se conectar à API Pagar.me para processar a transação */
+
+[controller finishTransactionWithSuccess:connected withResponseCode:[responseCode integerValue] emvData:emvData withCallback:^(NSError *error){}];
+```
+
+```swift
+let connected = true; /* Define se foi possível se conectar à API Pagar.me para processar a transação */
+
+controller.finishTransactionWithSuccess(connected, withResponseCode: Int(responseCode), emvData: emvData, withCallback: { error: NSError! }) -> Void in });
+```
+
+```cs
+using PagarMe.Mpos;
+
+bool connected = true; /* Define se foi possível se conectar à API Pagar.me para processar a transação */
+await mpos.FinishTransaction(connected, Int32.Parse(responseCode), emvData);
+```
+
+```cpp
+#include "mposcxx.h"
+
+bool connected = true; /* Define se foi possível se conectar à API Pagar.me para processar a transação */
+mpos.finish_transaction(connected, atoi(responseCode.c_str()), emvData);
+```
+
+Os parâmetros `responseCode` e `emvData` devem ser retirados do objeto `transaction` retornado pela API Pagar.me com a seguinte correspondência:
+
+Parâmetro | Correspondência no objeto `transaction`
+--------- | ---------------------------------------
+responseCode | Integer dentro da propriedade `acquirer_response_code` do objeto `transaction`
+emvData | String dentro da propriedade `card_emv_response` do objeto `transaction`
+
+Caso não tenha sido possível conexão com a API Pagar.me para inicializar uma transação (e o parâmetro `connected` seja `false`), `responseCode` deve ser `0` e `emvData` deve ser `null`.
+
 ## Erros
 
 O callback de erros reporta, com um número, um erro que ocorreu na comunicação com o pinpad. Entre as possibilidades estão os seguintes:
 
 Erro | Significado
 ----- | -----------
+-1 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
 10 | O fluxo correto de execução de operações não está sendo seguido (ex. tentativa de processar pagamento sem inicialização)
 11 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
 12 | Houve um timeout para a execução da operação requisitada.
@@ -322,6 +403,7 @@ Erro | Significado
 42 | As chaves do pinpad não foram carregadas corretamente.
 60 | O cartão passado no pinpad não está funcionando propriamente.
 70 | Não há aplicação disponível no pinpad para processamento do cartão (por conta de tabelas EMV inconsistentes, bandeira não suportada pela Pagar.me ou cartão que não obedece aos filtros das opções de cartão ao processar um pagamento).
+
 
 ## Próximos passos
 
