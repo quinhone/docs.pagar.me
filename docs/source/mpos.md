@@ -130,11 +130,12 @@ static void Errored(pagarme::mpos &mpos, abecs_stat_t error) {
 	/* Lidar com Erro */
 }
 
-// Obtenha o serial port TTY (Unix) ou COM (Windows) que representa uma conexão serial
-// ao aparelho Bluetooth pareado
-const char *device = ...;
+// Obtenha uma classe derivada de std::streambuf
+// que se comunique com o pinpad dependendo da plataforma
+// utilizada pelo SDK
+std::streambuf streambuffer;
 
-pagarme::mpos mpos(device, "{ENCRYPTION_KEY}");
+pagarme::mpos mpos(streambuffer, "{ENCRYPTION_KEY}");
 mpos.initialized.connect(boost::bind(&Initialized, _1));
 mpos.errored.connect(boost::bind(&Errored, _1, _2));
 mpos.processed_payment.connect(boost::bind(&ProcessedPayment, _1, _2));
