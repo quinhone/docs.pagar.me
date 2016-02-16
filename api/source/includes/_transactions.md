@@ -206,7 +206,8 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | **card_hash**<br> <span class="required">obrigatório\*</span> | Informações do cartão do cliente criptografadas no navegador. <br>**OBS**: Apenas para transações de **cartão de crédito** você deve passar **ou** o  `card_hash` **ou** o  `card_id` |
 | **card_id**<br> <span class="required">obrigatório\*</span> | Ao realizar uma transação, retornamos o `card_id` do cartão para que nas próximas transações desse cartão possa ser utilizado esse identificador ao invés do `card_hash` |
 | **payment_method**<br> default: `credit_card` | Aceita dois tipos de pagamentos/valores: `credit_card` e `boleto` |
-| **postback_url** | Endpoint do seu sistema que receberá informações a cada atualização da transação |
+| **postback_url** | Endpoint do seu sistema que receberá informações a cada atualização da transação. Caso você defina este parâmetro, o processamento da transação se tornará assíncrono. |
+| **async** <br> default: `false` ou `true` caso utilize `postback_url` | Utilize `false` caso queira utilizar POSTbacks e manter o processamento síncrono de uma transação. |
 | **installments**<br> mínimo: 1, máximo: 12 | Se o pagamento for boleto, o padrão é 1 |
 | **boleto_expiration_date**<br> default: data atual + 7 dias | Prazo limite para pagamento do boleto |
 | **soft_descriptor** | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
