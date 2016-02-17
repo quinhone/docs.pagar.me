@@ -393,6 +393,7 @@ O callback de erros reporta, com um número, um erro que ocorreu na comunicaçã
 
 Erro | Significado
 ----- | -----------
+-2 | Houve um erro na conexão Bluetooth/USB entre o pinpad e o cliente do SDK.
 -1 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
 10 | O fluxo correto de execução de operações não está sendo seguido (ex. tentativa de processar pagamento sem inicialização)
 11 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
