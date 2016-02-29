@@ -85,6 +85,8 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 | data-interest-rate | - | Taxa de juros a ser cobrada na transação |
 | data-free-installments | - | Número de parcelas que não terão juros cobrados |
 | data-default-installment | `1` | Define a parcela padrão selecionada ao abrir o checkout | 
+| data-header-text | `Total a pagar {price_info}` | Define o texto do cabeçalho. <br>**OBS**: Você poderá utilizar a variável `{price_info}` para injetar o valor do pagamento no texto. |
+| data-payment-button-text | `Pagar` | Define o texto do botão final de pagamento. |
 
 ## Inserindo o Checkout via API
 
@@ -154,7 +156,8 @@ customerPhoneNumber | - | Número do telefone do cliente
 interestRate | - | Taxa de juros a ser cobrada na transação 
 freeInstallments | - | Número de parcelas que não terão juros cobrados 
 defaultInstallment | `1` | Define a parcela padrão selecionada ao abrir o checkout 
-
+headerText | `Total a pagar {price_info}` | Define o texto do cabeçalho. <br>**OBS**: Você poderá utilizar a variável `{price_info}` para injetar o valor do pagamento no texto. |
+paymentButtonText | `Pagar` | Define o texto do botão final de pagamento. |
 
 
 ## Capturando a transação
