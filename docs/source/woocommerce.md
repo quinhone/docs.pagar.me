@@ -11,7 +11,7 @@ search: true
 **Acessando o plugin:**
 
 Acesse o Plugin Pagar.me para Woocommerce por meio desses links:
-https://github.com/claudiosmweb/woocommerce-pagarme ou https://br.wordpress.org/plugins/woocommerce-pagarme
+[https://github.com/claudiosmweb/woocommerce-pagarme](https://github.com/claudiosmweb/woocommerce-pagarme) ou [https://br.wordpress.org/plugins/woocommerce-pagarme](https://br.wordpress.org/plugins/woocommerce-pagarme)
 Para instalar o plugin, você deve enviar os arquivos para a pasta wp-content/plugins. Você também pode utilizar o instalador de
 plugins do WordPress.
 

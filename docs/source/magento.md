@@ -12,8 +12,7 @@ search: true
 
 **Instalando o plugin:**
 
-Acesse o Plugin Pagar.me para Magento por meio desse link:
-https://github.com/pagarme/pagarme-magento
+Acesse o Plugin Pagar.me para Magento por meio desse link: [https://github.com/pagarme/pagarme-magento](https://github.com/pagarme/pagarme-magento)
 
 **Configurando o plugin:**
 
@@ -63,7 +62,7 @@ Depois, é só configurar os pagamentos.
 
 Também está disponível para cliente Magento o Checkout Pagar.me
 
-Saiba mais clicando no link http://pagar.me/checkout e siga as instruções de configuração para utilizar.
+Saiba mais clicando no link [Pagar.me Checkout](http://pagar.me/checkout) e siga as instruções de configuração para utilizar.
 
 ## Configurando Checkout
 
