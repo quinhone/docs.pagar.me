@@ -11,20 +11,23 @@ search: true
 ### No painel Magento
 
 **Instalando o plugin:**
+
 Acesse o Plugin Pagar.me para Magento por meio desse link:
 https://github.com/pagarme/pagarme-magento
 
 **Configurando o plugin:**
+
 Com o plugin instalado acesse, o admin do Magento e faça as configurações necessárias.
 
 Para fazer as configurações do plugin, é só seguir as imagens abaixo. Para testar e ativá-lo, você precisa das chaves que estão no
 painel do Pagar.me, tem um tutorial de como pegá-las logo abaixo.
 
 **Configurando os campos no painel do Magento:**
+
 Para prosseguir, precisamos de dois campos configurados no painel.
 
-1. Vá até a parte referente a **Número de linhas p/ endereço > 4**
-2. Após fazer essa alteração, configure **Exibir CPF/CNPJ > Obrigatório**
+1. Vá até a parte referente a ***Número de linhas p/ endereço > 4***
+2. Após fazer essa alteração, configure ***Exibir CPF/CNPJ > Obrigatório***
 
 ![](magento/configurando-campos.png)
 
@@ -40,7 +43,7 @@ Para testar e ativá-lo, você precisa das chaves que estão no painel do Pagar.
 
 ![](magento/dashboard-minha-conta.png)
 
-    4. Na sua conta, vá em **Configurações > API Keys**.
+    4. Na sua conta, vá em ***Configurações > API Keys***.
 Nessa página, você encontra as chaves de API de modo LIVE e TEST
 
 ![](magento/dashboard-api-keys.png)
