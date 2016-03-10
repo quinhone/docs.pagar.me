@@ -270,7 +270,10 @@ event | Evento que originou a notificação de POSTback | `transaction_status_ch
 current_status | Status da transação após o evento | ---
 old_status | Status da transação antes do evento | ---
 desired_status | Status desejado após o evento | Ao criar a transação: `paid`. Ao estornar a transação: `refunded` |
-fingerprint | Parâmetro usado para validar a notificação de POSTback ([saiba mais](/advanced#validando-a-origem-de-um-postback)) | ---
+
+<aside class="notice">OBS: Você deve validar os postbacks para garantir que eles foram enviados pela Pagar.me.<br/>
+  Para isso existe o cabeçalho HTTP `X-Hub-Signature`, [saiba mais](https://docs.pagar.me/advanced#validando-a-origem-de-um-postback)</aside>
+
 
 ## Dividindo uma transação 
 
