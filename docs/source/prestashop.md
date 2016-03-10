@@ -50,12 +50,12 @@ Para testar e ativá-lo, você precisa das chaves que estão na Dashboard Pagar.
 
     7. Na Home da nossa Dashboard, acesse suas configurações de conta.
 
-![](prestashop/dashboard-minha-conta.png)
+![](plataformas/dashboard-minha-conta.png)
 
     8. Na sua conta, vá em ***Configurações > API Keys***.
 Nessa página, você encontra as chaves de API de modo LIVE e TEST
 
-![](prestashop/dashboard-api-keys.png)
+![](plataformas/dashboard-api-keys.png)
 
 **De volta ao Painel da Prestashop:**
 

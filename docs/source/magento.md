@@ -40,12 +40,12 @@ Para testar e ativá-lo, você precisa das chaves que estão no painel do Pagar.
 
     3. Na Home da nossa Dashboard, acesse suas configurações de conta.
 
-![](magento/dashboard-minha-conta.png)
+![](plataformas/dashboard-minha-conta.png)
 
     4. Na sua conta, vá em ***Configurações > API Keys***.
 Nessa página, você encontra as chaves de API de modo LIVE e TEST
 
-![](magento/dashboard-api-keys.png)
+![](plataformas/dashboard-api-keys.png)
 
 **De volta ao Painel do Magento:**
 
