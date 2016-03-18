@@ -13,28 +13,30 @@ search: true
 
 ## Validando a origem de um POSTback
 
-Você pode validar a origem do POSTback, isto é, se ele foi realmente enviado
-pelo Pagar.me, pelo parâmetro `fingerprint`. O `fingerprint` é enviada pelo
-Pagar.me ao notificar a sua `postback_url`.
+Você deve validar a origem do POSTback, isto é, se ele foi realmente enviado
+pelo Pagar.me.
 
-<aside class="notice">O `fingerprint` é o hash `SHA1` calculado a partir da string:<br/>
-`id_do_objeto#sua_chave_de_api`.</aside>
+Para fazer isso, você deve calcular o HMAC-SHA1 ([wikipedia HMAC](pt.wikipedia.org/wiki/HMAC))
+do body da requisição HTTP e compará-lo com o header `X-Hub-Signature`.
+
+<aside class="notice">A `X-Hub-Signature` é o hash `HMAC-SHA1` calculado a partir do body
+  da requisição HTTP com a sua API Key do Pagar.me como chave.</aside>
 
 ```shell
-EXPECTED_FINGERPRINT=`echo -n "149784#ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0" | openssl sha1`
-FINGERPRINT=1213e67a3b34c2848f8317d29bcb8cbc9e0979b8
-if [ "$FINGERPRINT" = "$EXPECTED_FINGERPRINT" ]; then
-	echo "Fingerprint válido"
+EXPECTED_SIGNATURE=`cat postback_body | openssl dgst -sha1 -hmac "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"`
+SIGNATURE=1213e67a3b34c2848f8317d29bcb8cbc9e0979b8
+if [ "$SIGNATURE" = "$EXPECTED_SIGNATURE" ]; then
+	echo "Valid Signature"
 fi
 ```
 
 ```ruby
 require 'pagarme'
 
-PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+PagarMe.api_key = 'ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0';
 
-if PagarMe::validate_fingerprint("149784", "1213e67a3b34c2848f8317d29bcb8cbc9e0979b8")
-	puts "Fingerprint válido"
+if PagarMe::PostBack.valid_request_signature?(postback_body, '1213e67a3b34c2848f8317d29bcb8cbc9e0979b8')
+	puts "Valid Signature"
 end
 ```
 
@@ -44,15 +46,15 @@ end
 
 	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-	if(PagarMe::validateFingerprint("149784", "1213e67a3b34c2848f8317d29bcb8cbc9e0979b8")) {
-		echo "Fingerprint válido";
+	if(PagarMe::validateRequestSignature(postback_body, "1213e67a3b34c2848f8317d29bcb8cbc9e0979b8")) {
+		echo "Valid Signature";
 	}
 ?>
 ```
 
-> Não se esqueça de substituir:<br/>
-> - `149784` pelo ID do objeto (transação, assinatura, etc.),<br/>
-> - `1213e67a3b34c2848f8317d29bcb8cbc9e0979b8` pelo `fingerprint` recebido,<br/>
+> Não se esqueça de:<br/>
+> - `postback_body` pelo conteúdo do body da requisição HTTP do postback,<br/>
+> - `1213e67a3b34c2848f8317d29bcb8cbc9e0979b8` pela `signature` recebido em X-Hub-Signature,<br/>
 > - `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela sua chave de API disponível<br/>
 >   no seu [Dashboard](https://dashboard.pagar.me/).
 

@@ -32,7 +32,7 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
 | **holder_name**<br> String | Nome do portador do cartão |
 | **first_digits**<br> String | Primeiros dígitos do cartão (6 dígitos) |
 | **last_digits**<br> String | Últimos dígitos do cartão (4 dígitos) |
-| **fingerprint**<br> String | Parâmetro usado para validar a notificação de POSTback ([saiba mais](https://pagar.me/docs/advanced/#validando-a-origem-de-um-postback)) |
+| **fingerprint**<br> String | Hash que permite comparar dois cartões através de seus fingerprints para saber se são o mesmo |
 | **customer**<br> Object | Objeto com dados do comprador |
 | **valid**<br> Boolean | Propriedade para verificar a validade do cartão |
 
