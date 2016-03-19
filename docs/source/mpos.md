@@ -19,6 +19,19 @@ A comunicação entre um pinpad é feita de forma serial, geralmente por Bluetoo
 
 Nossas bibliotecas irão realizar a geração do `card_hash`, que é uma representação segura dos dados do cartão e o único dado de cartão que deverá ser enviado ao servidor.
 
+## Download do SDK
+
+### SDK Android (Java)
+
+O SDK Android pode ser encontrado em duas distribuições, dependentes do sistema de build sendo usado:
+
+* Gradle: [Download](https://db.tt/pVCOZmsA)
+* Ant: [Download](https://db.tt/XqHgq3Iq)
+
+### SDK .NET (Windows)
+
+O SDK .NET pode ser instalado através do pacote [**PagarMe.Mpos**](https://www.nuget.org/packages/PagarMe.Mpos/) no nuget.
+
 ## Processando uma transação
 
 Para processar uma transação de cartão de crédito/débito por intermédio do pinpad e obter a card hash que deverá ser enviada à API Pagar.me para que a transação seja completada, o seguinte código poderá ser utilizado:
@@ -35,23 +48,44 @@ BluetoothDevice device = ...;
 
 final Mpos mpos = new Mpos(device, "{ENCRYPTION_KEY}");
 mpos.addListener(new MposListener() {
+	public void bluetoothConnected() {
+		/* Inicializar operações no pinpad */
+		mpos.initialize();
+	}
+	public void bluetoothDisconnected() {
+		/* Lidar com desconexão Bluetooth */
+	}
+	
 	public void receiveInitialization() {
 		mpos.payAmount(100, MPF_DEFAULT);
 	}
+	public void receiveClose() {
+		/* Fechar conexão com Bluetooth */
+		mpos.closeConnection();
+	}
+
 	public void receiveCardHash(String cardHash) {
 		Log.d("ExemploMpos", "card_hash gerado = " + cardHash);
 		
 		/* Gerar transação com a API Pagar.me... */
 		mpos.finishTransaction(...);
 	}
+
 	public void receiveFinishTransaction() {
-		mpos.close();
+		/* Finalizar sessão com o pinpad com mensagem. */
+		mpos.close("Operação Finalizada.");
+	}
+
+	public void bluetoothErrored(int error) {
+		/* Lidar com Erro de conexão Bluetooth */
 	}
 	public void receiveError(int error) {
-		/* Lidar com Erro */
+		/* Lidar com Erro na interação com o pinpad */
 	}
 });
-mpos.initialize();
+
+/* Abrir conexão Bluetooth com o pinpad */
+mpos.openConnection();
 ```
 
 ```objective_c
@@ -197,6 +231,7 @@ Deve ser notado que opções que não especificam bandeiras ou modalidade de pag
 
 Transações com maquininha de cartão de crédito não precisam de dados de antifraude.
 
+
 ## Atualizando tabelas EMV
 
 Para as diferentes aplicações de cartão de crédito (diferentes bandeiras, crédito/débito) existe um conjunto de especificações de como o pinpad deve lidar com as diferentes aplicações, e certificados que permitem ao pinpad lidar com elas. Este conjunto é denominado tabelas EMV e pode ser obtido junto ao adquirente.
@@ -220,19 +255,36 @@ BluetoothDevice device = ...;
 
 final Mpos mpos = new Mpos(device, "{ENCRYPTION_KEY}");
 mpos.addListener(new MposListener() {
+	public void bluetoothConnected() {
+		/* Inicializar operações no pinpad */
+		mpos.initialize();
+	}
+	public void bluetoothDisconnected() {
+		/* Lidar com desconexão Bluetooth */
+	}	
+	
 	public void receiveInitialization() {
 		boolean force = false; // Define o comportamento da atualização de tabelas
 		mpos.downloadEMVTablesToDevice(force);
 	}
+	public void receiveClose() {
+		/* Fechar conexão com Bluetooth */
+		mpos.closeConnection();
+	}
+
 	public void receiveTableUpdated(boolean loaded) {
 		Log.d("ExemploMpos", "Tabelas carregadas: " + loaded);
-		mpos.close();
+		mpos.close("Operação Finalizada.");
+	}
+
+	public void bluetoothErrored(int error) {
+		/* Lidar com Erro de conexão Bluetooth */
 	}
 	public void receiveError(int error) {
-		/* Lidar com Erro */
-	}
+		/* Lidar com Erro na interação com o pinpad */
+	}	
 });
-mpos.initialize();
+mpos.openConnection();
 ```
 
 ```objective_c
@@ -393,8 +445,7 @@ O callback de erros reporta, com um número, um erro que ocorreu na comunicaçã
 
 Erro | Significado
 ----- | -----------
--2 | Houve um erro na conexão Bluetooth/USB entre o pinpad e o cliente do SDK.
--1 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
+-1 | Houve um erro de conexão de Internet da biblioteca Pagar.me ao executar a operação requisitada.
 10 | O fluxo correto de execução de operações não está sendo seguido (ex. tentativa de processar pagamento sem inicialização)
 11 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
 12 | Houve um timeout para a execução da operação requisitada.
