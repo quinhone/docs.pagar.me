@@ -182,7 +182,7 @@ static void ProcessedPayment(pagarme::mpos &mpos, pagarme::mpos_payment_result &
 }
 
 static void FinishedTransaction(pagarme::mpos &mpos) {
-	mpos.close();
+	mpos.close("Operação Finalizada");
 }
 
 static void Errored(pagarme::mpos &mpos, abecs_stat_t error) {
@@ -200,7 +200,7 @@ mpos.errored.connect(boost::bind(&Errored, _1, _2));
 mpos.processed_payment.connect(boost::bind(&ProcessedPayment, _1, _2));
 mpos.finished_transaction.connected(boost::bind(&FinishedTransaction, _1));
 
-mpos.open_connection();
+mpos.open();
 mpos.wait();
 ```
 
@@ -362,7 +362,7 @@ static void Initialized(pagarme::mpos &mpos) {
 
 static void UpdatedTables(pagarme::mpos &mpos, bool loaded) {
 	std::cout << "Tabelas carregadas: " << loaded << std::endl;
-	mpos.close();
+	mpos.close("Operação Finalizada");
 }
 
 static void Errored(pagarme::mpos &mpos, abecs_stat_t error) {
@@ -379,7 +379,7 @@ mpos.initialized.connect(boost::bind(&Initialized, _1));
 mpos.errored.connect(boost::bind(&Errored, _1, _2));
 mpos.updated_tables.connect(boost::bind(&UpdatedTables, _1, _2));
 
-mpos.open_connection();
+mpos.open();
 mpos.wait();
 ```
 
