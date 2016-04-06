@@ -272,15 +272,15 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 | **card_hash**<br> <span class="required">obrigatório</span> | Dados encriptados do cartão do cliente. Você também pode usar o `card_id` ao invés do `card_hash` |
 | **postback_url** | URL onde nosso sistema irá enviar requisições informando a cada alteração de status da assinatura em questão |
 | **customer[email]**<br> <span class="required">obrigatório</span> | Email do cliente |
-| **customer[name]** | Nome completo ou razão social do cliente que está realizando a transação |
-| **customer[document_number]** | CPF ou CNPJ do cliente, sem separadores |
-| **customer[address][street]** | logradouro (rua, avenida, etc) do cliente |
-| **customer[address][street_number]** | Número da residência/estabelecimento do cliente |
+| **customer[name]**<br> <span class="required">obrigatório (com antifraude)</span> | Nome completo ou razão social do cliente que está realizando a transação |
+| **customer[document_number]**<br> <span class="required">obrigatório (com antifraude)</span> | CPF ou CNPJ do cliente, sem separadores |
+| **customer[address][street]**<br> <span class="required">obrigatório (com antifraude)</span> | logradouro (rua, avenida, etc) do cliente |
+| **customer[address][street_number]**<br> <span class="required">obrigatório (com antifraude)</span> | Número da residência/estabelecimento do cliente |
 | **customer[address][complementary]** | completo do endereço do cliente |
-| **customer[address][neighborhood]** | bairro de localização do cliente |
-| **customer[address][zipcode]** | CEP do imóvel do cliente, sem separadores |
-| **customer[phone][ddd]** | DDD do telefone do cliente |
-| **customer[phone][number]** | número de telefone do cliente |
+| **customer[address][neighborhood]**<br> <span class="required">obrigatório (com antifraude)</span> | bairro de localização do cliente |
+| **customer[address][zipcode]**<br> <span class="required">obrigatório (com antifraude)</span> | CEP do imóvel do cliente, sem separadores |
+| **customer[phone][ddd]**<br> <span class="required">obrigatório (com antifraude)</span> | DDD do telefone do cliente |
+| **customer[phone][number]**<br> <span class="required">obrigatório (com antifraude)</span> | número de telefone do cliente |
 | **customer[sex]**<br> `M` ou `F` (letras maiúsculas) | sexo do cliente |
 | **customer[born_at]**<br> Formato: `MM-DD-AAAA` | Data de nascimento do cliente.<br>Ex: 11-02-1985 |
 | **metadata** | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |

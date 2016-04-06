@@ -218,7 +218,7 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | **customer[email]**<br> <span class="required">obrigatório\* (com antifraude)</span> | email do cliente |
 | **customer[address][street]**<br> <span class="required">obrigatório\* (com antifraude)</span> | logradouro (rua, avenida, etc) do cliente |
 | **customer[address][street_number]**<br> <span class="required">obrigatório\* (com antifraude)</span> | Número da residência/estabelecimento do cliente |
-| **customer[address][complementary]**<br> <span class="required">obrigatório\* (com antifraude)</span>| complemento do endereço do cliente |
+| **customer[address][complementary]** | complemento do endereço do cliente |
 | **customer[address][neighborhood]**<br> <span class="required">obrigatório\* (com antifraude)</span> | bairro de localização do cliente |
 | **customer[address][zipcode]**<br> <span class="required">obrigatório\* (com antifraude)</span> | CEP do imóvel do cliente, sem separadores |
 | **customer[phone][ddd]**<br> <span class="required">obrigatório\* (com antifraude)</span> | DDD do telefone do cliente |
