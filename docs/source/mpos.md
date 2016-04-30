@@ -21,6 +21,10 @@ Nossas bibliotecas irão realizar a geração do `card_hash`, que é uma represe
 
 ## Download do SDK
 
+### SDK iOS (Objective-C / Swift)
+
+O SDK iOS pode ser encontrado em uma distribuição. [Download](https://db.tt/hrxHXi7N)
+
 ### SDK Android (Java)
 
 O SDK Android pode ser encontrado em duas distribuições, dependentes do sistema de build sendo usado:
@@ -96,7 +100,8 @@ mpos.openConnection();
 EAAccessory *accessory = [[[EAAccessoryManager sharedAccessoryManager] connectedAccessories] firstObject];
 
 PMMposController *controller = [[PMMposController alloc] initWithAccessory:accessory encryptionKey:@"{ENCRYPTION_KEY}"];
-[controller openConnectionWithCallback:^(NSError *error){
+[controller openConnection];
+[controller openSessionWithCallback:^(NSError *error){
 	if (error != nil) { /* Lidar com Erro */ return; }
 	[controller payAmount:100 withCardOptions:MPF_DEFAULT withCallback:^(NSString *cardHash, NSError *error){
 		if (error != nil) { /* Lidar com Erro */ return; }
@@ -105,7 +110,9 @@ PMMposController *controller = [[PMMposController alloc] initWithAccessory:acces
 		/* Gerar transação com a API Pagar.me... */
 		[controller finishTransactionWithSuccess:... withCallback:^(NSError *error){
 			if (error != nil) { /* Lidar com Erro */ return; }
-			[controller closeConnection];
+			[controller closeSessionWithMessage:@"Message" callback:^(NSError *error){
+				[controller closeConnection];
+			}];
 		}];
 	}];
 }];
@@ -118,7 +125,8 @@ import ExternalAccessory
 let accessory = EAAccessoryManager.sharedAccessoryManager().connectedAccessories.first
 
 let controller = PMMposController(accessory: accessory, encryptionKey: "{ENCRYPTION_KEY}")
-controller.openConnectionWithCallback({ (error: NSError!) -> Void in
+controller.openConnection()
+controller.openSessionWithCallback({ (error: NSError!) -> Void in
 	if error != nil {
 		/* Lidar com Erro */
 		return
@@ -137,7 +145,9 @@ controller.openConnectionWithCallback({ (error: NSError!) -> Void in
 				return
 			}
 			
-			controller.closeConnection()
+			controller.closeSessionWithMessage(message: "Message", callback: { error: NSError! -> Void in
+				controller.closeConnection()
+			})
 		})
 	})
 });
@@ -296,12 +306,15 @@ EAAccessory *accessory = [[[EAAccessoryManager sharedAccessoryManager] connected
 
 PMMposController *controller = [[PMMposController alloc] initWithAccessory:accessory encryptionKey:@"{ENCRYPTION_KEY}"];
 BOOL force = NO; // Define o comportamento da atualização de tabelas
-[controller openConnectionWithCallback:^(NSError *error){
+[controller openConnection];
+[controller openSessionWithCallback:^(NSError *error){
 	if (error != nil) { /* Lidar com Erro */ return; }
 	[controller downloadEMVTablesToDeviceWithCallback:^(BOOL loaded, NSError *error){
 		if (error != nil) { /* Lidar com Erro */ return; }
 		NSLog(@"Tabelas Carregadas: %d", loaded);
-		[controller closeConnection];
+		[controller closeSessionWithMessage:@"Message" callback:^(NSError *error){
+			[controller closeConnection];
+		}];
 	} forceUpdate:force];
 }];
 ```
@@ -314,7 +327,9 @@ let accessory = EAAccessoryManager.sharedAccessoryManager().connectedAccessories
 
 let controller = PMMposController(accessory: accessory, encryptionKey: "{ENCRYPTION_KEY}")
 let force = false // Define o comportamento da atualização de tabelas
-controller.openConnectionWithCallback({ (error: NSError!) -> Void in
+
+controller.openConnection()
+controller.openSessionWithCallback({ (error: NSError!) -> Void in
 	if error != nil {
 		/* Lidar com Erro */
 		return
@@ -326,7 +341,10 @@ controller.openConnectionWithCallback({ (error: NSError!) -> Void in
 		}
 		
 		NSLog("Tabelas Carregadas: %d", loaded);
-		controller.closeConnection();
+		controller.closeSessionWithMessage(message: "Message", callback: { error: NSError! -> Void in
+			controller.closeConnection()
+		})
+		
 	}, forceUpdate: force)
 });
 ```
