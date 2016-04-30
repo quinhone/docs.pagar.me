@@ -21,6 +21,10 @@ Nossas bibliotecas irão realizar a geração do `card_hash`, que é uma represe
 
 ## Download do SDK
 
+### SDK iOS (Objective-C / Swift)
+
+O SDK iOS pode ser encontrado em uma distribuição. [Download](https://db.tt/hrxHXi7N)
+
 ### SDK Android (Java)
 
 O SDK Android pode ser encontrado em duas distribuições, dependentes do sistema de build sendo usado:
