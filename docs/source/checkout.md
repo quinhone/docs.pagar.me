@@ -211,7 +211,7 @@ Caso a transação seja um boleto bancário, a transação terá status
 variável `boleto_url`.
 
 <aside class="notice">Após a finalização da transação em sua página, você terá
-05 minutos para capturá-la no seu servidor. Após esse período, a transação será
+5 horas para capturá-la no seu servidor. Após esse período, a transação será
 recusada pelo motivo `capture_timeout`.</aside>
 
 ## Enviando metadata com Checkout
