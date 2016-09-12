@@ -36,6 +36,14 @@ O SDK Android pode ser encontrado em duas distribuições, dependentes do sistem
 
 O SDK .NET pode ser instalado através do pacote [**PagarMe.Mpos**](https://www.nuget.org/packages/PagarMe.Mpos/) no nuget.
 
+Para que o SDK .NET funcione, os seguintes passos são necessários:
+
+1. Instalação dos componentes nativos do SDK mpos.dll e tms.dll, que deve ser colocado no diretório de binários do seu projeto (ex. a pasta `bin`).
+	* mpos.dll: [Download](https://db.tt/XXsK11R6)
+	* tms.dll: [Download](https://db.tt/Xn2fkHFD)
+2. Instalação dos componentes nativos do SQLite3. Um componente sqlite3.dll adequado deve ser colocado **exatamente** no diretório de binários do seu projeto (ex. a pasta `bin`).  
+Há muitas possibilidades de download desses componentes, variando com versão do Windows, por exemplo. [Possível download do SQLite](https://www.nuget.org/packages/SQLite.Native/3.12.3)
+
 ## Processando uma transação
 
 Para processar uma transação de cartão de crédito/débito por intermédio do pinpad e obter a card hash que deverá ser enviada à API Pagar.me para que a transação seja completada, o seguinte código poderá ser utilizado:
@@ -43,9 +51,13 @@ Para processar uma transação de cartão de crédito/débito por intermédio do
 ```java
 import me.pagar.mposandroid.Mpos;
 import me.pagar.mposandroid.MposListener;
-import static me.pagar.mposandroid.MposPaymentFlags.*;
+import me.pagar.mposandroid.EmvApplication;
+import me.pagar.mposandroid.PaymentMethod;
+
 import android.bluetooth.BluetoothDevice;
 import android.util.Log;
+
+imprort java.util.ArrayList;
 
 // Obtenha um objeto BluetoothDevice do Android, que representa um aparelho Bluetooth pareado
 BluetoothDevice device = ...;
@@ -61,7 +73,13 @@ mpos.addListener(new MposListener() {
 	}
 	
 	public void receiveInitialization() {
-		mpos.payAmount(100, MPF_DEFAULT);
+		/* aceitar somente Visa Crédito */
+		EmvApplication visaCredit = new EmvApplication(PaymentMethod.CreditCard, "visa");
+		ArrayList<EmvApplication> applications = new ArrayList<EmvApplication>();
+		applications.add(visaCredit);
+		
+		/* selecionar Crédito como método de pagamento de tarja */
+		mpos.payAmount(100, applications, PaymentMethod.CreditCard);
 	}
 	public void receiveClose() {
 		/* Fechar conexão com Bluetooth */
@@ -103,7 +121,12 @@ PMMposController *controller = [[PMMposController alloc] initWithAccessory:acces
 [controller openConnection];
 [controller openSessionWithCallback:^(NSError *error){
 	if (error != nil) { /* Lidar com Erro */ return; }
-	[controller payAmount:100 withCardOptions:MPF_DEFAULT withCallback:^(NSString *cardHash, NSError *error){
+
+	/* aceitar somente Visa Crédito */
+	NSArray *applications = @[ [PMEmvApplication applicationWithCardBrand:@"visa" paymentMethod:MPM_CREDIT] ];
+	
+	/* selecionar Crédito como método de pagamento de tarja */
+	[controller payAmount:100 withApplications:applications magstripePaymentMethod:MPM_CREDIT withCallback:^(NSString *cardHash, NSError *error){
 		if (error != nil) { /* Lidar com Erro */ return; }
 		NSLog(@"card_hash gerado = %@", cardHash);
 		
@@ -131,7 +154,12 @@ controller.openSessionWithCallback({ (error: NSError!) -> Void in
 		/* Lidar com Erro */
 		return
 	}
-	controller.payAmount(100, withCardOptions: MPF_DEFAULT, withCallback: { (cardHash: String!, error: NSError!) -> Void in
+	
+	/* aceitar somente Visa Crédito */
+	var applications = [ PMEmvApplication(cardBrand: "visa", paymentMethod: MPM_CREDIT) ];
+	
+	/* selecionar Crédito como método de pagamento de tarja */
+	controller.payAmount(100, withApplications: applications, withCallback: { (cardHash: String!, error: NSError!) -> Void in
 		if error != nil {
 			/* Lidar com Erro */
 			return
@@ -167,7 +195,13 @@ Mpos mpos = new Mpos(port.BaseStream, "{ENCRYPTION_KEY}");
 mpos.Errored += (sender, e) => { /* Lidar com Erro */ };
 
 await mpos.Initialize();
-var result = await mpos.ProcessPayment(100, PaymentFlags.Default);
+
+/* aceitar somente Visa Crédito */
+List<EmvApplication> applications = new List<EmvApplication>();
+applications.Add(new EmvApplication("visa", PaymentMethod.Credit));
+
+/* usar crédito como método de pagamento de tarja */
+var result = await mpos.ProcessPayment(100, applications, PaymentMethod.Credit);
 
 Console.WriteLine("card_hash gerado = " + result.CardHash);
 
@@ -218,29 +252,21 @@ mpos.wait();
 > sua chave de encriptação disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
 
-Todas as plataformas apresentam uma função de processamento de pagamento com dois parâmetros: `amount` e `options`. O primeiro é um inteiro representando a quantia a ser cobrada em centavos (no caso dos exemplos, `100` = R$1,00). As opções possíveis são as seguintes, que podem ser juntadas com o operador bitwise-OR (`|`):
+Todas as plataformas apresentam uma função de processamento de pagamento com três parâmetros: `amount`, `applications` e `magstripePaymentMethod`.
 
-Opção | Significado
------ | -----------
-MPF\_NONE | Não aceita nenhuma bandeira ou modalidade de pagamento.
-MPF\_CREDIT\_CARD | Aceita somente cartão de crédio. Não especifica bandeira.
-MPF\_DEBIT\_CARD | Aceita somente cartão de débito. Não especifica bandeira.
-MPF\_ALL\_APPLICATIONS | Aceita crédito e débito. Não especifica bandeira.
-MPF\_VISA\_CARD | Aceita a bandeira Visa. Não especifica modalidade de pagamento.
-MPF\_MASTER\_CARD | Aceita a bandeira MasterCard. Não especifica modalidade de pagamento.
-MPF\_ALL\_CARDS | Aceita Visa e Master. Não especifica modalidade de pagamento.
-MPF\_ALL\_VISA | Aceita crédito e débito com a bandeira Visa.
-MPF\_ALL\_MASTER | Aceita crédito e débito com a bandeira MasterCard.
-MPF\_ALL\_CREDIT | Aceita todas as bandeiras com método de pagamento crédito.
-MPF\_ALL\_DEBIT | Aceita todas as bandeiras com método de pagamento débito.
-MPF\_DEFAULT | Aceita todas as bandeiras e métodos de pagamento.
+O primeiro é um inteiro representando a quantia a ser cobrada em centavos (no caso dos exemplos, `100` = R$1,00). As opções possíveis são as seguintes, que podem ser juntadas com o operador bitwise-OR (`|`):
 
-Deve ser notado que opções que não especificam bandeiras ou modalidade de pagamento não podem ser usadas sozinhas. `MPF_CREDIT_CARD`, por exemplo, não deve ser usado por si só. Já `MPF_CREDIT_CARD | MPF_VISA_CARD` especifica que somente cartões Visa Crédito serão aceitos.
+Parâmetro | Significado
+--------- | -----------
+`amount` | Quantia a ser cobrada em centavos (ex. `100` = R$1,00)
+`applications` | Um conjunto de aplicações que a aplicação deseja selecionar. Uma aplicação consiste do conjunto de uma bandeira e um método de pagamento (ex. Visa Crédito, Master Débito, Amex Crédito). **Em caso de valor nulo, a escolha de possíveis aplicações é feita pelo pinpad.**
+`magstripePaymentMethod` | A tarja magnética não permite seleção de método de pagamento no pinpad, e requer sempre que a aplicação o defina.
+
+Caso o conjunto de aplicações especificado não seja suportado pelo cartão inserido (ex. `applications` contém Visa Crédito e o cartão é Master Crédito), o pinpad retorna o **erro 70**.
 
 <aside class="notice">É **imprescindível** que uma transação seja *finalizada* ao ser realizada. Para mais informações, leia mais abaixo.</aside>
 
 Transações com maquininha de cartão de crédito não precisam de dados de antifraude.
-
 
 ## Atualizando tabelas EMV
 
@@ -463,6 +489,7 @@ O callback de erros reporta, com um número, um erro que ocorreu na comunicaçã
 
 Erro | Significado
 ----- | -----------
+-2 | Encryption Key inválida.
 -1 | Houve um erro de conexão de Internet da biblioteca Pagar.me ao executar a operação requisitada.
 10 | O fluxo correto de execução de operações não está sendo seguido (ex. tentativa de processar pagamento sem inicialização)
 11 | Houve um erro da biblioteca Pagar.me ao executar a operação requisitada.
@@ -473,7 +500,7 @@ Erro | Significado
 42 | As chaves do pinpad não foram carregadas corretamente.
 60 | O cartão passado no pinpad não está funcionando propriamente.
 70 | Não há aplicação disponível no pinpad para processamento do cartão (por conta de tabelas EMV inconsistentes, bandeira não suportada pela Pagar.me ou cartão que não obedece aos filtros das opções de cartão ao processar um pagamento).
-
+90 | Houve um erro interno da biblioteca Pagar.me.
 
 ## Próximos passos
 
