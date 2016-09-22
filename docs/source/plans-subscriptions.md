@@ -225,8 +225,7 @@ O tempo que a assinatura ficará `pending_payment` caso o pagamento não seja
 detectado é, por padrão, de 5 dias. Esse valor (`payment_deadline`) pode ser
 configurado pelo seu Dashboard e é único para sua conta.
 
-Caso após todos as 5 dias de tentativa de cobrança a assinatura continue não paga, a
-mesma passará para o status `unpaid`.
+Caso sejam passados os 5 dias de tentativas de cobrança e a assinatura continue não paga, a mesma mudará o status para `unpaid`.
 
 ### Durante o status `unpaid`
 
