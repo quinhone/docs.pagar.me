@@ -82,6 +82,7 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 | data-customer-address-zipcode | - | Código de endereçmento postal (CEP) da cidade do cliente |
 | data-customer-phone-ddd | - | DDD do telefone do cliente |
 | data-customer-phone-number | - | Número do telefone do cliente |
+| data-disable-zero-document-number | - | Não aceita CPF ou CNPJ em que todos os números são zeros |
 | data-interest-rate | - | Taxa de juros a ser cobrada na transação |
 | data-free-installments | - | Número de parcelas que não terão juros cobrados |
 | data-default-installment | `1` | Define a parcela padrão selecionada ao abrir o checkout | 
@@ -155,6 +156,7 @@ customerAddress-State | - | Estado (unidade federativa) do cliente
 customerAddressZipcode | - | Código de endereçmento postal (CEP) da cidade do cliente 
 customerPhoneDdd | - | DDD do telefone do cliente 
 customerPhoneNumber | - | Número do telefone do cliente 
+disableZeroDocumentNumber | - | Não aceita CPF ou CNPJ em que todos os números são zeros
 interestRate | - | Taxa de juros a ser cobrada na transação 
 freeInstallments | - | Número de parcelas que não terão juros cobrados 
 defaultInstallment | `1` | Define a parcela padrão selecionada ao abrir o checkout 
