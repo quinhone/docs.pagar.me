@@ -13,6 +13,7 @@
     "agencia_dv": "5",
     "conta": "58054",
     "conta_dv": "1",
+    "type": "conta_corrente",
     "document_type": "cpf",
     "document_number": "26268738888",
     "legal_name": "API BANK ACCOUNT",
@@ -32,6 +33,7 @@ Contém os dados de uma conta bancária para futuros pagamentos.
 | **agencia_dv**<br> String | Dígito verificador da agência |
 | **conta**<br> String | Número da conta bancária |
 | **conta_dv**<br> String | Dígito verificador da conta |
+| **type**<br> String | Tipo da conta bancária (conta_corrente, conta_poupanca, conta_corrente_conjunta, conta_poupanca_conjunta) |
 | **document_type**<br> String | Tipo do documento do titular da conta |
 | **document_number**<br> String | Número do documento do titular da conta (cpf ou cnpj) |
 | **legal_name**<br> String | Nome completo (se pessoa física) ou Razão Social (se pessoa jurídica) |
@@ -48,6 +50,7 @@ curl -X POST https://api.pagar.me/1/bank_accounts \
 -d 'agencia=0932' \
 -d 'agencia_dv=5' \
 -d 'conta=58054' \
+-d 'type=conta_corrente' \
 -d 'conta_dv=1' \
 -d 'document_number=26268738888' \
 -d 'legal_name=API BANK ACCOUNT'
@@ -64,6 +67,7 @@ bank_account = PagarMe::BankAccount.new({
     :agencia_dv => '9',
     :conta => '23398',
     :conta_dv => '9',
+    :type => 'conta_corrente',
     :legal_name => 'foo bar loem',
     :document_number => '111.111.111-11'
 })
@@ -82,6 +86,7 @@ bank_account.create
 		"agencia_dv" => "5",
 		"conta" => "58054",
 		"conta_dv" => "1",
+		"type" => "conta_corrente",
 		"document_number" => "26268738888",
 		"legal_name" => "API BANK ACCOUNT"
 	));
@@ -115,6 +120,7 @@ Cria uma conta bancária para futuros pagamentos.
     "agencia_dv": "5",
     "conta": "58054",
     "conta_dv": "1",
+    "type": "conta_corrente",
     "document_type": "cpf",
     "document_number": "26268738888",
     "legal_name": "API BANK ACCOUNT",
@@ -131,6 +137,7 @@ Cria uma conta bancária para futuros pagamentos.
 | **agencia_dv** | Dígito verificador da sua agência <br /> **OBS**: Deve conter 1 dígito, apenas números |
 | **conta**<br> <span class="required">obrigatório</span> | Número da conta bancária <br /> **OBS**: Limite de 13 caracteres, apenas números |
 | **conta_dv**<br> <span class="required">obrigatório</span> | Dígito verificador da conta <br /> **OBS**: Limite de 2 caracteres, apenas alfanuméricos |
+| **type**<br> default: `conta_corrente` | Tipo da conta bancária <br> **Valores possíveis**: `conta_corrente`, `conta_poupanca`, `conta_corrente_conjunta`, `conta_poupanca_conjunta` |
 | **document_number**<br> <span class="required">obrigatório</span> | Documento identificador do titular da conta (cpf ou cnpj)<br> **Ex**: `35146484252` |
 | **legal_name**<br> <span class="required">obrigatório</span> | Nome completo (se pessoa física) ou razão social (se pessoa jurídica) |
 
@@ -178,6 +185,7 @@ Através dessa rota você consegue retornar os dados de uma conta bancária espe
     "agencia_dv": "5",
     "conta": "58054",
     "conta_dv": "1",
+    "type": "conta_corrente",
     "document_type": "cpf",
     "document_number": "26268738888",
     "legal_name": "API BANK ACCOUNT",
@@ -237,6 +245,7 @@ Através dessa rota você consegue retornar os dados de várias contas bancária
     "agencia_dv": "5",
     "conta": "58054",
     "conta_dv": "1",
+    "type": "conta_corrente",
     "document_type": "cpf",
     "document_number": "26268738888",
     "legal_name": "API BANK ACCOUNT",
@@ -250,6 +259,7 @@ Através dessa rota você consegue retornar os dados de várias contas bancária
     "agencia_dv": "5",
     "conta": "58054",
     "conta_dv": "1",
+    "type": "conta_corrente",
     "document_type": "cpf",
     "document_number": "26268738888",
     "legal_name": "API BANK ACCOUNT",
@@ -263,6 +273,7 @@ Através dessa rota você consegue retornar os dados de várias contas bancária
     "agencia_dv": "5",
     "conta": "58054",
     "conta_dv": "1",
+    "type": "conta_corrente",
     "document_type": "cpf",
     "document_number": "26268738888",
     "legal_name": "API BANK ACCOUNT",
