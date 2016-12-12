@@ -9,22 +9,32 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
 ```json
 {
   "object": "transaction",
-  "status": "processing",
+  "status": "paid",
   "refuse_reason": null,
   "status_reason": "acquirer",
-  "acquirer_response_code": null,
-  "authorization_code": null,
-  "soft_descriptor": "testeDeAPI",
-  "tid": null,
-  "nsu": null,
-  "date_created": "2015-02-25T21:54:56.000Z",
-  "date_updated": "2015-02-25T21:54:56.000Z",
-  "amount": 310000,
-  "installments": 5,
-  "id": 184220,
-  "cost": 0,
-  "postback_url": "http://requestb.in/pkt7pgpk",
+  "acquirer_response_code": "0000",
+  "acquirer_name": "pagarme",
+  "acquirer_id": "56f9d019decf72cc70055d58",
+  "authorization_code": "786920",
+  "soft_descriptor": null,
+  "tid": 937301,
+  "nsu": 937301,
+  "date_created": "2016-12-12T16:02:43.529Z",
+  "date_updated": "2016-12-12T16:02:43.948Z",
+  "amount": 100,
+  "authorized_amount": 100,
+  "paid_amount": 100,
+  "refunded_amount": 0,
+  "installments": 1,
+  "id": 937301,
+  "cost": 50,
+  "card_holder_name": "teste",
+  "card_last_digits": "4242",
+  "card_first_digits": "424242",
+  "card_brand": "visa",
+  "postback_url": "http://requestb.in/pkt7pgpk'",
   "payment_method": "credit_card",
+  "capture_method": "ecommerce",
   "antifraud_score": null,
   "boleto_url": null,
   "boleto_barcode": null,
@@ -32,25 +42,53 @@ Através da rota `/transactions` e suas derivadas, você pode criar transações
   "referer": "api_key",
   "ip": "189.8.94.42",
   "subscription_id": null,
-  "phone": null,
-  "address": null,
-  "customer": null,
+  "phone": {
+    "object": "phone",
+    "ddi": "55",
+    "ddd": "11",
+    "number": "99999999",
+    "id": 58579
+  },
+  "address": {
+    "object": "address",
+    "street": "Avenida Brigadeiro Faria Lima",
+    "complementary": "",
+    "street_number": "1811",
+    "neighborhood": "Jardim Paulistano",
+    "city": "São Paulo",
+    "state": "SP",
+    "zipcode": "01451001",
+    "country": "Brasil",
+    "id": 43634
+  },
+  "customer": {
+    "object": "customer",
+    "document_number": "18152564000105",
+    "document_type": "cnpj",
+    "name": "Aardvark Silva",
+    "email": "aardvark.silva@pagar.me",
+    "born_at": "1970-01-01T03:38:41.988Z",
+    "gender": "M",
+    "date_created": "2016-06-29T16:18:23.544Z",
+    "id": 76758
+  },
   "card": {
     "object": "card",
-    "id": "card_ci6l9fx8f0042rt16rtb477gj",
-    "date_created": "2015-02-25T21:54:56.000Z",
-    "date_updated": "2015-02-25T21:54:56.000Z",
-    "brand": "mastercard",
-    "holder_name": "Api Customer",
-    "first_digits": "548045",
-    "last_digits": "3123",
-    "fingerprint": "HSiLJan2nqwn",
-    "valid": null
+    "id": "card_ciwm2afsy01fmor6drdxpqx0d",
+    "date_created": "2016-12-12T12:34:50.627Z",
+    "date_updated": "2016-12-12T12:44:23.759Z",
+    "brand": "visa",
+    "holder_name": "Teste",
+    "first_digits": "424242",
+    "last_digits": "4242",
+    "country": "US",
+    "fingerprint": "7dW77kXg7opw",
+    "valid": true,
+    "expiration_date": "1224"
   },
-  "metadata": {
-    "nomeData": "API Doc Test",
-    "idData": 13
-  }
+  "split_rules": null,
+  "metadata": {},
+  "antifraud_metadata": {}
 }
 ```
 
@@ -70,6 +108,9 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 | **date_created**<br> String | Data de criação da transação no formato ISODate |
 | **date_updated**<br> String | Data de atualização da transação no formato ISODate |
 | **amount**<br> Number | Valor, em centavos, da transação |
+| **paid_amount**<br> Number | Valor, em centavos, capturado da transação |
+| **refunded_amount**<br> Number | Valor, em centavos, estornado da transação |
+| **authorized_amount**<br> Number | Valor, em centavos, autorizado da transação |
 | **installments**<br> Number | Número de parcelas/prestações a serem cobradas |
 | **id**<br> Number | Número identificador da transação |
 | **cost**<br> Number | Custo da transação para o lojista |
@@ -85,6 +126,7 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 | **address**<br> Object | Objeto com dados do endereço do cliente |
 | **customer**<br> Object | Objeto com dados do cliente |
 | **card**<br> Object | Objeto com dados do cartão do cliente |
+| **split_rules**<br> Object | Objeto com dados das Split Rules geradas |
 | **metadata**<br> Object | Objeto com dados adicionais do cliente/produto/serviço vendido |
 
 ## Criando uma transação
@@ -94,9 +136,19 @@ Ao criar ou atualizar uma transação, este será o objeto que você irá recebe
 ```shell
 curl -X POST https://api.pagar.me/1/transactions \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
--d 'amount=3100' \
+-d 'amount=100' \
 -d 'card_id=card_ci6l9fx8f0042rt16rtb477gj' \
 -d 'postback_url=http://requestb.in/pkt7pgpk' \
+-d 'customer[name]=Aardvark Silva' \
+-d 'customer[email]=aardvark.silva@pagar.me' \
+-d 'customer[document_number]=18152564000105' \
+-d 'customer[address][zipcode]=01451001' \
+-d 'customer[address][neighborhood]=Jardim Paulistano' \
+-d 'customer[address][street]=Avenida Brigadeiro Faria Lima' \
+-d 'customer[address][street_number]=1811' \
+-d 'customer[phone][number]=99999999' \
+-d 'customer[phone][ddi]=55' \
+-d 'customer[phone][ddd]=11' \
 -d 'metadata[idProduto]=13933139'
 ```
 
@@ -105,11 +157,30 @@ require 'pagarme'
 
 PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 
-transaction = PagarMe::Transaction.new({
-    :amount => 3100,
-    :card_id => "card_ci6l9fx8f0042rt16rtb477gj",
-    :postback_url => "http://requestb.in/pkt7pgpk",
-    :metadata[idProduto] => 13933139
+transaction  = PagarMe::Transaction.new({
+	amount: 100,
+	payment_method: "credit_card",
+	card_id: "card_ci6l9fx8f0042rt16rtb477gj",
+	postback_url: "http://requestb.in/pkt7pgpk",
+	customer: {
+		name: "Aardvark Silva",
+		email: "aardvark.silva@pagar.me",
+		document_number: "18152564000105",
+		address: {
+			street: "Avenida Brigadeiro Faria Lima",
+			street_number: "1811",
+			neighborhood: "Jardim Paulistano",
+			zipcode: "01451001"
+		},
+		phone: {
+			ddi: "55",
+			ddd: "11",
+			number: "99999999"
+		}
+	},
+	metadata: {
+		idProduto: "13933139"
+    }
 })
 
 transaction.charge
@@ -117,20 +188,39 @@ transaction.charge
 
 ```php
 <?php
-    require("pagarme-php/Pagarme.php");
+require("pagarme-php/Pagarme.php");
 
-    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
-    $transaction = new PagarMe_Transaction(array(
-        "amount" => 3100,
-        "card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
-        "postback_url" => "http://requestb.in/pkt7pgpk",
-        "metadata" => array(
-            "idProduto" => 13933139
-        )
-    ));
+$transaction = new PagarMe_Transaction(array(
+	"amount" => 100,
+	"card_id" => "card_ci6l9fx8f0042rt16rtb477gj",
+	"payment_method" => "credit_card",
+	"postback_url" => "http://requestb.in/pkt7pgpk",
+	"customer" => array(
+		"name" => "Aardvark Silva", 
+		"document_number" => "18152564000105",
+		"email" => "aardvark.silva@pagar.me",
+		"address" => array(
+			"street" => "Avenida Brigadeiro Faria Lima", 
+			"street_number" => "1811",
+			"neighborhood" => "Jardim Paulistano",
+			"zipcode" => "01451001"
+		),
+		"phone" =>  array(
+			"ddi" => "55"
+			"ddd" => "11",
+			"number" => "99999999" 
+		)
+	),
+	"metadata" => array(
+		"idProduto" => 13933139
+	)
+));
 
-    $transaction->charge();
+	$transaction->charge();
+?>   
+
 ```
 
 ```cs
@@ -138,8 +228,27 @@ PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 
 Transaction transaction = new Transaction();
 
-transaction.Amount = 3100;
-transaction.CardId = "card_ci6l9fx8f0042rt16rtb477gj";
+transaction.Amount = 100;
+transaction.Card = new Card() { 
+    Id = "card_ci6l9fx8f0042rt16rtb477gj"
+};
+transaction.Customer = new Customer () {
+	Name = "Aardvark Silva",
+	Email = "aardvark.silva@pagar.me",
+	DocumentNumber = "18152564000105",
+	Address = new Address () {
+		Street = "Avenida Brigadeiro Faria Lima",
+		StreetNumber = "123",
+		Neighborhood = "Jardim Paulistano",
+		Zipcode = "01451001"
+	},
+
+	Phone = new Phone () {
+		Ddi = "55",
+		Ddd = "11",
+		Number = "23456789"
+	}
+};
 transaction.PostbackUrl = "http://requestb.in/pkt7pgpk";
 transaction.Metadata = new Metadata() {
     IdProduto = 13933139
@@ -153,50 +262,89 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 > JSON retornado (exemplo):
 
 ```json
-{
-  "object": "transaction",
-  "status": "processing",
-  "refuse_reason": null,
-  "status_reason": "acquirer",
-  "acquirer_response_code": null,
-  "authorization_code": null,
-  "soft_descriptor": "testeDeAPI",
-  "tid": null,
-  "nsu": null,
-  "date_created": "2015-02-25T21:54:56.000Z",
-  "date_updated": "2015-02-25T21:54:56.000Z",
-  "amount": 310000,
-  "installments": 5,
-  "id": 184220,
-  "cost": 0,
-  "postback_url": "http://requestb.in/pkt7pgpk",
-  "payment_method": "credit_card",
-  "antifraud_score": null,
-  "boleto_url": null,
-  "boleto_barcode": null,
-  "boleto_expiration_date": null,
-  "referer": "api_key",
-  "ip": "189.8.94.42",
-  "subscription_id": null,
-  "phone": null,
-  "address": null,
-  "customer": null,
-  "card": {
-    "object": "card",
-    "id": "card_ci6l9fx8f0042rt16rtb477gj",
-    "date_created": "2015-02-25T21:54:56.000Z",
-    "date_updated": "2015-02-25T21:54:56.000Z",
-    "brand": "mastercard",
-    "holder_name": "Api Customer",
-    "first_digits": "548045",
-    "last_digits": "3123",
-    "fingerprint": "HSiLJan2nqwn",
-    "valid": null
-  },
-  "metadata": {
-    "idProduto": "13933139"
+  {
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "0000",
+    "acquirer_name": "pagarme",
+    "acquirer_id": "56f9d019decf72cc70055d58",
+    "authorization_code": "786920",
+    "soft_descriptor": null,
+    "tid": 937301,
+    "nsu": 937301,
+    "date_created": "2016-12-12T16:02:43.529Z",
+    "date_updated": "2016-12-12T16:02:43.948Z",
+    "amount": 100,
+    "authorized_amount": 100,
+    "paid_amount": 100,
+    "refunded_amount": 0,
+    "installments": 1,
+    "id": 937301,
+    "cost": 50,
+    "card_holder_name": "Teste",
+    "card_last_digits": "4242",
+    "card_first_digits": "424242",
+    "card_brand": "visa",
+    "postback_url": "http://requestb.in/pkt7pgpk",
+    "payment_method": "credit_card",
+    "capture_method": "ecommerce",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "189.8.94.42",
+    "subscription_id": null,
+    "phone": {
+      "object": "phone",
+      "ddi": "55",
+      "ddd": "11",
+      "number": "99999999",
+      "id": 58579
+    },
+    "address": {
+      "object": "address",
+      "street": "Avenida Brigadeiro Faria Lima",
+      "complementary": "",
+      "street_number": "1811",
+      "neighborhood": "Jardim Paulistano",
+      "city": "São Paulo",
+      "state": "SP",
+      "zipcode": "01451001",
+      "country": "Brasil",
+      "id": 43634
+    },
+    "customer": {
+      "object": "customer",
+      "document_number": "18152564000105",
+      "document_type": "cnpj",
+      "name": "Aardvark Silva",
+      "email": "aardvark.silva@pagar.me",
+      "born_at": "1970-01-01T03:38:41.988Z",
+      "gender": "M",
+      "date_created": "2016-06-29T16:18:23.544Z",
+      "id": 76758
+    },
+    "card": {
+      "object": "card",
+      "id": "card_ci6l9fx8f0042rt16rtb477gj",
+      "date_created": "2016-12-12T12:34:50.627Z",
+      "date_updated": "2016-12-12T12:44:23.759Z",
+      "brand": "visa",
+      "holder_name": "Teste",
+      "first_digits": "424242",
+      "last_digits": "4242",
+      "country": "US",
+      "fingerprint": "7dW77kXg7opw",
+      "valid": true,
+      "expiration_date": "1224"
+    },
+    "split_rules": null,
+    "antifraud_metadata": {},
+    "metadata": {}
   }
-}
 ```
 
 | Parâmetro | Descrição |
@@ -210,6 +358,7 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | **async** <br> default: `false` ou `true` caso utilize `postback_url` | Utilize `false` caso queira utilizar POSTbacks e manter o processamento síncrono de uma transação. |
 | **installments**<br> mínimo: 1, máximo: 12 | Se o pagamento for boleto, o padrão é 1 |
 | **boleto_expiration_date**<br> default: data atual + 7 dias | Prazo limite para pagamento do boleto |
+| **boleto_instructions**<br> default: `null`  | Campo instruções do boleto. Máximo de 255 caracteres |
 | **soft_descriptor** | Descrição que aparecerá na fatura depois do nome da loja. Máximo de 13 caracteres |
 | **capture**<br> default: `true` | Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribuir o valor `false` |
 | **metadata** | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
