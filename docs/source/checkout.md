@@ -66,7 +66,7 @@ data-boleto-helper-text | --- | Mensagem opcional que aparecerá embaixo do bot�
 data-credit-card-helper-text | --- | Mensagem opcional que aparecerá embaixo do botão de pagamento Cartão de Crédito.
 data-payment-methods | `credit_card,boleto` | Meios de pagamento disponíveis no Checkout.
 data-card-brands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceitas pelo Checkout.
-data-max-installments | `1` | Número máximo de parcelas aceitas.
+data-max-installments | `1` | Número máximo de parcelas aceitas, de 1 a 12.
 data-ui-color | `#1a6ee1` | Cor primária da interface de Checkout.
 data-postback-url | --- | Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações |
 data-create-token | `true` | Habilita a geração do token para autorização da transação. <br> **OBS**: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor `false`, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.
@@ -140,7 +140,7 @@ buttonClass | --- | Classe CSS a ser adicionada no botão de pagamento.
 customerData | `true` | Caso não deseje capturar dados do cliente pelo Checkout, setar como `false`.
 paymentMethods | `credit_card,boleto` | Meios de pagamento disponíveis no Checkout.
 cardBrands | `visa,mastercard,amex,aura,jcb,diners,elo` | Bandeiras aceitas pelo Checkout.
-maxInstallments | `1` | Número máximo de parcelas aceitas.
+maxInstallments | `1` | Número máximo de parcelas aceitas, de 1 a 12.
 uiColor | `#1a6ee1` | Cor primária da interface de Checkout.
 postbackUrl | --- | Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações |
 createToken | `true` | Habilita a geração do token para autorização da transação. <br> **OBS**: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor `false`, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.
