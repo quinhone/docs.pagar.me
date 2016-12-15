@@ -504,6 +504,20 @@ Erro | Significado
 70 | Não há aplicação disponível no pinpad para processamento do cartão (por conta de tabelas EMV inconsistentes, bandeira não suportada pela Pagar.me ou cartão que não obedece aos filtros das opções de cartão ao processar um pagamento).
 90 | Houve um erro interno da biblioteca Pagar.me.
 
+- Erros de Token:
+	
+	### Quando um token é fornecido pelo SDK, qual seu tempo de validade ?
+
+	O token fornecido é válido apenas por 5 minutos.
+
+	### Quando um token é fornecido pelo SDK, quanto tempo eu (cliente) tenho para utiliza-lo no sistema (API) pargar.me ?
+
+	O token fornecido pode ser utilizado em um periodo de 5 minutos, após esse tempo ele é considerado inválido pelo nosso sistema.
+
+	### Como proceder quando as comunicações forem interrompidas no processo de confirmação do token ?
+
+	É necessário reenviar a transação em no máximo 5 minutos, caso contrário será necessário criar uma nova transação.
+
 ## Próximos passos
 
 Com o `card_hash` em mãos no seu servidor, você pode [realizar uma transação](/transactions), [criar uma assinatura](/plans-subscriptions) ou [armazenar esse cartão e cobrá-lo posteriormente](/cards).
@@ -511,3 +525,85 @@ Com o `card_hash` em mãos no seu servidor, você pode [realizar uma transação
 ## Referência completa
 
 Uma referência completa das funções e do setup das bibliotecas de maquininha de cartão pode ser encontrada junto à distribuição de cada uma.
+
+##Perguntas frequentes
+
+- Estado MPOs:
+
+	### Quando sabemos que o PINPAD começou a funcionar ? Isto é, quando o sistema operacional é iniciado, quando podemos enviar mensagens para o PINPAD.
+
+	Não dá para fazer pelo SDK.
+
+	### Como podemos saber o estado que o SDK está sendo iniciado? Ou seja, se houve um erro, se você está iniciando em stand-by ou em qualquer outro estado.
+
+	Não existe como saber o estado de inicialização.
+
+	### Como podemos forçar uma reinicialização do SDK caso um erro seja detectado ?
+
+	Em primeiro lugar é necessário chamar a função mpos.cancel() seguida de mpos.close_connection() para encerrar o fluxo.
+
+	### Como podemos saber o estado que a API se encontra ?
+	
+	Estado da API pode ser consultado em: status.pagar.me.
+
+	### Devemos indicar ao SDK que o PINPAD irá ligar e desligar a cada venda realizada ?
+
+	Sim, depois de chamar a função finish_transaction(), vocês devem chamar a função mpos.close() e depois mpos.close_connection().
+
+	### Devemos indicar ao SDK que ele irá desligar a CPU ?
+
+	Não. O SDK não tem controle sobre isso.
+
+- Venda:
+	
+	### Quando uma venda é iniciada com um valor R$ X e um cartão é colocado e retirado rapidamente é devolvido algum erro pelo SDK ?
+
+	É retornado erro 13.
+
+	### Como se cancela uma venda através do POS ? 
+
+	Vocês podem chamar a função mpos.cancel().
+
+	### É armazenado informações de vendas anteriores ? Há anulações automáticas ? No caso descrito, se eu começar uma outra venda com uma quantidade diferente, quanto eu vou carregar o SDK: o montante anterior ou o novo?
+
+	Não armazenamos informações sobre as vendas no PINPAD e não há anulações automaticas, a cobrança a ser efetiva é sempre da transação atual, mas não esqueçam de chamar a função finish_transaction() e mpos.close() e mpos.close_connection() , após criar a transação.
+
+	### Como e onde a informação da transação é armazenada e como é possivel recuperar tal informação ?
+
+	As informações sobre transações são armazenadas através da API pagar.me, onde a mesma disponibiliza um serviço de consulta de transações para recuperação de informações relevantes ao usuário, para realizar tal ação basta utilizar sua API KEY que se encontra em sua dasboard na parte de configurações do seu perfil na rota https://api.pagar.me/1/transactions?api_key=SUA_API_KEY.
+
+	### Há um tempo limite quando o SDK é comunicado que uma venda foi iniciada ?
+
+	Não existe um tempo limite, ou seja, o PINPAD irá esperar até um evento de cancelamento ocorrer.
+
+	### Se a conexão entre o servidor Pagar.me e o POS forem interrompidas durante uma venda é recomendado tentar novamente ?
+
+	Se a conexão for interrompida durante a execução de uma transação pode-se tentar a retransmição da transação se não passar de 2 minutos de espera, caso estrapole os 2 minutos será necessário realizar o cancelamento da transação.
+
+	### Quanto tempo se tem para anular uma transação ?
+
+	Pode-se cancelar uma transação a qulquer momento, utilizando a seguinte rota (/transactions/refund).
+
+- Atualização de software:
+
+	### Como se atualiza o software do PINPAD ?
+
+	Depende do fabricante e do sistema operacional instalado.
+
+	### Como se atualiza o software (lib) do SDK ?
+
+	Isso acontece somente quando liberamos um SDK novo, ainda não definimos um processo de informativos aos clientes.
+
+	### Como se atualiza as chaves do PINPAD ?
+
+	Não dá para realizar essa ação pelo SDK.
+
+	### Como se obtem a versão do firmware do PINPAD e do seu SDK ?
+
+	Não da para realizar essa ação.
+
+	### A cada quanto tempo é necessário atualizar as tabela EMV do PINPAD ? Se ocorrer uma falha qual os passos necessários para continuar com a venda ?
+
+	A cada transação vocês precisam atualizar as tabelas. Em caso de falha, será retornado erro 20, e vocês devem chamar a função novamente.
+
+	OBS: A transação não vai ser concluída, dado que precisa do conteúdo das tabelas EMV.
