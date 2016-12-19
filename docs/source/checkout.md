@@ -45,7 +45,7 @@ o texto do botão pela tag `data-button-text` e o valor da transação pela tag
 `data-amount`.
 
 Ao clicar no botão, o Checkout do Pagar.me abrirá dentro do seu site e
-o usuário digitará os dados necessários para realizar a transação. 
+o usuário digitará os dados necessários para realizar a transação.
 
 Quando a transação for concluída, um `token` referente a transação realizada
 será adicionado ao `form`. O `form`, então, será submetido para o seu servidor,
@@ -82,10 +82,10 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 | data-customer-address-zipcode | - | Código de endereçmento postal (CEP) da cidade do cliente |
 | data-customer-phone-ddd | - | DDD do telefone do cliente |
 | data-customer-phone-number | - | Número do telefone do cliente |
-| data-disable-zero-document-number | - | Não aceita CPF ou CNPJ em que todos os números são zeros |
+| data-disable-zero-document-number | `true` | Não aceita CPF ou CNPJ em que todos os números são zeros, valor padrão `false` |
 | data-interest-rate | - | Taxa de juros a ser cobrada na transação |
 | data-free-installments | - | Número de parcelas que não terão juros cobrados |
-| data-default-installment | `1` | Define a parcela padrão selecionada ao abrir o checkout | 
+| data-default-installment | `1` | Define a parcela padrão selecionada ao abrir o checkout |
 | data-header-text | `Total a pagar {price_info}` | Define o texto do cabeçalho. <br>**OBS**: Você poderá utilizar a variável `{price_info}` para injetar o valor do pagamento no texto. |
 | data-payment-button-text | `Pagar` | Define o texto do botão final de pagamento. |
 
@@ -144,22 +144,22 @@ maxInstallments | `1` | Número máximo de parcelas aceitas, de 1 a 12.
 uiColor | `#1a6ee1` | Cor primária da interface de Checkout.
 postbackUrl | --- | Endereço da URL de POSTback do seu sistema, que receberá as notificações das alterações de status das transações |
 createToken | `true` | Habilita a geração do token para autorização da transação. <br> **OBS**: Caso você queira apenas pegar os dados do cliente, deixe esse atributo com o valor `false`, e realize a transação normalmente no seu backend, com os dados informados no formulário do checkout.
-customerName | - | Nome do cliente 
-customerDocumentNumber | - | CPF ou CNPJ do cliente 
-customerEmail | - | E-mail do cliente 
-customerAddressStreet | - | Nome do logradouro do cliente 
-customerAddressStreetNumber | - | Número do imóvel do cliente 
-customerAddressComplementary | - | Complemente do endereço do cliente 
-customerAddressNeighborhood | - | Bairro do cliente 
-customerAddressCity | - | Cidade do cliente 
-customerAddress-State | - | Estado (unidade federativa) do cliente 
-customerAddressZipcode | - | Código de endereçmento postal (CEP) da cidade do cliente 
-customerPhoneDdd | - | DDD do telefone do cliente 
-customerPhoneNumber | - | Número do telefone do cliente 
-disableZeroDocumentNumber | - | Não aceita CPF ou CNPJ em que todos os números são zeros
-interestRate | - | Taxa de juros a ser cobrada na transação 
-freeInstallments | - | Número de parcelas que não terão juros cobrados 
-defaultInstallment | `1` | Define a parcela padrão selecionada ao abrir o checkout 
+customerName | - | Nome do cliente
+customerDocumentNumber | - | CPF ou CNPJ do cliente
+customerEmail | - | E-mail do cliente
+customerAddressStreet | - | Nome do logradouro do cliente
+customerAddressStreetNumber | - | Número do imóvel do cliente
+customerAddressComplementary | - | Complemente do endereço do cliente
+customerAddressNeighborhood | - | Bairro do cliente
+customerAddressCity | - | Cidade do cliente
+customerAddress-State | - | Estado (unidade federativa) do cliente
+customerAddressZipcode | - | Código de endereçmento postal (CEP) da cidade do cliente
+customerPhoneDdd | - | DDD do telefone do cliente
+customerPhoneNumber | - | Número do telefone do cliente
+disableZeroDocumentNumber | `true` | Não aceita CPF ou CNPJ em que todos os números são zeros, valor padrão `false`
+interestRate | - | Taxa de juros a ser cobrada na transação
+freeInstallments | - | Número de parcelas que não terão juros cobrados
+defaultInstallment | `1` | Define a parcela padrão selecionada ao abrir o checkout
 headerText | `Total a pagar {price_info}` | Define o texto do cabeçalho. <br>**OBS**: Você poderá utilizar a variável `{price_info}` para injetar o valor do pagamento no texto. |
 paymentButtonText | `Pagar` | Define o texto do botão final de pagamento. |
 
@@ -299,7 +299,7 @@ Você só precisar pegar os dados da requisição POST e passar eles para a lib 
 Abaixo temos exemplos da implementação:
 
 ```shell
-Não é possível fazer essa implementação em Shell script 
+Não é possível fazer essa implementação em Shell script
 ```
 
 ```ruby
@@ -358,5 +358,3 @@ subscription.Save();
 > Não se esqueça de substituir `ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0` pela
 > sua [chave de API](https://dashboard.pagar.me/#/myaccount/apikeys) disponível no seu
 > [Dashboard](https://dashboard.pagar.me/).
-
-
