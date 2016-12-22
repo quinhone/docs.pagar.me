@@ -131,7 +131,7 @@ Através dessa rota você pode salvar os dados de um cliente no nosso banco de d
 | Parâmetro | Descrição |
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
-| **document_number** | Número do CPF ou CNPJ do cliente |
+| **document_number** <br> <span class="required">obrigatório</span>| Número do CPF ou CNPJ do cliente |
 | **name**<br> <span class="required">obrigatório</span> | Nome ou razão social do comprador |
 | **email**<br> <span class="required">obrigatório</span> | E-mail do comprador |
 | **born_at** | Data de nascimento |
