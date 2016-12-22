@@ -427,48 +427,6 @@ Após criar um recebedor, você pode atualizar todas as configurações do mesmo
 | **bank_account[document_number]** | CPF ou CNPJ do recebedor |
 | **bank_account[legal_name]** | Nome completo ou razão social do recebedor |
 
-## Saldo de um recebedor
-
-> GET https://api.pagar.me/1/recipients/:id/balance
-
-```shell
-curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance \
--d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
-```
-
-```ruby
-```
-
-```php
-```
-
-```cs
-```
-
-Retorna o balanço de saldo de um determinado recebedor.
-
-> JSON Retornado (Exemplo)
-
-```json
-{
-    "object": "balance",
-    "waiting_funds": {
-        "amount": 0
-    },
-    "available": {
-        "amount": 0
-    },
-    "transferred": {
-        "amount": 0
-    }
-}
-```
-
-| Parâmetro | Descrição |
-|--:|:--|
-| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
-| **:id**<br> <span class="required">obrigatório</span> | Id de recebedor desejado |
-
 ## Operações de saldo de um recebedor
 
 > GET https://api.pagar.me/1/recipients/:recipient_id/balance/operations

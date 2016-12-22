@@ -28,7 +28,7 @@ Com este objeto, você pode obter informações gerais sobre o saldo da sua cont
 | **available**<br> Object | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível em sua conta Pagar.me |
 | **transferred**<br> Object | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta bancária (quanto já recebeu efetivamente) |
 
-## Saldo geral das operações
+## Saldo geral das operações de sua empresa (company)
 
 > GET https://api.pagar.me/1/balance
 
@@ -70,5 +70,45 @@ Com essa rota `/balance` você poderá consultar o saldo gerado pelas suas trans
 | Parâmetro | Descrição |
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
-| **recipient_id**<br> default: `null` | Id de um recebedor específico, caso queira obter o saldo específico dele |
 
+## Saldo geral de um recebedor específico
+
+> GET https://api.pagar.me/1/recipients/:id/balance
+
+```shell
+curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balance \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+```
+
+```ruby
+```
+
+```php
+```
+
+```cs
+```
+
+Retorna o balanço de saldo de um determinado recebedor.
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+    "object": "balance",
+    "waiting_funds": {
+        "amount": 0
+    },
+    "available": {
+        "amount": 0
+    },
+    "transferred": {
+        "amount": 0
+    }
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível em sua Dashboard) |
+| **:id**<br> <span class="required">obrigatório</span> | Id do recebedor desejado |
