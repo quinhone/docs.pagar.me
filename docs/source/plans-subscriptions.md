@@ -373,7 +373,7 @@ subscription.cancel # Subscription cancelada
 
 ### O que muda no ato de upgrade ou downgrade de uma assinatura?
 
-- No **upgrade**, a periodicidade não é alterada. O que acontece é uma cobrança calculada da seguinte maneira:
+- No **upgrade**, a periodicidade não é alterada. Isso significa que o parâmetro days permanece o mesmo, porém o `current_period_start` e o `current_period_end` serão alterados. O que acontece é uma cobrança calculada da seguinte maneira:
 
 1. Se o status não é `paid`, o valor integral do novo plano é cobrado.  
 
