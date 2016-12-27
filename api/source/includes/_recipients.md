@@ -366,7 +366,8 @@ Retorna um objeto com os dados de um recebedor criado pela sua companhia.
 ```shell
 curl -X PUT https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl \
 -d 'anticipatable_volume_percentage=80' \
--d 'bank_account_id=5233'
+-d 'bank_account_id=5233' \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
 ```
 
 ```ruby
