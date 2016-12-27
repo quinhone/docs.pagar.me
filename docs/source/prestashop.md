@@ -12,7 +12,7 @@ search: true
 
 **Acessando o plugin:**
 
-Para ter acesso ao nosso módulo, mande um email para homologação@pagar.me que te enviaremos o arquivo.
+Para ter acesso ao nosso módulo, basta clicar no seguinte link e `baixá-lo` direto do nosso github [PrestaShop](https://github.com/pagarme/pagarme-prestashop)
 
 **Instalando o plugin:**
 
