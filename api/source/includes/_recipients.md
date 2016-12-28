@@ -449,6 +449,7 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balan
 ```
 
 Retorna as movimentações que aconteceram na conta do recebedor.
+**OBS:** Retorna somente as movimentações com status available (disponível).
 
 > JSON Retornado (Exemplo)
 

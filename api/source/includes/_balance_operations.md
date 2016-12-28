@@ -11,7 +11,7 @@
     "status": "available",
     "balance_amount": 3019898,
     "balance_old_amount": 2920013,
-    "movement_type": "payable",
+    "type": "payable",
     "amount": 100000,
     "fee": 115,
     "date_created": "2015-03-06T21:00:31.000Z",
@@ -37,7 +37,7 @@ Com este objeto você poderá acompanhar como estava/está seu saldo a cada movi
 | **id**<br> String | Identificador da operação |
 | **status**<br> String | Estado do saldo da conta. <br> **Valores possíveis**: `waiting_funds`, `available` e `transferred` |
 | **balance_amount**<br> Number | Saldo atual da conta |
-| **movement_type**<br> String | O que gerou a movimentação. <br> **Valores possíveis**: `payable`, `transaction` ou `anticipation` |
+| **type**<br> String | O que gerou a movimentação. <br> **Valores possíveis**: `payable`, `transfer` ou `anticipation` |
 | **amount**<br> Number | Valor transacionado para a conta |
 | **fee**<br> Number | Taxa cobrada pela transação |
 | **date_created**<br> String | Data da movimentação |
@@ -72,7 +72,7 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
     "status": "available",
     "balance_amount": 3019898,
     "balance_old_amount": 2920013,
-    "movement_type": "payable",
+    "type": "payable",
     "amount": 100000,
     "fee": 115,
     "date_created": "2015-03-06T21:00:31.000Z",
@@ -93,7 +93,7 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
     "status": "available",
     "balance_amount": 2920013,
     "balance_old_amount": 2910128,
-    "movement_type": "payable",
+    "type": "payable",
     "amount": 10000,
     "fee": 115,
     "date_created": "2015-03-06T18:44:42.000Z",
@@ -114,7 +114,7 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
     "status": "available",
     "balance_amount": 2910128,
     "balance_old_amount": 2880243,
-    "movement_type": "payable",
+    "type": "payable",
     "amount": 30000,
     "fee": 115,
     "date_created": "2015-03-05T19:32:36.000Z",
@@ -137,7 +137,7 @@ Com a rota `/balance/operations` você poderá ver todos os movimentos ocorridos
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **count**<br> default: `10` | Retorna `n` objetos de operação de saldo |
 | **page**<br> default: `1` | Útil para implementação de uma paginação de resultados |
-
+| **status**<br> default: `available` | Estado do saldo da conta. Valores possíveis: waiting_funds, available e transferred |
 ## Histórico específico de uma operação 
 
 > GET https://api.pagar.me/1/balance/operations/:id
@@ -167,7 +167,7 @@ Com a rota `/balance/operations/:id` você poderá ver uma operação específic
     "status": "available",
     "balance_amount": 3019898,
     "balance_old_amount": 2920013,
-    "movement_type": "payable",
+    "type": "payable",
     "amount": 100000,
     "fee": 115,
     "date_created": "2015-03-06T21:00:31.000Z",
