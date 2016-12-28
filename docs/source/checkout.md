@@ -157,6 +157,8 @@ customerAddressZipcode | - | Código de endereçmento postal (CEP) da cidade do 
 customerPhoneDdd | - | DDD do telefone do cliente
 customerPhoneNumber | - | Número do telefone do cliente
 disableZeroDocumentNumber | `true` | Não aceita CPF ou CNPJ em que todos os números são zeros, valor padrão `false`
+boletoDiscountAmount | - | Valor, em centavos, do desconto caso o meio de pagamento seja boleto. Ex: desconto de R$10,00 = `1000`. OBS: você não pode adicionar essa tag caso a tag de desconto percentual já esteja presente.
+boletoDiscountPercentage | - | Percentual de desconto caso o meio de pagamento seja boleto. Ex: desconto de 25% = `25`. OBS: você não pode adicionar essa tag caso a tag de desconto por valor já esteja presente.
 interestRate | - | Taxa de juros a ser cobrada na transação
 freeInstallments | - | Número de parcelas que não terão juros cobrados
 defaultInstallment | `1` | Define a parcela padrão selecionada ao abrir o checkout
