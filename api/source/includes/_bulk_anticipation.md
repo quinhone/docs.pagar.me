@@ -55,6 +55,16 @@ curl -X POST https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipa
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl");
+var bulkAnticipation = new BulkAnticipation()
+    {
+        Timeframe = TimeFrame.Start,
+        PaymentDate = DateTime.Today.AddDays(3),
+        RequestedAmount = 561599,
+        Build = true
+    };
+recipient.CreateAnticipation(bulkAnticipation);
 ```
 
 Para criar uma antecipação, você deve usar a rota `/recipients/:recipient_id/bulk_anticipations`.
@@ -103,6 +113,10 @@ curl -X GET https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipat
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl");
+var MaxLimit = recipient.MaxAnticipationValue(TimeFrame.Start, DateTime.Today.AddDays(3));
+var MinLimit = recipient.MinAnticipationValue(TimeFrame.Start, DateTime.Today.AddDays(3));
 ```
 
 Retorna os limites máximos e mínimos de antecipação que aquele recebedor poder fazer.
@@ -148,6 +162,10 @@ curl -X POST https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipa
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl");
+var anticipation = recipient.Anticipations.Find("ba_as2i4234js23in123");
+recipient.ConfirmAnticipation(anticipation);
 ```
 
 Confirma a antecipação criada, assim seu status passará para `pending`, ou seja, está criada com sucesso e aguardando aprovação do Pagar.me.
@@ -190,6 +208,10 @@ curl -X POST https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipa
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl");
+var anticipation = recipient.Anticipations.Find("ba_as2i4234js23in123");
+recipient.CancelAnticipation(anticipation);
 ```
 
 Cancela uma antecipação com status `pending`. Enquanto a antecipação foi criada e o Pagar.me ainda não a confirmou, você pode cancelar a antecipação a qualquer momento.
@@ -232,6 +254,10 @@ curl -X DELETE https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_antici
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl");
+var anticipation = recipient.Anticipations.Find("ba_as2i4234js23in123");
+recipient.DeleteAnticipation(anticipation);
 ```
 
 Enquanto você está construindo uma antecipação (status `building`), você pode cancelar o processo deletando a criação daquela antecipação. Lembrando que caso você não a destrua no status `building`, após 5 minutos ela é automaticamente destruída.
@@ -264,6 +290,9 @@ curl -X GET https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipat
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var recipient = PagarMeService.GetDefaultService().Recipients.Find("re_a123sd18das9d164");
+var anticipations = recipient.Anticipations.FindAll(new BulkAnticipation());
 ```
 
 Retorna um `Array` contendo objetos de antecipações.

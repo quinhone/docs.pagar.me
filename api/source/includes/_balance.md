@@ -87,6 +87,8 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balan
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var balance = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl").Balance;
 ```
 
 Retorna o balanço de saldo de um determinado recebedor.

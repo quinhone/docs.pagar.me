@@ -89,6 +89,32 @@ customer.create
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var customer = new Customer()
+    {
+        DocumentNumber = "18152564000105",
+        Name = "Nome do cliente",
+        Email = "eee@email.com",
+        Address = new Address()
+        {
+            Street = "rua qualquer",
+            Complementary = "apto",
+            StreetNumber = "13",
+            Neighborhood = "pinheiros",
+            City = "sao paulo",
+            State = "SP",
+            Zipcode = "05444040",
+            Country = "Brasil"
+        },
+        Phone = new Phone()
+        {
+            Ddi = "55",
+            Ddd = "11",
+            Number = "999887766"
+        }
+    };
+
+customer.Save();
 ```
 
 Através dessa rota você pode salvar os dados de um cliente no nosso banco de dados.
@@ -175,6 +201,8 @@ customer = PagarMe::Customer.find_by_id(11222)
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var customer = PagarMeService.GetDefaultService().Customers.Find("11222");
 ```
 
 Através da rota `/customers/:id` você recebe todos os dados do seu cliente, previamente cadastrado na realização de uma transação, quando os dados deste é passado pelos parâmetros `customer[nomeDaPropriedade]`.
@@ -248,6 +276,8 @@ card = PagarMe::Card.all(1, 2)
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var customers = PagarMeService.GetDefaultService().Customers.FindAll(new Customer());
 ```
 
 Retorna todos os clientes cadastrados em sua conta.

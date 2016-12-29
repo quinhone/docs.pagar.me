@@ -697,6 +697,8 @@ curl -X GET https://api.pagar.me/1/transactions/189164/split_rules \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var splits = PagarMeService.GetDefaultService().Transactions.Find("189164").SplitRules;
 ```
 
 Retorna os dados das regras de divisão do valor transacionado.
@@ -790,6 +792,8 @@ curl -X GET https://api.pagar.me/1/transactions/192669/payables \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var payables = PagarMeService.GetDefaultService().Transactions.Find("192669").Payables;
 ```
 
 Retorna um array com objetos `payable` informando os dados dos pagamentos referentes a uma transação.
@@ -847,6 +851,8 @@ curl -X GET https://api.pagar.me/1/transactions/192669/payables/1485 \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var payable = PagarMeService.GetDefaultService().Transactions.Find("192669").Payables.Find("1485");
 ```
 
 Retorna um objeto `payable` informando os dados de um pagamento referente a uma determinada transação.
@@ -1165,6 +1171,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/events \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var events = PagarMeService.GetDefaultService().Transactions.Find("192669").Events;
 ```
 
 Retorna todos os eventos já criados dentro de uma transação. <br>**Ex**: mudanças de status.
@@ -1900,6 +1908,10 @@ curl -X PUT https://api.pagar.me/1/transactions/260582 \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var transaction = PagarMeService.GetDefaultService().Transactions.Find("260582 ");
+transaction.Status = TransactionStatus.Paid;
+transaction.Save();
 ```
 
 Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.

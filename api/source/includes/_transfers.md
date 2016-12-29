@@ -65,6 +65,13 @@ curl -X POST https://api.pagar.me/1/transfers \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var transfer = new Transfer()
+    {
+        Amount = 13000,
+        BankAccountId = "4840"
+    };
+transfer.Save();
 ```
 
 Realiza uma transferência para uma conta bancária previamente criada.
@@ -121,6 +128,8 @@ curl -X GET https://api.pagar.me/1/transfers/484 \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var transfer = PagarMeService.GetDefaultService().Transfers.Find("480");
 ```
 
 Retorna os dados de uma transferência previamente realizada.
@@ -175,6 +184,8 @@ curl -X GET https://api.pagar.me/1/transfers \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var transfers = PagarMeService.GetDefaultService().Transfers.FindAll();
 ```
 
 Retorna os dados de todas as transferências previamente realizadas.
