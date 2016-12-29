@@ -241,6 +241,9 @@ curl -X POST https://api.pagar.me/1/transfers/480/cancel \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var transfer = PagarMeService.GetDefaultService().Transfers.Find("480");
+transfer.CancelTransfer();
 ```
 
 Cancela uma transferência previamente realizada.
