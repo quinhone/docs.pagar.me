@@ -365,6 +365,8 @@ Para fazer uma cobrança, você deve usar a rota `/transactions` para criar sua 
 | **customer[name]**<br> <span class="required">obrigatório\* (com antifraude)</span> | Nome completo ou razão social do cliente que está realizando a transação |
 | **customer[document_number]**<br> <span class="required">obrigatório\* (com antifraude)</span> | CPF ou CNPJ do cliente, sem separadores |
 | **customer[email]**<br> <span class="required">obrigatório\* (com antifraude)</span> | email do cliente |
+| **customer[address][state]** | Estado do endereço do cliente <br>**OBS**: passar esse parâmetro somente quando a verificação de CEP estiver desabilitada em sua dashboard |
+| **customer[address][city]** | Cidade do endereço do cliente <br>**OBS**: passar esse parâmetro somente quando a verificação de CEP estiver desabilitada em sua dashboard |
 | **customer[address][street]**<br> <span class="required">obrigatório\* (com antifraude)</span> | logradouro (rua, avenida, etc) do cliente |
 | **customer[address][street_number]**<br> <span class="required">obrigatório\* (com antifraude)</span> | Número da residência/estabelecimento do cliente |
 | **customer[address][complementary]** | complemento do endereço do cliente |
