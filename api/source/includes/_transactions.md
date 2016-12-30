@@ -898,6 +898,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var antifraudAnalyse = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalyse.Find("913456");
 ```
 
 Retorna uma análise antifraude específica realizada em uma transação.
@@ -939,6 +941,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var antifraudAnalyse = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalyse.FindAll(new AntifraudAnalyse());
 ```
 
 Retorna todas as análises antifraude realizadas em uma transação.
@@ -979,6 +983,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/postbacks/po_ciat6ssga002
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var postback = PagarMeService.GetDefaultService().Transactions.Find("314578").Postbacks.Find("po_ciat6ssga0022k06ng8vxg");
 ```
 
 Retorna um POSTback específico relacionado a transação.
@@ -1039,6 +1045,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/postbacks \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var postbacks = PagarMeService.GetDefaultService().Transactions.Find("314578").Postbacks.FindAll(new Postback());
 ```
 
 Retorna todos os POSTbacks enviados relacionados a transação.
@@ -1099,6 +1107,9 @@ curl -X POST https://api.pagar.me/1/transactions/314578/postbacks/po_ciat6ssga00
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var postback = PagarMeService.GetDefaultService().Transactions.Find("314578").Postbacks.Find("po_ciat6ssga0022k06ng8vxg");
+postback.Redeliver();
 ```
 
 Com essa rota você pode reenviar qualquer POSTback que já foi enviado de uma transação. Lembrando que caso o envio de um POSTback falhe ou seu servidor não o receba, nós o retentamos diversas vezes (com um total de 31 vezes). 
