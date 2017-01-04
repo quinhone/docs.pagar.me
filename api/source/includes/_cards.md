@@ -6,17 +6,19 @@
 
 ```json
 {
-    "object": "card",
-    "id": "card_ci6y37hc00030a416wrxsmzyi",
-    "date_created": "2015-03-06T21:21:25.000Z",
-    "date_updated": "2015-03-06T21:21:26.000Z",
-    "brand": "visa",
-    "holder_name": "API CUSTOMER",
-    "first_digits": "401872",
-    "last_digits": "8048",
-    "fingerprint": "Jl9oOIiDjAjR",
-    "customer": null,
-    "valid": true
+  "object": "card",
+  "id": "card_ci6y37hc00030a416wrxsmzyi",
+  "date_created": "2017-01-04T11:58:10.027Z",
+  "date_updated": "2017-01-04T11:58:10.199Z",
+  "brand": "visa",
+  "holder_name": " API CUSTOMER",
+  "first_digits": "401872",
+  "last_digits": "8048",
+  "country": "US",
+  "fingerprint": "Jl9oOIiDjAjR",
+  "customer": null,
+  "valid": true,
+  "expiration_date": "0117"
 }
 ```
 
@@ -44,8 +46,8 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
 curl -X  POST https://api.pagar.me/1/cards \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
 -d 'card_number=4018720572598048' \
--d 'holder_name=API Customer' \
--d 'card_expiration_date=0116'
+-d 'holder_name=API CUSTOMER' \
+-d 'card_expiration_date=0117'
 ```
 
 ```ruby
@@ -55,10 +57,10 @@ PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
 
 card = PagarMe::Card.new({
-	:card_number => '4111111111111111',
-	:card_holder_name => 'Jose da Silva',
-	:card_expiration_month => '10',
-	:card_expiration_year => '15',
+	:card_number => '4018720572598048',
+	:card_holder_name => 'API CUSTOMER',
+	:card_expiration_month => '01',
+	:card_expiration_year => '17',
 	:card_cvv => '314'
 })
 
@@ -72,11 +74,11 @@ card.create
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$card = new PagarMe_Card(array(
-		"card_number" => "4111111111111111",
-		"card_holder_name" => "Jose da Silva",
-		"card_expiration_month" => 10,
-		"card_expiration_year" => 22,
-		"card_cvv" => "123",
+		"card_number" => "4018720572598048",
+		"card_holder_name" => "API CUSTOMER",
+		"card_expiration_month" => 01,
+		"card_expiration_year" => 17,
+		"card_cvv" => "314",
 	));
 ```
 
@@ -85,10 +87,10 @@ PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 PagarMeService.DefaultEncryptionKey = "ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk";
 
 Card card = new Card();
-card.Number = "4111111111111111";
-card.HolderName = "Jose da Silva";
-card.ExpirationDate = "1022";
-card.Cvv = "123";
+card.Number = "4018720572598048";
+card.HolderName = "API CUSTOMER";
+card.ExpirationDate = "0117";
+card.Cvv = "314";
 
 card.Save();
 ```
@@ -99,26 +101,30 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
 
 ```json
 {
-    "object": "card",
-    "id": "card_ci6y37h16wrxsmzyi",
-    "date_created": "2015-03-06T21:21:25.000Z",
-    "date_updated": "2015-03-06T21:21:26.000Z",
-    "brand": "visa",
-    "holder_name": "API CUSTOMER",
-    "first_digits": "401872",
-    "last_digits": "8048",
-    "fingerprint": "Jl9oOIiDjAjR",
-    "customer": null,
-    "valid": true
+  "object": "card",
+  "id": "card_ci6y37hc00030a416wrxsmzyi",
+  "date_created": "2017-01-04T11:58:10.027Z",
+  "date_updated": "2017-01-04T11:58:10.199Z",
+  "brand": "visa",
+  "holder_name": " API CUSTOMER",
+  "first_digits": "401872",
+  "last_digits": "8048",
+  "country": "US",
+  "fingerprint": "Jl9oOIiDjAjR",
+  "customer": null,
+  "valid": true,
+  "expiration_date": "0117"
 }
+
 ```
 
 | Parâmetro | Descrição |
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
-| **card_number** | Número do portador do cartão |
-| **card_expiration_date** ou **expiration_date** | Data de expiração do cartão |
-| **holder_name** | Nome no cartão do portador |
+| **card_number**<br> <span class="required">obrigatório</span>| Número do portador do cartão |
+| **card_expiration_date** ou **expiration_date** <br> <span class="required">obrigatório</span>| Data de expiração do cartão |
+| **card_cvv** <br> <span class="required">obrigatório</span> | Código de segurança do cartão |
+| **holder_name** <br> <span class="required">obrigatório</span> | Nome no cartão do portador |
 | **customer_id** | Você pode usar o `id` do objeto `customer` para associar mais informações do cliente ao `card` a ser gerado |
 | **card_hash** | Você também pode criar um objeto `card` usando os dados do cartão criptografados no `card_hash` |
 
@@ -160,17 +166,19 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 
 ```json
 {
-    "object": "card",
-    "id": "card_ci6y37h16wrxsmzyi",
-    "date_created": "2015-03-06T21:21:25.000Z",
-    "date_updated": "2015-03-06T21:21:26.000Z",
-    "brand": "visa",
-    "holder_name": "API CUSTOMER",
-    "first_digits": "401872",
-    "last_digits": "8048",
-    "fingerprint": "Jl9oOIiDjAjR",
-    "customer": null,
-    "valid": true
+  "object": "card",
+  "id": "card_ci6y37hc00030a416wrxsmzyi",
+  "date_created": "2017-01-04T11:58:10.027Z",
+  "date_updated": "2017-01-04T11:58:10.199Z",
+  "brand": "visa",
+  "holder_name": " API CUSTOMER",
+  "first_digits": "401872",
+  "last_digits": "8048",
+  "country": "US",
+  "fingerprint": "Jl9oOIiDjAjR",
+  "customer": null,
+  "valid": true,
+  "expiration_date": "0117"
 }
 ```
 
@@ -184,23 +192,23 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
 Essa cobrança é realizada para validar o cartão que pode vir a ser utilizado na criação de uma transação (objeto transaction) ou de uma assinatura (subscription). Ou seja, a API Pagar.Me envia uma requisição ao banco emissor, pedindo a reserva de R$1,23 no saldo do portador, caso autorizada, cria um novo cartão em nossa base, retornando o objeto ao lado: 
 
 ```json
- {
-    "object": "card",
-    "id": "card_civi47gf900dgwf6dugd02b98",
-    "date_created": "2016-11-14T13:37:43.656Z",
-    "date_updated": "2016-11-17T12:59:09.657Z",
-    "brand": "visa",
-    "holder_name": "Pernalonga",
-    "first_digits": "424242",
-    "last_digits": "4242",
-    "country": "US",
-    "fingerprint": "zuXID6kjRtS+",
-    "customer": null,
-    "valid": true,
-    "expiration_date": "0221"
-  }
+{
+  "object": "card",
+  "id": "card_ci6y37hc00030a416wrxsmzyi",
+  "date_created": "2017-01-04T11:58:10.027Z",
+  "date_updated": "2017-01-04T11:58:10.199Z",
+  "brand": "visa",
+  "holder_name": " API CUSTOMER",
+  "first_digits": "401872",
+  "last_digits": "8048",
+  "country": "US",
+  "fingerprint": "Jl9oOIiDjAjR",
+  "customer": null,
+  "valid": true,
+  "expiration_date": "0117"
+}
 ```
 
-Em que o id `card_civi47gf900dgwf6dugd02b98` pode ser reutilizado para futuras compras.
+Em que o id `card_ci6y37hc00030a416wrxsmzyi` pode ser reutilizado para futuras compras.
 
 **OBS:** O valor `será estornado` para o portador do cartão no exato momento após a validação dos dados.
