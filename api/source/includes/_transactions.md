@@ -899,7 +899,7 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 
 ```cs
 PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
-var antifraudAnalisis = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalisis.Find("913456");
+var antifraudAnalysis = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalysis.Find("913456");
 ```
 
 Retorna uma análise antifraude específica realizada em uma transação.
@@ -942,7 +942,7 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 
 ```cs
 PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
-var antifraudAnalisis = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalisis.FindAll(new AntifraudAnalisis());
+var antifraudAnalysis = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalysis.FindAll(new AntifraudAnalysis());
 ```
 
 Retorna todas as análises antifraude realizadas em uma transação.
