@@ -12,13 +12,13 @@
   "date_updated": "2017-01-04T11:58:10.199Z",
   "brand": "visa",
   "holder_name": " API CUSTOMER",
-  "first_digits": "401872",
-  "last_digits": "8048",
+  "first_digits": "424242",
+  "last_digits": "4242",
   "country": "US",
   "fingerprint": "Jl9oOIiDjAjR",
   "customer": null,
   "valid": true,
-  "expiration_date": "0117"
+  "expiration_date": "0120"
 }
 ```
 
@@ -45,9 +45,9 @@ Sempre que você faz uma requisição através da nossa API nós guardamos as in
 ```shell
 curl -X  POST https://api.pagar.me/1/cards \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
--d 'card_number=4018720572598048' \
+-d 'card_number=4242424242424242' \
 -d 'holder_name=API CUSTOMER' \
--d 'card_expiration_date=0117'
+-d 'card_expiration_date=0120'
 ```
 
 ```ruby
@@ -57,10 +57,10 @@ PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
 
 
 card = PagarMe::Card.new({
-	:card_number => '4018720572598048',
+	:card_number => '4242424242424242',
 	:card_holder_name => 'API CUSTOMER',
 	:card_expiration_month => '01',
-	:card_expiration_year => '17',
+	:card_expiration_year => '20',
 	:card_cvv => '314'
 })
 
@@ -74,10 +74,10 @@ card.create
     Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$card = new PagarMe_Card(array(
-		"card_number" => "4018720572598048",
+		"card_number" => "4242424242424242",
 		"card_holder_name" => "API CUSTOMER",
 		"card_expiration_month" => 01,
-		"card_expiration_year" => 17,
+		"card_expiration_year" => 20,
 		"card_cvv" => "314",
 	));
 ```
@@ -87,9 +87,9 @@ PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
 PagarMeService.DefaultEncryptionKey = "ek_test_Ec8KhxISQ1tug1b8bCcxC2nXfxqRnk";
 
 Card card = new Card();
-card.Number = "4018720572598048";
+card.Number = "4242424242424242";
 card.HolderName = "API CUSTOMER";
-card.ExpirationDate = "0117";
+card.ExpirationDate = "0120";
 card.Cvv = "314";
 
 card.Save();
@@ -113,7 +113,7 @@ Você pode armazenar os dados do cartão do seu cliente através da rota `/cards
   "fingerprint": "Jl9oOIiDjAjR",
   "customer": null,
   "valid": true,
-  "expiration_date": "0117"
+  "expiration_date": "0120"
 }
 
 ```
@@ -172,13 +172,13 @@ Use a rota `/cards/:id` para retornar os dados de um cartão previamente salvo.
   "date_updated": "2017-01-04T11:58:10.199Z",
   "brand": "visa",
   "holder_name": " API CUSTOMER",
-  "first_digits": "401872",
-  "last_digits": "8048",
+  "first_digits": "424242",
+  "last_digits": "4242",
   "country": "US",
   "fingerprint": "Jl9oOIiDjAjR",
   "customer": null,
   "valid": true,
-  "expiration_date": "0117"
+  "expiration_date": "0120"
 }
 ```
 
@@ -199,13 +199,13 @@ Essa cobrança é realizada para validar o cartão que pode vir a ser utilizado 
   "date_updated": "2017-01-04T11:58:10.199Z",
   "brand": "visa",
   "holder_name": " API CUSTOMER",
-  "first_digits": "401872",
-  "last_digits": "8048",
+  "first_digits": "424242",
+  "last_digits": "4242",
   "country": "US",
   "fingerprint": "Jl9oOIiDjAjR",
   "customer": null,
   "valid": true,
-  "expiration_date": "0117"
+  "expiration_date": "0120"
 }
 ```
 
