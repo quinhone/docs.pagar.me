@@ -138,6 +138,7 @@ Com essa rota você consegue criar um recebedor, definindo o período que ele ir
 | **bank_account[bank_code]** | Código do banco do recebedor |
 | **bank_account[agencia]** | Agência da conta do recebedor |
 | **bank_account[conta]** | Número da conta bancária do recebedor |
+| **bank_account[type]** <br> default: `conta_corrente` | Tipo de conta bancária <br> **Valores possíveis**: `conta_corrente`, `conta_poupanca`, `conta_corrente_conjunta`, `conta_poupanca_conjunta` | 
 | **bank_account[conta_dv]** | Dígito verificador da conta do recebedor |
 | **bank_account[document_number]** | CPF ou CNPJ do recebedor |
 | **bank_account[legal_name]** | Nome completo ou razão social do recebedor |
@@ -424,6 +425,7 @@ Após criar um recebedor, você pode atualizar todas as configurações do mesmo
 | **bank_account[bank_code]** | Código do banco do recebedor |
 | **bank_account[agencia]** | Agência da conta do recebedor |
 | **bank_account[conta]** | Número da conta bancária do recebedor |
+| **bank_account[type]** <br> default: `conta_corrente` | Tipo de conta bancária <br> **Valores possíveis**: `conta_corrente`, `conta_poupanca`, `conta_corrente_conjunta`, `conta_poupanca_conjunta` |
 | **bank_account[conta_dv]** | Dígito verificador da conta do recebedor |
 | **bank_account[document_number]** | CPF ou CNPJ do recebedor |
 | **bank_account[legal_name]** | Nome completo ou razão social do recebedor |
