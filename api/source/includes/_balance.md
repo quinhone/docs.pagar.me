@@ -28,7 +28,7 @@ Com este objeto, você pode obter informações gerais sobre o saldo da sua cont
 | **available**<br> Object | Possui a propriedade `amount`, que representa quanto, em centavos, você tem disponível em sua conta Pagar.me |
 | **transferred**<br> Object | Possui a propriedade `amount`, que representa quanto, em centavos, você já transferiu para sua conta bancária (quanto já recebeu efetivamente) |
 
-## Saldo geral das operações de sua empresa (company)
+## Saldo geral do recebedor principal da sua empresa (company)
 
 > GET https://api.pagar.me/1/balance
 
@@ -46,7 +46,7 @@ curl -X  GET https://api.pagar.me/1/balance \
 ```cs
 ```
 
-Com essa rota `/balance` você poderá consultar o saldo gerado pelas suas transações.
+Com essa rota `/balance` você poderá consultar o saldo gerado pelas transações do seu recebedor principal.
 
 **OBS**: os valores retornados estão em **centavos**.
 
