@@ -79,7 +79,7 @@ data-create-token | `true` | Habilita a geração do token para autorização da
 | data-customer-address-neighborhood | - | Bairro do cliente |
 | data-customer-address-city | - | Cidade do cliente |
 | data-customer-address-state | - | Estado (unidade federativa) do cliente |
-| data-customer-address-zipcode | - | Código de endereçmento postal (CEP) da cidade do cliente |
+| data-customer-address-zipcode | - | Código de endereçamento postal (CEP) da cidade do cliente |
 | data-customer-phone-ddd | - | DDD do telefone do cliente |
 | data-customer-phone-number | - | Número do telefone do cliente |
 | data-disable-zero-document-number | `true` | Não aceita CPF ou CNPJ em que todos os números são zeros, valor padrão `false` |
@@ -152,8 +152,8 @@ customerAddressStreetNumber | - | Número do imóvel do cliente
 customerAddressComplementary | - | Complemente do endereço do cliente
 customerAddressNeighborhood | - | Bairro do cliente
 customerAddressCity | - | Cidade do cliente
-customerAddress-State | - | Estado (unidade federativa) do cliente
-customerAddressZipcode | - | Código de endereçmento postal (CEP) da cidade do cliente
+customerAddressState | - | Estado (unidade federativa) do cliente
+customerAddressZipcode | - | Código de endereçamento postal (CEP) da cidade do cliente
 customerPhoneDdd | - | DDD do telefone do cliente
 customerPhoneNumber | - | Número do telefone do cliente
 disableZeroDocumentNumber | `true` | Não aceita CPF ou CNPJ em que todos os números são zeros, valor padrão `false`
