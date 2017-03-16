@@ -211,8 +211,34 @@ Retorna os dados de todas as transferências previamente realizadas.
 | Parâmetro | Descrição |
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **bank_account_id**<br> | Especifica uma conta bancária que recebeu a transferência |
+| **amount**<br> | Valor da transferência |
+| **recipient_id**<br> | ID do recebedor que fez o saque |
+| **date_created**<br> | Data de criação da transferência <br> **OBS:** Deve ser passado em unixtimestamp |
 | **count**<br> default: `10` | Retorna `n` objetos de transferência |
 | **page**<br> default: `1` | Útil para implementação de uma paginação de resultados |
+
+### Filtros
+
+O parâmetro **date_created** pode ser usado para buscas em ranges usando os prefixos:
+
+| Prefixo | Descrição |
+|--:|:--|
+| **<**<br>  | Menor que |
+| **>**<br>  | Maior que |
+| **<=**<br>  | Menor ou igual a |
+| **>=**<br>  | Maior ou igual a |
+
+**Exemplo:** `date_created=>1483236000000`
+
+> Exemplo de prefixos com date_created
+
+```shell
+curl -X GET https://api.pagar.me/1/transfers \
+-d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0'
+-d 'date_created=>=1483236000000'
+-d 'date_created=<=1484689847590'
+```
 
 ## Cancelando uma transferência
 
