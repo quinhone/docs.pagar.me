@@ -793,6 +793,9 @@ subscription.cancel
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var subscription = PagarMeService.GetDefaultService().Subscriptions.Find("154986");
+subscription.Cancel();
 ```
 
 Para cancelar uma assinatura você deve utilizar a rota `/subscriptions/:id/cancel`

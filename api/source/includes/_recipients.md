@@ -448,6 +448,8 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balan
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var balanceOperations = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl").Balance.Operations;
 ```
 
 Retorna as movimentações que aconteceram na conta do recebedor.
@@ -544,6 +546,8 @@ curl -X GET https://api.pagar.me/1/recipients/re_ci7nhf1ay0007n016wd5t22nl/balan
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var balanceOperations = PagarMeService.GetDefaultService().Recipients.Find("re_ci7nhf1ay0007n016wd5t22nl").Balance.Operations.find("4861");
 ```
 
 Retorna uma movimentação de saldo que aconteceu na conta do recebedor.

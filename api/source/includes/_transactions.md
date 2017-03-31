@@ -699,6 +699,8 @@ curl -X GET https://api.pagar.me/1/transactions/189164/split_rules \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var splits = PagarMeService.GetDefaultService().Transactions.Find("189164").SplitRules;
 ```
 
 Retorna os dados das regras de divisão do valor transacionado.
@@ -792,6 +794,8 @@ curl -X GET https://api.pagar.me/1/transactions/192669/payables \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var payables = PagarMeService.GetDefaultService().Transactions.Find("192669").Payables;
 ```
 
 Retorna um array com objetos `payable` informando os dados dos pagamentos referentes a uma transação.
@@ -849,6 +853,8 @@ curl -X GET https://api.pagar.me/1/transactions/192669/payables/1485 \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var payable = PagarMeService.GetDefaultService().Transactions.Find("192669").Payables.Find("1485");
 ```
 
 Retorna um objeto `payable` informando os dados de um pagamento referente a uma determinada transação.
@@ -894,6 +900,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses/913456
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var antifraudAnalysis = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalysis.Find("913456");
 ```
 
 Retorna uma análise antifraude específica realizada em uma transação.
@@ -935,6 +943,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/antifraud_analyses \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var antifraudAnalysis = PagarMeService.GetDefaultService().Transactions.Find("314578").AntifraudAnalysis.FindAll(new AntifraudAnalysis());
 ```
 
 Retorna todas as análises antifraude realizadas em uma transação.
@@ -975,6 +985,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/postbacks/po_ciat6ssga002
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var postback = PagarMeService.GetDefaultService().Transactions.Find("314578").Postbacks.Find("po_ciat6ssga0022k06ng8vxg");
 ```
 
 Retorna um POSTback específico relacionado a transação.
@@ -1035,6 +1047,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/postbacks \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var postbacks = PagarMeService.GetDefaultService().Transactions.Find("314578").Postbacks.FindAll(new Postback());
 ```
 
 Retorna todos os POSTbacks enviados relacionados a transação.
@@ -1095,6 +1109,9 @@ curl -X POST https://api.pagar.me/1/transactions/314578/postbacks/po_ciat6ssga00
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var postback = PagarMeService.GetDefaultService().Transactions.Find("314578").Postbacks.Find("po_ciat6ssga0022k06ng8vxg");
+postback.Redeliver();
 ```
 
 Com essa rota você pode reenviar qualquer POSTback que já foi enviado de uma transação. Lembrando que caso o envio de um POSTback falhe ou seu servidor não o receba, nós o retentamos diversas vezes (com um total de 31 vezes). 
@@ -1167,6 +1184,8 @@ curl -X GET https://api.pagar.me/1/transactions/314578/events \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var events = PagarMeService.GetDefaultService().Transactions.Find("192669").Events;
 ```
 
 Retorna todos os eventos já criados dentro de uma transação. <br>**Ex**: mudanças de status.
@@ -1902,6 +1921,10 @@ curl -X PUT https://api.pagar.me/1/transactions/260582 \
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var transaction = PagarMeService.GetDefaultService().Transactions.Find("260582 ");
+transaction.Status = TransactionStatus.Paid;
+transaction.Save();
 ```
 
 Usado **apenas em ambiente de Teste** para simular o pagamento de um Boleto.

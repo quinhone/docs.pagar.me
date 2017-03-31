@@ -311,16 +311,25 @@ plan.save
 
 ```php
 <?php
-    require("pagarme-php/Pagarme.php");
+	require("pagarme-php/Pagarme.php");
 
-    Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
+	Pagarme::setApiKey("ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0");
 
 	$plan = PagarMe_Plan::findById("12785");
 
 	$plan->setName("plano silver");
+
+	$plan->setTrialDays(7);
+
+	$plan->save();
 ```
 
 ```cs
+PagarMeService.DefaultApiKey = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0";
+var plan = PagarMeService.GetDefaultService().Plans.Find("13580");
+plan.Name = "Plano Diamond";
+plan.TrialDays = 7;
+plan.Save();
 ```
 
 Atualiza um plano previamente criado. As propriedades que podem ser alteradas são:
