@@ -6,17 +6,22 @@
 
 ```json
 {
-    "object": "payable",
-    "id": 1465,
-    "status": "paid",
-    "amount": 700,
-    "fee": 80,
-    "installment": null,
-    "transaction_id": 191517,
-    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
-    "payment_date": "2015-03-31T03:00:00.000Z",
-    "type": null,
-    "date_created": "2015-03-31T22:16:21.000Z"
+  "object": "payable",
+  "id": 1167628,
+  "status": "waiting_funds",
+  "amount": 41667,
+  "fee": 4167,
+  "anticipation_fee": 0,
+  "installment": 12,
+  "transaction_id": 1373781,
+  "split_rule_id": null,
+  "bulk_anticipation_id": null,
+  "recipient_id": "re_cimcpc2qc002za46d9dt4vfok",
+  "payment_date": "2018-03-13T03:00:00.000Z",
+  "original_payment_date": null,
+  "type": "credit",
+  "payment_method": "credit_card",
+  "date_created": "2017-03-16T19:51:02.533Z"
 }
 ```
 
@@ -28,14 +33,19 @@ Objeto contendo os dados de um recebível. O recebível (`payable`) é gerado au
 |--:|:--|
 | **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `payable` |
 | **id**<br> Number | Identificador do recebível |
-| **status**<br> String | Estado atual do recebível. <br> **Valores possíveis**: `waiting_funds`, `paid` |
+| **status**<br> String | Estado atual do recebível. <br> **Valores possíveis**: `waiting_funds`, `paid`, `suspended` |
 | **amount**<br> Number | Valor em centavos que foi pago |
 | **fee**<br> Number | Valor em centavos que foi cobrado (taxa) |
+| **anticipation_fee**<br> Number | Valor em centavos que foi cobrado (taxa) em case de antecipação |
 | **installment**<br> Number | Número da parcela |
 | **transaction_id**<br> Number | Identificador da transação que gerou o recebível |
 | **split_rule_id**<br> String | Identificador da regra de split do recebível |
+| **bulk_anticipation_id**<br> String | Identificador da antecipação do recebível, se criada |
+| **recipient_id**<br> String | Identificador do recebedor a quem pertence este recebível |
 | **payment_date**<br> String | Dia e hora do pagamento (ISODate) |
+| **original_payment_date**<br> String | Dia e hora do pagamento original (ISODate) |
 | **type**<br> String | Tipo do recebível. <br> **Valores possíveis**: `credit`, `refund` e `chargeback` |
+| **payment_method**<br> String | Tipo de pagamento da transação |
 | **date_created**<br> String | Data da criação do objeto (ISODate) |
 
 ## Retornando recebíveis
@@ -64,41 +74,58 @@ Retorna todos os recebíveis da sua empresa.
 
 ```json
 [{
-    "object": "payable",
-    "id": 1465,
-    "status": "paid",
-    "amount": 700,
-    "fee": 80,
-    "installment": null,
-    "transaction_id": 191517,
-    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
-    "payment_date": "2015-03-31T03:00:00.000Z",
-    "type": null,
-    "date_created": "2015-03-31T22:16:21.000Z"
-}, {
-    "object": "payable",
-    "id": 1464,
-    "status": "paid",
-    "amount": 300,
-    "fee": 35,
-    "installment": null,
-    "transaction_id": 191517,
-    "split_rule_id": "sr_ci7xsejbn0009wq16h3ybjgif",
-    "payment_date": "2015-03-31T03:00:00.000Z",
-    "type": null,
-    "date_created": "2015-03-31T22:16:21.000Z"
-}, {
-    "object": "payable",
-    "id": 1462,
-    "status": "paid",
-    "amount": 91000,
-    "fee": 0,
-    "installment": null,
-    "transaction_id": 191508,
-    "split_rule_id": "sr_ci7xru0nx005ckx16zjnvft7x",
-    "payment_date": "2015-03-31T03:00:00.000Z",
-    "type": null,
-    "date_created": "2015-03-31T20:43:05.000Z"
+  "object": "payable",
+  "id": 1167628,
+  "status": "waiting_funds",
+  "amount": 41667,
+  "fee": 4167,
+  "anticipation_fee": 0,
+  "installment": 12,
+  "transaction_id": 1373781,
+  "split_rule_id": null,
+  "bulk_anticipation_id": null,
+  "recipient_id": "re_cimcpc2qc002za46d9dt4vfok",
+  "payment_date": "2018-03-13T03:00:00.000Z",
+  "original_payment_date": null,
+  "type": "credit",
+  "payment_method": "credit_card",
+  "date_created": "2017-03-16T19:51:02.533Z"
+},
+{
+  "object": "payable",
+  "id": 1167627,
+  "status": "waiting_funds",
+  "amount": 41667,
+  "fee": 4167,
+  "anticipation_fee": 0,
+  "installment": 11,
+  "transaction_id": 1373781,
+  "split_rule_id": null,
+  "bulk_anticipation_id": null,
+  "recipient_id": "re_cimcpc2qc002za46d9dt4vfok",
+  "payment_date": "2018-02-14T02:00:00.000Z",
+  "original_payment_date": null,
+  "type": "credit",
+  "payment_method": "credit_card",
+  "date_created": "2017-03-16T19:51:02.533Z"
+},
+{
+  "object": "payable",
+  "id": 1167626,
+  "status": "waiting_funds",
+  "amount": 41667,
+  "fee": 4167,
+  "anticipation_fee": 0,
+  "installment": 10,
+  "transaction_id": 1373781,
+  "split_rule_id": null,
+  "bulk_anticipation_id": null,
+  "recipient_id": "re_cimcpc2qc002za46d9dt4vfok",
+  "payment_date": "2018-01-11T02:00:00.000Z",
+  "original_payment_date": null,
+  "type": "credit",
+  "payment_method": "credit_card",
+  "date_created": "2017-03-16T19:51:02.533Z"
 }]
 ```
 
@@ -132,17 +159,22 @@ Retorna um recebível de sua conta.
 
 ```json
 {
-    "object": "payable",
-    "id": 1465,
-    "status": "paid",
-    "amount": 700,
-    "fee": 80,
-    "installment": null,
-    "transaction_id": 191517,
-    "split_rule_id": "sr_ci7xsejbp000awq16wr5rkweh",
-    "payment_date": "2015-03-31T03:00:00.000Z",
-    "type": null,
-    "date_created": "2015-03-31T22:16:21.000Z"
+  "object": "payable",
+  "id": 1167628,
+  "status": "waiting_funds",
+  "amount": 41667,
+  "fee": 4167,
+  "anticipation_fee": 0,
+  "installment": 12,
+  "transaction_id": 1373781,
+  "split_rule_id": null,
+  "bulk_anticipation_id": null,
+  "recipient_id": "re_cimcpc2qc002za46d9dt4vfok",
+  "payment_date": "2018-03-13T03:00:00.000Z",
+  "original_payment_date": null,
+  "type": "credit",
+  "payment_method": "credit_card",
+  "date_created": "2017-03-16T19:51:02.533Z"
 }
 ```
 
@@ -151,4 +183,12 @@ Retorna um recebível de sua conta.
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **:id**<br> <span class="required">obrigatório</span> | Id do recebível |
 
+## Status de um recebível 
 
+Seus recebíveis podem ter os seguintes status: 
+
+* `waiting_funds` : Valor do recebível ainda não foi passado à pagar.me. 
+
+* `paid` : Valor do recebível já foi passado à pagar.me, e está disponível para saque. 
+
+* `suspended` : Recebível pertence à uma transação que está com status **chargedback**. Sendo que o status só vai mudar caso o chargeback seja revertido.
