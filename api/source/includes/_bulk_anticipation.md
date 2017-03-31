@@ -8,17 +8,17 @@ Através da rota `/recipients/:recipient_id/bulk_anticipations` e suas derivadas
 
 ```json
 {
-    "amount": 600005, 
-    "anticipation_fee": 44940, 
-    "date_created": "2015-10-23T05:17:54.000Z", 
-    "date_updated": "2015-10-23T05:17:54.000Z", 
-    "fee": 30025, 
-    "id": "ba_cig37i5s6004xor6e5cefsjsp", 
-    "object": "bulk_anticipation", 
-    "payment_date": "2015-12-13T02:00:00.000Z", 
-    "status": "pending", 
-    "timeframe": "start", 
-    "type": "spot"
+  "object": "bulk_anticipation",
+  "id": "ba_cisc10x0k013x4x6ezdivenc7",
+  "status": "pending",
+  "amount": 312695,
+  "fee": 31270,
+  "anticipation_fee": 20866,
+  "type": "spot",
+  "timeframe": "start",
+  "payment_date": "2016-09-02T03:00:00.000Z",
+  "date_created": "2016-08-26T17:22:55.656Z",
+  "date_updated": "2016-08-26T17:23:07.770Z"
 }
 ```
 
@@ -27,13 +27,16 @@ Ao criar ou atualizar uma antecipação, este será o objeto que você irá rece
 | Propriedade | Descrição |
 |--:|:--|
 | **object**<br> String | Nome do tipo do objeto criado/modificado. <br> **Valor retornado**: `bulk_anticipation` |
+| **id**<br> String | Identificador da antecipação |
 | **status**<br> String | Status atual da antecipação <br> **Valores possíveis**: `building`, `pending`, `approved`, `refused`, `canceled` |
-| **timeframe**<br> String | Período de onde os recebíveis irão vir, do ínicio ou do fim de sua agenda de recebíveis. **Ex**: Caso você escolha do começo (`start`), seu custo será menor mas há maior impacto no seu fluxo de caixa. <br> **Valores possíveis**: `start`, `end` |
-| **payment_date**<br> String | Data de pagamento da antecipação.  |
 | **amount**<br> Number | Valor bruto, em centavos, da antecipação criada.  |
 | **fee**<br> Number | Taxa de adquirência relacionada aos recebíveis antecipados. |
 | **anticipation_fee**<br> Number | Taxa de antecipação relacionada aos recebíveis antecipados. |
-| **id**<br> String | Identificador da antecipação |
+| **type**<br> Number | Tipo de antecipação criada. <br> **Valores possíveis**: `spot`, `automatic` |
+| **timeframe**<br> String | Período de onde os recebíveis irão vir, do ínicio ou do fim de sua agenda de recebíveis. **Ex**: Caso você escolha do começo (`start`), seu custo será menor mas há maior impacto no seu fluxo de caixa. <br> **Valores possíveis**: `start`, `end` |
+| **payment_date**<br> String | Data de pagamento da antecipação.  |
+| **date_created**<br> String | Data de criação da antecipação.  |
+| **date_updated**<br> String | Data de atualização da antecipação.  |
 
 ## Criando uma antecipação
 
@@ -43,9 +46,9 @@ Ao criar ou atualizar uma antecipação, este será o objeto que você irá rece
 curl -X POST https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipations/ \
 -d 'api_key=ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0' \
 -d 'timeframe=start' \
--d 'payment_date=1462999741870' \
--d 'requested_amount=561599' \
--d 'building=true' \
+-d 'payment_date=1491346800000' \
+-d 'requested_amount=45000' \
+-d 'build=true' \
 ```
 
 ```ruby
@@ -63,17 +66,17 @@ Para criar uma antecipação, você deve usar a rota `/recipients/:recipient_id/
 
 ```json
 {
-    "amount": 600005, 
-    "anticipation_fee": 44940, 
-    "date_created": "2015-10-23T05:17:54.000Z", 
-    "date_updated": "2015-10-23T05:17:54.000Z", 
-    "fee": 30025, 
-    "id": "ba_cig37i5s6004xor6e5cefsjsp", 
-    "object": "bulk_anticipation", 
-    "payment_date": "2015-12-13T02:00:00.000Z", 
-    "status": "pending", 
-    "timeframe": "start", 
-    "type": "spot"
+  "object": "bulk_anticipation",
+  "id": "ba_cj0x9l43l0033y86dudlmevd4",
+  "status": "pending",
+  "amount": 48070,
+  "fee": 2923,
+  "anticipation_fee": 221,
+  "type": "spot",
+  "timeframe": "start",
+  "payment_date": "2017-04-04T03:00:00.000Z",
+  "date_created": "2017-03-31T03:23:23.277Z",
+  "date_updated": "2017-03-31T03:23:23.277Z"
 }
 ```
 
@@ -83,7 +86,10 @@ Para criar uma antecipação, você deve usar a rota `/recipients/:recipient_id/
 | **payment_date**<br> <span class="required">obrigatório</span>| Data que você deseja receber a antecipação em sua conta Pagar.me |
 | **timeframe**<br> <span class="required">obrigatório</span><br> Valores: `start`, `end`| Define o período de onde os recebíveis serão escolhidos. **start** define recebíveis próximos, perto de serem pagos, e **end** define recebíveis longes, no final de todos recebíveis que você possui para receber |
 | **requested_amount**<br> <span class="required">obrigatório</span>| Valor líquido, em centavos, que você deseja receber de antecipação |
-| **building**<br> Valores: `true` ou `false` |  Define se a antecipação deve retornar com status `building`, para `building=true`, para possíveis ajustes no valor da antecipação, ou se a transferência é criada diretamente, para `building=false` e a antecipação já vai diretamente para a aprovação do Pagar.me. **OBS**: Caso você deseje alterar a antecipação após confirmar, você tem 5 minutos antes que a antecipação `building` seja destruída automaticamente |
+| **build**<br> Valores: `true` ou `false` |  Define se a antecipação deve retornar status `building` com `build=true`, isso para possíveis ajustes no valor da antecipação, data de pagamento ou timeframe. Para `build=false`, a antecipação já vai diretamente para a aprovação do Pagar.me. **OBS**: Caso deseje alterar a antecipação antes de confirmar, você tem 5 minutos antes que a antecipação `building` seja destruída automaticamente. |
+
+### Criando uma antecipação para o mesmo dia
+Para criar uma antecipação com essa condição, você precisa apenas passar o parâmetro `payment_date` com a data de hoje, mas com a restrição de que só pode ser feito até as 11h da manhã. Ademais, vale ressaltar também que antecipações desse tipo, feitas via API, **não** criam uma transferência automática para sua conta bancária.
 
 ## Obtendo os limites de antecipação
 
@@ -105,7 +111,7 @@ curl -X GET https://api.pagar.me/1/recipients/re_a123sd18das9d164/bulk_anticipat
 ```cs
 ```
 
-Retorna os limites máximos e mínimos de antecipação que aquele recebedor poder fazer.
+Retorna os limites máximos e mínimos de antecipação que aquele recebedor pode fazer.
 
 > JSON Retornado (exemplo):
 
@@ -128,8 +134,8 @@ Retorna os limites máximos e mínimos de antecipação que aquele recebedor pod
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **:recipient_id**<br> <span class="required">obrigatório</span> | Identificador do recebedor |
-| **timeframe**<br> <span class="required">obrigatório</span> <br> Valores: `start`, `end`| Define o período de onde os recebíveis serão escolhidos. **start** define recebíveis próximos, perto de serem pagos, e **end** define recebíveis longes, no final de todos recebíveis que você possui para receber |
-| **payment_date**<br> <span class="required">obrigatório</span> |  Data de pagamento deseja para a antecipação, ou seja, data em que você deseja que o dinheiro esteja em sua conta Pagar.me disponível para saque |
+| **timeframe**<br> <span class="required">obrigatório</span> <br> Valores: `start`, `end`| Define o período de onde os recebíveis serão escolhidos. **start** define recebíveis próximos, perto de serem pagos, e **end** define recebíveis mais distantes, a partir do final de todos recebíveis que você possui para receber |
+| **payment_date**<br> <span class="required">obrigatório</span> |  Data de pagamento desejada para a antecipação, ou seja, data em que você deseja que o dinheiro esteja em sua conta Pagar.me disponível para saque |
 
 
 ## Confirmando uma antecipação `building`
