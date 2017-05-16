@@ -23,7 +23,7 @@ https://api.pagar.me/1
 Nos exemplos que você encontrará pela documentação, usaremos o
 [cURL](http://curl.haxx.se) e as nossas bibliotecas em
 [Ruby](https://github.com/pagarme/pagarme-ruby),
-[PHP](https://github.com/pagarme/pagarme-php) e [C\#](https://github.com/pagarme/pagarme-net). 
+[PHP](https://github.com/pagarme/pagarme-php/tree/V2) e [C\#](https://github.com/pagarme/pagarme-net). 
 
 ### Integração Ruby
 
@@ -38,8 +38,11 @@ Você pode conferir o código-fonte [aqui](https://github.com/pagarme/pagarme-ru
 ### Integração PHP
 
 Para instalar a biblioteca PHP, basta [baixá-la do nosso
-Github](https://github.com/pagarme/pagarme-php) e copiá-la para a pasta do seu
-projeto. Você também pode instalá-la usando o [Composer](https://getcomposer.org).
+Github](https://github.com/pagarme/pagarme-php/tree/V2) e copiá-la para a pasta do seu
+projeto. Use o [Composer](https://getcomposer.org) para baixar as dependências necessárias.
+
+A versão mais atual da sdk é 3, estando em: [PHP v3](https://github.com/pagarme/pagarme-php).
+Para essa nova versão, vide a wiki no github: [Wiki](https://github.com/pagarme/pagarme-php/wiki)
 
 ### Para começar...
 
