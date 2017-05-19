@@ -292,6 +292,241 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 | **customer[born_at]**<br> Formato: `MM-DD-AAAA` | Data de nascimento do cliente.<br>Ex: 11-02-1985 |
 | **metadata** | Você pode passar dados adicionais na criação da transação para posteriormente filtrar estas na nossa dashboard. Ex: `metadata[ idProduto ]=13933139` |
 
+## Criando uma assinatura com split de pagamento
+
+> POST https://api.pagar.me/1/subscriptions
+
+```shell
+curl -X POST -H "Content-Type: application/json"  -d '{
+  "api_key":"ak_test_tWY9VQ0A0dNPHOLTbKKOLb8SOlaILe",
+  "card_number": "4242424242424242",
+  "card_cvv": "122",
+  "card_holder_name": "SDFSDF",
+  "card_expiration_date": "1220",
+  "customer":{
+    "email":"email.do.cliente@gmail.com",
+    "name":"nome",
+    "document_number":"35965816804",
+    "address":{
+      "zipcode":"06350270",
+      "neighborhood":"bairro",
+      "street":"rua",
+      "street_number":"122"
+    },
+    "phone": {
+      "number":"87654321",
+      "ddd":"11"
+    }
+  } ,
+  "plan_id":"89226",
+  "amount": 10000,
+  "split_rules": [
+    {
+      "recipient_id": "re_cj2wd5ul500d4946do7qtjrvk",
+      "percentage": 20,
+      "liable": true,
+      "charge_processing_fee": true
+    },{
+      "recipient_id": "re_cj2wd5u2600fecw6eytgcbkd0",
+      "percentage": 80,
+      "liable": true,
+      "charge_processing_fee": true
+    }
+  ]
+}' "https://api.pagar.me/1/subscriptions"
+
+```
+
+```ruby
+require 'pagarme'
+
+PagarMe.api_key = "ak_test_grXijQ4GicOa2BLGZrDRTR5qNQxJW0"
+
+plan = PagarMe::Plan.find_by_id("12783")
+
+subscription = PagarMe::Subscription.new({
+    :payment_method => 'credit_card',
+    :card_number => "4901720080344448",
+    :card_holder_name => "Jose da Silva",
+    :card_expiration_month => "10",
+    :card_expiration_year => "15",
+    :card_cvv => "314",
+    :postback_url => "http://test.com/postback",
+    :customer => {
+        email: 'api@test.com'
+    },
+    :split_rules: [
+        {
+          recipient_id: "re_cj2wd5ul500d4946do7qtjrvk",
+          percentage: 10,
+          liable: true,
+          charge_processing_fee: true
+        } ,
+        {
+          recipient_id: "re_cj2wd5u2600fecw6eytgcbkd0",
+          percentage: 90,
+          liable: true,
+          charge_processing_fee: true
+        } 
+    ])
+subscription.plan = plan
+
+subscription.create
+```
+
+```php
+<?php
+require("pagarme-php/Pagarme.php");
+
+Pagarme::setApiKey("SUA API KEY");
+
+$plan = PagarMe_Plan::findById("133163");
+
+$subscription = new PagarMe_Subscription(array(
+    "plan" => $plan,
+    "payment_method" => "credit_card",
+    "card_hash" => "card_hash_gerado",
+    'customer' => array(
+        'email' => 'whitney.silva@pagar.me'
+    ),
+    'split_rules' => array(
+        array(
+            "recipient_id" => "re_ciyol0qac00xnlg6dkaftvn9j",
+            "liable" => "false",
+            "charge_processing_fee" => "false",
+            "percentage" => "20"
+        ),
+        array(
+            "recipient_id" => "re_ciyoloogb0100l46dy6f1iuww",
+            "liable" => "true",
+            "charge_processing_fee" => "true",
+            "percentage" => "80"
+        )
+    )));
+
+$subscription->create();
+
+?>
+```
+
+```cs
+```
+Além de cobrar o seu cliente de forma recorrente, você pode também dividir os pagamentos resultantes 
+dessas assinaturas, entre dois ou mais recebedores de sua company. Sendo que, os parâmetros a serem passados, **além** dos 
+já existentes e explicados na seção anterior, são: 
+
+> JSON Retornado (Exemplo)
+
+```json
+{
+  "object": "subscription",
+  "plan": {
+    "object": "plan",
+    "id": 133163,
+    "amount": 500000,
+    "days": 30,
+    "name": "The Pro Plan - Platinum",
+    "trial_days": 0,
+    "date_created": "2017-02-14T13:28:31.443Z",
+    "payment_methods": [
+      "boleto",
+      "credit_card"
+    ],
+    "color": null,
+    "charges": null,
+    "installments": 12
+  },
+  "id": 200303,
+  "current_transaction": {
+    "object": "transaction",
+    "status": "paid",
+    "refuse_reason": null,
+    "status_reason": "acquirer",
+    "acquirer_response_code": "0000",
+    "acquirer_name": "pagarme",
+    "acquirer_id": "56f9d019decf72cc70055d58",
+    "authorization_code": "451705",
+    "soft_descriptor": null,
+    "tid": 1549864,
+    "nsu": 1549864,
+    "date_created": "2017-05-19T20:11:38.384Z",
+    "date_updated": "2017-05-19T20:11:39.048Z",
+    "amount": 500000,
+    "authorized_amount": 500000,
+    "paid_amount": 500000,
+    "refunded_amount": 0,
+    "installments": 12,
+    "id": 1549864,
+    "cost": 50,
+    "card_holder_name": "Aardvark Silva",
+    "card_last_digits": "4242",
+    "card_first_digits": "424242",
+    "card_brand": "visa",
+    "card_pin_mode": null,
+    "postback_url": null,
+    "payment_method": "credit_card",
+    "capture_method": "ecommerce",
+    "antifraud_score": null,
+    "boleto_url": null,
+    "boleto_barcode": null,
+    "boleto_expiration_date": null,
+    "referer": "api_key",
+    "ip": "54.12.143.29",
+    "subscription_id": 200303,
+    "split_rules": null,
+    "metadata": {},
+    "antifraud_metadata": {}
+  },
+  "postback_url": null,
+  "payment_method": "credit_card",
+  "card_brand": "visa",
+  "card_last_digits": "4242",
+  "current_period_start": "2017-05-19T20:11:38.364Z",
+  "current_period_end": "2017-06-18T20:11:38.364Z",
+  "charges": 0,
+  "status": "paid",
+  "date_created": "2017-05-19T20:11:39.038Z",
+  "phone": null,
+  "address": null,
+  "customer": {
+    "object": "customer",
+    "document_number": "47852627889",
+    "document_type": "cpf",
+    "name": "Aardvark Silva",
+    "email": "aardvark.silva@pagar.me",
+    "born_at": "1970-01-01T03:00:00.000Z",
+    "gender": null,
+    "date_created": "2016-12-12T16:33:36.182Z",
+    "id": 114043
+  },
+  "card": {
+    "object": "card",
+    "id": "card_cj2wa6h39007acw6e4xm419dw",
+    "date_created": "2017-05-19T20:11:38.375Z",
+    "date_updated": "2017-05-19T20:11:39.031Z",
+    "brand": "visa",
+    "holder_name": "Aardvark Silva",
+    "first_digits": "424242",
+    "last_digits": "4242",
+    "country": "US",
+    "fingerprint": "Ntjtk/Hk/QnY",
+    "valid": true,
+    "expiration_date": "1122"
+  },
+  "metadata": null
+}
+```
+
+| Parâmetro | Descrição |
+|--:|:--|
+| **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
+| **split_rules[n][recipient_id]**<br> <span class="required">obrigatório</span> | Id do recipient correpondente a respectiva n regra de split |
+| **split_rules[n][liable]**<br> <span class="required">obrigatório</span> | Parâmetro true/false que indica o responsável por um possível chargeback |
+| **split_rules[n][charge_processing_fee]**<br> <span class="required">obrigatório</span> | Parâmetro true/false que indica o responsável pelas taxas da transação |
+| **split_rules[n][percentage]**<br> <span class="required">obrigatório</span> | Indica qual a porcentagem da transação será passada a este recebedor |
+| **split_rules[n][amount]**<br> <span class="required">obrigatório</span> | Indica qual o amount(em centavos) da transação será repassado ao recebedor <br> **OBS**: Este parâmetro **não** é complementar ao percentage, apenas um deles deve ser usado em todas as regras de split. |
+| **split_rules[n][charge_remainder]** | Parâmetro `true/false` responsável por distribuir o centavo restante da divisão de taxas entre os recebedores. <br> **OBS**: Somente um recebedor pode ter este parâmetro como `true`, e o default vai para o primeiro definido no conjunto de regras passadas.  |
+
 ## Retornando uma assinatura
 
 > GET https://api.pagar.me/1/subscriptions/:id
