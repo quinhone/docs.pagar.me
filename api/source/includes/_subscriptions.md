@@ -298,13 +298,13 @@ A criação de uma `subscription` (assinatura) é parecida com a criação de um
 
 ```shell
 curl -X POST -H "Content-Type: application/json"  -d '{
-  "api_key":"ak_test_tWY9VQ0A0dNPHOLTbKKOLb8SOlaILe",
+  "api_key":"SUA API KEY",
   "card_number": "4242424242424242",
   "card_cvv": "122",
-  "card_holder_name": "SDFSDF",
+  "card_holder_name": "Aardvark Silva",
   "card_expiration_date": "1220",
   "customer":{
-    "email":"email.do.cliente@gmail.com",
+    "email":"aardvark.silva@pagar.me",
     "name":"nome",
     "document_number":"35965816804",
     "address":{
@@ -411,9 +411,7 @@ $subscription->create();
 
 ```cs
 ```
-Além de cobrar o seu cliente de forma recorrente, você pode também dividir os pagamentos resultantes 
-dessas assinaturas, entre dois ou mais recebedores de sua company. Sendo que, os parâmetros a serem passados, **além** dos 
-já existentes e explicados na seção anterior, são: 
+Além de cobrar o seu cliente de forma recorrente, você também pode dividir as transações resultantes dessas assinaturas, entre dois ou mais recebedores de sua company. Os parâmetros a serem passados, **além** dos já existentes e explicados na seção anterior, são: 
 
 > JSON Retornado (Exemplo)
 
@@ -521,11 +519,11 @@ já existentes e explicados na seção anterior, são:
 |--:|:--|
 | **api_key**<br> <span class="required">obrigatório</span> | Chave da API (disponível no seu dashboard) |
 | **split_rules[n][recipient_id]**<br> <span class="required">obrigatório</span> | Id do recipient correpondente a respectiva n regra de split |
-| **split_rules[n][liable]**<br> <span class="required">obrigatório</span> | Parâmetro true/false que indica o responsável por um possível chargeback |
-| **split_rules[n][charge_processing_fee]**<br> <span class="required">obrigatório</span> | Parâmetro true/false que indica o responsável pelas taxas da transação |
+| **split_rules[n][liable]**<br> <span class="required">obrigatório</span> | Parâmetro `true/false` que indica o responsável por um possível chargeback |
+| **split_rules[n][charge_processing_fee]**<br> <span class="required">obrigatório</span> | Parâmetro `true/false` que indica o responsável pelas taxas da transação |
 | **split_rules[n][percentage]**<br> <span class="required">obrigatório</span> | Indica qual a porcentagem da transação será passada a este recebedor |
 | **split_rules[n][amount]**<br> <span class="required">obrigatório</span> | Indica qual o amount(em centavos) da transação será repassado ao recebedor <br> **OBS**: Este parâmetro **não** é complementar ao percentage, apenas um deles deve ser usado em todas as regras de split. |
-| **split_rules[n][charge_remainder]** | Parâmetro `true/false` responsável por distribuir o centavo restante da divisão de taxas entre os recebedores. <br> **OBS**: Somente um recebedor pode ter este parâmetro como `true`, e o default vai para o primeiro definido no conjunto de regras passadas.  |
+| **split_rules[n][charge_remainder]** | Parâmetro `true/false` responsável por distribuir o centavo restante da divisão de taxas entre os recebedores. <br> **OBS**: Somente um recebedor pode ter este parâmetro como `true`, sendo que o default é para o primeiro recebedor das regras definidas.  |
 
 ## Retornando uma assinatura
 
