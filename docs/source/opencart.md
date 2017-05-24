@@ -58,3 +58,6 @@ Faça as suas alterações e inclua as chaves. Não se esqueça de clicar em sal
 
 ![](opencart/pagarme-cartao.png)
 
+**Pagar.me - Checkout**
+
+![](opencart/pagarme-checkout.png)

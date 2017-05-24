@@ -64,6 +64,10 @@ Também está disponível para cliente Magento o Checkout Pagar.me
 
 Saiba mais clicando no link [Pagar.me Checkout](http://pagar.me/checkout) e siga as instruções de configuração para utilizar.
 
+## Configurando Checkout
+
+![](magento/configurando-checkout.png)
+
 Agora é só fazer algumas transações em modo TEST para testar a ferramenta.
 O Pagar.me já está funcionando!
 
