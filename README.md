@@ -1,3 +1,5 @@
+# Atenção: este projeto foi descontinuado e a documentação movida para o [readme.io](https://docs.pagar.me/)
+
 ## Documentação Pagar.me
 
 ### Estrutura
